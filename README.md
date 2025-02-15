@@ -1,3 +1,1 @@
-# ETutoring test
-
-sync
+# ETutoring
