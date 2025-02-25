@@ -21,6 +21,10 @@ namespace SchoolSystem.Models
 		public string Gender { get; set; } 
 
 		public string? Image { get; set; } 
+
+		public ICollection<Group>? GroupTeacher { get; set; }
+		public ICollection<Group>? GroupStudent { get; set; }
+		public ICollection<Message>? Messages { get; set; }
 	}
 }
 
