@@ -7,7 +7,7 @@ namespace SchoolSystem.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public int MessageId { get; set; }
+        public required int MessageId { get; set; }
         public Message Message { get; set; } = null!;
         [Required]
         public required string FileContent { get; set; }
