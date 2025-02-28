@@ -58,3 +58,8 @@ wwwroot\lib\jquery-validation\LICENSE.md
 wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
 wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
 wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+wwwroot\uploads\437b15e0-6775-4d8d-a66a-56d177fe37a0_avatar-trang-4.jpg
+wwwroot\uploads\83057492-80b8-4c67-bed9-a75f0dd92a77_avatar-trang-4.jpg
+wwwroot\uploads\8bf05a5e-7333-416c-b797-f428ec1ee3c0_726527.png
+wwwroot\uploads\8db933be-dc69-49c2-9622-100a7a519885_1218864.jpg
+wwwroot\uploads\default-profile.png
