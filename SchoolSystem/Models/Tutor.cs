@@ -9,5 +9,7 @@ namespace SchoolSystem.Models
         public string? SubjectSpecialization { get; set; } // Chuyên ngành giảng dạy
         public string? Qualification { get; set; } // Bằng cấp
         public string? Bio { get; set; } // Giới thiệu bản thân (có thể để trống)
+
+        public ICollection<Group>? GroupTutor { get; set; }
     }
 }
