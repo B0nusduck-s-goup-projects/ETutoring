@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace SchoolSystem.ViewModels
 {
@@ -31,8 +32,9 @@ namespace SchoolSystem.ViewModels
 		public string Code { get; set; }
 
 		[Required]
-		public string Gender { get; set; } 
+		public string Gender { get; set; }
 
-		public string? Image { get; set; }
+		public IFormFile? Image { get; set; }
+
 	}
 }
