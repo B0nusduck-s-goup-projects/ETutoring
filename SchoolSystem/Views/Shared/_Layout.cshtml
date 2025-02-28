@@ -29,21 +29,18 @@
                          @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register user</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Register">Register user</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="ListUsers">List users</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ListUsers">List users</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="CreateRole">Create role</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="CreateRole">Create role</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="ListRoles">List roles</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ListRoles">List roles</a>
                                 </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="ListRoles">Import file</a>
-                            </li>
                             }
                             </ul>
                     <partial name="_LoginPartial"/>
