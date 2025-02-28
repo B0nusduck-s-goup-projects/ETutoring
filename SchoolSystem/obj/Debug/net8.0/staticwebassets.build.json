@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LAkg3RK+Yoy8TLHomZWwt00ciDy6HQnIw+1Yrm8rEKY=",
+  "Hash": "Hliz9CE3tFqtOUWoeERyK3Z1UqZZmsCo9gdjl9K2XXg=",
   "Source": "SchoolSystem",
   "BasePath": "_content/SchoolSystem",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "SchoolSystem\\wwwroot",
       "Source": "SchoolSystem",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SchoolSystem.styles.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SchoolSystem.styles.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "SchoolSystem#[.{fingerprint}]?.styles.css",
       "AssetKind": "All",
@@ -35,13 +35,13 @@
       "Integrity": "rWzdD7y6sGmFPYXS3SEWnLcaGLxC/HNH58PpZ77ki7w=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SchoolSystem.styles.css"
+      "OriginalItemSpec": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SchoolSystem.styles.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SchoolSystem.bundle.scp.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SchoolSystem.bundle.scp.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "SchoolSystem#[.{fingerprint}]!.bundle.scp.css",
       "AssetKind": "All",
@@ -56,13 +56,13 @@
       "Integrity": "rWzdD7y6sGmFPYXS3SEWnLcaGLxC/HNH58PpZ77ki7w=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SchoolSystem.bundle.scp.css"
+      "OriginalItemSpec": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SchoolSystem.bundle.scp.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\css\\site.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\css\\site.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "css/site#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -80,10 +80,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\favicon.ico",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\favicon.ico",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "favicon#[.{fingerprint}]?.ico",
       "AssetKind": "All",
@@ -101,10 +101,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\js\\site.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\js\\site.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "js/site#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -122,10 +122,10 @@
       "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -143,10 +143,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -164,10 +164,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -185,10 +185,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -206,10 +206,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -227,10 +227,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -248,10 +248,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -269,10 +269,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -290,10 +290,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -311,10 +311,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -332,10 +332,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -353,10 +353,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -374,10 +374,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -395,10 +395,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -416,10 +416,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -437,10 +437,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -458,10 +458,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -479,10 +479,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -500,10 +500,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -521,10 +521,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -542,10 +542,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -563,10 +563,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -584,10 +584,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -605,10 +605,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -626,10 +626,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -647,10 +647,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -668,10 +668,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -689,10 +689,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -710,10 +710,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -731,10 +731,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -752,10 +752,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -773,10 +773,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -794,10 +794,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -815,10 +815,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -836,10 +836,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -857,10 +857,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -878,10 +878,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -899,10 +899,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -920,10 +920,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -941,10 +941,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -962,10 +962,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -983,10 +983,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1004,10 +1004,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1025,10 +1025,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1046,10 +1046,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\LICENSE",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/bootstrap/LICENSE#[.{fingerprint}]?",
       "AssetKind": "All",
@@ -1067,10 +1067,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/jquery/dist/jquery#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1088,10 +1088,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1109,10 +1109,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1130,10 +1130,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/jquery/LICENSE#[.{fingerprint}]?.txt",
       "AssetKind": "All",
@@ -1151,10 +1151,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/jquery-validation/dist/additional-methods#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1172,10 +1172,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1193,10 +1193,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1214,10 +1214,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1235,10 +1235,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/jquery-validation/LICENSE#[.{fingerprint}]?.md",
       "AssetKind": "All",
@@ -1256,10 +1256,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1277,10 +1277,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1298,10 +1298,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "SourceId": "SchoolSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
       "BasePath": "_content/SchoolSystem",
       "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE#[.{fingerprint}]?.txt",
       "AssetKind": "All",
@@ -1317,12 +1317,117 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\437b15e0-6775-4d8d-a66a-56d177fe37a0_avatar-trang-4.jpg",
+      "SourceId": "SchoolSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
+      "BasePath": "_content/SchoolSystem",
+      "RelativePath": "uploads/437b15e0-6775-4d8d-a66a-56d177fe37a0_avatar-trang-4#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ltfr8yrqfa",
+      "Integrity": "J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\437b15e0-6775-4d8d-a66a-56d177fe37a0_avatar-trang-4.jpg"
+    },
+    {
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\83057492-80b8-4c67-bed9-a75f0dd92a77_avatar-trang-4.jpg",
+      "SourceId": "SchoolSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
+      "BasePath": "_content/SchoolSystem",
+      "RelativePath": "uploads/83057492-80b8-4c67-bed9-a75f0dd92a77_avatar-trang-4#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ltfr8yrqfa",
+      "Integrity": "J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\83057492-80b8-4c67-bed9-a75f0dd92a77_avatar-trang-4.jpg"
+    },
+    {
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\8bf05a5e-7333-416c-b797-f428ec1ee3c0_726527.png",
+      "SourceId": "SchoolSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
+      "BasePath": "_content/SchoolSystem",
+      "RelativePath": "uploads/8bf05a5e-7333-416c-b797-f428ec1ee3c0_726527#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "q8m1xmjcaa",
+      "Integrity": "2i/UZBqwVKYsxkJvky/XSjnO7HNMmfLng66WiCe5Dig=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\8bf05a5e-7333-416c-b797-f428ec1ee3c0_726527.png"
+    },
+    {
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\8db933be-dc69-49c2-9622-100a7a519885_1218864.jpg",
+      "SourceId": "SchoolSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
+      "BasePath": "_content/SchoolSystem",
+      "RelativePath": "uploads/8db933be-dc69-49c2-9622-100a7a519885_1218864#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2hll3ca8cu",
+      "Integrity": "9pI4XMzL7Q5M1VPlbnfyimwOvbQH9qngLk8TdKO53PE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\8db933be-dc69-49c2-9622-100a7a519885_1218864.jpg"
+    },
+    {
+      "Identity": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\default-profile.png",
+      "SourceId": "SchoolSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\",
+      "BasePath": "_content/SchoolSystem",
+      "RelativePath": "uploads/default-profile#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ltfr8yrqfa",
+      "Integrity": "J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\default-profile.png"
     }
   ],
   "Endpoints": [
     {
       "Route": "css/site.c2tiyv64ts.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\css\\site.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1367,7 +1472,7 @@
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\css\\site.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1404,7 +1509,7 @@
     },
     {
       "Route": "favicon.61n19gt1b8.ico",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\favicon.ico",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1449,7 +1554,7 @@
     },
     {
       "Route": "favicon.ico",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\favicon.ico",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1486,7 +1591,7 @@
     },
     {
       "Route": "js/site.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\js\\site.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\js\\site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1523,7 +1628,7 @@
     },
     {
       "Route": "js/site.xtxxf3hu2r.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\js\\site.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\js\\site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1568,7 +1673,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1605,7 +1710,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.css.73kdqttayv.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1650,7 +1755,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1687,7 +1792,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.bpk8xqwxhs.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1732,7 +1837,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1769,7 +1874,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.css.8inm30yfxf.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1814,7 +1919,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1851,7 +1956,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.mpyigms19s.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1896,7 +2001,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1933,7 +2038,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css.4gxs3k148c.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1978,7 +2083,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2015,7 +2120,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.9b9oa1qrmt.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2060,7 +2165,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2097,7 +2202,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.fctod5rc9n.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2142,7 +2247,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2179,7 +2284,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.ve6x09088i.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2224,7 +2329,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.agp80tu62r.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2269,7 +2374,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2306,7 +2411,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2343,7 +2448,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.css.st1cbwfwo5.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2388,7 +2493,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2425,7 +2530,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css.5vj65cig9w.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2470,7 +2575,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2507,7 +2612,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.unj9p35syc.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2552,7 +2657,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2589,7 +2694,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.2q4vfeazbq.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2634,7 +2739,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2671,7 +2776,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2708,7 +2813,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2745,7 +2850,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.o371a8zbv2.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2790,7 +2895,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.n1oizzvkh6.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2835,7 +2940,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.q2ku51ktnl.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2880,7 +2985,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.7na4sro3qu.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2925,7 +3030,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2962,7 +3067,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.css.jeal3x0ldm.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3007,7 +3112,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3044,7 +3149,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3081,7 +3186,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3118,7 +3223,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.okkk44j0xs.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3163,7 +3268,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.f8imaxxbri.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3208,7 +3313,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.0wve5yxp74.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3253,7 +3358,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3290,7 +3395,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.cwzlr5n8x4.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3335,7 +3440,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3372,7 +3477,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3409,7 +3514,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3446,7 +3551,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.wmug9u23qg.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3491,7 +3596,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.npxfuf8dg6.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3536,7 +3641,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3573,7 +3678,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.css.j75batdsum.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3618,7 +3723,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3655,7 +3760,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.16095smhkz.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3700,7 +3805,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3737,7 +3842,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3774,7 +3879,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.vy0bq9ydhf.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3819,7 +3924,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.b4skse8du6.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3864,7 +3969,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3901,7 +4006,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.ab1c3rmv7g.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3946,7 +4051,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3983,7 +4088,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4020,7 +4125,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.56d2bn4wt9.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4065,7 +4170,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4102,7 +4207,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.u3xrusw2ol.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4147,7 +4252,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.tey0rigmnh.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4192,7 +4297,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4229,7 +4334,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js.kbynt5jhd9.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4274,7 +4379,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4311,7 +4416,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.l2av4jpuoj.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4356,7 +4461,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.25iw1kog22.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4401,7 +4506,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4438,7 +4543,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.c2nslu3uf3.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4483,7 +4588,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4520,7 +4625,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4557,7 +4662,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js.2lgwfvgpvi.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4602,7 +4707,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4639,7 +4744,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.m39kt2b5c9.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4684,7 +4789,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4721,7 +4826,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4758,7 +4863,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js.wsezl0heh6.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4803,7 +4908,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.um2aeqy4ik.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4848,7 +4953,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4885,7 +4990,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.js.6ukhryfubh.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4930,7 +5035,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.js.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4967,7 +5072,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5004,7 +5109,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.js.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5041,7 +5146,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.js.u33ctipx7g.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5086,7 +5191,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.zwph15dxgs.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5131,7 +5236,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.o4kw7cc6tf.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5176,7 +5281,7 @@
     },
     {
       "Route": "lib/bootstrap/LICENSE",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\LICENSE",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5213,7 +5318,7 @@
     },
     {
       "Route": "lib/bootstrap/LICENSE.81b7ukuj9c",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\bootstrap\\LICENSE",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5258,7 +5363,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.fwhahm2icz.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5303,7 +5408,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5340,7 +5445,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.5pze98is44.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5385,7 +5490,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.dd6z7egasc.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5430,7 +5535,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5467,7 +5572,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.map",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5504,7 +5609,7 @@
     },
     {
       "Route": "lib/jquery/LICENSE.mlv21k5csn.txt",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5549,7 +5654,7 @@
     },
     {
       "Route": "lib/jquery/LICENSE.txt",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5586,7 +5691,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.ay5nd8zt9x.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5631,7 +5736,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5668,7 +5773,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.min.9oaff4kq20.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5713,7 +5818,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.min.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5750,7 +5855,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5787,7 +5892,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.min.b7iojwaux1.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5832,7 +5937,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.min.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5869,7 +5974,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.pzqfkb6aqo.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5914,7 +6019,7 @@
     },
     {
       "Route": "lib/jquery-validation/LICENSE.md",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5951,7 +6056,7 @@
     },
     {
       "Route": "lib/jquery-validation/LICENSE.x0q3zqp4vz.md",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5996,7 +6101,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.47otxtyo56.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6041,7 +6146,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6078,7 +6183,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.4v8eqarkd7.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6123,7 +6228,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6160,7 +6265,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/LICENSE.356vix0kms.txt",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6205,7 +6310,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/LICENSE.txt",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6242,7 +6347,7 @@
     },
     {
       "Route": "SchoolSystem.bundle.scp.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SchoolSystem.bundle.scp.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SchoolSystem.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6279,7 +6384,7 @@
     },
     {
       "Route": "SchoolSystem.styles.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SchoolSystem.styles.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SchoolSystem.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6316,7 +6421,7 @@
     },
     {
       "Route": "SchoolSystem.v5geashkdx.bundle.scp.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SchoolSystem.bundle.scp.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SchoolSystem.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6361,7 +6466,7 @@
     },
     {
       "Route": "SchoolSystem.v5geashkdx.styles.css",
-      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SchoolSystem.styles.css",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SchoolSystem.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6401,6 +6506,416 @@
         {
           "Name": "integrity",
           "Value": "sha256-rWzdD7y6sGmFPYXS3SEWnLcaGLxC/HNH58PpZ77ki7w="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/437b15e0-6775-4d8d-a66a-56d177fe37a0_avatar-trang-4.jpg",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\437b15e0-6775-4d8d-a66a-56d177fe37a0_avatar-trang-4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18983"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Feb 2025 04:25:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/437b15e0-6775-4d8d-a66a-56d177fe37a0_avatar-trang-4.ltfr8yrqfa.jpg",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\437b15e0-6775-4d8d-a66a-56d177fe37a0_avatar-trang-4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18983"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Feb 2025 04:25:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ltfr8yrqfa"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/437b15e0-6775-4d8d-a66a-56d177fe37a0_avatar-trang-4.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/83057492-80b8-4c67-bed9-a75f0dd92a77_avatar-trang-4.jpg",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\83057492-80b8-4c67-bed9-a75f0dd92a77_avatar-trang-4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18983"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Feb 2025 04:26:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/83057492-80b8-4c67-bed9-a75f0dd92a77_avatar-trang-4.ltfr8yrqfa.jpg",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\83057492-80b8-4c67-bed9-a75f0dd92a77_avatar-trang-4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18983"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Feb 2025 04:26:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ltfr8yrqfa"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/83057492-80b8-4c67-bed9-a75f0dd92a77_avatar-trang-4.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/8bf05a5e-7333-416c-b797-f428ec1ee3c0_726527.png",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\8bf05a5e-7333-416c-b797-f428ec1ee3c0_726527.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3705019"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2i/UZBqwVKYsxkJvky/XSjnO7HNMmfLng66WiCe5Dig=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Feb 2025 05:13:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2i/UZBqwVKYsxkJvky/XSjnO7HNMmfLng66WiCe5Dig="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/8bf05a5e-7333-416c-b797-f428ec1ee3c0_726527.q8m1xmjcaa.png",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\8bf05a5e-7333-416c-b797-f428ec1ee3c0_726527.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3705019"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2i/UZBqwVKYsxkJvky/XSjnO7HNMmfLng66WiCe5Dig=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Feb 2025 05:13:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "q8m1xmjcaa"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/8bf05a5e-7333-416c-b797-f428ec1ee3c0_726527.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2i/UZBqwVKYsxkJvky/XSjnO7HNMmfLng66WiCe5Dig="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/8db933be-dc69-49c2-9622-100a7a519885_1218864.2hll3ca8cu.jpg",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\8db933be-dc69-49c2-9622-100a7a519885_1218864.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4846454"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9pI4XMzL7Q5M1VPlbnfyimwOvbQH9qngLk8TdKO53PE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Feb 2025 04:44:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2hll3ca8cu"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/8db933be-dc69-49c2-9622-100a7a519885_1218864.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9pI4XMzL7Q5M1VPlbnfyimwOvbQH9qngLk8TdKO53PE="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/8db933be-dc69-49c2-9622-100a7a519885_1218864.jpg",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\8db933be-dc69-49c2-9622-100a7a519885_1218864.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4846454"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9pI4XMzL7Q5M1VPlbnfyimwOvbQH9qngLk8TdKO53PE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Feb 2025 04:44:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9pI4XMzL7Q5M1VPlbnfyimwOvbQH9qngLk8TdKO53PE="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/default-profile.ltfr8yrqfa.png",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\default-profile.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18983"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Feb 2025 04:26:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ltfr8yrqfa"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/default-profile.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/default-profile.png",
+      "AssetFile": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\wwwroot\\uploads\\default-profile.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18983"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Feb 2025 04:26:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-J3el/jDtQvS/YDy5sScr0WU5UUPnumLF5VITQxPLQkA="
         }
       ]
     }

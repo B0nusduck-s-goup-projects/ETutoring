@@ -4186,11 +4186,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\SchoolSystem.csproj",
+      "projectUniqueName": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\SchoolSystem.csproj",
       "projectName": "SchoolSystem",
-      "projectPath": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\SchoolSystem.csproj",
+      "projectPath": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\SchoolSystem.csproj",
       "packagesPath": "C:\\Users\\phuth\\.nuget\\packages\\",
-      "outputPath": "D:\\DO_PHU_THINH\\Enterprise\\SchoolSystem\\obj\\",
+      "outputPath": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\VS\\tools\\NuGetPackages"
