@@ -1,3 +1,5 @@
-.vs
-SchoolSystem\.vs
-SchoolSystem\bin
+SchoolSystem/.vs
+SchoolSystem/bin
+SchoolSystem/obj
+SchoolSystem/appsettings.json
+SchoolSystem/appsettings.Development.json
