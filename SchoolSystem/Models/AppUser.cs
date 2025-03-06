@@ -23,7 +23,7 @@ namespace SchoolSystem.Models
 		public string? Image { get; set; } 
 
 		public ICollection<Message>? Messages { get; set; }
-        public ICollection<Group>? Group { get; }
+        public ICollection<Group>? Group { get; set; }
     }
 }
 

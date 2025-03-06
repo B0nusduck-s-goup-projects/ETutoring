@@ -12,6 +12,6 @@ namespace SchoolSystem.Models
         public DateTime? ExpiredTime { get; set; }
 
         public ICollection<Message>? Messages { get; set; }
-        public ICollection<AppUser> User { get; } = null!;
+        public ICollection<AppUser> User { get; set; } = null!;
     }
 }

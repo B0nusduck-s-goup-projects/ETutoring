@@ -261,7 +261,7 @@ namespace SchoolSystem.Migrations
 
                     b.HasIndex("MessageId");
 
-                    b.ToTable("AttachFiles");
+                    b.ToTable("AttachFiles", (string)null);
                 });
 
             modelBuilder.Entity("SchoolSystem.Models.Blog", b =>
@@ -378,7 +378,7 @@ namespace SchoolSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Groups");
+                    b.ToTable("Groups", (string)null);
                 });
 
             modelBuilder.Entity("SchoolSystem.Models.GroupUsers", b =>
@@ -393,7 +393,7 @@ namespace SchoolSystem.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("GroupUsers");
+                    b.ToTable("GroupUsers", (string)null);
                 });
 
             modelBuilder.Entity("SchoolSystem.Models.Message", b =>
@@ -429,7 +429,7 @@ namespace SchoolSystem.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
