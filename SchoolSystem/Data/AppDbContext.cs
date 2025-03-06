@@ -1,42 +1,40 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Abstractions;
 using SchoolSystem.Models;
 
 namespace SchoolSystem.Data
 {
-	public class AppDbContext : IdentityDbContext<AppUser>
-	{
-		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-		{
+    public class AppDbContext : IdentityDbContext<AppUser>
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
 
-		}
+        }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			base.OnModelCreating(modelBuilder);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-			modelBuilder.Entity<AppUser>()
-				.HasMany(e => e.Group)
-				.WithMany(e => e.User)
-				.UsingEntity<GroupUsers>(
-					l => l.HasOne<Group>().WithMany().HasForeignKey(e => e.GroupId),
-					r => r.HasOne<AppUser>().WithMany().HasForeignKey(e => e.UserId)
-				);
+            modelBuilder.Entity<AppUser>()
+                .HasMany(e => e.Group)
+                .WithMany(e => e.User)
+                .UsingEntity<GroupUsers>(
+                    l => l.HasOne<Group>().WithMany().HasForeignKey(e => e.GroupId),
+                    r => r.HasOne<AppUser>().WithMany().HasForeignKey(e => e.UserId)
+                );
 
             modelBuilder.Entity<Group>()
-				.Property(e => e.IsValid)
-				.HasDefaultValue(true);
-			modelBuilder.Entity<Group>()
-				.HasMany(e => e.Messages)
-				.WithOne(e => e.Group)
-				.HasForeignKey(e => e.GroupId)
-				.OnDelete(DeleteBehavior.Cascade);
+                .Property(e => e.IsValid)
+                .HasDefaultValue(true);
+            modelBuilder.Entity<Group>()
+                .HasMany(e => e.Messages)
+                .WithOne(e => e.Group)
+                .HasForeignKey(e => e.GroupId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-			modelBuilder.Entity<Message>()
-				.Property(e => e.FileCount)
-				.HasDefaultValue(0);
+            modelBuilder.Entity<Message>()
+                .Property(e => e.FileCount)
+                .HasDefaultValue(0);
             modelBuilder.Entity<Message>()
                 .HasMany(e => e.AttachFiles)
                 .WithOne(e => e.Message)
