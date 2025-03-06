@@ -15,9 +15,11 @@ namespace SchoolSystem.Controllers
 		private readonly SignInManager<AppUser> signInManager;
 		private readonly UserManager<AppUser> userManager;
 		private readonly RoleManager<IdentityRole> roleManager;
-
-		public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
-		{
+		public AccountController(SignInManager<AppUser> signInManager,
+			UserManager<AppUser> userManager,
+			RoleManager<IdentityRole> roleManager
+			)
+		{			
 			this.signInManager = signInManager;
 			this.userManager = userManager;
 			this.roleManager = roleManager;

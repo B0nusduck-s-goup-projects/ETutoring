@@ -35,6 +35,9 @@ var app = builder.Build();
 
 // Ensure roles exist in the database on startup
 await EnsureRolesExistAsync(app.Services);
+// Ensure an Admin user exists in the database
+await EnsureAdminUserExistsAsync(app.Services);
+
 
 
 
@@ -75,3 +78,38 @@ async Task EnsureRolesExistAsync(IServiceProvider serviceProvider)
 		}
 	}
 }
+// Method to create admin if users don't exist
+async Task EnsureAdminUserExistsAsync(IServiceProvider serviceProvider)
+{
+	using var scope = serviceProvider.CreateScope();
+	var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+	var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+	// Check if any user exists
+	if (!userManager.Users.Any())
+	{
+		var Email = "thinh@gmail.com";
+		var Password = "thinh123"; // Change for security
+		var User = new AppUser
+		{
+			Name = "Thinh",
+			Code = "GCS210895",
+			UserName = Email,
+			Email = Email,
+			Address = "Admin Office",
+			Gender = "Male"
+		};
+
+		// Create Admin user
+		var result = await userManager.CreateAsync(User, Password);
+		if (result.Succeeded)
+		{
+			// Ensure Admin role exists
+			if (await roleManager.RoleExistsAsync("Admin"))
+			{
+				await userManager.AddToRoleAsync(User, "Admin");
+			}
+		}
+	}
+}
+

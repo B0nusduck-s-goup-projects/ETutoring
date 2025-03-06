@@ -44,11 +44,37 @@ namespace SchoolSystem.Data
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.Cascade);
 
-        }
+			//HeadBlog
+			modelBuilder.Entity<Blog>()
+				.HasMany(b => b.Comments)
+				.WithOne(c => c.Blog)
+				.HasForeignKey(c => c.BlogId)
+				.OnDelete(DeleteBehavior.NoAction); 
 
+			modelBuilder.Entity<Blog>()
+				.HasMany(b => b.Ratings)
+				.WithOne(r => r.Blog)
+				.HasForeignKey(r => r.BlogId)
+				.OnDelete(DeleteBehavior.NoAction); 
+
+			modelBuilder.Entity<BlogComment>()
+				.HasOne(c => c.ParentComment)
+				.WithMany(c => c.Replies)
+				.HasForeignKey(c => c.ParentCommentId)
+				.OnDelete(DeleteBehavior.NoAction);
+			//EndBlog
+		}
+
+		//Group
 		public DbSet<GroupUsers> GroupUsers { get; set; }
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<Message> Messages { get; set; }
 		public DbSet<AttachFiles> AttachFiles { get; set; }
+
+		//Blog
+		public DbSet<Blog> Blogs { get; set; }
+		public DbSet<BlogRating> BlogRatings { get; set; }
+		public DbSet<BlogComment> BlogComments { get; set; }
+
 	}
 }
