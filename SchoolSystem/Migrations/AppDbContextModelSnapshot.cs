@@ -291,7 +291,7 @@ namespace SchoolSystem.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("Blogs", (string)null);
                 });
 
             modelBuilder.Entity("SchoolSystem.Models.BlogComment", b =>
@@ -327,7 +327,7 @@ namespace SchoolSystem.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BlogComments");
+                    b.ToTable("BlogComments", (string)null);
                 });
 
             modelBuilder.Entity("SchoolSystem.Models.BlogRating", b =>
@@ -354,7 +354,7 @@ namespace SchoolSystem.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BlogRatings");
+                    b.ToTable("BlogRatings", (string)null);
                 });
 
             modelBuilder.Entity("SchoolSystem.Models.Group", b =>

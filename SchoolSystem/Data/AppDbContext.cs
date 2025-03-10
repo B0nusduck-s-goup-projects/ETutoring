@@ -15,6 +15,7 @@ namespace SchoolSystem.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Group & message
             modelBuilder.Entity<AppUser>()
                 .HasMany(e => e.Group)
                 .WithMany(e => e.User)
@@ -41,9 +42,10 @@ namespace SchoolSystem.Data
                 .HasForeignKey(e => e.MessageId)
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.Cascade);
+            // Group & message
 
-			//HeadBlog
-			modelBuilder.Entity<Blog>()
+            //HeadBlog
+            modelBuilder.Entity<Blog>()
 				.HasMany(b => b.Comments)
 				.WithOne(c => c.Blog)
 				.HasForeignKey(c => c.BlogId)
@@ -63,7 +65,7 @@ namespace SchoolSystem.Data
 			//EndBlog
 		}
 
-		//Group
+		//Group & message
 		public DbSet<GroupUsers> GroupUsers { get; set; }
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<Message> Messages { get; set; }

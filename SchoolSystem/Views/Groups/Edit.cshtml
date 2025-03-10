@@ -1,43 +1,52 @@
-﻿@model SchoolSystem.Models.Group
+﻿@model SchoolSystem.ViewModels.GroupIndexVM
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Group</h4>
+<h4>Edit group status</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-route-id="@Model.Group.Id" />
+            <div>
+                <label class="control-label">Teacher name:</label>
+                <p class="form-control">@Model.Teacher.Name</p>
+            </div>
+            <div>
+                <label class="control-label">Student name:</label>
+                <p class="form-control">@Model.Student.Name</p>
+            </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsValid" /> @Html.DisplayNameFor(model => model.IsValid)
-                </label>
+                <label class="form-check-label">Is Active</label>
+                @if (Model.Group.IsValid)
+                {
+                    <input disabled checked type="checkbox" class="form-check-input" />
+                }
+                else
+                {
+                    <input disabled type="checkbox" class="form-check-input" />
+                }
+                
             </div>
             <div class="form-group">
-                <label asp-for="CreatedTime" class="control-label"></label>
-                <input asp-for="CreatedTime" class="form-control" />
-                <span asp-validation-for="CreatedTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ExpiredTime" class="control-label"></label>
-                <input asp-for="ExpiredTime" class="form-control" />
-                <span asp-validation-for="ExpiredTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                @if(Model.Group.IsValid){
+                    <input type="submit" value="disable group" class="btn btn-primary" />
+                }
+                else
+                {
+                    <input type="submit" value="re-enable group" class="btn btn-primary" />
+                }
             </div>
         </form>
     </div>
 </div>
 
-<div>
+<div >
     <a asp-action="Index">Back to List</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
