@@ -1,4 +1,4 @@
-﻿@model SchoolSystem.Models.Group
+﻿@model SchoolSystem.ViewModels.GroupIndexVM
 
 @{
     ViewData["Title"] = "Details";
@@ -11,26 +11,38 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsValid)
+            @Html.DisplayNameFor(model => model.Teacher.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsValid)
+            @Html.DisplayFor(model => model.Teacher.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedTime)
+            @Html.DisplayNameFor(model => model.Student.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedTime)
+            @Html.DisplayFor(model => model.Student.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExpiredTime)
+            @Html.DisplayNameFor(model => model.Group.CreatedTime)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExpiredTime)
+            @Html.DisplayFor(model => model.Group.CreatedTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Group.ExpiredTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Group.ExpiredTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Group.IsValid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Group.IsValid)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Group.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

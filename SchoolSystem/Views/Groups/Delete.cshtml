@@ -1,4 +1,4 @@
-﻿@model SchoolSystem.Models.Group
+﻿@model SchoolSystem.ViewModels.GroupIndexVM
 
 @{
     ViewData["Title"] = "Delete";
@@ -6,33 +6,45 @@
 
 <h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to complely delete data regarding this group?</h3>
 <div>
     <h4>Group</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsValid)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Teacher.Name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsValid)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Teacher.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedTime)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Student.Name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedTime)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Student.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExpiredTime)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Group.CreatedTime)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExpiredTime)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Group.CreatedTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Group.ExpiredTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Group.ExpiredTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Group.IsValid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Group.IsValid)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Group.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

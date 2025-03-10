@@ -18,7 +18,7 @@ namespace SchoolSystem.Controllers
             _context = context;
             _userManager = userManager;
         }
-
+        
         private async Task<IList<string>> GetUserRole(AppUser user)
         {
             return await _userManager.GetRolesAsync(user);
@@ -27,6 +27,30 @@ namespace SchoolSystem.Controllers
         private async Task<bool> UserHasRole(AppUser user, string role)
         {
             return (await GetUserRole(user)).Contains(role);
+        }
+
+        private async Task<GroupIndexVM> AssignUserValue(Group group)
+        {
+            GroupIndexVM entry = new GroupIndexVM();
+            foreach (AppUser user in group.User)
+            {
+                if (await UserHasRole(user, "Student")
+                    && entry.Student == null)
+                {
+                    entry.Student = user;
+                }
+                if (await UserHasRole(user, "Tutor")
+                    && entry.Teacher == null)
+                {
+                    entry.Teacher = user;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            entry.Group = group;
+            return entry;
         }
 
         // GET: Groups
@@ -40,25 +64,7 @@ namespace SchoolSystem.Controllers
             List<GroupIndexVM> index = new List<GroupIndexVM>();
             foreach (Group group in groups)
             {
-                GroupIndexVM entry = new GroupIndexVM();
-                foreach (AppUser user in group.User)
-                {
-                    if (await UserHasRole(user,"Student")
-                        && entry.Student == null)
-                    {
-                        entry.Student = user;
-                    }
-                    if (await UserHasRole(user, "Tutor")
-                        && entry.Teacher == null)
-                    {
-                        entry.Teacher = user;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-                entry.Group = group;
+                GroupIndexVM entry = await AssignUserValue(group);
                 index.Add(entry);
             }
             return View(index);
@@ -72,32 +78,14 @@ namespace SchoolSystem.Controllers
                 return NotFound();
             }
 
-            Group? group = await _context.Groups.FirstOrDefaultAsync(m => m.Id == id);
+            Group? group = await _context.Groups.FindAsync(id);
             if (group == null)
             {
                 return NotFound();
             }
             
-            GroupIndexVM groupDetail = new GroupIndexVM();
-            groupDetail.Group = group;
-            foreach(AppUser user in group.User)
-            {
-                if(await UserHasRole(user, "Student")
-                    && groupDetail.Student == null)
-                {
-                    groupDetail.Student = user;
-                }
-                if (await UserHasRole(user, "Tutor")
-                    && groupDetail.Teacher == null)
-                {
-                    groupDetail.Teacher = user;
-                }
-                else
-                {
-                    continue;
-                }
-            }
-            return View(group);
+            GroupIndexVM groupDetail = await AssignUserValue(group);
+            return View(groupDetail);
         }
 
         // GET: Groups/Create
@@ -116,8 +104,8 @@ namespace SchoolSystem.Controllers
             createVM.exception = null;
             if (ModelState.IsValid)
             {
-                AppUser? teacher = _context.Users.Where(u => u.Id == createVM.TeacherID).FirstOrDefault();
-                AppUser? student = _context.Users.Where(u => u.Id == createVM.StudentID).FirstOrDefault();
+                AppUser? teacher = await _context.Users.FindAsync(createVM.TeacherID);
+                AppUser? student = await _context.Users.FindAsync(createVM.StudentID);
 
                 if (student == null || !await UserHasRole(student!, "Student"))
                 {
@@ -140,6 +128,7 @@ namespace SchoolSystem.Controllers
                     group.CreatedTime = DateTime.Now;
                     group.User = new List<AppUser>(){ teacher!, student!};
                     await _context.Groups.AddAsync(group);
+                    await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -154,13 +143,13 @@ namespace SchoolSystem.Controllers
             {
                 return NotFound();
             }
-
-            var @group = await _context.Groups.FindAsync(id);
-            if (@group == null)
+            Group? group = await _context.Groups.FindAsync(id);
+            if (group == null)
             {
                 return NotFound();
             }
-            return View(@group);
+            GroupIndexVM entry = await AssignUserValue(group);
+            return View(entry);
         }
 
         // POST: Groups/Edit/5
@@ -168,34 +157,41 @@ namespace SchoolSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IsValid,CreatedTime,ExpiredTime")] Group @group)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id != @group.Id)
+            Group? group = await _context.Groups.FindAsync(id);
+            if (group == null)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            try
             {
-                try
+                if (group!.ExpiredTime == null)
                 {
-                    _context.Update(@group);
-                    await _context.SaveChangesAsync();
+                    group.ExpiredTime = DateTime.Now;
+                    group.IsValid = false;
                 }
-                catch (DbUpdateConcurrencyException)
+                //if time since expire is <= 1 day
+                if ((((DateTime)group.ExpiredTime).Ticks - DateTime.Now.Ticks) <= 864000000000)
                 {
-                    if (!GroupExists(@group.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    group.ExpiredTime = null;
+                    group.IsValid = true;
                 }
-                return RedirectToAction(nameof(Index));
+                else
+                {
+                    return View(group);
+                }
+                _context.Update(group);
+                await _context.SaveChangesAsync();
             }
-            return View(@group);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!GroupExists(group!.Id))
+                {
+                    return NotFound();
+                }
+            }
+            return View(group);
         }
 
         // GET: Groups/Delete/5
@@ -205,15 +201,13 @@ namespace SchoolSystem.Controllers
             {
                 return NotFound();
             }
-
-            var @group = await _context.Groups
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (@group == null)
+            Group? group = await _context.Groups.FindAsync(id);
+            if (group == null)
             {
                 return NotFound();
             }
-
-            return View(@group);
+            GroupIndexVM entry = await AssignUserValue(group);
+            return View(entry);
         }
 
         // POST: Groups/Delete/5
@@ -221,13 +215,13 @@ namespace SchoolSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var @group = await _context.Groups.FindAsync(id);
-            if (@group != null)
+            Group? group = await _context.Groups.FindAsync(id);
+            if (group != null)
             {
-                _context.Groups.Remove(@group);
+                _context.Groups.Remove(group);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
