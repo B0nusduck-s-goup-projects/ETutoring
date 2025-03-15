@@ -27,6 +27,16 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(
     })
     .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+
+//Add Email Service
+builder.Services.AddScoped(sp => new EmailSender.Services.EmailService(
+    smtpHost: "smtp.gmail.com", 
+    smtpPort: 587,              
+    smtpUser: "buicaonguyen115@gmail.com", 
+    smtpPass: "tzju egvo icfu rrnc"
+));
+
+
 // Register the custom claims principal factory 
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, CustomClaimsPrincipalFactory>();
 
