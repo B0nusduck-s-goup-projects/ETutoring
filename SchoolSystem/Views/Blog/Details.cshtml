@@ -1,0 +1,212 @@
+﻿@model SchoolSystem.Models.Blog
+
+@{
+    ViewData["Title"] = "Blog Details";
+}
+
+<h2>@Model.Title</h2>
+<p><strong>Author:</strong> @Model.User.UserName</p>
+<p><strong>Date:</strong> @Model.TimeStamp.ToString("dd/MM/yyyy")</p>
+
+@if (!string.IsNullOrEmpty(Model.Image))
+{
+    <img src="@Model.Image" width="400" />
+}
+<p>@Model.Content</p>
+
+<h3>Rate this Blog</h3>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-action="RateBlog" method="post">
+        <input type="hidden" name="blogId" value="@Model.Id" />
+
+        <label>Select rating:</label>
+        <select name="rating" class="form-control" required>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary mt-2">Submit Rating</button>
+    </form>
+}
+else
+{
+    <p><a asp-controller="Account" asp-action="Login">Login</a> to rate this blog.</p>
+}
+
+<a asp-action="ListBlogs" class="btn btn-secondary">Back</a>
+
+@* Show rating *@
+<h3>Rating</h3>
+@{
+    var averageRating = (Model.Ratings != null && Model.Ratings.Any())
+    ? Model.Ratings.Average(r => r.Rating)
+    : 0;
+}
+@if (averageRating > 0)
+{
+    <span>@averageRating.ToString("0.0") ⭐</span>
+}
+else
+{
+    <span>No ratings yet</span>
+}
+
+@* Comment *@
+<h3>Comment</h3>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-action="AddComment" method="post">
+        <input type="hidden" name="BlogId" value="@Model.Id" />
+
+        <textarea name="Content" class="form-control" placeholder="Write your comment..." required></textarea>
+        <button type="submit" class="btn btn-primary mt-2">Post Comment</button>
+    </form>
+}
+else
+{
+    <p><a asp-controller="Account" asp-action="Login">Login</a> to comment.</p>
+}
+
+
+@* AllComment *@
+@* <h3>All Comments</h3>
+
+@if (Model.Comments.Any())
+{
+    <ul>
+        @foreach (var comment in Model.Comments.Where(c => c.ParentCommentId == null))
+        {
+            <li>
+                <strong>@comment.User.Name</strong> - @comment.TimeStamp.ToString("dd/MM/yyyy HH:mm")
+                <p>@comment.Content</p>
+
+                <button class="btn btn-link reply-btn" data-comment-id="@comment.Id">Reply</button>
+
+                <!-- reply form -->
+                <form asp-action="AddComment" method="post" class="reply-form" data-comment-id="@comment.Id" style="display:none;">
+                    <input type="hidden" name="BlogId" value="@Model.Id" />
+                    <input type="hidden" name="ParentCommentId" value="@comment.Id" />
+                    <textarea name="Content" class="form-control" placeholder="Reply to this comment..." required></textarea>
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                </form>
+
+                <!-- reply comments -->
+                <ul>
+                    @foreach (var reply in Model.Comments.Where(c => c.ParentCommentId == comment.Id))
+                    {
+                        <li>
+                            <strong>@reply.User.Name</strong> - @reply.TimeStamp.ToString("dd/MM/yyyy HH:mm")
+                            <p>@reply.Content</p>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No comments yet. Be the first to comment!</p>
+} *@
+
+<h3>All Comments</h3>
+
+@if (Model.Comments.Any())
+{
+    <ul>
+        @foreach (var comment in Model.Comments.Where(c => c.ParentCommentId == null))
+        {
+            @Html.Raw(RenderComments(comment, Model.Comments))
+        }
+    </ul>
+}
+else
+{
+    <p>No comments yet. Be the first to comment!</p>
+}
+
+@functions {
+    string RenderComments(BlogComment comment, IEnumerable<BlogComment> allComments)
+    {
+        var replies = allComments.Where(c => c.ParentCommentId == comment.Id).ToList();
+        string html = $@"
+            <li>
+                <strong>{comment.User?.Name}</strong> - {comment.TimeStamp:dd/MM/yyyy HH:mm}
+                <p>{comment.Content}</p>
+
+                <button class='btn btn-link reply-btn' data-comment-id='{comment.Id}'>Reply</button>
+
+                <form method='post' action='/Blog/AddComment' class='reply-form' data-comment-id='{comment.Id}' style='display:none;'>
+                    <input type='hidden' name='BlogId' value='{comment.BlogId}' />
+                    <input type='hidden' name='ParentCommentId' value='{comment.Id}' />
+                    <textarea name='Content' class='form-control' placeholder='Reply to this comment...' required></textarea>
+                    <button type='submit' class='btn btn-primary mt-2'>Submit</button>
+                </form>
+        ";
+
+        if (replies.Any())
+        {
+            html += "<ul>";
+            foreach (var reply in replies)
+            {
+                html += RenderComments(reply, allComments);
+            }
+            html += "</ul>";
+        }
+
+        html += "</li>";
+        return html;
+    }
+}
+
+
+
+
+@* Delete *@
+
+@if (User.Identity.IsAuthenticated && (Model.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value || User.IsInRole("Admin")))
+{
+    <form asp-action="Delete" method="post" asp-route-id="@Model.Id" style="display:inline;">
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">
+            Delete
+        </button>
+    </form>
+}
+@* JavaScript *@
+@* <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var replyButtons = document.querySelectorAll(".reply-btn");
+
+        replyButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                var commentId = this.getAttribute("data-comment-id");
+                var replyForm = document.querySelector(`.reply-form[data-comment-id='${commentId}']`);
+
+                if (replyForm) {
+                    replyForm.style.display = (replyForm.style.display === "none" || replyForm.style.display === "") ? "block" : "none";
+                }
+            });
+        });
+    });
+</script> *@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".reply-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                var commentId = this.getAttribute("data-comment-id");
+
+                // Chọn tất cả form có cùng data-comment-id để đảm bảo tìm đúng
+                document.querySelectorAll(`form.reply-form[data-comment-id='${commentId}']`).forEach(replyForm => {
+                    replyForm.style.display = (replyForm.style.display === "none" || replyForm.style.display === "") ? "block" : "none";
+                });
+            });
+        });
+    });
+</script>
+

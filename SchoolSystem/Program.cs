@@ -5,14 +5,13 @@ using SchoolSystem.Models;
 
 
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("default");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlServer(connectionString));
 
@@ -38,7 +37,7 @@ builder.Services.AddScoped(sp => new EmailSender.Services.EmailService(
 
 
 // Register the custom claims principal factory 
-builder.Services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, CustomClaimsPrincipalFactory>();
+//builder.Services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, CustomClaimsPrincipalFactory>();
 
 var app = builder.Build();
 

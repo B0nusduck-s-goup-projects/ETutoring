@@ -19,6 +19,8 @@ namespace SchoolSystem.Models
 		public string UserId { get; set; }
 		public AppUser User { get; set; }
 
+		public string? Image { get; set; }
+
 		public ICollection<BlogComment> Comments { get; set; }
 		public ICollection<BlogRating> Ratings { get; set; }
 	}
