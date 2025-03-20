@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #003366; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; background-color: #f9f9f9; }
+        .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
+        .button { display: inline-block; padding: 10px 20px; background-color: #003366; color: white; text-decoration: none;
+            border-radius: 5px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>New Comment Notification</h1>
+        </div>
+        
+        <div class="content">
+            <p>Dear @Model.RecipientName,</p>
+            
+            <p>A new comment has been added to @Model.ContentType "@Model.ContentTitle".</p>
+            
+            <p><strong>Comment by:</strong> @Model.CommenterName</p>
+            
+            <p><strong>Comment:</strong></p>
+            <p style="margin-left: 20px; padding: 10px; background-color: #eee; border-left: 4px solid #003366;">
+                @Model.CommentText
+            </p>
+
+            <p>
+                <a href="@Model.ContentUrl" class="button">View in eTutor System</a>
+            </p>
+
+            <p>Please log in to the eTutor system to respond or view the full context.</p>
+            
+            <p>Best regards,<br />eTutor System</p>
+        </div>
+
+        <div class="footer">
+            <p>This is an automated notification from the eTutor System. Please do not reply to this email.</p>
+            <p>For all communications, please use the eTutor platform.</p>
+        </div>
+    </div>
+</body>
+</html>
