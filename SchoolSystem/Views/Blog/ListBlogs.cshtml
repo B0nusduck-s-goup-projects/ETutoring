@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SchoolSystem.Models.Blog>
+
+@{
+    ViewData["Title"] = "Blog List";
+}
+
+<h2>Blog List</h2>
+
+<a asp-action="Create" class="btn btn-success">+ Write a Blog</a>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Date</th>
+            <th>Image</th>
+            <th>Average Rating</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model)
+        {
+            <tr>
+                <td>@blog.Title</td>
+                <td>@blog.User.UserName</td>
+                <td>@blog.TimeStamp.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(blog.Image))
+                    {
+                        <img src="@blog.Image" width="100" />
+                    }
+                </td>
+                <td>
+                    @{
+                        var averageRating = (blog.Ratings != null && blog.Ratings.Any())
+                        ? blog.Ratings.Average(r => r.Rating)
+                        : 0;
+                    }
+                    @if (averageRating > 0)
+                    {
+                        <span>@averageRating.ToString("0.0") ⭐</span>
+                    }
+                    else
+                    {
+                        <span>No ratings yet</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@blog.Id" class="btn btn-info">View</a>
+
+                    @if (User.Identity.IsAuthenticated && (blog.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value || User.IsInRole("Admin")))
+                    {
+                        <form asp-action="Delete" method="post" asp-route-id="@blog.Id" style="display:inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">
+                                Delete
+                            </button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
