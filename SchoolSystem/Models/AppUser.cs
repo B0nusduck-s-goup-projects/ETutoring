@@ -24,6 +24,7 @@ namespace SchoolSystem.Models
 
 		public ICollection<Message>? Messages { get; set; }
         public ICollection<Group>? Group { get; set; }
+        public ICollection<GroupUsers>? GroupUsers { get; set; }
     }
 }
 

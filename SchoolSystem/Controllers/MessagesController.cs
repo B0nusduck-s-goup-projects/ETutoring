@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,13 +14,22 @@ namespace SchoolSystem.Controllers
     public class MessagesController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public MessagesController(AppDbContext context)
+        public MessagesController(AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        // GET: Messages
+        public IActionResult Chat()
+        {
+            string id = "";
+            AppUser? tutor = _context.Users.Where(u => u.Id.Equals(id)).Include(u => u.Group).FirstOrDefault();
+            return View();
+        }
+
+        /*// GET: Messages
         public async Task<IActionResult> Index()
         {
             var appDbContext = _context.Messages.Include(m => m.Group).Include(m => m.Sender);
@@ -165,6 +175,6 @@ namespace SchoolSystem.Controllers
         private bool MessageExists(int id)
         {
             return _context.Messages.Any(e => e.Id == id);
-        }
+        }*/
     }
 }
