@@ -20,8 +20,8 @@ namespace SchoolSystem.Data
                 .HasMany(e => e.Group)
                 .WithMany(e => e.User)
                 .UsingEntity<GroupUsers>(
-                    l => l.HasOne<Group>().WithMany().HasForeignKey(e => e.GroupId),
-                    r => r.HasOne<AppUser>().WithMany().HasForeignKey(e => e.UserId)
+                    l => l.HasOne<Group>(gu => gu.Group).WithMany(g => g.GroupUsers).HasForeignKey(e => e.GroupId),
+                    r => r.HasOne<AppUser>(gu => gu.User).WithMany(au => au.GroupUsers).HasForeignKey(e => e.UserId)
                 );
 
             modelBuilder.Entity<Group>()

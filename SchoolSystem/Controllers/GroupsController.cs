@@ -56,7 +56,7 @@ namespace SchoolSystem.Controllers
         // GET: Groups
         public async Task<IActionResult> Index()
         {
-            List<Group> groups = await _context.Groups.ToListAsync();
+            List<Group> groups = await _context.Groups.Include(g=>g.User).ToListAsync();
             if (groups.IsNullOrEmpty())
             {
                 return View();
@@ -78,7 +78,7 @@ namespace SchoolSystem.Controllers
                 return NotFound();
             }
 
-            Group? group = await _context.Groups.FindAsync(id);
+            Group? group = await _context.Groups.Include(g => g.User).FirstOrDefaultAsync(g => g.Id == id);
             if (group == null)
             {
                 return NotFound();
@@ -143,7 +143,7 @@ namespace SchoolSystem.Controllers
             {
                 return NotFound();
             }
-            Group? group = await _context.Groups.FindAsync(id);
+            Group? group = await _context.Groups.Include(g => g.User).FirstOrDefaultAsync(g => g.Id == id);
             if (group == null)
             {
                 return NotFound();
@@ -159,7 +159,7 @@ namespace SchoolSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id)
         {
-            Group? group = await _context.Groups.FindAsync(id);
+            Group? group = await _context.Groups.Include(g => g.User).FirstOrDefaultAsync(g => g.Id == id);
             if (group == null)
             {
                 return NotFound();
@@ -172,7 +172,7 @@ namespace SchoolSystem.Controllers
                     group.IsValid = false;
                 }
                 //if time since expire is <= 1 day
-                if ((((DateTime)group.ExpiredTime).Ticks - DateTime.Now.Ticks) <= 864000000000)
+                else if ((((DateTime)group.ExpiredTime).Ticks - DateTime.Now.Ticks) <= 864000000000)
                 {
                     group.ExpiredTime = null;
                     group.IsValid = true;
@@ -191,7 +191,8 @@ namespace SchoolSystem.Controllers
                     return NotFound();
                 }
             }
-            return View(group);
+            GroupIndexVM entry = await AssignUserValue(group);
+            return View(entry);
         }
 
         // GET: Groups/Delete/5
@@ -201,7 +202,7 @@ namespace SchoolSystem.Controllers
             {
                 return NotFound();
             }
-            Group? group = await _context.Groups.FindAsync(id);
+            Group? group = await _context.Groups.Include(g => g.User).FirstOrDefaultAsync(g => g.Id == id);
             if (group == null)
             {
                 return NotFound();

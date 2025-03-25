@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using SchoolSystem.Data;
 using SchoolSystem.Models;
+using SchoolSystem.Services.Hubs;
 
 
 
@@ -10,6 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("default");
 
 // Add services to the container.
+builder.Services.AddSignalR();
+/*builder.Services.AddResponseCompression(opts =>
+{
+    opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+        ["application/octet-stream"]);
+});*/
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>(
@@ -65,6 +73,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapHub<ChatHub>("/Chat");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

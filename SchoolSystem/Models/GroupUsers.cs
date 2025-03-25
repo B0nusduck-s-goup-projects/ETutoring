@@ -6,9 +6,9 @@ namespace SchoolSystem.Models
     {
         [Required]
         public required int GroupId { get; set; }
-        //public Group Group { get; set; } = null!;
+        public Group Group { get; set; } = null!;
         [Required]
         public required string UserId { get; set; }
-        //public AppUser User { get; set; } = null!;
+        public AppUser User { get; set; } = null!;
     }
 }
