@@ -1,0 +1,86 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Liter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Liter&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+:root {
+    --main-text-font: "Liter", serif;
+    --logo-text-font: "Roboto Flex", serif;
+    --main-color: #020381;
+    --fpt-color: #F06E28;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    background-color: #7BC9FF;
+    display: flex;
+}
+
+nav {
+    position: fixed;
+    width: 25%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--main-color);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.logo {
+    margin-bottom: 35px;
+}
+
+.menu-list {
+    width: 100%;
+    color: white;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+    font-size: 24px;
+    font-weight: 500;
+    gap: 24px;
+    cursor: pointer;
+    position: relative;
+}
+
+.menu-item.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background-color: var(--fpt-color);
+}
+
+.menu-item > img {
+    width: 50px;
+    height: 50px
+}
+
+.nav-item:hover {
+
+}
+
+.chat-container {
+    margin-left: calc(25% + 35px);
+    flex-grow: 1;
+}
