@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - eTutoring</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/6e8637ff15.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+</head>
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <span class="contact-info">
+                        <i class="fas fa-phone-alt"></i> Call Us on 028.7300.6622
+                    </span>
+                    <div class="top-bar-links">
+                        <a href="#">News</a>
+                        <a href="#">Gallery</a>
+                        <a href="#"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="top">
+            <div class="container">
+                <div class="header-top row">
+                    <a asp-controller="Home" asp-action="Index" class="logo">
+                        <img src="https://greenwich.edu.vn/wp-content/uploads/2024/06/2022-Greenwich-Eng-400x200.webp" alt="Greenwich University Logo">
+                    </a>
+                    <ul>
+                        @* <i class="fa-solid fa-xmark"></i> *@
+                        <li><a asp-controller="Home" asp-action="Index">HOME</a></li>
+                        <li><a href="">ABOUT US</a></li>
+                        <li><a asp-controller="Home" asp-action="Event">EVENT</a></li>
+                        <li><a asp-controller="Home" asp-action="Blog">BLOG</a></li>
+                        <li><a href="">CONTACT US</a></li>
+                    </ul>
+                    @* <i class="fa-solid fa-bars"></i> *@
+                </div>
+            </div>
+        </div>
+    </header>   
+
+    <body>
+        @RenderBody() 
+    </body>
+
+    <footer>
+        <div class="social-icons">
+            <div class="social-item">
+                <a href="#">
+                    <div class="icon facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                </a>
+                <p>Facebook</p>
+            </div>
+
+            <div class="social-item">
+                <a href="#">
+                    <div class="icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </a>
+                <p>Instagram</p>
+            </div>
+
+            <div class="social-item">
+                <a href="#">
+                    <div class="icon youtube">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                </a>
+                <p>YouTube</p>
+            </div>
+
+            <div class="social-item">
+                <a href="#">
+                    <div class="icon tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                </a>
+                <p>TikTok</p>
+            </div>
+        </div>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>INFORMATION</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our History</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>STUDENT HELP</h3>
+                <ul>
+                    <li><a href="#">My Info</a></li>
+                    <li><a href="#">F.A.Q</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section gallery">
+                <h3>GALLERY</h3>
+                <div class="insta-gallery">
+                    <img src="~/images/home/img1.jpg" alt="Gallery 1">
+                    <img src="~/images/home/img2.jpg" alt="Gallery 2">
+                    <img src="~/images/home/img3.jpg" alt="Gallery 3">
+                    <img src="~/images/home/img4.jpg" alt="Gallery 4">
+                    <img src="~/images/home/img5.jpg" alt="Gallery 5">
+                    <img src="~/images/home/img6.jpg" alt="Gallery 6">
+                </div>
+            </div>
+
+            <div class="footer-section contact">
+                <h3>CONTACT</h3>
+                <p>Cong Hoa Garden, Ward 12, Tan Binh District</p>
+                <p>Phone: 028.7300.6622</p>
+                <p>Email: <a href="#">acad.gre.hcm@fe.edu.vn</a></p>
+            </div>
+        </div>
+        <div class="copyright">© 2025 Greenwich.edu.vn. All Rights Reserved</div>
+    </footer>
+
+    <script>
+        CKEDITOR.replace("content");
+    </script>
+</html>

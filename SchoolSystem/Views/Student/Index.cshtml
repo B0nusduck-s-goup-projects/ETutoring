@@ -1,0 +1,40 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+	Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<div class="bg-image">
+	<div class="overlay"></div>
+	<div class="header-text">
+		<h1>WELCOME TO OUR UNIVERSITY</h1>
+		<p>We Believe There Is Nothing More Important Than Education</p>
+		<button>READ MORE</button>
+	</div>
+</div>
+
+<section class="cards">
+	<div class="container">
+		<h1 class="section-title">Enhance Your Learning with Our Online Tutoring Services</h1>
+		<div class="card-items">
+			<div class="item1">
+				<img src="~/images/home/item1.jpg" alt="Writing Lab" class="" />
+				<h2>Writing Lab</h2>
+				<p>Submit a draft of your paper to a tutor, ask for specific feedback, and receive a detailed response within 48 hours.</p>
+			</div>
+			<a asp-controller="Home" asp-action="Chat">
+				<div class="item2">
+					<img src="~/images/home/item2.jpg" alt="Live Tutoring" class="" />
+					<h2>Chat Tutoring</h2>
+					<p>Chat or meet with a tutor in one-on-one tutoring sessions via a fully interactive online.</p>
+				</div>
+			</a>
+			<div class="item3">
+				<img src="~/images/home/item3.jpg" alt="eQuestions" class="" />
+				<h2>eQuestions</h2>
+				<p>Leave a specific question for our eTutors and get a response within 48 hours.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
