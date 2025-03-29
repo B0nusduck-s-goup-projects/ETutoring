@@ -74,47 +74,6 @@ else
 }
 
 
-@* AllComment *@
-@* <h3>All Comments</h3>
-
-@if (Model.Comments.Any())
-{
-    <ul>
-        @foreach (var comment in Model.Comments.Where(c => c.ParentCommentId == null))
-        {
-            <li>
-                <strong>@comment.User.Name</strong> - @comment.TimeStamp.ToString("dd/MM/yyyy HH:mm")
-                <p>@comment.Content</p>
-
-                <button class="btn btn-link reply-btn" data-comment-id="@comment.Id">Reply</button>
-
-                <!-- reply form -->
-                <form asp-action="AddComment" method="post" class="reply-form" data-comment-id="@comment.Id" style="display:none;">
-                    <input type="hidden" name="BlogId" value="@Model.Id" />
-                    <input type="hidden" name="ParentCommentId" value="@comment.Id" />
-                    <textarea name="Content" class="form-control" placeholder="Reply to this comment..." required></textarea>
-                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
-                </form>
-
-                <!-- reply comments -->
-                <ul>
-                    @foreach (var reply in Model.Comments.Where(c => c.ParentCommentId == comment.Id))
-                    {
-                        <li>
-                            <strong>@reply.User.Name</strong> - @reply.TimeStamp.ToString("dd/MM/yyyy HH:mm")
-                            <p>@reply.Content</p>
-                        </li>
-                    }
-                </ul>
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p>No comments yet. Be the first to comment!</p>
-} *@
-
 <h3>All Comments</h3>
 
 @if (Model.Comments.Any())
@@ -135,6 +94,11 @@ else
     string RenderComments(BlogComment comment, IEnumerable<BlogComment> allComments)
     {
         var replies = allComments.Where(c => c.ParentCommentId == comment.Id).ToList();
+        var userId = Context.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+        var userRoles = Context.User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).Select(c => c.Value).ToList();
+
+        bool canDelete = userId == comment.UserId || userId == comment.Blog.UserId || userRoles.Contains("Admin") || userRoles.Contains("Staff");
+
         string html = $@"
             <li>
                 <strong>{comment.User?.Name}</strong> - {comment.TimeStamp:dd/MM/yyyy HH:mm}
@@ -149,6 +113,16 @@ else
                     <button type='submit' class='btn btn-primary mt-2'>Submit</button>
                 </form>
         ";
+
+if (canDelete)
+{
+    html += $@"
+        <form method='post' action='/Blog/DeleteComment' class='delete-form' style='display:inline;'>
+            <input type='hidden' name='CommentId' value='{comment.Id}' />
+            <button type='submit' class='btn btn-danger btn-sm' onclick='return confirm(""Are you sure you want to delete this comment?"");'>Delete</button>
+        </form>
+    ";
+}
 
         if (replies.Any())
         {
@@ -168,33 +142,19 @@ else
 
 
 
-@* Delete *@
+
+
+@* Delete Blog *@
 
 @if (User.Identity.IsAuthenticated && (Model.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value || User.IsInRole("Admin")))
 {
     <form asp-action="Delete" method="post" asp-route-id="@Model.Id" style="display:inline;">
         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">
-            Delete
+            Delete Blog
         </button>
     </form>
 }
-@* JavaScript *@
-@* <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var replyButtons = document.querySelectorAll(".reply-btn");
 
-        replyButtons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                var commentId = this.getAttribute("data-comment-id");
-                var replyForm = document.querySelector(`.reply-form[data-comment-id='${commentId}']`);
-
-                if (replyForm) {
-                    replyForm.style.display = (replyForm.style.display === "none" || replyForm.style.display === "") ? "block" : "none";
-                }
-            });
-        });
-    });
-</script> *@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".reply-btn").forEach(button => {
