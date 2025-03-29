@@ -1,0 +1,30 @@
+﻿@model SchoolSystem.ViewModels.TutorDashboardVM
+
+<h2>Tutor Dashboard</h2>
+
+<p>Tutor Name: @Model.TutorName</p>
+<p>Uploaded Documents: @Model.UploadedDocuments</p>
+
+<h3>Recent Comments</h3>
+<ul>
+    @foreach (var comment in Model.RecentComments)
+    {
+        <li>@comment</li>
+    }
+</ul>
+
+<h3>Recent Messages</h3>
+<ul>
+    @foreach (var message in Model.RecentMessages)
+    {
+        <li>@message.TextContent</li>
+    }
+</ul>
+
+<h3>Assigned Groups</h3>
+<ul>
+    @foreach (var group in Model.AssignedGroups)
+    {
+        <li>@group.Id</li>
+    }
+</ul>

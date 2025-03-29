@@ -14,5 +14,6 @@ namespace SchoolSystem.Models
         public ICollection<Message>? Messages { get; set; }
         public ICollection<AppUser> User { get; set; } = null!;
         public ICollection<GroupUsers> GroupUsers { get; set; } = null!;
+        //public string TutorId { get; set; } = string.Empty;
     }
 }
