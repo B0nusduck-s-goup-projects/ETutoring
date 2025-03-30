@@ -1,0 +1,127 @@
+﻿body, nav {
+    background: linear-gradient(117deg,rgba(11, 14, 31, 1),rgba(57, 58, 67, 1),rgba(11, 55, 70, 1));
+}
+
+.navbar {
+    border-bottom: none !important;
+    padding-left: 60px;
+}
+
+.footer {
+    border-top: none !important;
+    text-align: center;
+    padding: 20px;
+}
+.text-dark{
+    color: white !important;
+}
+/* Login view */
+.center-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 80vh; 
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.card {
+    width: 400px;
+    height: 400px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); 
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5); 
+    border-radius: 20px;
+    backdrop-filter: blur(30px);
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    color: #ffffff;
+    padding-top: 10px;
+}
+
+/* Title: "Login" */
+.text-center.text-info {
+    font-size: 40px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #fc6c4a, #fcbe8f); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    margin: -25px;
+    margin-bottom: 40px;
+}
+
+/* Input fields */
+.form-control {
+    background: transparent; 
+    color: #fff;
+    border: none;
+    border-bottom: 0.5px solid #9A9797;
+    padding: 8px;
+    padding-left: 40px;
+    margin-bottom: 10px;
+    font-size: 16px; 
+    transition: all 0.3s ease;
+}
+
+    .form-control:hover,
+    .form-control:focus{
+        background: transparent; 
+        color: #ffffff;
+        border: 1px solid #9A9797;
+        border-radius: 12px;
+    }
+
+/* Label */
+label {
+    font-size: 16px;
+    color: #ddd; 
+    margin-bottom: 5px; 
+    display: block; 
+    text-align: left;
+}
+
+/* Checkbox - Remember Me */
+.form-check {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.form-check-input {
+    width: 20px; 
+    height: 20px;
+    background: transparent;
+    border: 1px solid #9A9797;
+    margin-right: 10px;
+}
+
+.form-check-label {
+    font-size: 14px;
+    color: #fff; 
+}
+
+/* Nút Login */
+.btn {
+    background: linear-gradient(90deg, #ff7e5f, #feb47b); 
+    border: none;
+    color: #fff; 
+    font-weight: bold;
+    border-radius: 20px; 
+    padding: 8px 35px; 
+    font-size: 16px; 
+    cursor: pointer;
+    transition: 0.3s ease;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 15px;
+}
+
+    .btn:hover {
+        background: linear-gradient(135deg, #b5aeac, #837673); 
+    }
+
+/* Login view */

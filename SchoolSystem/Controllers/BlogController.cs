@@ -6,8 +6,10 @@ using SchoolSystem.Data;
 using SchoolSystem.Models;
 using SchoolSystem.ViewModels;
 using System;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace SchoolSystem.Controllers
@@ -188,6 +190,45 @@ namespace SchoolSystem.Controllers
 			await _context.SaveChangesAsync();
 
 			return RedirectToAction("Details", new { id = model.BlogId });
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> DeleteComment(int CommentId)
+		{
+			var comment = await _context.BlogComments.Include(c => c.Blog).FirstOrDefaultAsync(c => c.Id == CommentId);
+
+			if (comment == null)
+			{
+				return NotFound();
+			}
+
+			var userId = _userManager.GetUserId(User);
+			var userRoles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
+
+			if (userId != comment.UserId && userId != comment.Blog.UserId && !userRoles.Contains("Admin") && !userRoles.Contains("Staff"))
+			{
+				return Forbid();
+			}
+
+			await DeleteCommentRecursively(comment.Id);
+
+			_context.BlogComments.Remove(comment);
+			await _context.SaveChangesAsync();
+
+			return RedirectToAction("Details", new { id = comment.BlogId });
+		}
+
+		private async Task DeleteCommentRecursively(int commentId)
+		{
+			var replies = await _context.BlogComments.Where(c => c.ParentCommentId == commentId).ToListAsync();
+
+			foreach (var reply in replies)
+			{
+				await DeleteCommentRecursively(reply.Id);
+				_context.BlogComments.Remove(reply);
+			}
+
+			await _context.SaveChangesAsync();
 		}
 
 	}

@@ -1,0 +1,47 @@
+﻿@model SchoolSystem.ViewModels.StudentDashboardVM
+
+<h2>Student Dashboard</h2>
+
+<p>Student Name: @Model.StudentName</p>
+<p>Personal Tutor: @Model.PersonalTutor</p>
+<p>Uploaded Documents: @Model.UploadedDocuments</p>
+
+<h3>Recent Comments</h3>
+<ul>
+    @foreach (var comment in Model.RecentComments)
+    {
+        <li>@comment</li>
+    }
+</ul>
+
+<h3>Student Blogs</h3>
+<ul>
+    @foreach (var blog in Model.StudentBlogs)
+    {
+        <li>@blog.Title</li>
+    }
+</ul>
+
+<h3>Recent Messages</h3>
+<ul>
+    @foreach (var message in Model.RecentMessages)
+    {
+        <li>@message.TextContent</li>
+    }
+</ul>
+
+<h3>Groups</h3>
+<ul>
+    @foreach (var group in Model.Groups)
+    {
+        <li>@group.Id</li>
+    }
+</ul>
+
+<h3>Recent Files</h3>
+<ul>
+    @foreach (var file in Model.RecentFiles)
+    {
+        <li>@file.FileContent</li>
+    }
+</ul>
