@@ -1,6 +1,59 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="container mt-4">
+    <h1>@ViewData["Title"]</h1>
+    <hr />
+
+    <div class="mb-4">
+        <h4>Information We Collect</h4>
+        <p>We collect information that you provide directly to us, including:</p>
+        <ul>
+            <li>Name and contact information</li>
+            <li>Academic records and educational history</li>
+            <li>Communication preferences</li>
+            <li>Messages and content you share on our platform</li>
+        </ul>
+    </div>
+
+    <div class="mb-4">
+        <h4>How We Use Your Information</h4>
+        <p>We use the information we collect to:</p>
+        <ul>
+            <li>Provide and maintain our tutoring services</li>
+            <li>Communicate with you about your account and updates</li>
+            <li>Improve our educational services</li>
+            <li>Ensure platform security and prevent abuse</li>
+        </ul>
+    </div>
+
+    <div class="mb-4">
+        <h4>Data Security</h4>
+        <p>We implement appropriate security measures to protect your personal information. However, no method of transmission over the Internet is 100% secure.</p>
+    </div>
+
+    <div class="mb-4">
+        <h4>Your Rights</h4>
+        <p>You have the right to:</p>
+        <ul>
+            <li>Access your personal information</li>
+            <li>Correct inaccurate data</li>
+            <li>Request deletion of your data</li>
+            <li>Opt-out of communications</li>
+        </ul>
+    </div>
+
+    <div class="mb-4">
+        <h4>Contact Us</h4>
+        <p>If you have questions about this Privacy Policy, please contact us at:</p>
+        <address>
+            Email: privacy@schoolsystem.com<br />
+            Phone: (123) 456-7890
+        </address>
+    </div>
+
+    <div class="mt-4">
+        <p><small>Last updated: @DateTime.Now.ToString("MMMM yyyy")</small></p>
+    </div>
+</div>
