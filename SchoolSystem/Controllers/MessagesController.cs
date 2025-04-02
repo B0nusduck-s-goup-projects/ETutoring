@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SchoolSystem.Data;
 using SchoolSystem.Models;
+using SchoolSystem.ViewModels;
 
 namespace SchoolSystem.Controllers
 {
@@ -22,159 +24,46 @@ namespace SchoolSystem.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Chat()
+        public async Task<IActionResult> ChatWindow(int groupId)
         {
-            string id = "";
-            AppUser? tutor = _context.Users.Where(u => u.Id.Equals(id)).Include(u => u.Group).FirstOrDefault();
-            return View();
+            AppUser? currentUser = await _userManager.GetUserAsync(this.User);
+            Group? group = _context.Groups.Where(g => g.Id == groupId).FirstOrDefault();
+            List<Message> messages = new List<Message>();
+            messages = _context.Messages.Where(m => m.Group == group)
+                                .Include(m => m.AttachFiles)
+                                .Include(m => m.Sender)
+                                .OrderBy(m => m.TimeStamp)
+                                .ToList();
+            ChatWindowVM viewModel = new ChatWindowVM()
+            {
+                CurrentUser = currentUser,
+                CurrentGroup = group,
+                Messages = messages,
+            };
+            return View(viewModel);
         }
-
-        /*// GET: Messages
-        public async Task<IActionResult> Index()
+        [Route("messages/")]
+        public async Task<IActionResult> ChatList()
         {
-            var appDbContext = _context.Messages.Include(m => m.Group).Include(m => m.Sender);
-            return View(await appDbContext.ToListAsync());
-        }
-
-        // GET: Messages/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            AppUser? currentUser = await _userManager.GetUserAsync(this.User);
+            List<ChatListVM> result = new List<ChatListVM>();
+            if (currentUser != null)
             {
-                return NotFound();
-            }
-
-            var message = await _context.Messages
-                .Include(m => m.Group)
-                .Include(m => m.Sender)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (message == null)
-            {
-                return NotFound();
-            }
-
-            return View(message);
-        }
-
-        // GET: Messages/Create
-        public IActionResult Create()
-        {
-            ViewData["GroupId"] = new SelectList(_context.Groups, "Id", "Id");
-            ViewData["SenderId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
-        }
-
-        // POST: Messages/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SenderId,GroupId,TextContent,FileCount,TimeStamp")] Message message)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(message);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["GroupId"] = new SelectList(_context.Groups, "Id", "Id", message.GroupId);
-            ViewData["SenderId"] = new SelectList(_context.Users, "Id", "Id", message.SenderId);
-            return View(message);
-        }
-
-        // GET: Messages/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var message = await _context.Messages.FindAsync(id);
-            if (message == null)
-            {
-                return NotFound();
-            }
-            ViewData["GroupId"] = new SelectList(_context.Groups, "Id", "Id", message.GroupId);
-            ViewData["SenderId"] = new SelectList(_context.Users, "Id", "Id", message.SenderId);
-            return View(message);
-        }
-
-        // POST: Messages/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SenderId,GroupId,TextContent,FileCount,TimeStamp")] Message message)
-        {
-            if (id != message.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                List<Group> groups = _context.Groups.Where( g => g.User.Contains(currentUser!)).Include(g => g.User).ToList();
+                foreach (Group group in groups)
                 {
-                    _context.Update(message);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MessageExists(message.Id))
+                    AppUser otherUser = group.User.Where(u => u.Id != currentUser.Id).FirstOrDefault()!;
+                    ChatListVM instance = new ChatListVM()
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                        UserName = otherUser.Name,
+                        groupId = group.Id,
+                        image = otherUser.Image,
+                        IsValid = group.IsValid,
+                    };
+                    result.Add(instance);
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["GroupId"] = new SelectList(_context.Groups, "Id", "Id", message.GroupId);
-            ViewData["SenderId"] = new SelectList(_context.Users, "Id", "Id", message.SenderId);
-            return View(message);
+            return View(result);
         }
-
-        // GET: Messages/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var message = await _context.Messages
-                .Include(m => m.Group)
-                .Include(m => m.Sender)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (message == null)
-            {
-                return NotFound();
-            }
-
-            return View(message);
-        }
-
-        // POST: Messages/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var message = await _context.Messages.FindAsync(id);
-            if (message != null)
-            {
-                _context.Messages.Remove(message);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool MessageExists(int id)
-        {
-            return _context.Messages.Any(e => e.Id == id);
-        }*/
     }
 }

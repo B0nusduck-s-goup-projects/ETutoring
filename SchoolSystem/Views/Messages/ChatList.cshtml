@@ -1,0 +1,46 @@
+﻿@model ICollection<SchoolSystem.ViewModels.ChatListVM>
+
+@if(Model != null)
+{    
+    foreach(var item in Model){
+        <a disabled="item.IsValid" asp-action="ChatWindow" asp-route-groupid="@item.groupId">
+            <div>
+                @if (item.image != null && item.image != "")
+                {
+                    @* todo: add default image name to onerror *@
+                    <img style="display:inline" width="70" height="70" src="/uploads/@item.image" onerror="this.onerror=null; this.src=default-profile.png" />
+                }
+                else
+                {
+                    @* todo: add default image name to src *@
+                    <img style="display:inline" width="70" height="70" src="/uploads/default-profile.png" />
+                }
+                <h5 style="display:inline">@item.UserName</h5>
+            </div>
+        </a>
+    }
+}
+else
+{
+<div style="text-align:center">
+        @if (User.IsInRole("Student"))
+        {
+            <h1>
+                You have no assigned tutor for a conversation at the moment, 
+                please await for your assignment or contact the office to arrange
+                and assignment if you are yet to revice any information regarding
+                this topic
+            </h1>
+        }
+        else
+        {
+            <h1>
+                You have no assigned student for a conversation at the moment, 
+                please await for your assignment or contact the office to arrange
+                and assignment if you are yet to revice any information regarding
+                this topic
+            </h1>
+        }
+</div>
+}
+
