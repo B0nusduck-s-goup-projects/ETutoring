@@ -185,8 +185,12 @@ public class HomeController : Controller
     {
         return View();
     }
+	public IActionResult IndexUser()
+	{
+		return View(); 
+	}
 
-    public IActionResult Privacy()
+	public IActionResult Privacy()
     {
         return View();
     }

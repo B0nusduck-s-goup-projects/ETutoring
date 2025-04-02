@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace SchoolSystem.Controllers
 {
@@ -69,6 +70,15 @@ namespace SchoolSystem.Controllers
 						// Sign in with claims
 						await signInManager.SignOutAsync(); // Ensure clean authentication
 						await signInManager.SignInWithClaimsAsync(user, model.RememberMe!, claims);
+
+						if (roles.Contains("Student") || roles.Contains("Tutor"))
+						{
+							return RedirectToAction("IndexUser", "Home");
+						}
+						else if (roles.Contains("Admin") || roles.Contains("Staff"))
+						{
+							return RedirectToAction("Index", "Home");
+						}
 
 						return RedirectToAction("Index", "Home");
 					}
@@ -308,5 +318,65 @@ namespace SchoolSystem.Controllers
 			return RedirectToAction("ListUsers");
 		}
 		//End
+
+		//NormalUser
+		[Authorize(Roles = "Student,Staff,Tutor")]
+		public async Task<IActionResult> ViewProfile()
+		{
+			var user = await userManager.GetUserAsync(User);
+			if (user == null)
+			{
+				return NotFound();
+			}
+
+			var model = new ProfileVM
+			{
+				Name = user.Name,
+				Code = user.Code,
+				Email = user.Email,
+				Address = user.Address,
+				Gender = user.Gender,
+				Image = user.Image
+			};
+
+			return View(model);
+		}
+
+		//ChangePassword
+		[Authorize(Roles = "Student,Staff,Tutor")]
+		public IActionResult ChangePassword()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Student,Staff,Tutor")]
+		public async Task<IActionResult> ChangePassword(ChangePasswordVM model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			var user = await userManager.GetUserAsync(User);
+			if (user == null)
+			{
+				return NotFound();
+			}
+
+			var result = await userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+			if (!result.Succeeded)
+			{
+				foreach (var error in result.Errors)
+				{
+					ModelState.AddModelError("", error.Description);
+				}
+				return View(model);
+			}
+
+			TempData["SuccessMessage"] = "Password changed successfully!";
+			return RedirectToAction("ViewProfile");
+		}
+
 	}
 }
