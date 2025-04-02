@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Blog";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="blog-bg-image">
+    <div class="overlay"></div>
+    <div class="blog-text">
+        <h1>BLOG</h1>
+    </div>
+</div>
+
+<div class="blog-write">
+    <a asp-action="Create">
+        <button class="writing-blog">WRITE BLOG</button>
+    </a>
+</div>
+
+<div class="news-container">
+    <div class="news-card">
+        <div class="news-date">
+            <span>14</span>
+            <span>Nov</span>
+        </div>
+        <img src="~/images/blog/blog1.jpg" alt="Blog Image">
+        <div class="news-content">
+            <p class="author">Jonathan Doe</p>
+            <h3>REASERCH WORKS OF STUDENTS ABOUT TO BE START</h3>
+            <a asp-controller="Home" asp-action="BlogDetails" class="read-more">Read More →</a>
+        </div>
+    </div>
+
+    <div class="news-card">
+        <div class="news-date">
+            <span>14</span>
+            <span>Nov</span>
+        </div>
+        <img src="~/images/blog/blog2.jpg" alt="Blog Image">
+        <div class="news-content">
+            <p class="author">Jonathan Doe</p>
+            <h3>BACK TO SCHOOL WITH COURSE OF UNIVERSITY</h3>
+            <a href="#" class="read-more">Read More →</a>
+        </div>  
+    </div>
+
+    <div class="news-card">
+        <div class="news-date">
+            <span>14</span>
+            <span>Nov</span>
+        </div>
+        <img src="~/images/blog/blog5.jpeg" alt="Blog Image">
+        <div class="news-content">
+            <p class="author">Jonathan Doe</p>
+            <h3>REASERCH WORKS OF STUDENTS ABOUT TO BE START</h3>
+            <a href="#" class="read-more">Read More →</a>
+        </div>
+    </div>
+
+    <div class="news-card">
+        <div class="news-date">
+            <span>14</span>
+            <span>Nov</span>
+        </div>
+        <img src="~/images/blog/blog5.jpeg" alt="Blog Image">
+        <div class="news-content">
+            <p class="author">Jonathan Doe</p>
+            <h3>REASERCH WORKS OF STUDENTS ABOUT TO BE START</h3>
+            <a href="#" class="read-more">Read More →</a>
+        </div>
+    </div>
+
+    <div class="news-card">
+        <div class="news-date">
+            <span>14</span>
+            <span>Nov</span>
+        </div>
+        <img src="~/images/blog/blog5.jpeg" alt="Blog Image">
+        <div class="news-content">
+            <p class="author">Jonathan Doe</p>
+            <h3>REASERCH WORKS OF STUDENTS ABOUT TO BE START</h3>
+            <a href="#" class="read-more">Read More →</a>
+        </div>
+    </div>
+</div>

@@ -132,7 +132,7 @@ li{
 }
 .bg-image {
     position: relative;
-    background-image: url(../images/home/bg2.jpg);
+    background-image: url(../uploads/home/bg2.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -376,7 +376,7 @@ footer {
 /*-------------------------Blog Page-------------------------*/
 .blog-bg-image {
     position: relative;
-    background-image: url(../images/blog/bg1.jpg);
+    background-image: url(../BlogUploads/bg1.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

@@ -2,93 +2,136 @@
 
 @{
     ViewData["Title"] = "Blog Details";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
-<h2>@Model.Title</h2>
-<p><strong>Author:</strong> @Model.User.UserName</p>
-<p><strong>Date:</strong> @Model.TimeStamp.ToString("dd/MM/yyyy")</p>
+<div class="blog-bg-image">
+    <div class="overlay"></div>
+    <div class="blog-text">
+        <h1></h1>
+    </div>
+</div>
 
-@if (!string.IsNullOrEmpty(Model.Image))
-{
-    <img src="@Model.Image" width="400" />
-}
-<p>@Model.Content</p>
+<div class="backPage">
+    <a asp-controller="Blog" asp-action="Index">Back</a>
+</div>
 
-<h3>Rate this Blog</h3>
+<div class="container">
+    <div class="header-blog">
+        <h3 class="topic">@Model.Title</h3>
+        <div>
+            @if (!string.IsNullOrEmpty(Model.Image))
+            {
+                <img src="@Model.Image" width="400" />
+            }
+        </div>
+    </div>
 
-@if (User.Identity.IsAuthenticated)
-{
-    <form asp-action="RateBlog" method="post">
-        <input type="hidden" name="blogId" value="@Model.Id" />
+    <div class="content">
+        <p><strong>Date:</strong> @Model.TimeStamp.ToString("dd/MM/yyyy")</p>
+        <div class="author-blog-details">
+            <span>By</span>
+            <span>@Model.User.UserName</span>
+        </div>
 
-        <label>Select rating:</label>
-        <select name="rating" class="form-control" required>
-            <option value="1">⭐</option>
-            <option value="2">⭐⭐</option>
-            <option value="3">⭐⭐⭐</option>
-            <option value="4">⭐⭐⭐⭐</option>
-            <option value="5">⭐⭐⭐⭐⭐</option>
-        </select>
+        <p>@Model.Content</p>
+    </div>
 
-        <button type="submit" class="btn btn-primary mt-2">Submit Rating</button>
-    </form>
-}
-else
-{
-    <p><a asp-controller="Account" asp-action="Login">Login</a> to rate this blog.</p>
-}
+    <h3>Rate this Blog</h3>
 
-<a asp-action="ListBlogs" class="btn btn-secondary">Back</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form asp-action="RateBlog" method="post">
+            <input type="hidden" name="blogId" value="@Model.Id" />
 
-@* Show rating *@
-<h3>Rating</h3>
-@{
-    var averageRating = (Model.Ratings != null && Model.Ratings.Any())
-    ? Model.Ratings.Average(r => r.Rating)
-    : 0;
-}
-@if (averageRating > 0)
-{
-    <span>@averageRating.ToString("0.0") ⭐</span>
-}
-else
-{
-    <span>No ratings yet</span>
-}
+            <label>Select rating:</label>
+            <select name="rating" class="form-control" required>
+                <option value="1">⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="5">⭐⭐⭐⭐⭐</option>
+            </select>
 
-@* Comment *@
-<h3>Comment</h3>
+            <button type="submit" class="btn btn-primary mt-2">Submit Rating</button>
+        </form>
+    }
+    else
+    {
+        <p><a asp-controller="Account" asp-action="Login">Login</a> to rate this blog.</p>
+    }
 
-@if (User.Identity.IsAuthenticated)
-{
-    <form asp-action="AddComment" method="post">
-        <input type="hidden" name="BlogId" value="@Model.Id" />
+    <a asp-action="ListBlogs" class="btn btn-secondary">Back</a>
 
-        <textarea name="Content" class="form-control" placeholder="Write your comment..." required></textarea>
-        <button type="submit" class="btn btn-primary mt-2">Post Comment</button>
-    </form>
-}
-else
-{
-    <p><a asp-controller="Account" asp-action="Login">Login</a> to comment.</p>
-}
+    @* Show rating *@
+    <h3>Rating</h3>
+    @{
+        var averageRating = (Model.Ratings != null && Model.Ratings.Any())
+        ? Model.Ratings.Average(r => r.Rating)
+        : 0;
+    }
+    @if (averageRating > 0)
+    {
+        <span>@averageRating.ToString("0.0") ⭐</span>
+    }
+    else
+    {
+        <span>No ratings yet</span>
+    }
+
+    @* Comment *@
+    <h3>Comment</h3>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form asp-action="AddComment" method="post">
+            <input type="hidden" name="BlogId" value="@Model.Id" />
+
+            <textarea name="Content" class="form-control" placeholder="Write your comment..." required></textarea>
+            <button type="submit" class="btn btn-primary mt-2">Post Comment</button>
+        </form>
+    }
+    else
+    {
+        <p><a asp-controller="Account" asp-action="Login">Login</a> to comment.</p>
+    }
 
 
-<h3>All Comments</h3>
+    <h3>All Comments</h3>
 
-@if (Model.Comments.Any())
-{
-    <ul>
-        @foreach (var comment in Model.Comments.Where(c => c.ParentCommentId == null))
-        {
-            @Html.Raw(RenderComments(comment, Model.Comments))
-        }
-    </ul>
-}
-else
-{
-    <p>No comments yet. Be the first to comment!</p>
-}
+    @if (Model.Comments.Any())
+    {
+        <ul>
+            @foreach (var comment in Model.Comments.Where(c => c.ParentCommentId == null))
+            {
+                @Html.Raw(RenderComments(comment, Model.Comments))
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No comments yet. Be the first to comment!</p>
+    }
+
+    @if (User.Identity.IsAuthenticated && (Model.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value || User.IsInRole("Admin") || User.IsInRole("Staff")))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Update</a>
+    }
+
+
+
+    @* Delete Blog *@
+
+    @if (User.Identity.IsAuthenticated && (Model.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value || User.IsInRole("Admin")))
+    {
+        <form asp-action="Delete" method="post" asp-route-id="@Model.Id" style="display:inline;">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">
+                Delete Blog
+            </button>
+        </form>
+    }
+</div>
+
 
 @functions {
     string RenderComments(BlogComment comment, IEnumerable<BlogComment> allComments)
@@ -137,25 +180,6 @@ if (canDelete)
         html += "</li>";
         return html;
     }
-}
-
-
-@if (User.Identity.IsAuthenticated && (Model.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value || User.IsInRole("Admin") || User.IsInRole("Staff")))
-{
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Update</a>
-}
-
-
-
-@* Delete Blog *@
-
-@if (User.Identity.IsAuthenticated && (Model.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value || User.IsInRole("Admin")))
-{
-    <form asp-action="Delete" method="post" asp-route-id="@Model.Id" style="display:inline;">
-        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">
-            Delete Blog
-        </button>
-    </form>
 }
 
 <script>

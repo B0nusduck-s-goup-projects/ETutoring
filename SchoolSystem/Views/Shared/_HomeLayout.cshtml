@@ -19,7 +19,12 @@
                     <div class="top-bar-links">
                         <a href="#">News</a>
                         <a href="#">Gallery</a>
-                        <a href="#"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                        <a asp-controller="Account" asp-action="Login"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        }
+                        <partial name="_LoginPartial" />
+
                     </div>
                 </div>
             </div>
@@ -27,15 +32,15 @@
         <div class="top">
             <div class="container">
                 <div class="header-top row">
-                    <a asp-controller="Home" asp-action="Index" class="logo">
+                    <a asp-controller="Student" asp-action="Index" class="logo">
                         <img src="https://greenwich.edu.vn/wp-content/uploads/2024/06/2022-Greenwich-Eng-400x200.webp" alt="Greenwich University Logo">
                     </a>
                     <ul>
                         @* <i class="fa-solid fa-xmark"></i> *@
-                        <li><a asp-controller="Home" asp-action="Index">HOME</a></li>
+                        <li><a asp-controller="Student" asp-action="Index">HOME</a></li>
                         <li><a href="">ABOUT US</a></li>
-                        <li><a asp-controller="Home" asp-action="Event">EVENT</a></li>
-                        <li><a asp-controller="Home" asp-action="Blog">BLOG</a></li>
+                        <li><a asp-controller="Student" asp-action="Event">EVENT</a></li>
+                        <li><a asp-controller="Blog" asp-action="Index">BLOG</a></li>
                         <li><a href="">CONTACT US</a></li>
                     </ul>
                     @* <i class="fa-solid fa-bars"></i> *@
@@ -106,12 +111,12 @@
             <div class="footer-section gallery">
                 <h3>GALLERY</h3>
                 <div class="insta-gallery">
-                    <img src="~/images/home/img1.jpg" alt="Gallery 1">
-                    <img src="~/images/home/img2.jpg" alt="Gallery 2">
-                    <img src="~/images/home/img3.jpg" alt="Gallery 3">
-                    <img src="~/images/home/img4.jpg" alt="Gallery 4">
-                    <img src="~/images/home/img5.jpg" alt="Gallery 5">
-                    <img src="~/images/home/img6.jpg" alt="Gallery 6">
+                    <img src="~/uploads/home/img1.jpg" alt="Gallery 1">
+                    <img src="~/uploads/home/img2.jpg" alt="Gallery 2">
+                    <img src="~/uploads/home/img3.jpg" alt="Gallery 3">
+                    <img src="~/uploads/home/img4.jpg" alt="Gallery 4">
+                    <img src="~/uploads/home/img5.jpg" alt="Gallery 5">
+                    <img src="~/uploads/home/img6.jpg" alt="Gallery 6">
                 </div>
             </div>
 
