@@ -26,7 +26,12 @@ namespace SchoolSystem.Controllers
 			_userManager = userManager;
 		}
 
-		public IActionResult Create()
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Create()
 		{
 			return View();
 		}
