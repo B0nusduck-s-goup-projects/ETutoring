@@ -8,7 +8,6 @@ namespace SchoolSystem.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,39 +41,53 @@ namespace SchoolSystem.Data
                 .HasForeignKey(e => e.MessageId)
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.Cascade);
-            // Group & message
 
-            //HeadBlog
+            // Blog relationships
             modelBuilder.Entity<Blog>()
-				.HasMany(b => b.Comments)
-				.WithOne(c => c.Blog)
-				.HasForeignKey(c => c.BlogId)
-				.OnDelete(DeleteBehavior.NoAction); 
+                .HasMany(b => b.Comments)
+                .WithOne(c => c.Blog)
+                .HasForeignKey(c => c.BlogId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-			modelBuilder.Entity<Blog>()
-				.HasMany(b => b.Ratings)
-				.WithOne(r => r.Blog)
-				.HasForeignKey(r => r.BlogId)
-				.OnDelete(DeleteBehavior.NoAction); 
+            modelBuilder.Entity<Blog>()
+                .HasMany(b => b.Ratings)
+                .WithOne(r => r.Blog)
+                .HasForeignKey(r => r.BlogId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-			modelBuilder.Entity<BlogComment>()
-				.HasOne(c => c.ParentComment)
-				.WithMany(c => c.Replies)
-				.HasForeignKey(c => c.ParentCommentId)
-				.OnDelete(DeleteBehavior.NoAction);
-			//EndBlog
-		}
+            modelBuilder.Entity<BlogComment>()
+                .HasOne(c => c.ParentComment)
+                .WithMany(c => c.Replies)
+                .HasForeignKey(c => c.ParentCommentId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-		//Group & message
-		public DbSet<GroupUsers> GroupUsers { get; set; }
-		public DbSet<Group> Groups { get; set; }
-		public DbSet<Message> Messages { get; set; }
-		public DbSet<AttachFiles> AttachFiles { get; set; }
+            // Document relationships
+            modelBuilder.Entity<Document>()
+                .HasOne(d => d.User)
+                .WithMany(u => u.Documents)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-		//Blog
-		public DbSet<Blog> Blogs { get; set; }
-		public DbSet<BlogRating> BlogRatings { get; set; }
-		public DbSet<BlogComment> BlogComments { get; set; }
+            // User Profile relationships
+            modelBuilder.Entity<AppUser>()
+                .HasMany(u => u.Documents)
+                .WithOne(d => d.User)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
 
-	}
+        // Group & message
+        public DbSet<GroupUsers> GroupUsers { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<AttachFiles> AttachFiles { get; set; }
+
+        // Blog related
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<BlogRating> BlogRatings { get; set; }
+        public DbSet<BlogComment> BlogComments { get; set; }
+
+        // Document management
+        public DbSet<Document> Documents { get; set; }
+    }
 }

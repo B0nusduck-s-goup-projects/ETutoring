@@ -1,9 +1,100 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@{
     ViewData["Title"] = "Home Page";
 }
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="text-primary mb-4">Admin Dashboard</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-users"></i> User Management</h5>
+                                <p class="card-text">Manage users, roles, and permissions</p>
+                                <a href="/Admin/Users" class="btn btn-primary">Manage Users</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-book"></i> Document Management</h5>
+                                <p class="card-text">Manage all system documents</p>
+                                <a href="/Documents" class="btn btn-primary">Manage Documents</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-envelope"></i> Email Management</h5>
+                                <p class="card-text">Manage email templates and settings</p>
+                                <button id="sendEmailsButton" class="btn btn-primary">Send Test Email</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-chart-bar"></i> System Statistics</h5>
+                        <div class="list-group">
+                            <a href="/Admin/Statistics/Users" class="list-group-item list-group-item-action">
+                                User Statistics
+                            </a>
+                            <a href="/Admin/Statistics/Documents" class="list-group-item list-group-item-action">
+                                Document Statistics
+                            </a>
+                            <a href="/Admin/Statistics/Activities" class="list-group-item list-group-item-action">
+                                Activity Log
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-cog"></i> System Settings</h5>
+                        <div class="list-group">
+                            <a href="/Admin/Settings/General" class="list-group-item list-group-item-action">
+                                General Settings
+                            </a>
+                            <a href="/Admin/Settings/Email" class="list-group-item list-group-item-action">
+                                Email Settings
+                            </a>
+                            <a href="/Admin/Settings/Security" class="list-group-item list-group-item-action">
+                                Security Settings
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <h1 class="display-4">Welcome to E-Tutoring System</h1>
+            <p class="lead">Connect, Learn, and Grow with our Online Learning Platform</p>
+            @if (!SignInManager.IsSignedIn(User))
+            {
+                <div class="mt-4">
+                    <a href="/Account/Register" class="btn btn-primary btn-lg mx-2">Get Started</a>
+                    <a href="/Account/Login" class="btn btn-outline-primary btn-lg mx-2">Sign In</a>
+                </div>
+            }
+        </div>
+    }
 </div>
 <button id="sendEmailsButton">Send Test Emails</button>
 @section Scripts {
