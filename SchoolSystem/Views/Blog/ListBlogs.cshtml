@@ -49,7 +49,10 @@
                 </td>
                 <td>
                     <a asp-action="Details" asp-route-id="@blog.Id" class="btn btn-info">View</a>
-
+                    @if (User.Identity.IsAuthenticated && (blog.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value || User.IsInRole("Admin") || User.IsInRole("Staff")))
+                    {
+                        <a asp-action="Edit" asp-route-id="@blog.Id" class="btn btn-warning">Edit</a>
+                    }
                     @if (User.Identity.IsAuthenticated && (blog.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value || User.IsInRole("Admin")))
                     {
                         <form asp-action="Delete" method="post" asp-route-id="@blog.Id" style="display:inline;">

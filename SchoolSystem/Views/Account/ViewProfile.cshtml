@@ -1,0 +1,21 @@
+﻿@model SchoolSystem.ViewModels.ProfileVM
+
+@{
+    ViewData["Title"] = "Your Profile";
+}
+
+<h2>Your Profile</h2>
+
+<div>
+    <img src="@Model.Image" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%;" />
+</div>
+
+<table class="table">
+    <tr><th>Name:</th><td>@Model.Name</td></tr>
+    <tr><th>Code:</th><td>@Model.Code</td></tr>
+    <tr><th>Email:</th><td>@Model.Email</td></tr>
+    <tr><th>Address:</th><td>@Model.Address</td></tr>
+    <tr><th>Gender:</th><td>@Model.Gender</td></tr>
+</table>
+
+<a asp-action="ChangePassword" class="btn btn-primary">Change Password</a>

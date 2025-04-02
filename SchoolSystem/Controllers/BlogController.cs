@@ -97,6 +97,99 @@ namespace SchoolSystem.Controllers
 			return View(blog);
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			var blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
+			if (blog == null)
+			{
+				return NotFound();
+			}
+
+			var userId = _userManager.GetUserId(User);
+			var userRoles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
+
+			// Kiểm tra quyền chỉnh sửa
+			if (userId != blog.UserId && !userRoles.Contains("Admin") && !userRoles.Contains("Staff"))
+			{
+				return Forbid();
+			}
+
+			var model = new BlogVM
+			{
+				Id = blog.Id,
+				Title = blog.Title,
+				Content = blog.Content,
+				ExistingImage = blog.Image // Lưu ảnh cũ
+			};
+
+			return View(model);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(BlogVM model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			var blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == model.Id);
+			if (blog == null)
+			{
+				return NotFound();
+			}
+
+			var userId = _userManager.GetUserId(User);
+			var userRoles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
+
+			// Kiểm tra quyền chỉnh sửa
+			if (userId != blog.UserId && !userRoles.Contains("Admin") && !userRoles.Contains("Staff"))
+			{
+				return Forbid();
+			}
+
+			// Xử lý ảnh mới (nếu có)
+			string? imagePath = blog.Image;
+			if (model.Image != null)
+			{
+				var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/BlogUploads");
+				Directory.CreateDirectory(uploadsFolder);
+
+				var uniqueFileName = $"{Guid.NewGuid()}_{model.Image.FileName}";
+				var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+				using (var fileStream = new FileStream(filePath, FileMode.Create))
+				{
+					await model.Image.CopyToAsync(fileStream);
+				}
+
+				// Xóa ảnh cũ nếu có
+				if (!string.IsNullOrEmpty(blog.Image))
+				{
+					var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", blog.Image.TrimStart('/'));
+					if (System.IO.File.Exists(oldImagePath))
+					{
+						System.IO.File.Delete(oldImagePath);
+					}
+				}
+
+				imagePath = $"/BlogUploads/{uniqueFileName}";
+			}
+
+			// Cập nhật thông tin blog
+			blog.Title = model.Title;
+			blog.Content = model.Content;
+			blog.Image = imagePath;
+			blog.TimeStamp = DateTime.UtcNow;
+
+			_context.Blogs.Update(blog);
+			await _context.SaveChangesAsync();
+
+			return RedirectToAction("ListBlogs");
+		}
+
+
 		[HttpPost]
 		public async Task<IActionResult> Delete(int id)
 		{

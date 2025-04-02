@@ -140,7 +140,10 @@ if (canDelete)
 }
 
 
-
+@if (User.Identity.IsAuthenticated && (Model.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value || User.IsInRole("Admin") || User.IsInRole("Staff")))
+{
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Update</a>
+}
 
 
 
