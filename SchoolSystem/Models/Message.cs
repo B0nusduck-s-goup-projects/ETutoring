@@ -15,7 +15,7 @@ namespace SchoolSystem.Models
         [Required]
         public required string TextContent { get; set; }
         [Required]
-        public required int FileCount { get; set; }
+        public int FileCount { get; set; }
         [Required]
         public required DateTime TimeStamp { get; set; }
 

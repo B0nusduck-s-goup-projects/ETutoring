@@ -2,32 +2,67 @@
 using Microsoft.AspNetCore.SignalR;
 using SchoolSystem.Data;
 using SchoolSystem.Models;
+using System.Threading.Tasks.Dataflow;
 
 namespace SchoolSystem.Services.Hubs
 {
     public class ChatHub : Hub
     {
-        private readonly UserManager<AppUser> _user;
         private readonly AppDbContext _context;
-        public ChatHub(UserManager<AppUser> user, AppDbContext context)
+        private readonly UserManager<AppUser> _user;
+        //variables wont lasted after each calls, causing null reference if calling anything other than add to groups
+        public ChatHub(AppDbContext context, UserManager<AppUser> user)
         {
-            _user = user;
             _context = context;
+            _user = user;
+        }
+
+        public  async Task AddToGroup(int currentGroupId)
+        {
+            AppUser? currentUser = await _user.GetUserAsync(Context.User);
+            bool Exist = _context.Groups.Any(g => g.Id == currentGroupId && g.User.Contains(currentUser));
+            if (Exist)
+            {
+                await Groups.AddToGroupAsync(Context.ConnectionId, currentGroupId.ToString());
+            }
         }
 
         //todo:
-        //-update group user model to make it able to retrive the associated
-        //user and group for connection establishment
         //-possibly adding a connection id feild (nullable string) to group
         //for repeated connection to a chat
-        public async Task SentMessage(GroupUsers connection, Message message)
+        public async Task SendMessage(int currentGroupId, string textContent)
         {
-            string? role = (await _user.GetRolesAsync(connection.User)).FirstOrDefault();
-            if (role == null || role != "Student" || role != "Tutor")
-                return;
-            //List<Message> data = _context.Messages.Where(m => m.GroupId == connection.GroupId).OrderBy(m => m.TimeStamp).ToList();
-            await Groups.AddToGroupAsync(Context.ConnectionId, connection.GroupId.ToString());
-            await Clients.Group(connection.GroupId.ToString()).SendAsync("recive message", connection.User, message);
+            AppUser? currentUser = await _user.GetUserAsync(Context.User);
+            Message message = new Message()
+            {
+                SenderId = currentUser.Id,
+                GroupId = currentGroupId,
+                TextContent = textContent,
+                //FileCount =
+                TimeStamp = DateTime.Now,
+                //AttachFiles = 
+            };
+            await _context.AddAsync(message);
+            await _context.SaveChangesAsync();
+            await Clients.Group(currentGroupId.ToString()).SendAsync("ReceiveMessage", currentUser.Name, currentUser.Id , textContent);
         }
+
+        //old working version
+        //public async Task SendMessage(string senderId, int groupId, string textContent)
+        //{
+        //    Message message = new Message()
+        //    {
+        //        SenderId = senderId,
+        //        GroupId = groupId,
+        //        TextContent = textContent,
+        //        //FileCount =
+        //        TimeStamp = DateTime.Now,
+        //        //AttachFiles = 
+        //    };
+        //    await _context.AddAsync(message);
+        //    await _context.SaveChangesAsync();
+        //    AppUser sender = _context.Users.FirstOrDefault(u => u.Id == senderId);
+        //    await Clients.Group(groupId.ToString()).SendAsync("ReceiveMessage", sender.Name, sender.Id, textContent);
+        //}
     }
 }

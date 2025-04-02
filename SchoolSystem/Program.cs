@@ -13,11 +13,6 @@ var connectionString = builder.Configuration.GetConnectionString("default");
 
 // Add services to the container.
 builder.Services.AddSignalR();
-/*builder.Services.AddResponseCompression(opts =>
-{
-    opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-        ["application/octet-stream"]);
-});*/
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>(
@@ -73,7 +68,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapHub<ChatHub>("/Chat");
+app.MapHub<ChatHub>("/chatHub");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

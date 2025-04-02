@@ -1,0 +1,100 @@
+﻿@model SchoolSystem.ViewModels.ChatWindowVM
+<div class="container">
+    <div id="chatWindow" style="display:flex;
+                                flex-direction:column;
+                                overflow:scroll;
+                                height: 500px;
+                                padding: 0px 10px 0px 10px">
+        @if (Model != null)
+        {
+            @foreach (Message message in Model.Messages)
+                {
+                    if (message.Sender != Model.CurrentUser)
+                    {
+                        <div class="messageBox" style="align-self: start; max-width: 80px;">
+                            <h6>@message.Sender.Name</h6>
+                            <p>@message.TextContent</p>
+                            @* <img src="/uploads/default-profile.png" /> *@
+                        </div>
+                    }
+                    else
+                    {
+                        <div class ="messageBox" style="align-self: end; max-width: 80px;">
+                            <p>@message.TextContent</p>
+                            @* <img src="/uploads/default-profile.png" /> *@
+                        </div>
+                    }
+                }
+        }
+        
+    </div>
+    
+    <ul style="width: 100%;
+                height: 70px;
+                background-color: gray;
+                list-style-type: none;
+                padding: 0px;">
+        <li style="width: 80%; height: 100%; float:left">
+            <textarea id="messageInput" style="resize:none; width: 100%; height: 100%;" warp="soft"></textarea>
+        </li>
+        <li style="width:20%; height:100%; float:right">
+            <button id="sendButton" class="btn btn-dark" style="width: 100%; height: 100%;">sent</button>
+        </li>
+    </ul>
+</div>
+@section Scripts {
+    <script>
+        "use strict";
+        
+        /*use testing and debugging
+        function showalert(){
+             alert('You Clicked Button');
+        }*/
+
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        //Disable the send button until connection is established.
+        document.getElementById("sendButton").disabled = true;
+
+        //initialize 2 way connection to server
+        connection.start().then(function () {
+            connection.invoke('AddToGroup', @Model.CurrentGroup.Id)
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
+            event.preventDefault();
+            document.getElementById("sendButton").disabled = false;
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+        
+        //define "ReceiveMessage" function callable from hub
+        connection.on("ReceiveMessage", function (senderName, senderId, textMessage) {
+            var chatWindow = document.getElementById("chatWindow");
+            var textBox = '';
+            if(senderId != "@Model.CurrentUser.Id")
+            {
+                textBox = '<div class="messageBox" style="align-self: start;"><h6>'+ senderName + '</h6><p>' + textMessage + '</p></div>';
+            }
+            else
+            {
+                textBox = '<div class="messageBox" style="align-self: end;"><p>' + textMessage + '</p></div>';
+            }
+            chatWindow.insertAdjacentHTML('beforeend',textBox)
+            chatWindow.scrollTop($(".messageBox")[0].scrollHeight);
+        });
+
+        //create event listener that will trigger hub function when fired
+        document.getElementById("sendButton").addEventListener("click", function (event) {
+            var message = document.getElementById("messageInput").value;
+            message = message.toString();
+            if(!(message == null || message == ''|| message == "")){
+                connection.invoke('SendMessage', @Model.CurrentGroup.Id, message)
+                .catch(function (err) {
+                    return console.error(err.toString());
+                });
+            }
+            event.preventDefault();
+        });
+    </script>
+}
