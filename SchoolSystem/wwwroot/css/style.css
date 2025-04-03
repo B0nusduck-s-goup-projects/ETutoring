@@ -26,6 +26,14 @@ li{
     list-style: none;
 }
 
+h3 {
+    text-transform: uppercase;
+}
+
+.m-bottom-10 {
+    margin-bottom: 40px !important;
+}
+
 .container{
     max-width: 1024px;
     margin: auto;

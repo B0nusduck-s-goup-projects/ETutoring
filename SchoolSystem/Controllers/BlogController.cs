@@ -26,10 +26,16 @@ namespace SchoolSystem.Controllers
 			_userManager = userManager;
 		}
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var blogs = await _context.Blogs
+                .Include(b => b.User)
+                .Include(b => b.Ratings)
+                .ToListAsync();
+
+            return View(blogs);
         }
+
 
         public IActionResult Create()
 		{
@@ -78,7 +84,7 @@ namespace SchoolSystem.Controllers
 			_context.Blogs.Add(blog);
 			await _context.SaveChangesAsync();
 
-			return RedirectToAction("ListBlogs");
+			return RedirectToAction("Index");
 		}
 
 		public async Task<IActionResult> ListBlogs()
@@ -191,7 +197,7 @@ namespace SchoolSystem.Controllers
 			_context.Blogs.Update(blog);
 			await _context.SaveChangesAsync();
 
-			return RedirectToAction("ListBlogs");
+			return RedirectToAction("Index");
 		}
 
 
@@ -223,7 +229,7 @@ namespace SchoolSystem.Controllers
 			await _context.SaveChangesAsync();
 
 			TempData["SuccessMessage"] = "Blog deleted successfully!";
-			return RedirectToAction("ListBlogs");
+			return RedirectToAction("Index");
 		}
 
 		[HttpPost]
