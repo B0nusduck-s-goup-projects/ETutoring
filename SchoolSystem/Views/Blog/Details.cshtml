@@ -16,7 +16,7 @@
     <a asp-controller="Blog" asp-action="Index">Back</a>
 </div>
 
-<div class="container">
+<div class="container m-bottom-10">
     <div class="header-blog">
         <h3 class="topic">@Model.Title</h3>
         <div>
@@ -60,8 +60,6 @@
     {
         <p><a asp-controller="Account" asp-action="Login">Login</a> to rate this blog.</p>
     }
-
-    <a asp-action="ListBlogs" class="btn btn-secondary">Back</a>
 
     @* Show rating *@
     <h3>Rating</h3>
