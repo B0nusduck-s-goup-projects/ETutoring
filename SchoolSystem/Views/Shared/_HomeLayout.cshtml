@@ -9,128 +9,130 @@
     <script src="https://kit.fontawesome.com/6e8637ff15.js" crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
 </head>
-    <header>
-        <div class="top-bar">
-            <div class="container">
-                <div class="top-bar-content">
-                    <span class="contact-info">
-                        <i class="fas fa-phone-alt"></i> Call Us on 028.7300.6622
-                    </span>
-                    <div class="top-bar-links">
-                        <a href="#">News</a>
-                        <a href="#">Gallery</a>
-                        @if (!User.Identity.IsAuthenticated)
-                        {
-                        <a asp-controller="Account" asp-action="Login"><i class="fas fa-sign-in-alt"></i> Sign In</a>
-                        }
-                        <partial name="_LoginPartial" />
+<body>
+    @if (!Context.Request.Path.StartsWithSegments("/Admin"))
+    {
+        <header>
+            <div class="top-bar">
+                <div class="container">
+                    <div class="top-bar-content">
+                        <span class="contact-info">
+                            <i class="fas fa-phone-alt"></i> Call Us on 028.7300.6622
+                        </span>
+                        <div class="top-bar-links">
+                            <a href="#">News</a>
+                            <a href="#">Gallery</a>
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                            <a asp-controller="Account" asp-action="Login"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                            }
+                            <partial name="_LoginPartial" />
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="top">
-            <div class="container">
-                <div class="header-top row">
-                    <a asp-controller="Student" asp-action="Index" class="logo">
-                        <img src="https://greenwich.edu.vn/wp-content/uploads/2024/06/2022-Greenwich-Eng-400x200.webp" alt="Greenwich University Logo">
+            <div class="top">
+                <div class="container">
+                    <div class="header-top row">
+                        <a asp-controller="Student" asp-action="Index" class="logo">
+                            <img src="https://greenwich.edu.vn/wp-content/uploads/2024/06/2022-Greenwich-Eng-400x200.webp" alt="Greenwich University Logo">
+                        </a>
+                        <ul>
+                            @* <i class="fa-solid fa-xmark"></i> *@
+                            <li><a asp-controller="Student" asp-action="Index">HOME</a></li>
+                            <li><a href="">ABOUT US</a></li>
+                            <li><a asp-controller="Student" asp-action="Event">EVENT</a></li>
+                            <li><a asp-controller="Blog" asp-action="Index">BLOG</a></li>
+                            <li><a href="">CONTACT US</a></li>
+                        </ul>
+                        @* <i class="fa-solid fa-bars"></i> *@
+                    </div>
+                </div>
+            </div>
+        </header>   
+    }
+    
+    @RenderBody()
+
+    @if (!Context.Request.Path.StartsWithSegments("/Admin"))
+    {
+        <footer>
+            <div class="social-icons">
+                <div class="social-item">
+                    <a href="#">
+                        <div class="icon facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
                     </a>
+                    <p>Facebook</p>
+                </div>
+    
+                <div class="social-item">
+                    <a href="#">
+                        <div class="icon instagram">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                    </a>
+                    <p>Instagram</p>
+                </div>
+    
+                <div class="social-item">
+                    <a href="#">
+                        <div class="icon youtube">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </a>
+                    <p>YouTube</p>
+                </div>
+    
+                <div class="social-item">
+                    <a href="#">
+                        <div class="icon tiktok">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                    </a>
+                    <p>TikTok</p>
+                </div>
+            </div>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>INFORMATION</h3>
                     <ul>
-                        @* <i class="fa-solid fa-xmark"></i> *@
-                        <li><a asp-controller="Student" asp-action="Index">HOME</a></li>
-                        <li><a href="">ABOUT US</a></li>
-                        <li><a asp-controller="Student" asp-action="Event">EVENT</a></li>
-                        <li><a asp-controller="Blog" asp-action="Index">BLOG</a></li>
-                        <li><a href="">CONTACT US</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our History</a></li>
                     </ul>
-                    @* <i class="fa-solid fa-bars"></i> *@
+                </div>
+    
+                <div class="footer-section">
+                    <h3>STUDENT HELP</h3>
+                    <ul>
+                        <li><a href="#">My Info</a></li>
+                        <li><a href="#">F.A.Q</a></li>
+                    </ul>
+                </div>
+    
+                <div class="footer-section gallery">
+                    <h3>GALLERY</h3>
+                    <div class="insta-gallery">
+                        <img src="~/uploads/home/img1.jpg" alt="Gallery 1">
+                        <img src="~/uploads/home/img2.jpg" alt="Gallery 2">
+                        <img src="~/uploads/home/img3.jpg" alt="Gallery 3">
+                        <img src="~/uploads/home/img4.jpg" alt="Gallery 4">
+                        <img src="~/uploads/home/img5.jpg" alt="Gallery 5">
+                        <img src="~/uploads/home/img6.jpg" alt="Gallery 6">
+                    </div>
+                </div>
+    
+                <div class="footer-section contact">
+                    <h3>CONTACT</h3>
+                    <p>Cong Hoa Garden, Ward 12, Tan Binh District</p>
+                    <p>Phone: 028.7300.6622</p>
+                    <p>Email: <a href="#">acad.gre.hcm@fe.edu.vn</a></p>
                 </div>
             </div>
-        </div>
-    </header>   
-
-    <body>
-        @RenderBody() 
-    </body>
-
-    <footer>
-        <div class="social-icons">
-            <div class="social-item">
-                <a href="#">
-                    <div class="icon facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </div>
-                </a>
-                <p>Facebook</p>
-            </div>
-
-            <div class="social-item">
-                <a href="#">
-                    <div class="icon instagram">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                </a>
-                <p>Instagram</p>
-            </div>
-
-            <div class="social-item">
-                <a href="#">
-                    <div class="icon youtube">
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                </a>
-                <p>YouTube</p>
-            </div>
-
-            <div class="social-item">
-                <a href="#">
-                    <div class="icon tiktok">
-                        <i class="fab fa-tiktok"></i>
-                    </div>
-                </a>
-                <p>TikTok</p>
-            </div>
-        </div>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>INFORMATION</h3>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Our History</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>STUDENT HELP</h3>
-                <ul>
-                    <li><a href="#">My Info</a></li>
-                    <li><a href="#">F.A.Q</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section gallery">
-                <h3>GALLERY</h3>
-                <div class="insta-gallery">
-                    <img src="~/uploads/home/img1.jpg" alt="Gallery 1">
-                    <img src="~/uploads/home/img2.jpg" alt="Gallery 2">
-                    <img src="~/uploads/home/img3.jpg" alt="Gallery 3">
-                    <img src="~/uploads/home/img4.jpg" alt="Gallery 4">
-                    <img src="~/uploads/home/img5.jpg" alt="Gallery 5">
-                    <img src="~/uploads/home/img6.jpg" alt="Gallery 6">
-                </div>
-            </div>
-
-            <div class="footer-section contact">
-                <h3>CONTACT</h3>
-                <p>Cong Hoa Garden, Ward 12, Tan Binh District</p>
-                <p>Phone: 028.7300.6622</p>
-                <p>Email: <a href="#">acad.gre.hcm@fe.edu.vn</a></p>
-            </div>
-        </div>
-        <div class="copyright">© 2025 Greenwich.edu.vn. All Rights Reserved</div>
-    </footer>
-
-    <script>
-        CKEDITOR.replace("content");
-    </script>
+            <div class="copyright">© 2025 Greenwich.edu.vn. All Rights Reserved</div>
+        </footer>
+    }
+</body>
 </html>

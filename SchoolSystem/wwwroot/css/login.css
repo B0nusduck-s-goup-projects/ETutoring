@@ -1,5 +1,26 @@
 ﻿body, nav {
-    background: linear-gradient(117deg,rgba(11, 14, 31, 1),rgba(57, 58, 67, 1),rgba(11, 55, 70, 1));
+    background: #ffffff;
+    color: #333333;
+}
+
+.text-dark {
+    color: #333333 !important; /* Changed from white to dark gray */
+}
+
+.card {
+    background: #f8f9fa; /* Changed from transparent to light gray */
+    border: 1px solid #dee2e6; /* Changed from white border to light gray */
+    color: #333333; /* Changed from white to dark text */
+}
+
+.form-control {
+    background: #ffffff; /* Changed from transparent to white */
+    color: #333333; /* Changed from white to dark text */
+    border-bottom: 1px solid #ced4da; /* Changed from gray to light gray */
+}
+
+.btn {
+    background: linear-gradient(90deg, #007bff, #00bfff); /* Changed from orange to blue gradient */
 }
 
 .navbar {
@@ -13,7 +34,7 @@
     padding: 20px;
 }
 .text-dark{
-    color: white !important;
+    color: black !important;
 }
 /* Login view */
 .center-container {
