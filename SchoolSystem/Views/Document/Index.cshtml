@@ -1,0 +1,32 @@
+@model IEnumerable<SchoolSystem.ViewModels.DocumentIndexVM>
+@{
+    ViewData["Title"] = "Documents";
+}
+
+<div class="document-container">
+    <h2 class="document-title">My Documents</h2>
+    <p>
+        <a asp-action="Create" class="document-btn document-btn-primary">Upload New Document</a>
+    </p>
+    <div class="document-grid">
+        @foreach (var item in Model)
+        {
+            <div class="document-card">
+                <div class="document-card-body">
+                    <h5 class="document-card-title">@item.Title</h5>
+                    <p class="document-description">@item.Description</p>
+                    <p class="document-metadata">
+                        Upload Date: @item.UploadDate.ToString("MMM dd, yyyy HH:mm")<br />
+                        File Type: @item.FileType<br />
+                        Size: @(item.FileSize / 1024) KB
+                    </p>
+                    <div class="document-actions">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="document-btn document-btn-primary">Details</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="document-btn document-btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="document-btn document-btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

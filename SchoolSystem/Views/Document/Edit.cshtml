@@ -1,0 +1,49 @@
+@model SchoolSystem.ViewModels.DocumentEditVM
+@using System.IO
+
+@{
+    ViewData["Title"] = "Edit Document";
+    Layout = "_Layout"; // Ensure using the correct layout
+}
+
+<div class="document-container">
+    <h2 class="document-title">Edit Document</h2>
+    <div class="document-form">
+        <form asp-action="Edit" enctype="multipart/form-data" class="document-form-container">
+            <div asp-validation-summary="ModelOnly" class="document-validation-error"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ExistingFilePath" />
+            
+            <div class="document-form-group">
+                <label asp-for="Title" class="document-form-label"></label>
+                <input asp-for="Title" class="document-form-input" />
+                <span asp-validation-for="Title" class="document-validation-error"></span>
+            </div>
+            
+            <div class="document-form-group">
+                <label asp-for="Description" class="document-form-label"></label>
+                <textarea asp-for="Description" class="document-form-input" rows="3"></textarea>
+                <span asp-validation-for="Description" class="document-validation-error"></span>
+            </div>
+            
+            <div class="document-form-group">
+                <label asp-for="NewFile" class="document-form-label">Replace File (Optional)</label>
+                <input asp-for="NewFile" class="document-form-input" type="file" />
+                <span asp-validation-for="NewFile" class="document-validation-error"></span>
+                <div class="document-form-help-container">
+                    <small class="document-form-help">Current file: @(Model.ExistingFilePath?.Split('/').LastOrDefault())</small>
+                    <small class="document-form-help">Allowed file types: PDF, DOC, DOCX, TXT, XLS, XLSX (Max size: 10MB)</small>
+                </div>
+            </div>
+            
+            <div class="document-actions">
+                <button type="submit" class="document-btn document-btn-primary">Save Changes</button>
+                <a asp-action="Index" class="document-btn document-btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

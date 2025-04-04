@@ -1,0 +1,26 @@
+@model SchoolSystem.ViewModels.DocumentDetailsVM
+
+@{
+    ViewData["Title"] = "Document Details";
+}
+
+<div class="document-container">
+    <h2 class="document-title">Document Details</h2>
+    <div class="document-card">
+        <div class="document-card-body">
+            <h4 class="document-card-title">@Model.Title</h4>
+            <p class="document-description">@Model.Description</p>
+            <div class="document-metadata">
+                <p>Uploaded by: @Model.UserName</p>
+                <p>Upload Date: @Model.UploadDate.ToString("MMM dd, yyyy HH:mm")</p>
+                <p>File Type: @Model.FileType</p>
+                <p>File Size: @(Model.FileSize / 1024) KB</p>
+            </div>
+            <div class="document-actions">
+                <a href="@Model.FilePath" class="document-btn document-btn-primary" target="_blank">Download Document</a>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="document-btn document-btn-warning">Edit</a>
+                <a asp-action="Index" class="document-btn document-btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

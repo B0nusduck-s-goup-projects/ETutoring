@@ -1,0 +1,42 @@
+@model SchoolSystem.ViewModels.DocumentCreateVM
+
+@{
+    ViewData["Title"] = "Upload Document";
+}
+
+<div class="document-container">
+    <h2 class="document-title">Upload New Document</h2>
+    <div class="document-form">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="document-validation-error"></div>
+            
+            <div class="document-form-group">
+                <label asp-for="Title" class="document-form-label"></label>
+                <input asp-for="Title" class="document-form-input" />
+                <span asp-validation-for="Title" class="document-validation-error"></span>
+            </div>
+            
+            <div class="document-form-group">
+                <label asp-for="Description" class="document-form-label"></label>
+                <textarea asp-for="Description" class="document-form-input" rows="3"></textarea>
+                <span asp-validation-for="Description" class="document-validation-error"></span>
+            </div>
+            
+            <div class="document-form-group">
+                <label asp-for="File" class="document-form-label"></label>
+                <input asp-for="File" class="document-form-input" type="file" />
+                <span asp-validation-for="File" class="document-validation-error"></span>
+                <small class="document-form-help">Allowed file types: PDF, DOC, DOCX, TXT, XLS, XLSX (Max size: 10MB)</small>
+            </div>
+            
+            <div class="document-actions">
+                <button type="submit" class="document-btn document-btn-primary">Upload</button>
+                <a asp-action="Index" class="document-btn document-btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

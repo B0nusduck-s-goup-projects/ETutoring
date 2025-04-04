@@ -9,45 +9,70 @@ using SchoolSystem.Data;
 namespace SchoolSystem.Controllers
 {
     [Authorize]
-    public class DocumentsController : Controller
+    public class DocumentController : Controller
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public DocumentsController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
+        public DocumentController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Documents
-        public async Task<IActionResult> Index()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var documents = await _context.Documents
-                .Include(d => d.User)
-                .Where(d => d.UserId == userId)
-                .OrderByDescending(d => d.UploadDate)
-                .ToListAsync();
-            return View(documents);
-        }
+    public async Task<IActionResult> Index()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var documents = await _context.Documents
+            .Include(d => d.User)
+            .Where(d => d.UserId == userId)
+            .OrderByDescending(d => d.UploadDate)
+            .Select(d => new DocumentIndexVM
+            {
+                Id = d.Id,
+                Title = d.Title,
+                Description = d.Description,
+                UploadDate = d.UploadDate,
+                FileType = d.FileType,
+                FileSize = d.FileSize,
+                UserName = d.User.UserName
+            })
+            .ToListAsync();
+        return View(documents);
+    }
 
         // GET: Documents/Details/5
-        public async Task<IActionResult> Details(int? id)
+    public async Task<IActionResult> Details(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var document = await _context.Documents
+            .Include(d => d.User)
+            .FirstOrDefaultAsync(m => m.Id == id);
+
+        if (document == null) return NotFound();
+
+        // Check if the current user owns the document
+        var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (document.UserId != currentUserId)
+            return Forbid();
+
+        var viewModel = new DocumentDetailsVM
         {
-            if (id == null) return NotFound();
+            Id = document.Id,
+            Title = document.Title,
+            Description = document.Description,
+            FilePath = document.FilePath,
+            UploadDate = document.UploadDate,
+            FileType = document.FileType,
+            FileSize = document.FileSize,
+            UserName = document.User.UserName,
+            UserId = document.UserId
+        };
 
-            var document = await _context.Documents
-                .Include(d => d.User)
-                .FirstOrDefaultAsync(d => d.Id == id);
-
-            if (document == null) return NotFound();
-
-            if (document.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
-                return Forbid();
-
-            return View(document);
-        }
+        return View(viewModel);
+    }
 
         // GET: Documents/Create
         public IActionResult Create()
@@ -58,7 +83,7 @@ namespace SchoolSystem.Controllers
         // POST: Documents/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(DocumentVM model)
+        public async Task<IActionResult> Create(DocumentCreateVM model)
         {
             // Validate file size (10MB max)
             const int maxFileSize = 10 * 1024 * 1024; // 10MB in bytes
@@ -251,13 +276,26 @@ namespace SchoolSystem.Controllers
             if (document.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
                 return Forbid();
 
-            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, document.FilePath.TrimStart('/'));
-            if (System.IO.File.Exists(filePath))
-                System.IO.File.Delete(filePath);
+            try
+            {
+                // Delete the physical file
+                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, document.FilePath.TrimStart('/'));
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
 
-            _context.Documents.Remove(document);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                // Remove from database
+                _context.Documents.Remove(document);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "An error occurred while deleting the document.");
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         private bool DocumentExists(int id)
