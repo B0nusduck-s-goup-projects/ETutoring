@@ -38,31 +38,11 @@ namespace SchoolSystem.Services.Hubs
                 SenderId = currentUser.Id,
                 GroupId = currentGroupId,
                 TextContent = textContent,
-                //FileCount =
                 TimeStamp = DateTime.Now,
-                //AttachFiles = 
             };
             await _context.AddAsync(message);
             await _context.SaveChangesAsync();
             await Clients.Group(currentGroupId.ToString()).SendAsync("ReceiveMessage", currentUser.Name, currentUser.Id , textContent);
         }
-
-        //old working version
-        //public async Task SendMessage(string senderId, int groupId, string textContent)
-        //{
-        //    Message message = new Message()
-        //    {
-        //        SenderId = senderId,
-        //        GroupId = groupId,
-        //        TextContent = textContent,
-        //        //FileCount =
-        //        TimeStamp = DateTime.Now,
-        //        //AttachFiles = 
-        //    };
-        //    await _context.AddAsync(message);
-        //    await _context.SaveChangesAsync();
-        //    AppUser sender = _context.Users.FirstOrDefault(u => u.Id == senderId);
-        //    await Clients.Group(groupId.ToString()).SendAsync("ReceiveMessage", sender.Name, sender.Id, textContent);
-        //}
     }
 }

@@ -4,7 +4,7 @@
 
 <p>Student Name: @Model.StudentName</p>
 <p>Personal Tutor: @Model.PersonalTutor</p>
-<p>Uploaded Documents: @Model.UploadedDocuments</p>
+@* <p>Uploaded Documents: @Model.UploadedDocuments</p> *@
 
 <h3>Recent Comments</h3>
 <ul>
@@ -39,9 +39,9 @@
 </ul>
 
 <h3>Recent Files</h3>
-<ul>
+@* <ul>
     @foreach (var file in Model.RecentFiles)
     {
         <li>@file.FileContent</li>
     }
-</ul>
+</ul> *@
