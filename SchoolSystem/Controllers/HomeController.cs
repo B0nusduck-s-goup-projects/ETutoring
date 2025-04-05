@@ -180,11 +180,12 @@ public class HomeController : Controller
             AssignedGroups = assignedGroups
         };
     }
-
-    public IActionResult Index()
+	[Authorize(Roles = "Admin,Staff")]
+	public IActionResult Index()
     {
         return View();
     }
+	[Authorize(Roles = "Student,Tutor")]
 	public IActionResult IndexUser()
 	{
 		return View(); 

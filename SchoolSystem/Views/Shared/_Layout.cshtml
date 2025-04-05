@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/css/document.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/chat.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SchoolSystem.styles.css" asp-append-version="true" />
+    @*     <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" /> *@
 </head>
 <body>
     <header>
@@ -64,7 +65,29 @@
                         } 
                        <a asp-controller="Account" asp-action="ViewProfile" class="nav-link">View Profile</a>
 
-                    </ul>
+
+                         @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register user</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="ListUsers">List users</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="CreateRole">Create role</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="ListRoles">List roles</a>
+                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="ListRoles">Import file</a>
+                            </li>
+                            }
+                          
+
+                            </ul>
                     <partial name="_LoginPartial"/>
                 </div>
             </div>
