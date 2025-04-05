@@ -73,6 +73,32 @@ public class HomeController : Controller
 
         var studentGroupIds = studentGroups.Select(g => g.Id).ToList();
 
+        // Fetch the roles for each user in the groups
+        var groupUsersWithRoles = new List<UserWithRolesVM>();
+        foreach (var group in studentGroups)
+        {
+            foreach (var groupUser in group.GroupUsers)
+            {
+                var roles = await _userManager.GetRolesAsync(groupUser.User);
+                groupUsersWithRoles.Add(new UserWithRolesVM
+                {
+                    User = groupUser.User,
+                    Roles = roles
+                });
+            }
+        }
+
+        var groupUsers = await _context.GroupUsers
+            .Where(gu => studentGroupIds.Contains(gu.GroupId))
+            .Include(gu => gu.User)
+            .ToListAsync();
+
+        var personalTutor = groupUsers
+            .AsEnumerable()
+            .Where(gu => _userManager.IsInRoleAsync(gu.User, "Tutor").Result)
+            .Select(gu => gu.User.Name)
+            .FirstOrDefault() ?? string.Empty;
+
         var recentComments = await _context.BlogComments
             .Where(c => c.UserId == userId)
             .OrderByDescending(c => c.TimeStamp)
@@ -97,20 +123,8 @@ public class HomeController : Controller
             .Where(f => recentMessageIds.Contains(f.MessageId))
             .ToListAsync();
 
-        // Fetch the roles for each user in the groups
-        var groupUsersWithRoles = new List<UserWithRolesVM>();
-        foreach (var group in studentGroups)
-        {
-            foreach (var groupUser in group.GroupUsers)
-            {
-                var roles = await _userManager.GetRolesAsync(groupUser.User);
-                groupUsersWithRoles.Add(new UserWithRolesVM
-                {
-                    User = groupUser.User,
-                    Roles = roles
-                });
-            }
-        }
+        
+
 
         // Log the fetched data
         Debug.WriteLine($"Student Name: {user.Name}");
@@ -120,6 +134,7 @@ public class HomeController : Controller
         Debug.WriteLine($"Recent Messages: {string.Join(", ", recentMessages.Select(m => m.TextContent))}");
         Debug.WriteLine($"Groups: {string.Join(", ", studentGroups.Select(g => g.Id))}");
         Debug.WriteLine($"Recent Files: {string.Join(", ", recentFiles.Select(f => f.FileContent))}");
+        Debug.WriteLine($"Personal Tutor: {personalTutor}");
 
         return new StudentDashboardVM
         {
@@ -130,7 +145,8 @@ public class HomeController : Controller
             RecentMessages = recentMessages,
             Groups = studentGroups,
             GroupUsersWithRoles = groupUsersWithRoles,
-            RecentFiles = recentFiles
+            RecentFiles = recentFiles,
+            PersonalTutor = personalTutor,
         };
     }
 
@@ -147,6 +163,25 @@ public class HomeController : Controller
             .ToListAsync();
 
         var assignedGroupIds = assignedGroups.Select(g => g.Id).ToList();
+
+        var groupUsersWithRoles = new List<UserWithRolesVM>();
+        foreach (var group in assignedGroups)
+        {
+            foreach (var groupUser in group.GroupUsers)
+            {
+                var roles = await _userManager.GetRolesAsync(groupUser.User);
+                groupUsersWithRoles.Add(new UserWithRolesVM
+                {
+                    User = groupUser.User,
+                    Roles = roles.ToList()
+                });
+            }
+        }
+
+        groupUsersWithRoles = groupUsersWithRoles
+        .OrderByDescending(gu => gu.Roles.Contains("Tutor"))
+        .ThenBy(gu => gu.User.Name)
+        .ToList();
 
         var recentMessages = await _context.Messages
             .Where(m => assignedGroupIds.Contains(m.GroupId))
@@ -177,8 +212,27 @@ public class HomeController : Controller
             UploadedDocuments = recentMessages.Count(),
             RecentComments = recentComments,
             RecentMessages = recentMessages,
-            AssignedGroups = assignedGroups
+            AssignedGroups = assignedGroups,
+            GroupUsersWithRoles = groupUsersWithRoles,
         };
+    }
+
+    [HttpPost]
+    [Authorize(Roles = "Tutor")]
+    public async Task<IActionResult> RemoveStudentFromGroup(int groupId, string studentId)
+    {
+        var groupUser = await _context.GroupUsers
+            .FirstOrDefaultAsync(gu => gu.GroupId == groupId && gu.UserId == studentId);
+
+        if (groupUser == null)
+        {
+            return NotFound();
+        }
+
+        _context.GroupUsers.Remove(groupUser);
+        await _context.SaveChangesAsync();
+
+        return Ok();
     }
 
     public IActionResult Index()
