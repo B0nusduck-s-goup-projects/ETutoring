@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<SchoolSystem.Models.Blog>
+
+@{
     ViewData["Title"] = "Blog";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
@@ -17,68 +19,35 @@
 </div>
 
 <div class="news-container">
-    <div class="news-card">
-        <div class="news-date">
-            <span>14</span>
-            <span>Nov</span>
+    @foreach (var blog in Model)
+    {
+        <div class="news-card">
+            <div class="news-date">
+                <span>@blog.TimeStamp.ToString("dd/MM/yyyy")</span>
+            </div>
+            @if (!string.IsNullOrEmpty(blog.Image))
+            {
+                <img src="@blog.Image" width="100" />
+            }
+            <div class="news-content">
+                <p class="author">@blog.User.UserName</p>
+                <h3>@blog.Title</h3>
+                @{
+                    var averageRating = (blog.Ratings != null && blog.Ratings.Any())
+                    ? blog.Ratings.Average(r => r.Rating)
+                    : 0;
+                }
+                @if (averageRating > 0)
+                {
+                    <span>@averageRating.ToString("0.0") ⭐</span>
+                }
+                else
+                {
+                    <span>No ratings yet</span>
+                }
+                <br />
+                <a asp-action="Details" asp-route-id="@blog.Id" class="read-more">Read More →</a>
+            </div>
         </div>
-        <img src="~/images/blog/blog1.jpg" alt="Blog Image">
-        <div class="news-content">
-            <p class="author">Jonathan Doe</p>
-            <h3>REASERCH WORKS OF STUDENTS ABOUT TO BE START</h3>
-            <a asp-controller="Home" asp-action="BlogDetails" class="read-more">Read More →</a>
-        </div>
-    </div>
-
-    <div class="news-card">
-        <div class="news-date">
-            <span>14</span>
-            <span>Nov</span>
-        </div>
-        <img src="~/images/blog/blog2.jpg" alt="Blog Image">
-        <div class="news-content">
-            <p class="author">Jonathan Doe</p>
-            <h3>BACK TO SCHOOL WITH COURSE OF UNIVERSITY</h3>
-            <a href="#" class="read-more">Read More →</a>
-        </div>  
-    </div>
-
-    <div class="news-card">
-        <div class="news-date">
-            <span>14</span>
-            <span>Nov</span>
-        </div>
-        <img src="~/images/blog/blog5.jpeg" alt="Blog Image">
-        <div class="news-content">
-            <p class="author">Jonathan Doe</p>
-            <h3>REASERCH WORKS OF STUDENTS ABOUT TO BE START</h3>
-            <a href="#" class="read-more">Read More →</a>
-        </div>
-    </div>
-
-    <div class="news-card">
-        <div class="news-date">
-            <span>14</span>
-            <span>Nov</span>
-        </div>
-        <img src="~/images/blog/blog5.jpeg" alt="Blog Image">
-        <div class="news-content">
-            <p class="author">Jonathan Doe</p>
-            <h3>REASERCH WORKS OF STUDENTS ABOUT TO BE START</h3>
-            <a href="#" class="read-more">Read More →</a>
-        </div>
-    </div>
-
-    <div class="news-card">
-        <div class="news-date">
-            <span>14</span>
-            <span>Nov</span>
-        </div>
-        <img src="~/images/blog/blog5.jpeg" alt="Blog Image">
-        <div class="news-content">
-            <p class="author">Jonathan Doe</p>
-            <h3>REASERCH WORKS OF STUDENTS ABOUT TO BE START</h3>
-            <a href="#" class="read-more">Read More →</a>
-        </div>
-    </div>
+    }
 </div>

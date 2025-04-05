@@ -1,53 +1,89 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SchoolSystem.ViewModels;
-using SchoolSystem.Models;
-using System.Security.Claims;
 using SchoolSystem.Data;
+using SchoolSystem.Models;
+using SchoolSystem.ViewModels;
+using System.Security.Claims;
 
 namespace SchoolSystem.Controllers
 {
     [Authorize]
-    public class DocumentsController : Controller
+    public class DocumentController : Controller
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly UserManager<AppUser> _userManager;
 
-        public DocumentsController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
+        public DocumentController(
+            AppDbContext context, 
+            IWebHostEnvironment webHostEnvironment,
+            UserManager<AppUser> userManager)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
         }
 
-        // GET: Documents
         public async Task<IActionResult> Index()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var documents = await _context.Documents
                 .Include(d => d.User)
-                .Where(d => d.UserId == userId)
-                .OrderByDescending(d => d.UploadDate)
                 .ToListAsync();
-            return View(documents);
+
+            var documentVMs = new List<DocumentIndexVM>();
+            
+            foreach (var doc in documents)
+            {
+                var userRoles = await _userManager.GetRolesAsync(doc.User);
+                documentVMs.Add(new DocumentIndexVM
+                {
+                    Id = doc.Id,
+                    Title = doc.Title,
+                    Description = doc.Description,
+                    UploadDate = doc.UploadDate,
+                    FileType = doc.FileType,
+                    FileSize = doc.FileSize,
+                    UserName = doc.User.UserName,
+                    UserRole = userRoles.FirstOrDefault() ?? "Unknown"
+                });
+            }
+
+            return View(documentVMs);
         }
 
         // GET: Documents/Details/5
-        public async Task<IActionResult> Details(int? id)
+    public async Task<IActionResult> Details(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var document = await _context.Documents
+            .Include(d => d.User)
+            .FirstOrDefaultAsync(m => m.Id == id);
+
+        if (document == null) return NotFound();
+
+        var currentUser = await _userManager.GetUserAsync(User);
+        var currentUserRole = (await _userManager.GetRolesAsync(currentUser)).FirstOrDefault();
+        var documentUserRole = (await _userManager.GetRolesAsync(document.User)).FirstOrDefault();
+
+        var viewModel = new DocumentDetailsVM
         {
-            if (id == null) return NotFound();
+            Id = document.Id,
+            Title = document.Title,
+            Description = document.Description,
+            FilePath = document.FilePath,
+            UploadDate = document.UploadDate,
+            FileType = document.FileType,
+            FileSize = document.FileSize,
+            UserName = document.User.UserName,
+            UserId = document.UserId,
+            CanEdit = document.UserId == currentUser.Id
+        };
 
-            var document = await _context.Documents
-                .Include(d => d.User)
-                .FirstOrDefaultAsync(d => d.Id == id);
-
-            if (document == null) return NotFound();
-
-            if (document.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
-                return Forbid();
-
-            return View(document);
-        }
+        return View(viewModel);
+    }
 
         // GET: Documents/Create
         public IActionResult Create()
@@ -58,7 +94,7 @@ namespace SchoolSystem.Controllers
         // POST: Documents/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(DocumentVM model)
+        public async Task<IActionResult> Create(DocumentCreateVM model)
         {
             // Validate file size (10MB max)
             const int maxFileSize = 10 * 1024 * 1024; // 10MB in bytes
@@ -131,6 +167,7 @@ namespace SchoolSystem.Controllers
             var document = await _context.Documents.FindAsync(id);
             if (document == null) return NotFound();
 
+            // Only document owner can edit
             if (document.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
                 return Forbid();
 
@@ -139,8 +176,7 @@ namespace SchoolSystem.Controllers
                 Id = document.Id,
                 Title = document.Title,
                 Description = document.Description,
-                ExistingFilePath = document.FilePath,
-                NewFile = null
+                ExistingFilePath = document.FilePath
             };
 
             return View(viewModel);
@@ -234,7 +270,15 @@ namespace SchoolSystem.Controllers
 
             if (document == null) return NotFound();
 
-            if (document.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            var currentUser = await _userManager.GetUserAsync(User);
+            var currentUserRoles = await _userManager.GetRolesAsync(currentUser);
+            var documentUserRoles = await _userManager.GetRolesAsync(document.User);
+
+            // Allow if user owns the document or if user is a tutor and document owner is a student
+            bool canDelete = document.UserId == currentUser.Id || 
+                            (currentUserRoles.Contains("Tutor") && documentUserRoles.Contains("Student"));
+
+            if (!canDelete)
                 return Forbid();
 
             return View(document);
@@ -245,19 +289,43 @@ namespace SchoolSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var document = await _context.Documents.FindAsync(id);
+            var document = await _context.Documents
+                .Include(d => d.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (document == null) return NotFound();
 
-            if (document.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            var currentUser = await _userManager.GetUserAsync(User);
+            var currentUserRoles = await _userManager.GetRolesAsync(currentUser);
+            var documentUserRoles = await _userManager.GetRolesAsync(document.User);
+
+            // Allow if user owns the document or if user is a tutor and document owner is a student
+            bool canDelete = document.UserId == currentUser.Id || 
+                            (currentUserRoles.Contains("Tutor") && documentUserRoles.Contains("Student"));
+
+            if (!canDelete)
                 return Forbid();
 
-            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, document.FilePath.TrimStart('/'));
-            if (System.IO.File.Exists(filePath))
-                System.IO.File.Delete(filePath);
+            try
+            {
+                // Delete the physical file
+                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, document.FilePath.TrimStart('/'));
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
 
-            _context.Documents.Remove(document);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                // Remove from database
+                _context.Documents.Remove(document);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "An error occurred while deleting the document.");
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         private bool DocumentExists(int id)

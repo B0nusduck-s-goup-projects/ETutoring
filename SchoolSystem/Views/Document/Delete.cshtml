@@ -1,0 +1,28 @@
+@model SchoolSystem.Models.Document
+
+@{
+    ViewData["Title"] = "Delete Document";
+}
+
+<div class="document-container">
+    <h2 class="document-title">Delete Document</h2>
+    <div class="document-card">
+        <div class="document-card-body">
+            <h4 class="document-card-title">Are you sure you want to delete this document?</h4>
+            <p class="document-description">@Model.Description</p>
+            <div class="document-metadata">
+                <p>Title: @Model.Title</p>
+                <p>Uploaded by: @Model.User.UserName</p>
+                <p>Upload Date: @Model.UploadDate.ToString("MMM dd, yyyy HH:mm")</p>
+                <p>File Type: @Model.FileType</p>
+                <p>File Size: @(Model.FileSize / 1024) KB</p>
+            </div>
+            
+            <form asp-action="Delete" class="document-actions">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="document-btn document-btn-danger">Delete</button>
+                <a asp-action="Index" class="document-btn document-btn-secondary">Back to List</a>
+            </form>
+        </div>
+    </div>
+</div>

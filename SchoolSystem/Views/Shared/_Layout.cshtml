@@ -6,8 +6,12 @@
     <title>@ViewData["Title"] - SchoolSystem</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SchoolSystem.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/document.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/chat.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SchoolSystem.styles.css" asp-append-version="true" />
+    @*     <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" /> *@
 </head>
 <body>
     <header>
@@ -44,7 +48,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="ListRoles">List roles</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="ListRoles">Import file</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Document" asp-action="Index">Documents</a>
                                 </li>
                             }
 
@@ -52,10 +56,15 @@
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Calendar">Calendar</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Document" asp-action="Index">Documents</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Chat">Chat</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                                 </li>
                             }
-                        }
-                        
+                        } 
+                       <a asp-controller="Account" asp-action="ViewProfile" class="nav-link">View Profile</a>
+
 
                          @if (User.IsInRole("Admin"))
                             {
@@ -76,7 +85,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="ListRoles">Import file</a>
                             </li>
                             }
-                           <a asp-controller="Account" asp-action="ViewProfile" class="nav-link">View Profile</a>
+                          
 
                             </ul>
                     <partial name="_LoginPartial"/>

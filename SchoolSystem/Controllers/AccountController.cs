@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using SchoolSystem.Models;
 using SchoolSystem.ViewModels;
 using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pag
 
 namespace SchoolSystem.Controllers
 {
+	
     public class AccountController : Controller
     {
 		private readonly SignInManager<AppUser> signInManager;

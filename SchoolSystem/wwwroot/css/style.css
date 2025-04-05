@@ -13,17 +13,31 @@
     box-sizing: border-box;
 }
 
-a {
+/* Scope general styles */
+:not(.document-container) a {
     text-decoration: none;
     color: inherit;
 }
 
-a:hover {
+:not(.document-container) a:hover {
     color: inherit;
 }
 
+/* Keep container styles specific */
+.container:not(.document-container) {
+    max-width: 1024px;
+    margin: auto;
+}
 li{
     list-style: none;
+}
+
+h3 {
+    text-transform: uppercase;
+}
+
+.m-bottom-10 {
+    margin-bottom: 40px !important;
 }
 
 .container{
