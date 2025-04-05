@@ -119,33 +119,34 @@ public class HomeController : Controller
 
         var recentMessageIds = recentMessages.Select(m => m.Id).ToList();
 
-        var recentFiles = await _context.AttachFiles
+        //removed attach files from messages
+        /*var recentFiles = await _context.AttachFiles
             .Where(f => recentMessageIds.Contains(f.MessageId))
-            .ToListAsync();
+            .ToListAsync();*/
 
         
 
 
         // Log the fetched data
         Debug.WriteLine($"Student Name: {user.Name}");
-        Debug.WriteLine($"Uploaded Documents: {recentFiles.Count}");
+        //Debug.WriteLine($"Uploaded Documents: {recentFiles.Count}");
         Debug.WriteLine($"Recent Comments: {string.Join(", ", recentComments)}");
         Debug.WriteLine($"Student Blogs: {string.Join(", ", studentBlogs.Select(b => b.Title))}");
         Debug.WriteLine($"Recent Messages: {string.Join(", ", recentMessages.Select(m => m.TextContent))}");
         Debug.WriteLine($"Groups: {string.Join(", ", studentGroups.Select(g => g.Id))}");
-        Debug.WriteLine($"Recent Files: {string.Join(", ", recentFiles.Select(f => f.FileContent))}");
+        //Debug.WriteLine($"Recent Files: {string.Join(", ", recentFiles.Select(f => f.FileContent))}");
         Debug.WriteLine($"Personal Tutor: {personalTutor}");
 
         return new StudentDashboardVM
         {
             StudentName = user.Name,
-            UploadedDocuments = recentFiles.Count(),
+            //UploadedDocuments = recentFiles.Count(),
             RecentComments = recentComments,
             StudentBlogs = studentBlogs,
             RecentMessages = recentMessages,
             Groups = studentGroups,
             GroupUsersWithRoles = groupUsersWithRoles,
-            RecentFiles = recentFiles,
+            //RecentFiles = recentFiles
             PersonalTutor = personalTutor,
         };
     }

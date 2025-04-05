@@ -15,10 +15,6 @@ namespace SchoolSystem.Models
         [Required]
         public required string TextContent { get; set; }
         [Required]
-        public int FileCount { get; set; }
-        [Required]
         public required DateTime TimeStamp { get; set; }
-
-        public ICollection<AttachFiles>? AttachFiles { get; set; }
     }
 }
