@@ -239,6 +239,8 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    [Authorize(Roles = "Student,Tutor")]
 	public IActionResult IndexUser()
 	{
 		return View(); 
