@@ -160,7 +160,6 @@ namespace SchoolSystem.Controllers
 				return Forbid();
 			}
 
-			// Xử lý ảnh mới (nếu có)
 			string? imagePath = blog.Image;
 			if (model.Image != null)
 			{
@@ -175,7 +174,6 @@ namespace SchoolSystem.Controllers
 					await model.Image.CopyToAsync(fileStream);
 				}
 
-				// Xóa ảnh cũ nếu có
 				if (!string.IsNullOrEmpty(blog.Image))
 				{
 					var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", blog.Image.TrimStart('/'));

@@ -3,7 +3,12 @@
 @{
     ViewData["Title"] = "Your Profile";
 }
-
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
 <h2>Your Profile</h2>
 
 <div>
