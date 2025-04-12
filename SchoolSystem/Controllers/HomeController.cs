@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 
 namespace SchoolSystem.Controllers;
@@ -129,36 +130,28 @@ public class HomeController : Controller
 
         var recentMessageIds = recentMessages.Select(m => m.Id).ToList();
 
-        var recentFiles = await _context.AttachFiles
-            .Where(f => recentMessageIds.Contains(f.MessageId))
-            .ToListAsync();
+
         // Log the fetched data
         Debug.WriteLine($"Student Name: {user.Name}");
-        Debug.WriteLine($"Uploaded Documents: {recentFiles.Count}");
         Debug.WriteLine($"Recent Comments: {string.Join(", ", recentComments)}");
         Debug.WriteLine($"Student Blogs: {string.Join(", ", studentBlogs.Select(b => b.Title))}");
         Debug.WriteLine($"Tutor Blogs: {string.Join(", ", tutorBlogs.Select(b => b.Title))}");
         Debug.WriteLine($"Recent Messages: {string.Join(", ", recentMessages.Select(m => m.TextContent))}");
         Debug.WriteLine($"Groups: {string.Join(", ", studentGroups.Select(g => g.Id))}");
-        Debug.WriteLine($"Recent Files: {string.Join(", ", recentFiles.Select(f => f.FileContent))}");
         Debug.WriteLine($"Personal Tutor: {personalTutor}");
 
         return new StudentDashboardVM
         {
             StudentName = user.Name,
-            UploadedDocuments = recentFiles.Count(),
             RecentComments = recentComments,
             StudentBlogs = studentBlogs,
             TutorBlogs = tutorBlogs,
             RecentMessages = recentMessages,
             Groups = studentGroups,
             GroupUsersWithRoles = groupUsersWithRoles,
-            RecentFiles = recentFiles,
             PersonalTutor = personalTutor,
         };
     }
-
-
     private async Task<TutorDashboardVM> GetTutorDashboard(string userId, string searchName, int? groupId)
     {
         var user = await _context.Users.FindAsync(userId);
@@ -265,12 +258,12 @@ public class HomeController : Controller
     }
 
     [Authorize(Roles = "Student,Tutor")]
-	public IActionResult IndexUser()
-	{
-		return View(); 
-	}
+    public IActionResult IndexUser()
+    {
+        return View();
+    }
 
-	public IActionResult Privacy()
+    public IActionResult Privacy()
     {
         return View();
     }

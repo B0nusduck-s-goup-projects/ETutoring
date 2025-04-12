@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SchoolSystem.ViewModels;
-using SchoolSystem.Models;
-using System.Security.Claims;
 using SchoolSystem.Data;
+using SchoolSystem.Models;
+using SchoolSystem.ViewModels;
+using System.Security.Claims;
 
 namespace SchoolSystem.Controllers
 {
@@ -13,34 +14,44 @@ namespace SchoolSystem.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly UserManager<AppUser> _userManager;
 
-        public DocumentController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
+        public DocumentController(
+            AppDbContext context, 
+            IWebHostEnvironment webHostEnvironment,
+            UserManager<AppUser> userManager)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
         }
 
-        // GET: Documents
-    public async Task<IActionResult> Index()
-    {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var documents = await _context.Documents
-            .Include(d => d.User)
-            .Where(d => d.UserId == userId)
-            .OrderByDescending(d => d.UploadDate)
-            .Select(d => new DocumentIndexVM
+        public async Task<IActionResult> Index()
+        {
+            var documents = await _context.Documents
+                .Include(d => d.User)
+                .ToListAsync();
+
+            var documentVMs = new List<DocumentIndexVM>();
+            
+            foreach (var doc in documents)
             {
-                Id = d.Id,
-                Title = d.Title,
-                Description = d.Description,
-                UploadDate = d.UploadDate,
-                FileType = d.FileType,
-                FileSize = d.FileSize,
-                UserName = d.User.UserName
-            })
-            .ToListAsync();
-        return View(documents);
-    }
+                var userRoles = await _userManager.GetRolesAsync(doc.User);
+                documentVMs.Add(new DocumentIndexVM
+                {
+                    Id = doc.Id,
+                    Title = doc.Title,
+                    Description = doc.Description,
+                    UploadDate = doc.UploadDate,
+                    FileType = doc.FileType,
+                    FileSize = doc.FileSize,
+                    UserName = doc.User.UserName,
+                    UserRole = userRoles.FirstOrDefault() ?? "Unknown"
+                });
+            }
+
+            return View(documentVMs);
+        }
 
         // GET: Documents/Details/5
     public async Task<IActionResult> Details(int? id)
@@ -53,10 +64,9 @@ namespace SchoolSystem.Controllers
 
         if (document == null) return NotFound();
 
-        // Check if the current user owns the document
-        var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (document.UserId != currentUserId)
-            return Forbid();
+        var currentUser = await _userManager.GetUserAsync(User);
+        var currentUserRole = (await _userManager.GetRolesAsync(currentUser)).FirstOrDefault();
+        var documentUserRole = (await _userManager.GetRolesAsync(document.User)).FirstOrDefault();
 
         var viewModel = new DocumentDetailsVM
         {
@@ -68,7 +78,8 @@ namespace SchoolSystem.Controllers
             FileType = document.FileType,
             FileSize = document.FileSize,
             UserName = document.User.UserName,
-            UserId = document.UserId
+            UserId = document.UserId,
+            CanEdit = document.UserId == currentUser.Id
         };
 
         return View(viewModel);
@@ -156,6 +167,7 @@ namespace SchoolSystem.Controllers
             var document = await _context.Documents.FindAsync(id);
             if (document == null) return NotFound();
 
+            // Only document owner can edit
             if (document.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
                 return Forbid();
 
@@ -164,8 +176,7 @@ namespace SchoolSystem.Controllers
                 Id = document.Id,
                 Title = document.Title,
                 Description = document.Description,
-                ExistingFilePath = document.FilePath,
-                NewFile = null
+                ExistingFilePath = document.FilePath
             };
 
             return View(viewModel);
@@ -259,7 +270,15 @@ namespace SchoolSystem.Controllers
 
             if (document == null) return NotFound();
 
-            if (document.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            var currentUser = await _userManager.GetUserAsync(User);
+            var currentUserRoles = await _userManager.GetRolesAsync(currentUser);
+            var documentUserRoles = await _userManager.GetRolesAsync(document.User);
+
+            // Allow if user owns the document or if user is a tutor and document owner is a student
+            bool canDelete = document.UserId == currentUser.Id || 
+                            (currentUserRoles.Contains("Tutor") && documentUserRoles.Contains("Student"));
+
+            if (!canDelete)
                 return Forbid();
 
             return View(document);
@@ -270,10 +289,21 @@ namespace SchoolSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var document = await _context.Documents.FindAsync(id);
+            var document = await _context.Documents
+                .Include(d => d.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (document == null) return NotFound();
 
-            if (document.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            var currentUser = await _userManager.GetUserAsync(User);
+            var currentUserRoles = await _userManager.GetRolesAsync(currentUser);
+            var documentUserRoles = await _userManager.GetRolesAsync(document.User);
+
+            // Allow if user owns the document or if user is a tutor and document owner is a student
+            bool canDelete = document.UserId == currentUser.Id || 
+                            (currentUserRoles.Contains("Tutor") && documentUserRoles.Contains("Student"));
+
+            if (!canDelete)
                 return Forbid();
 
             try

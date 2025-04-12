@@ -30,7 +30,6 @@ namespace SchoolSystem.Controllers
             Group? group = _context.Groups.Where(g => g.Id == groupId).FirstOrDefault();
             List<Message> messages = new List<Message>();
             messages = _context.Messages.Where(m => m.Group == group)
-                                .Include(m => m.AttachFiles)
                                 .Include(m => m.Sender)
                                 .OrderBy(m => m.TimeStamp)
                                 .ToList();

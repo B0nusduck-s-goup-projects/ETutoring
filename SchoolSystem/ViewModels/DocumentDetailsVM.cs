@@ -14,5 +14,6 @@ namespace SchoolSystem.ViewModels
         public long FileSize { get; set; }
         public string UserName { get; set; }
         public string UserId { get; set; }
+        public bool CanEdit { get; set; }
     }
 }
