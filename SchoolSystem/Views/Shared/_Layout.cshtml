@@ -81,13 +81,17 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="ListRoles">List roles</a>
                                 </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="ListRoles">Import file</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="ListRoles">Import file</a>
+                                </li>
+                                @* Group feature acess button *@
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Groups" asp-action="Index">Group Manage</a>
+                                </li>
                             }
                           
 
-                            </ul>
+                        </ul>
                     <partial name="_LoginPartial"/>
                 </div>
             </div>

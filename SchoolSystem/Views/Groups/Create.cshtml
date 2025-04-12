@@ -1,4 +1,4 @@
-﻿@model SchoolSystem.ViewModels.CreateGroupVM
+﻿@model SchoolSystem.ViewModels.GroupCreateVM
 
 @{
     ViewData["Title"] = "Create";
@@ -8,7 +8,7 @@
 
 <h4>Group</h4>
 <hr />
-<div class="row">
+@* <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -27,7 +27,7 @@
             </div>
         </form>
     </div>
-</div>
+</div> *@
 
 <div class="container mt-5">
     <h2 class="text-center mb-4">Tạo Nhóm Học Tập</h2>
@@ -39,13 +39,14 @@
                     <div class="col-md-6">
                         <h4 class="text-center mb-3">Chọn Giáo Viên</h4>
                         <div class="form-group mb-3">
-                            <label asp-for="TeacherID" class="control-label"></label>
-                            <select asp-for="TeacherID" class="form-control">
+                            <label asp-for="Teachers" class="control-label"></label>
+                            <select asp-for="Teachers" class="form-control" name="teacherID">
                                 <option value="">-- Chọn Giáo Viên --</option>
-                                <option value="1">Giáo viên A</option>
-                                <option value="2">Giáo viên B</option>
+                                @foreach (AppUser Teacher in Model.Teachers)
+                                {
+                                    <option value="@Teacher.Id">@Teacher.Name</option>
+                                }
                             </select>
-                            <span asp-validation-for="TeacherID" class="text-danger"></span>
                         </div>
                     </div>
                         
@@ -55,65 +56,24 @@
                         <input type="text" id="searchStudent" class="form-control mb-2" placeholder="Tìm kiếm học sinh..." onkeyup="filterStudents()">
                             
                         <div class="border p-3 rounded" style="max-height: 400px; overflow-y: auto; background-color: #f8f9fa;" id="studentList">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div><div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="StudentIDs" value="102">
-                                <label class="form-check-label">Học sinh 2</label>
-                            </div>
+                            @foreach(AppUser student in Model.Students){
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="studentID" value="@student.Id" asp-route-studentID="@student.Id">
+                                    <label class="form-check-label">@student.Name</label>
+                                </div>
+                            }
                         </div>
                     </div>
                     <div class="form-group mt-4 text-center">
-                        <button type="submit" class="btn btn-primary px-4">Tạo Nhóm</button>
+                        @if(Model.exception != null)
+                        {
+                            @foreach(string exception in Model.exception)
+                            {
+                                @* error messages*@
+                                <p>@exception</p>
+                            }
+                        }
+                        <button id="submit" type="submit" class="btn btn-primary px-4">Tạo Nhóm</button>
                     </div>
                 </div>
             </form>

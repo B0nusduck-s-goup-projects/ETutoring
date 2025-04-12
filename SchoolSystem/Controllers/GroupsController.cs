@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.IdentityModel.Tokens;
 using SchoolSystem.Data;
 using SchoolSystem.Models;
@@ -88,10 +90,32 @@ namespace SchoolSystem.Controllers
             return View(groupDetail);
         }
 
-        // GET: Groups/Create
-        public IActionResult Create()
+        private async Task<GroupCreateVM> GetGroupCreateVM()
         {
-            return View();
+            GroupCreateVM selection = new GroupCreateVM();
+            //get student list
+            IList<AppUser> users = await _userManager.GetUsersInRoleAsync("Student");
+            //include group into the student list for filtering
+            List<AppUser> students = _context.Users.Where(s => users.Contains(s)).Include(s => s.GroupUsers).ThenInclude(gu => gu.Group).ToList();
+            //remove all student who already has a valid group and prioritise student without group
+            //then student with long expired group, due to the lack of atribute indicating the student
+            //has quit or graduated, this list will become longer overtime
+            students = students.Where(s => s.Group.IsNullOrEmpty() || s.Group!.All(g => g.IsValid == false))
+                                .OrderBy(s => s.Group.IsNullOrEmpty())
+                                .ThenBy(s => (DateTime)(s.Group!.Select(g => g.ExpiredTime).OrderBy(dt => (DateTime)dt!).FirstOrDefault())!)
+                                .ToList();
+                                        
+            //get a list of tutor
+            List<AppUser> tutors = (await _userManager.GetUsersInRoleAsync("Tutor")).ToList();
+            selection.Students = students;
+            selection.Teachers = tutors;
+            return selection;
+        }
+        
+        // GET: Groups/Create
+        public async Task<IActionResult> Create()
+        {   
+            return View(await GetGroupCreateVM());
         }
 
         // POST: Groups/Create
@@ -99,40 +123,55 @@ namespace SchoolSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TeacherID, StudentID")] CreateGroupVM createVM)
+        public async Task<IActionResult> Create(String teacherID, List<String>studentID)
         {
-            createVM.exception = null;
+            GroupCreateVM createVM = await GetGroupCreateVM();
+            createVM.exception = new List<string>();
             if (ModelState.IsValid)
             {
-                AppUser? teacher = await _context.Users.FindAsync(createVM.TeacherID);
-                AppUser? student = await _context.Users.FindAsync(createVM.StudentID);
-
-                if (student == null || !await UserHasRole(student!, "Student"))
-                {
-                    createVM.exception?.Add("Student with this id don't exist");
-                    return View(createVM);
-                }
-                if(_context.Groups.Where(s => s.User.Contains(student!) && s.IsValid).Any())
-                {
-                    createVM.exception?.Add("group already exist for this student");
-                    return View(createVM);
-                }
+                AppUser? teacher = await _context.Users.FindAsync(teacherID);
+                List<AppUser>? students = _context.Users.Where(u => studentID.Contains(u.Id)).ToList();
+                
                 if (teacher == null || !await UserHasRole(teacher!, "Tutor"))
                 {
                     createVM.exception?.Add("Tutor with this id don't exist");
                     return View(createVM);
                 }
-                else
-                { 
-                    Group group = new Group();
-                    group.CreatedTime = DateTime.Now;
-                    group.User = new List<AppUser>(){ teacher!, student!};
-                    await _context.Groups.AddAsync(group);
-                    await _context.SaveChangesAsync();
+                List<Group> validGroup = new List<Group>();
+                foreach (AppUser student in students)
+                {
+                    if (!await UserHasRole(student!, "Student"))
+                    {
+                        createVM.exception?.Add(student.Name + " is not a valid student");
+                    }
+                    if (_context.Groups.Where(s => s.User.Contains(student!) && s.IsValid).Any())
+                    {
+                        createVM.exception?.Add(student.Name + " has already been in an active group");
+                    }
+                    else
+                    {
+                        Group group = new Group();
+                        group.CreatedTime = DateTime.Now;
+                        group.User = new List<AppUser>() { teacher!, student! };
+                        group.IsValid = true;
+                        validGroup.Add(group);
+                        
+                    }
+                }
+                if (!validGroup.IsNullOrEmpty())
+                {
+                    foreach (Group group in validGroup)
+                    {
+                        await _context.Groups.AddAsync(group);
+                        await _context.SaveChangesAsync();
+                    }
                     return RedirectToAction(nameof(Index));
                 }
             }
-            createVM.exception?.Add("Invalid model state");
+            if (createVM.exception.IsNullOrEmpty())
+            {
+                createVM.exception?.Add("Invalid model state");
+            }
             return View(createVM);
         }
 
@@ -196,7 +235,7 @@ namespace SchoolSystem.Controllers
         }
 
         // GET: Groups/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        /*public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -224,7 +263,7 @@ namespace SchoolSystem.Controllers
             }
 
             return RedirectToAction(nameof(Index));
-        }
+        }*/
 
         private bool GroupExists(int id)
         {
