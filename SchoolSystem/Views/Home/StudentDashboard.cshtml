@@ -2,11 +2,35 @@
 
 <h2>Student Dashboard</h2>
 
+<h3>Welcome, @Model.StudentName</h3>
 <p>Student Name: @Model.StudentName</p>
 <p>Personal Tutor: @Model.PersonalTutor</p>
-@* <p>Uploaded Documents: @Model.UploadedDocuments</p> *@
 
-<h3>Recent Comments</h3>
+<h4>Personal Tutor: @Model.PersonalTutor</h4>
+
+<h4>Tutor Blogs</h4>
+<ul>
+    @foreach (var blog in Model.TutorBlogs)
+    {
+        <li>
+            <h5>You have received a new blog</h5>
+            <p><small>Posted on @blog.TimeStamp.ToString("g") by @blog.User.Name</small></p>
+        </li>
+    }
+</ul>
+
+<h4>Student Blogs</h4>
+<ul>
+    @foreach (var blog in Model.StudentBlogs)
+    {
+        <li>
+            <h5>You have received a new blog</h5>
+            <p><small>Posted on @blog.TimeStamp</small></p>
+        </li>
+    }
+</ul>
+
+<h4>Recent Comments</h4>
 <ul>
     @foreach (var comment in Model.RecentComments)
     {
@@ -14,15 +38,7 @@
     }
 </ul>
 
-<h3>Student Blogs</h3>
-<ul>
-    @foreach (var blog in Model.StudentBlogs)
-    {
-        <li>@blog.Title</li>
-    }
-</ul>
-
-<h3>Recent Messages</h3>
+<h4>Recent Messages</h4>
 <ul>
     @foreach (var message in Model.RecentMessages)
     {
@@ -30,18 +46,15 @@
     }
 </ul>
 
-<h3>Groups</h3>
+<h4>Groups</h4>
 <ul>
     @foreach (var group in Model.Groups)
     {
-        <li>@group.Id</li>
+        <li>
+            <h5>You have been assigned to a new group</h5>
+            <p><small>Group ID: @group.Id</small></p>
+        </li>
     }
 </ul>
 
-<h3>Recent Files</h3>
-@* <ul>
-    @foreach (var file in Model.RecentFiles)
-    {
-        <li>@file.FileContent</li>
-    }
-</ul> *@
+

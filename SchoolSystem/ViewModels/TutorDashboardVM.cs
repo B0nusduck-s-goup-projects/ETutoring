@@ -14,5 +14,7 @@ namespace SchoolSystem.ViewModels
         public List<Message> RecentMessages { get; set; } = new List<Message>();
 
         public List<Group> AssignedGroups { get; set; } = new List<Group> { };
+        public string SearchName { get; set; }
+        public List<AppUser> FilteredStudents { get; set; }
     }
 }

@@ -29,6 +29,36 @@
     }
 </ul>
 
+<h3>Search and Filter</h3>
+<form method="get" asp-action="Dashboard">
+    <div class="form-group">
+        <label for="searchName">Search by Name:</label>
+        <input type="text" id="searchName" name="searchName" value="@Model.SearchName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="groupId">Filter by Group:</label>
+        <select id="groupId" name="groupId" class="form-control">
+            <option value="">All Groups</option>
+            @foreach (var group in Model.AssignedGroups)
+            {
+                var selectedGroupId = Model.FilteredStudents.FirstOrDefault()?.GroupUsers.FirstOrDefault()?.GroupId;
+                var isSelected = group.Id == selectedGroupId ? "selected" : "";
+                <option value="@group.Id" selected="@isSelected">@group.Id</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary" style="z-index: 1000; position: relative;">Search</button>
+</form>
+
+<h3>Filtered Students</h3>
+<ul>
+    @foreach (var student in Model.FilteredStudents)
+    {
+        <li>@student.Name</li>
+    }
+</ul>
+
+
 <h4>Groups list</h4>
 @foreach (var group in Model.AssignedGroups)
 {
@@ -51,6 +81,7 @@
         </ul>
     </div>
 }
+
 
 <style>
     .remove-button {

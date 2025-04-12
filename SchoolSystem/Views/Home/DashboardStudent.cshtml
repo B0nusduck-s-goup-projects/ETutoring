@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Views/Shared/_ChatLayout.cshtml";
+}
+
+<div class="layout">
+    <h2 class="heading-text">Dashboard</h2>
+</div>
+
+<div class="dashboard-container">
+    <div class="student-bio">
+        <div class="student-info">
+            <div class="student-name">
+                <p class="text-dashboard">Welcomeback Student's name</p>
+            </div>
+            <div class="tutor">
+                <p class="text-dashboard">Personal Tutor: Peter</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="document-bio">
+        <div class="document-info">
+            <div class="document">
+                <p class="text-dashboard">Recent upload document</p>
+                <p>1</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="blog-bio">
+        <div class="blog-info">
+            <div class="blog-name">
+                <p class="text-dashboard text-bold">Student Blogs</p>
+                <p>The Londoner</p>
+            </div>
+            <div class="blog-comment mt-6">
+                <p class="text-dashboard text-bold">Recent Comments</p>
+                <p>good blog</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="message-bio">
+        <div class="message-info">
+            <div class="message">
+                <p class="text-dashboard text-bold">Recent Messages</p>
+                <p>Hello Mr.Quoc</p>h
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuItems = document.querySelectorAll(".menu-item");
+
+        menuItems.forEach(item => {
+            if (item.getAttribute("data-name") === "dashboard") {
+                item.classList.add("active");
+            }
+        });
+    });
+</script>

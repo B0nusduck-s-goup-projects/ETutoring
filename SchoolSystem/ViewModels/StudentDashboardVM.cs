@@ -19,6 +19,8 @@ namespace SchoolSystem.ViewModels
 
         // Blog của sinh viên
         public List<Blog> StudentBlogs { get; set; } = new List<Blog>();
+        // Blog của giáo viên
+        public List<Blog> TutorBlogs { get; set; } = new List<Blog>();
 
         // Tin nhắn mới từ Tutor
         public List<Message> RecentMessages { get; set; } = new List<Message>();
