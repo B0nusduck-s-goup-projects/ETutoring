@@ -25,7 +25,7 @@ public class HomeController : Controller
         _context = context;
     }
 
-    public async Task<IActionResult> Dashboard()
+    public async Task<IActionResult> Dashboard(string searchName = null, int? groupId = null)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the current user's ID
         if (userId == null)
@@ -52,7 +52,7 @@ public class HomeController : Controller
         }
         else if (await _userManager.IsInRoleAsync(user, "Tutor"))
         {
-            var tutorDashboard = await GetTutorDashboard(userId);
+            var tutorDashboard = await GetTutorDashboard(userId, searchName, groupId);
             return View("TutorDashboard", tutorDashboard);
         }
 
@@ -111,6 +111,16 @@ public class HomeController : Controller
             .OrderByDescending(b => b.TimeStamp)
             .ToListAsync();
 
+        var tutorRoleId = (await _context.Roles.FirstOrDefaultAsync(r => r.Name == "Tutor"))?.Id;
+
+        var tutorBlogs = await _context.Blogs
+            .Join(_context.UserRoles, b => b.UserId, ur => ur.UserId, (b, ur) => new { b, ur })
+            .Where(bur => bur.ur.RoleId == tutorRoleId)
+            .Select(bur => bur.b)
+            .Include(b => b.User) // Include the User to access the User.Name in the view
+            .OrderByDescending(b => b.TimeStamp)
+            .ToListAsync();
+
         var recentMessages = await _context.Messages
             .Where(m => studentGroupIds.Contains(m.GroupId))
             .OrderByDescending(m => m.TimeStamp)
@@ -122,15 +132,12 @@ public class HomeController : Controller
         var recentFiles = await _context.AttachFiles
             .Where(f => recentMessageIds.Contains(f.MessageId))
             .ToListAsync();
-
-        
-
-
         // Log the fetched data
         Debug.WriteLine($"Student Name: {user.Name}");
         Debug.WriteLine($"Uploaded Documents: {recentFiles.Count}");
         Debug.WriteLine($"Recent Comments: {string.Join(", ", recentComments)}");
         Debug.WriteLine($"Student Blogs: {string.Join(", ", studentBlogs.Select(b => b.Title))}");
+        Debug.WriteLine($"Tutor Blogs: {string.Join(", ", tutorBlogs.Select(b => b.Title))}");
         Debug.WriteLine($"Recent Messages: {string.Join(", ", recentMessages.Select(m => m.TextContent))}");
         Debug.WriteLine($"Groups: {string.Join(", ", studentGroups.Select(g => g.Id))}");
         Debug.WriteLine($"Recent Files: {string.Join(", ", recentFiles.Select(f => f.FileContent))}");
@@ -142,6 +149,7 @@ public class HomeController : Controller
             UploadedDocuments = recentFiles.Count(),
             RecentComments = recentComments,
             StudentBlogs = studentBlogs,
+            TutorBlogs = tutorBlogs,
             RecentMessages = recentMessages,
             Groups = studentGroups,
             GroupUsersWithRoles = groupUsersWithRoles,
@@ -151,7 +159,7 @@ public class HomeController : Controller
     }
 
 
-    private async Task<TutorDashboardVM> GetTutorDashboard(string userId)
+    private async Task<TutorDashboardVM> GetTutorDashboard(string userId, string searchName, int? groupId)
     {
         var user = await _context.Users.FindAsync(userId);
         if (user == null) return null; // Check if user does not exist
@@ -179,9 +187,9 @@ public class HomeController : Controller
         }
 
         groupUsersWithRoles = groupUsersWithRoles
-        .OrderByDescending(gu => gu.Roles.Contains("Tutor"))
-        .ThenBy(gu => gu.User.Name)
-        .ToList();
+            .OrderByDescending(gu => gu.Roles.Contains("Tutor"))
+            .ThenBy(gu => gu.User.Name)
+            .ToList();
 
         var recentMessages = await _context.Messages
             .Where(m => assignedGroupIds.Contains(m.GroupId))
@@ -199,6 +207,20 @@ public class HomeController : Controller
             .Take(5)
             .ToListAsync();
 
+        var filteredStudentsQuery = _context.Users.AsQueryable();
+
+        if (!string.IsNullOrEmpty(searchName))
+        {
+            filteredStudentsQuery = filteredStudentsQuery.Where(u => u.Name.Contains(searchName));
+        }
+
+        if (groupId.HasValue)
+        {
+            filteredStudentsQuery = filteredStudentsQuery.Where(u => u.GroupUsers.Any(gu => gu.GroupId == groupId.Value));
+        }
+
+        var filteredStudents = await filteredStudentsQuery.ToListAsync();
+
         // Log the fetched data
         Debug.WriteLine($"Tutor Name: {user.Name}");
         Debug.WriteLine($"Uploaded Documents: {recentMessages.Count()}");
@@ -214,6 +236,8 @@ public class HomeController : Controller
             RecentMessages = recentMessages,
             AssignedGroups = assignedGroups,
             GroupUsersWithRoles = groupUsersWithRoles,
+            SearchName = searchName,
+            FilteredStudents = filteredStudents
         };
     }
 
