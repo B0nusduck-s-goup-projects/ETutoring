@@ -5,6 +5,7 @@ using SchoolSystem.ViewModels;
 using SchoolSystem.Models;
 using System.Security.Claims;
 using SchoolSystem.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace SchoolSystem.Controllers
 {
@@ -13,12 +14,14 @@ namespace SchoolSystem.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+		private readonly UserManager<AppUser> _userManager;
 
-        public DocumentController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
+		public DocumentController(AppDbContext context, IWebHostEnvironment webHostEnvironment, UserManager<AppUser> userManager)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
-        }
+			_userManager = userManager;
+		}
 
         // GET: Documents
     public async Task<IActionResult> Index()
@@ -48,8 +51,10 @@ namespace SchoolSystem.Controllers
         if (id == null) return NotFound();
 
         var document = await _context.Documents
-            .Include(d => d.User)
-            .FirstOrDefaultAsync(m => m.Id == id);
+			 .Include(d => d.User) 
+	        .Include(d => d.Comments)
+		    .ThenInclude(c => c.User) 
+			.FirstOrDefaultAsync(m => m.Id == id);
 
         if (document == null) return NotFound();
 
@@ -68,8 +73,10 @@ namespace SchoolSystem.Controllers
             FileType = document.FileType,
             FileSize = document.FileSize,
             UserName = document.User.UserName,
-            UserId = document.UserId
-        };
+            UserId = document.UserId,
+
+			Comments = document.Comments.ToList()
+		};
 
         return View(viewModel);
     }
@@ -302,5 +309,74 @@ namespace SchoolSystem.Controllers
         {
             return _context.Documents.Any(e => e.Id == id);
         }
+
+        //CommentHead
+        [HttpPost]
+        public async Task<IActionResult> AddComment(DocumentCommentVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["ErrorMessage"] = "Comment cannot be empty.";
+                return RedirectToAction("Details", new { id = model.DocumentId });
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return Unauthorized();
+
+            var comment = new DocumentComment
+            {
+                Content = model.Content,
+                DocumentId = model.DocumentId,
+                UserId = user.Id,
+                ParentCommentId = model.ParentCommentId,
+                TimeStamp = DateTime.UtcNow
+            };
+
+            _context.DocumentComments.Add(comment);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = model.DocumentId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteComment(int CommentId)
+        {
+            var comment = await _context.DocumentComments.Include(c => c.Document).FirstOrDefaultAsync(c => c.Id == CommentId);
+
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            var userId = _userManager.GetUserId(User);
+            var userRoles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
+
+            if (userId != comment.UserId && userId != comment.Document.UserId && !userRoles.Contains("Admin") && !userRoles.Contains("Staff"))
+            {
+                return Forbid();
+            }
+
+            await DeleteCommentRecursively(comment.Id);
+
+            _context.DocumentComments.Remove(comment);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = comment.DocumentId });
+        }
+
+        private async Task DeleteCommentRecursively(int commentId)
+        {
+            var replies = await _context.DocumentComments.Where(c => c.ParentCommentId == commentId).ToListAsync();
+
+            foreach (var reply in replies)
+            {
+                await DeleteCommentRecursively(reply.Id);
+                _context.DocumentComments.Remove(reply);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+        //CommentEnd
     }
 }

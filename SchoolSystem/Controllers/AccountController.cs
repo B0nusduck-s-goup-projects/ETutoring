@@ -8,6 +8,8 @@ using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using OfficeOpenXml;
+using System.IO;
 
 namespace SchoolSystem.Controllers
 {
@@ -238,6 +240,76 @@ namespace SchoolSystem.Controllers
 			return View(model);
 		}
 
+		//[HttpPost]
+		//public async Task<IActionResult> UpdateUser(UpdateUserVM model)
+		//{
+		//	if (!ModelState.IsValid)
+		//	{
+		//		ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
+		//		return View(model);
+		//	}
+
+		//	var user = await userManager.FindByIdAsync(model.Id);
+		//	if (user == null)
+		//	{
+		//		return NotFound();
+		//	}
+
+		//	// Kiểm tra trùng email
+		//	var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
+		//	if (existingUserByEmail != null && existingUserByEmail.Id != model.Id)
+		//	{
+		//		ModelState.AddModelError("Email", "Email already exists");
+		//		ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
+		//		return View(model);
+		//	}
+
+		//	// Update user properties
+		//	user.Name = model.Name;
+		//	user.Code = model.Code;
+		//	user.Email = model.Email;
+		//	user.UserName = model.Email;
+		//	user.Address = model.Address;
+		//	user.Gender = model.Gender;
+
+		//	// Handle image update
+		//	if (model.Image != null)
+		//	{
+		//		var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+		//		Directory.CreateDirectory(uploadsFolder);
+
+		//		var uniqueFileName = $"{Guid.NewGuid()}_{model.Image.FileName}";
+		//		var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+		//		using (var fileStream = new FileStream(filePath, FileMode.Create))
+		//		{
+		//			await model.Image.CopyToAsync(fileStream);
+		//		}
+
+		//		user.Image = $"/uploads/{uniqueFileName}";
+		//	}
+
+		//	var result = await userManager.UpdateAsync(user);
+		//	if (!result.Succeeded)
+		//	{
+		//		ModelState.AddModelError("", "Failed to update user");
+		//		return View(model);
+		//	}
+
+		//	// Update user role if changed
+		//	var userRoles = await userManager.GetRolesAsync(user);
+		//	if (userRoles.Any())
+		//	{
+		//		await userManager.RemoveFromRolesAsync(user, userRoles);
+		//	}
+		//	if (!string.IsNullOrEmpty(model.Role) && await roleManager.RoleExistsAsync(model.Role))
+		//	{
+		//		await userManager.AddToRoleAsync(user, model.Role);
+		//	}
+
+		//	TempData["SuccessMessage"] = "User updated successfully!";
+		//	return RedirectToAction("ListUsers");
+		//}
+
 		[HttpPost]
 		public async Task<IActionResult> UpdateUser(UpdateUserVM model)
 		{
@@ -253,7 +325,16 @@ namespace SchoolSystem.Controllers
 				return NotFound();
 			}
 
-			// Update user properties
+			// Kiểm tra trùng email trước khi cập nhật
+			var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
+			if (existingUserByEmail != null && existingUserByEmail.Id != model.Id)
+			{
+				ModelState.AddModelError("Email", "Email already exists");
+				ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();  // Đảm bảo không bị mất dữ liệu role
+				return View(model);
+			}
+
+			// Cập nhật thông tin người dùng
 			user.Name = model.Name;
 			user.Code = model.Code;
 			user.Email = model.Email;
@@ -261,7 +342,7 @@ namespace SchoolSystem.Controllers
 			user.Address = model.Address;
 			user.Gender = model.Gender;
 
-			// Handle image update
+			// Xử lý hình ảnh nếu có
 			if (model.Image != null)
 			{
 				var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
@@ -277,27 +358,51 @@ namespace SchoolSystem.Controllers
 				user.Image = $"/uploads/{uniqueFileName}";
 			}
 
-			var result = await userManager.UpdateAsync(user);
-			if (!result.Succeeded)
+			try
 			{
-				ModelState.AddModelError("", "Failed to update user");
+				var result = await userManager.UpdateAsync(user);
+				if (!result.Succeeded)
+				{
+					ModelState.AddModelError("", "Failed to update user");
+					ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();  // Đảm bảo không bị mất dữ liệu role
+					return View(model);
+				}
+
+				// Cập nhật vai trò của người dùng nếu có thay đổi
+				var userRoles = await userManager.GetRolesAsync(user);
+				if (userRoles.Any())
+				{
+					await userManager.RemoveFromRolesAsync(user, userRoles);
+				}
+				if (!string.IsNullOrEmpty(model.Role) && await roleManager.RoleExistsAsync(model.Role))
+				{
+					await userManager.AddToRoleAsync(user, model.Role);
+				}
+
+				TempData["SuccessMessage"] = "User updated successfully!";
+				return RedirectToAction("ListUsers");
+			}
+			catch (DbUpdateException ex) // Bắt lỗi DbUpdateException nếu có lỗi với database
+			{
+				//Kiểm tra lỗi liên quan đến trùng email
+				if (ex.InnerException != null && ex.InnerException.Message.Contains("IX_AspNetUsers_Email"))
+				{
+					ModelState.AddModelError("Email", "Email already exists");
+				}
+				if (ex.InnerException != null && ex.InnerException.Message.Contains("IX_AspNetUsers_Code"))
+				{
+					ModelState.AddModelError("Code", "Code already exists");
+				}
+				else
+				{
+					ModelState.AddModelError("", "Failed to update user");
+				}
+
+				ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();  // Đảm bảo không bị mất dữ liệu role
 				return View(model);
 			}
-
-			// Update user role if changed
-			var userRoles = await userManager.GetRolesAsync(user);
-			if (userRoles.Any())
-			{
-				await userManager.RemoveFromRolesAsync(user, userRoles);
-			}
-			if (!string.IsNullOrEmpty(model.Role) && await roleManager.RoleExistsAsync(model.Role))
-			{
-				await userManager.AddToRoleAsync(user, model.Role);
-			}
-
-			TempData["SuccessMessage"] = "User updated successfully!";
-			return RedirectToAction("ListUsers");
 		}
+
 
 		[HttpPost]
 		public async Task<IActionResult> DeleteUser(string id)
@@ -377,6 +482,272 @@ namespace SchoolSystem.Controllers
 
 			TempData["SuccessMessage"] = "Password changed successfully!";
 			return RedirectToAction("ViewProfile");
+		}
+
+		//excel
+		//[HttpGet]
+		//public async Task<IActionResult> ExportUsersToExcel()
+		//{
+		//	var users = await userManager.Users.ToListAsync(); // Lấy danh sách người dùng từ database
+		//	var stream = new MemoryStream();
+
+		//	using (var package = new ExcelPackage(stream))
+		//	{
+		//		var worksheet = package.Workbook.Worksheets.Add("Users");
+
+		//		// Thêm tiêu đề cột
+		//		worksheet.Cells[1, 1].Value = "ID";
+		//		worksheet.Cells[1, 2].Value = "Name";
+		//		worksheet.Cells[1, 3].Value = "Email";
+		//		worksheet.Cells[1, 4].Value = "Code";
+		//		worksheet.Cells[1, 5].Value = "Gender";
+		//		worksheet.Cells[1, 6].Value = "Address";
+
+		//		// Thêm dữ liệu người dùng vào các hàng tiếp theo
+		//		for (int i = 0; i < users.Count; i++)
+		//		{
+		//			worksheet.Cells[i + 2, 1].Value = users[i].Id;
+		//			worksheet.Cells[i + 2, 2].Value = users[i].Name;
+		//			worksheet.Cells[i + 2, 3].Value = users[i].Email;
+		//			worksheet.Cells[i + 2, 4].Value = users[i].Code;
+		//			worksheet.Cells[i + 2, 5].Value = users[i].Gender;
+		//			worksheet.Cells[i + 2, 6].Value = users[i].Address;
+		//		}
+
+		//		package.Save();
+		//	}
+
+		//	stream.Position = 0;
+		//	string fileName = "Users.xlsx";
+		//	return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+		//}
+
+
+		//[HttpPost]
+		//	public async Task<IActionResult> ImportUsersFromExcel(IFormFile file)
+		//	{
+		//		if (file != null && file.Length > 0)
+		//		{
+		//			using (var package = new ExcelPackage(file.OpenReadStream()))
+		//			{
+		//				var worksheet = package.Workbook.Worksheets[0];
+		//				var rowCount = worksheet.Dimension.Rows;
+
+		//				for (int row = 2; row <= rowCount; row++) // Bắt đầu từ dòng 2 vì dòng 1 là tiêu đề
+		//				{
+		//					var name = worksheet.Cells[row, 2].Text;
+		//					var email = worksheet.Cells[row, 3].Text;
+		//					var code = worksheet.Cells[row, 4].Text;
+		//					var gender = worksheet.Cells[row, 5].Text;
+		//					var address = worksheet.Cells[row, 6].Text;
+
+		//					// Kiểm tra xem người dùng đã tồn tại chưa
+		//					var existingUser = await userManager.FindByEmailAsync(email);
+		//					if (existingUser == null)
+		//					{
+		//						var user = new AppUser
+		//						{
+		//							Name = name,
+		//							Email = email,
+		//							UserName = email, // Email là tên đăng nhập
+		//							Code = code,
+		//							Gender = gender,
+		//							Address = address
+		//						};
+
+		//						var result = await userManager.CreateAsync(user, "DefaultPassword123"); // Cấp mật khẩu mặc định
+		//						if (!result.Succeeded)
+		//						{
+		//							// Xử lý lỗi nếu có
+		//							foreach (var error in result.Errors)
+		//							{
+		//								// Xử lý lỗi (ví dụ: lưu vào log, thông báo cho người dùng, v.v.)
+		//							}
+		//						}
+		//					}
+		//				}
+		//			}
+		//		}
+
+		//		TempData["SuccessMessage"] = "Import users successfully!";
+		//		return RedirectToAction("ListUsers");
+		//	}
+		[HttpPost]
+		public async Task<IActionResult> ImportUsersFromExcel(IFormFile file)
+		{
+			if (file != null && file.Length > 0)
+			{
+				using (var package = new ExcelPackage(file.OpenReadStream()))
+				{
+					var worksheet = package.Workbook.Worksheets[0];
+					var rowCount = worksheet.Dimension.Rows;
+
+					for (int row = 2; row <= rowCount; row++) // Bắt đầu từ dòng 2 vì dòng 1 là tiêu đề
+					{
+						var name = worksheet.Cells[row, 2].Text;
+						var email = worksheet.Cells[row, 3].Text;
+						var code = worksheet.Cells[row, 4].Text;
+						var gender = worksheet.Cells[row, 5].Text;
+						var address = worksheet.Cells[row, 6].Text;
+						var imagePath = worksheet.Cells[row, 7].Text; // Lấy đường dẫn hình ảnh từ cột Image
+						var role = worksheet.Cells[row, 8].Text; // Lấy chức vụ (role)
+
+						// Kiểm tra xem cột Image có trống không
+						if (string.IsNullOrWhiteSpace(imagePath))
+						{
+							imagePath = null; // Gán giá trị null nếu không có hình ảnh
+						}
+
+						//// Kiểm tra nếu đường dẫn ảnh không trống
+						//if (!string.IsNullOrEmpty(imagePath))
+						//{
+						//	// Xử lý ảnh: Kiểm tra nếu ảnh chưa tồn tại trong thư mục uploads, tải ảnh từ URL
+						//	var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+						//	Directory.CreateDirectory(uploadsFolder);
+
+						//	var fileName = Path.GetFileName(imagePath);
+						//	var filePath = Path.Combine(uploadsFolder, fileName);
+
+						//	// Kiểm tra nếu file không tồn tại, tải lên từ URL (chỉ tải nếu cần thiết)
+						//	if (!System.IO.File.Exists(filePath))
+						//	{
+						//		using (var client = new HttpClient())
+						//		{
+						//			var imageBytes = await client.GetByteArrayAsync(imagePath);
+						//			await System.IO.File.WriteAllBytesAsync(filePath, imageBytes);
+						//		}
+						//	}
+
+						//	// Cập nhật lại đường dẫn ảnh vào trường Image
+						//	imagePath = $"/uploads/{fileName}";
+						//}
+
+						// Kiểm tra xem email và code có bị trùng không
+						var existingUserByEmail = await userManager.FindByEmailAsync(email);
+						var existingUserByCode = await userManager.Users.FirstOrDefaultAsync(u => u.Code == code);
+
+						if (existingUserByEmail != null)
+						{
+							// Nếu email đã tồn tại
+							TempData["ErrorMessage"] = $"Email {email} đã được sử dụng. Vui lòng kiểm tra lại!";
+							return RedirectToAction("ListUsers");
+						}
+
+						if (existingUserByCode != null)
+						{
+							// Nếu code đã tồn tại
+							TempData["ErrorMessage"] = $"Code {code} đã được sử dụng. Vui lòng kiểm tra lại!";
+							return RedirectToAction("ListUsers");
+						}
+
+
+						// Kiểm tra xem người dùng đã tồn tại chưa
+						var existingUser = await userManager.FindByEmailAsync(email);
+						if (existingUser == null)
+						{
+							var user = new AppUser
+							{
+								Name = name,
+								Email = email,
+								UserName = email, // Email là tên đăng nhập
+								Code = code,
+								Gender = gender,
+								Address = address,
+								Image = imagePath // Lưu đường dẫn hình ảnh vào trường Image của người dùng
+							};
+
+							var result = await userManager.CreateAsync(user, "DefaultPassword123"); // Cấp mật khẩu mặc định
+							if (result.Succeeded)
+							{
+								// Gán Role cho người dùng nếu tồn tại
+								if (!string.IsNullOrEmpty(role) && await roleManager.RoleExistsAsync(role))
+								{
+									await userManager.AddToRoleAsync(user, role);
+								}
+							}
+							else
+							{
+								// Xử lý lỗi nếu có
+								foreach (var error in result.Errors)
+								{
+									// Xử lý lỗi (ví dụ: lưu vào log, thông báo cho người dùng, v.v.)
+								}
+							}
+						}
+					}
+				}
+			}
+
+			TempData["SuccessMessage"] = "Import users successfully!";
+			return RedirectToAction("ListUsers");
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> ExportUsersToExcel()
+		{
+			var users = await userManager.Users.ToListAsync(); // Lấy danh sách người dùng từ database
+			var stream = new MemoryStream();
+
+			using (var package = new ExcelPackage(stream))
+			{
+				var worksheet = package.Workbook.Worksheets.Add("Users");
+
+				// Thêm tiêu đề cột
+				worksheet.Cells[1, 1].Value = "ID";
+				worksheet.Cells[1, 2].Value = "Name";
+				worksheet.Cells[1, 3].Value = "Email";
+				worksheet.Cells[1, 4].Value = "Code";
+				worksheet.Cells[1, 5].Value = "Gender";
+				worksheet.Cells[1, 6].Value = "Address";
+				worksheet.Cells[1, 7].Value = "Image"; // Thêm cột Image
+				worksheet.Cells[1, 8].Value = "Role"; // Thêm cột Role
+
+				// Thêm dữ liệu người dùng vào các hàng tiếp theo
+				for (int i = 0; i < users.Count; i++)
+				{
+					worksheet.Cells[i + 2, 1].Value = users[i].Id;
+					worksheet.Cells[i + 2, 2].Value = users[i].Name;
+					worksheet.Cells[i + 2, 3].Value = users[i].Email;
+					worksheet.Cells[i + 2, 4].Value = users[i].Code;
+					worksheet.Cells[i + 2, 5].Value = users[i].Gender;
+					worksheet.Cells[i + 2, 6].Value = users[i].Address;
+					worksheet.Cells[i + 2, 7].Value = users[i].Image; // Xuất đường dẫn hình ảnh
+					var roles = await userManager.GetRolesAsync(users[i]);
+					worksheet.Cells[i + 2, 8].Value = string.Join(", ", roles); // Xuất các chức vụ (Role)
+				}
+
+				package.Save();
+			}
+
+			stream.Position = 0;
+			string fileName = "Users.xlsx";
+			return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+		}
+
+		//UploadImage
+		[HttpPost]
+		public async Task<IActionResult> UploadImage(IFormFile image)
+		{
+			if (image != null && image.Length > 0)
+			{
+				// Tạo thư mục uploads nếu chưa có
+				var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+				Directory.CreateDirectory(uploadsFolder);
+
+				// Tạo tên file duy nhất để tránh trùng lặp
+				var uniqueFileName = $"{Guid.NewGuid()}_{image.FileName}";
+				var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+				// Lưu file vào thư mục uploads
+				using (var fileStream = new FileStream(filePath, FileMode.Create))
+				{
+					await image.CopyToAsync(fileStream);
+				}
+
+				return Json(new { filePath = $"/uploads/{uniqueFileName}" });
+			}
+
+			return BadRequest("No image uploaded.");
 		}
 
 	}
