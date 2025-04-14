@@ -18,7 +18,10 @@
             </div>
             <div class="document-actions">
                 <a href="@Model.FilePath" class="document-btn document-btn-primary" target="_blank">Download Document</a>
-                <a asp-action="Edit" asp-route-id="@Model.Id" class="document-btn document-btn-warning">Edit</a>
+                @if (Model.CanEdit)
+                {
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="document-btn document-btn-warning">Edit</a>
+                }
                 <a asp-action="Index" class="document-btn document-btn-secondary">Back to List</a>
             </div>
         </div>

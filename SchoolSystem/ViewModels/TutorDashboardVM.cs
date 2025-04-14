@@ -8,9 +8,13 @@ namespace SchoolSystem.ViewModels
     {
         public string TutorName { get; set; } = string.Empty;
         public int UploadedDocuments { get; set; }
+        public List<UserWithRolesVM> GroupUsersWithRoles { get; set; }
+
         public List<string> RecentComments { get; set; } = new List<string>();
         public List<Message> RecentMessages { get; set; } = new List<Message>();
 
         public List<Group> AssignedGroups { get; set; } = new List<Group> { };
+        public string SearchName { get; set; }
+        public List<AppUser> FilteredStudents { get; set; }
     }
 }

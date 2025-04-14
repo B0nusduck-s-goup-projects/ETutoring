@@ -16,6 +16,7 @@ namespace SchoolSystem.ViewModels
         public string UserName { get; set; }
         public string UserId { get; set; }
 
-		public List<DocumentComment> Comments { get; set; }
-	}
+        public List<DocumentComment> Comments { get; set; }
+        public bool CanEdit { get; set; }
+    }
 }

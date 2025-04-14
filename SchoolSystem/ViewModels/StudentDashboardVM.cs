@@ -11,14 +11,16 @@ namespace SchoolSystem.ViewModels
         public string StudentName { get; set; } = string.Empty;
         public string PersonalTutor { get; set; } = string.Empty;
 
-        // Số lượng tệp đính kèm đã tải lên
-        public int UploadedDocuments { get; set; }
+        // Số lượng tệp đính kèm đã tải lên (không còn sử dụng vì đả xoá attach file khỏi messages)
+        //public int UploadedDocuments { get; set; }
 
         // Danh sách bình luận gần nhất từ Tutor
         public List<string> RecentComments { get; set; } = new List<string>();
 
         // Blog của sinh viên
         public List<Blog> StudentBlogs { get; set; } = new List<Blog>();
+        // Blog của giáo viên
+        public List<Blog> TutorBlogs { get; set; } = new List<Blog>();
 
         // Tin nhắn mới từ Tutor
         public List<Message> RecentMessages { get; set; } = new List<Message>();
@@ -28,8 +30,8 @@ namespace SchoolSystem.ViewModels
 
         public List<UserWithRolesVM> GroupUsersWithRoles { get; set; } = new List<UserWithRolesVM> { };
 
-        //Danh sách tệp đính kèm
-        public List<AttachFiles> RecentFiles { get; set; } = new List<AttachFiles> { };
+        //Danh sách tệp đính kèm (không còn sử dụng vì đả xoá attach file khỏi messages)
+        //public List<AttachFiles> RecentFiles { get; set; } = new List<AttachFiles> { };
     }
     //public class DashboardEntry
     //{

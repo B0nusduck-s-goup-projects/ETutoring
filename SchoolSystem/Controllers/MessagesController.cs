@@ -30,7 +30,6 @@ namespace SchoolSystem.Controllers
             Group? group = _context.Groups.Where(g => g.Id == groupId).FirstOrDefault();
             List<Message> messages = new List<Message>();
             messages = _context.Messages.Where(m => m.Group == group)
-                                .Include(m => m.AttachFiles)
                                 .Include(m => m.Sender)
                                 .OrderBy(m => m.TimeStamp)
                                 .ToList();
@@ -46,6 +45,11 @@ namespace SchoolSystem.Controllers
         public async Task<IActionResult> ChatList()
         {
             AppUser? currentUser = await _userManager.GetUserAsync(this.User);
+            if (_userManager.GetRolesAsync(currentUser).Result.Contains("Student"))
+            {
+                Group? group = _context.Groups.Where(g => g.User.Contains(currentUser!) && g.IsValid).Include(g => g.User).FirstOrDefault();
+                return group != null ? RedirectToAction("ChatWindow", new {groupId = group.Id}) : View(new List<ChatListVM>());
+            }
             List<ChatListVM> result = new List<ChatListVM>();
             if (currentUser != null)
             {

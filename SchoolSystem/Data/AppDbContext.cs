@@ -37,16 +37,6 @@ namespace SchoolSystem.Data
                 .HasForeignKey(e => e.GroupId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Message>()
-                .Property(e => e.FileCount)
-                .HasDefaultValue(0);
-            modelBuilder.Entity<Message>()
-                .HasMany(e => e.AttachFiles)
-                .WithOne(e => e.Message)
-                .HasForeignKey(e => e.MessageId)
-                .IsRequired(true)
-                .OnDelete(DeleteBehavior.Cascade);
-
             // Blog relationships
             modelBuilder.Entity<Blog>()
                 .HasMany(b => b.Comments)
@@ -98,7 +88,6 @@ namespace SchoolSystem.Data
         public DbSet<GroupUsers> GroupUsers { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<AttachFiles> AttachFiles { get; set; }
 
         // Blog related
         public DbSet<Blog> Blogs { get; set; }
