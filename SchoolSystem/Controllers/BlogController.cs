@@ -266,7 +266,6 @@ namespace SchoolSystem.Controllers
 		}
 
 		[HttpPost]
-		[Authorize]
 		public async Task<IActionResult> AddComment(CommentVM model)
 		{
 			if (!ModelState.IsValid)

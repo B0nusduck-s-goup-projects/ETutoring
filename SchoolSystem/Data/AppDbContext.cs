@@ -14,8 +14,13 @@ namespace SchoolSystem.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Group & message
-            modelBuilder.Entity<AppUser>()
+			// Tạo chỉ mục duy nhất cho code
+			modelBuilder.Entity<AppUser>()
+				.HasIndex(u => u.Code)
+				.IsUnique(); // Đảm bảo rằng code là duy nhất
+
+			// Group & message
+			modelBuilder.Entity<AppUser>()
                 .HasMany(e => e.Group)
                 .WithMany(e => e.User)
                 .UsingEntity<GroupUsers>(
@@ -58,8 +63,21 @@ namespace SchoolSystem.Data
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // User Profile relationships
-            modelBuilder.Entity<AppUser>()
+			//DocumentComment relationships
+			modelBuilder.Entity<Document>()
+	            .HasMany(b => b.Comments)
+	            .WithOne(c => c.Document)
+	            .HasForeignKey(c => c.DocumentId)
+	            .OnDelete(DeleteBehavior.NoAction);
+
+			modelBuilder.Entity<DocumentComment>()
+	            .HasOne(c => c.ParentComment)
+	            .WithMany(c => c.Replies)
+	            .HasForeignKey(c => c.ParentCommentId)
+	            .OnDelete(DeleteBehavior.NoAction);
+
+			// User Profile relationships
+			modelBuilder.Entity<AppUser>()
                 .HasMany(u => u.Documents)
                 .WithOne(d => d.User)
                 .HasForeignKey(d => d.UserId)
@@ -78,5 +96,8 @@ namespace SchoolSystem.Data
 
         // Document management
         public DbSet<Document> Documents { get; set; }
-    }
+
+		//DocumentComment
+		public DbSet<DocumentComment> DocumentComments { get; set; }
+	}
 }

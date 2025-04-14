@@ -22,16 +22,18 @@
                         <div class="top-bar-links">
                             <a href="#">News</a>
                             <a href="#">Gallery</a>
-                            @if (!User.Identity.IsAuthenticated)
+                    @*         @if (!User.Identity.IsAuthenticated)
                             {
                             <a asp-controller="Account" asp-action="Login"><i class="fas fa-sign-in-alt"></i> Sign In</a>
-                            }
-                            <partial name="_LoginPartial" />
+                            } *@
+                      
+                                <partial name="_LoginPartial" />
 
                         </div>
                     </div>
                 </div>
             </div>
+            
             <div class="top">
                 <div class="container">
                     <div class="header-top row">
