@@ -1,0 +1,143 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sanserif;
+}
+
+/* Main Layout */
+.admin-layout {
+    display: flex;
+    height: 100vh; /* Full height of the screen */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px; /* Sidebar occupies the left-hand side */
+    background-color: rgb(1, 28, 64, 0.69);
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Allows scrolling if content overflows */
+}
+
+.sidebar-divider {
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0; /* Adds spacing between sections */
+}
+
+.project-link {
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 40px;
+    text-align: center;
+    background: linear-gradient(90deg, #58b3c7 19.71%, #254068 80.29%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+    .project-link a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 5px;
+    flex-grow:1;
+}
+
+.menu-item {
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.menu-link {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+    .menu-link:hover {
+        background: linear-gradient(90deg, rgba(167, 235, 242, 0.36) 0%, rgba(84, 172, 191, 0.36) 100%);
+        box-shadow: 0px 0px 5px rgba(167, 235, 242, 0.5); /* Ánh sáng khi hover */
+        color: #fff; /* Giữ màu chữ không đổi */
+    }
+    .menu-link i {
+        margin-right: 15px; /* Adds space between the icon and the text */
+        font-size: 18px; /* Adjusts the icon size */
+    }
+.bottom-menu{
+    margin-top:auto;
+}
+
+/* Right Section */
+.right-section {
+    flex: 1; /* Takes up the rest of the width */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: flex-end; /* Align partial to the top-right */
+    padding: 10px 20px;
+    background: linear-gradient(0deg, rgba(215, 228, 234, 0.70) 0%, rgba(215, 228, 234, 0.70) 100%), linear-gradient(130deg, rgba(167, 235, 242, 0.36) 0%, rgba(84, 172, 191, 0.36) 100%);
+    backdrop-filter: blur(calc(var(--sds-size-depth-800) / 2));
+    color: black;
+}
+
+/* Partial in admin layout */
+.header-right {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end; /* Align items to the right */
+    align-items: center;
+}
+
+    .header-right a {
+        text-decoration: none;
+        color: slategrey;
+        font-weight: bold;
+    }
+
+        .header-right a:hover {
+            background: linear-gradient(90deg, #58b3c7 19.71%, #254068 80.29%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+/* Content Area */
+.content-area {
+    flex: 1; /* Takes up the available space between header and footer */
+    padding: 20px;
+    background: linear-gradient(0deg, rgba(215, 228, 234, 0.70) 0%, rgba(215, 228, 234, 0.70) 100%), linear-gradient(130deg, rgba(167, 235, 242, 0.36) 0%, rgba(84, 172, 191, 0.36) 100%);
+    backdrop-filter: blur(calc(var(--sds-size-depth-800) / 2));
+}
+
+/* Footer */
+.admin-footer {
+    background: linear-gradient(0deg, rgba(215, 228, 234, 0.70) 0%, rgba(215, 228, 234, 0.70) 100%), linear-gradient(130deg, rgba(167, 235, 242, 0.36) 0%, rgba(84, 172, 191, 0.36) 100%);
+    backdrop-filter: blur(calc(var(--sds-size-depth-800) / 2));
+    color: rgb(148, 147, 144);
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
+    .admin-footer a {
+        text-decoration: none;
+        color: rgb(148, 147, 144);
+    }
