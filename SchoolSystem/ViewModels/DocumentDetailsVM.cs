@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
-using SchoolSystem.Models;
 
 namespace SchoolSystem.ViewModels
 {
@@ -15,8 +14,6 @@ namespace SchoolSystem.ViewModels
         public long FileSize { get; set; }
         public string UserName { get; set; }
         public string UserId { get; set; }
-
-        public List<DocumentComment> Comments { get; set; }
         public bool CanEdit { get; set; }
     }
 }

@@ -5,6 +5,12 @@
     ViewData["Title"] = "Home Page";
 }
 
+<!--Using _AdminLayout-->
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
     <div class="admin-container">

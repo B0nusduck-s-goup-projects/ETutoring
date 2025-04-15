@@ -25,8 +25,6 @@ namespace SchoolSystem.Models
 
         public required string FileType { get; set; }
         public long FileSize { get; set; }
-
-		public ICollection<DocumentComment> Comments { get; set; }
-	}
+    }
 }
 // Thêm các dòng "required" để tránh bị bắt lỗi của non-nullable property assignment khi exit constructor

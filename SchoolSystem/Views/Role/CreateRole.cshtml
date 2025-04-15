@@ -1,5 +1,10 @@
 ﻿@model SchoolSystem.ViewModels.RoleVM
 
+<!--Using _AdminLayout-->
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
 @if (!ViewData.ModelState.IsValid)
 {
     <div class="alert alert-danger">

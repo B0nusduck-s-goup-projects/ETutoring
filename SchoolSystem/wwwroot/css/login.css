@@ -1,26 +1,25 @@
-﻿body, nav {
-    background: #ffffff;
+﻿body, .navbar, .footer {
+    background: rgb(223, 242, 235) !important;
     color: #333333;
+    backdrop-filter: blur(60px);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .text-dark {
     color: #333333 !important; /* Changed from white to dark gray */
 }
 
-.card {
-    background: #f8f9fa; /* Changed from transparent to light gray */
-    border: 1px solid #dee2e6; /* Changed from white border to light gray */
-    color: #333333; /* Changed from white to dark text */
-}
-
 .form-control {
     background: #ffffff; /* Changed from transparent to white */
     color: #333333; /* Changed from white to dark text */
     border-bottom: 1px solid #ced4da; /* Changed from gray to light gray */
-}
-
-.btn {
-    background: linear-gradient(90deg, #007bff, #00bfff); /* Changed from orange to blue gradient */
+    width: 80%; /* Chiếm 80% của card */
+    min-width: 250px; /* Đảm bảo không bị thu nhỏ quá mức */
 }
 
 .navbar {
@@ -28,48 +27,40 @@
     padding-left: 60px;
 }
 
-.footer {
-    border-top: none !important;
-    text-align: center;
-    padding: 20px;
-}
-.text-dark{
-    color: black !important;
-}
 /* Login view */
 .center-container {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    height: 80vh; 
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
     max-width: 100%;
     box-sizing: border-box;
 }
 
 .card {
-    width: 400px;
-    height: 400px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); 
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.5); 
+    width: 500px;
+    height: 500px;
+    box-shadow: 0px 4px 10px #9A9797;
+    border: 1px solid rgba(255, 255, 255, 0.9);
     border-radius: 20px;
+    background-color: rgb(115, 141, 164);
     backdrop-filter: blur(30px);
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    color: #ffffff;
-    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 }
+
 
 /* Title: "Login" */
 .text-center.text-info {
-    font-size: 40px;
+    font-size: 55px;
     font-weight: bold;
-    background: linear-gradient(135deg, #fc6c4a, #fcbe8f); 
+    background: linear-gradient(135deg,rgb(108, 176, 168),rgb(210, 205, 187));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; 
-    margin: -25px;
+    -webkit-text-fill-color: transparent;
+    margin: -40px;
     margin-bottom: 40px;
 }
 
@@ -78,12 +69,13 @@
 .login-container .form-control,
 .center-container .form-control {
     background: transparent;
-    color: #fff;
+    color: rgb(148, 147, 144);
     border: none;
-    border-bottom: 0.5px solid #9A9797;
-    padding: 8px;
-    padding-left: 40px;
-    margin-bottom: 10px;
+    border-bottom: 0.5px solid rgb(148, 147, 144);
+    /*    padding: 10px;
+    padding-left: 20px;*/
+    padding: 10px 10px 10px 20px;
+    margin-bottom: 20px;
     font-size: 16px;
     transition: all 0.3s ease;
 }
@@ -92,8 +84,8 @@
 .center-container .card {
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(30px);
-    color: #ffffff;
+    backdrop-filter: blur(200px);
+    color: rgb(148, 147, 144);
 }
 
 /* Scope button styles */
@@ -101,20 +93,21 @@
 .center-container .btn {
     background: linear-gradient(90deg, #007bff, #00bfff);
 }
-    .form-control:hover,
-    .form-control:focus{
-        background: transparent; 
-        color: #ffffff;
-        border: 1px solid #9A9797;
-        border-radius: 12px;
-    }
+
+.form-control:hover,
+.form-control:focus {
+    background: transparent;
+    color: rgb(148, 147, 144);
+    border: 1px solid rgb(148, 147, 144);
+    border-radius: 12px;
+}
 
 /* Label */
 label {
     font-size: 16px;
-    color: #ddd; 
-    margin-bottom: 5px; 
-    display: block; 
+    color: rgb(148, 147, 144);
+    margin-bottom: 5px;
+    display: block;
     text-align: left;
 }
 
@@ -127,37 +120,43 @@ label {
 }
 
 .form-check-input {
-    width: 20px; 
+    width: 20px;
     height: 20px;
     background: transparent;
-    border: 1px solid #9A9797;
+    border: 1px solid rgb(148, 147, 144);
     margin-right: 10px;
 }
 
 .form-check-label {
     font-size: 14px;
-    color: #fff; 
+    color: rgb(148, 147, 144);
 }
 
-/* Nút Login */
+/* Button Login */
 .btn {
-    background: linear-gradient(90deg, #ff7e5f, #feb47b); 
-    border: none;
-    color: #fff; 
+    background: transparent !important;
+    border: 1px solid rgb(148, 147, 144);
+    color: rgb(148, 147, 144);
     font-weight: bold;
-    border-radius: 20px; 
-    padding: 8px 35px; 
-    font-size: 16px; 
+    border-radius: 20px;
+    padding: 10px 50px;
+    font-size: 18px;
     cursor: pointer;
     transition: 0.3s ease;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 15px;
+    bottom: 20px;
 }
 
     .btn:hover {
-        background: linear-gradient(135deg, #b5aeac, #837673); 
+        background: linear-gradient(135deg,rgb(108, 176, 168),rgb(210, 205, 187)) !important;
     }
+
+.footer {
+    margin-top: auto; /* Đẩy footer xuống dưới cùng */
+    text-align: center;
+    padding: 20px;
+}
 
 /* Login view */
