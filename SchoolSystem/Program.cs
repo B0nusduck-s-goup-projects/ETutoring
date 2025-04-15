@@ -4,9 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using SchoolSystem.Data;
 using SchoolSystem.Models;
 using SchoolSystem.Services.Hubs;
-using OfficeOpenXml;
 
-ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,29 +15,27 @@ var connectionString = builder.Configuration.GetConnectionString("default");
 builder.Services.AddSignalR();
 builder.Services.AddControllersWithViews();
 
-
-
 builder.Services.AddDbContext<AppDbContext>(
-	options => options.UseSqlServer(connectionString));
+    options => options.UseSqlServer(connectionString));
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(
-	options =>
-	{
-		options.Password.RequiredUniqueChars = 0;
-		options.Password.RequireUppercase = false;
-		options.Password.RequiredLength = 8;
-		options.Password.RequireNonAlphanumeric = false;
-		options.Password.RequireLowercase = false;
-	})
-	.AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+    options =>
+    {
+        options.Password.RequiredUniqueChars = 0;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 8;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireLowercase = false;
+    })
+    .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 
 //Add Email Service
 builder.Services.AddScoped(sp => new EmailSender.Services.EmailService(
-	smtpHost: "smtp.gmail.com",
-	smtpPort: 587,
-	smtpUser: "buicaonguyen115@gmail.com",
-	smtpPass: "tzju egvo icfu rrnc"
+    smtpHost: "smtp.gmail.com", 
+    smtpPort: 587,              
+    smtpUser: "buicaonguyen115@gmail.com", 
+    smtpPass: "tzju egvo icfu rrnc"
 ));
 
 
@@ -59,9 +56,9 @@ await EnsureAdminUserExistsAsync(app.Services);
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-	app.UseExceptionHandler("/Home/Error");
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-	app.UseHsts();
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -73,8 +70,8 @@ app.UseAuthorization();
 
 app.MapHub<ChatHub>("/chatHub");
 app.MapControllerRoute(
-	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
 
@@ -128,3 +125,4 @@ async Task EnsureAdminUserExistsAsync(IServiceProvider serviceProvider)
 		}
 	}
 }
+

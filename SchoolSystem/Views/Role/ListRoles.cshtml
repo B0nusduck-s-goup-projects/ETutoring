@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
 
+<!--Using _AdminLayout-->
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
 @if (TempData["Message"] != null)
 {
     <div class="alert alert-success">@TempData["Message"]</div>
