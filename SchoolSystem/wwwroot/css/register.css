@@ -1,0 +1,72 @@
+﻿.form-container {
+    width: 50vw; /* Điều chỉnh theo cửa sổ */
+    max-width: 600px; /* Đảm bảo không quá rộng */
+    min-width: 300px; /* Tránh quá nhỏ */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    left: 60%; /* Điều chỉnh vị trí form, có thể thay đổi */
+    transform: translateX(-50%); /* Giúp căn giữa theo chiều ngang */
+}
+
+.form-header {
+    text-align: center;
+    color: #17a2b8;
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    width: 48%; /* Fields aligned in two columns */
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form-group textarea {
+        resize: none;
+    }
+
+.form-footer {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    padding: 20px
+}
+
+    .form-footer input {
+        padding: 10px 20px;
+        border: none;
+        background-color: #17a2b8;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .form-footer input:hover {
+            background-color: #138496;
+        }
+
+.validation-error {
+    color: red;
+    font-size: 12px;
+}
+
