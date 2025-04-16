@@ -5,6 +5,10 @@
     font-family: Arial, sanserif;
 }
 
+.a {
+    display:none
+}
+
 /* Main Layout */
 .admin-layout {
     display: flex;
