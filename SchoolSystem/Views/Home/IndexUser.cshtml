@@ -1,3 +1,44 @@
-﻿
-<strong>Hello student</strong>
-<a asp-controller="Account" asp-action="ViewProfile" class="nav-link">View Profile</a>
+﻿@{
+	ViewData["Title"] = "Home Page";
+	Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<div class="bg-image">
+	<div class="overlay"></div>
+	<div class="header-text">
+		<h1>WELCOME TO OUR UNIVERSITY</h1>
+		<p>We Believe There Is Nothing More Important Than Education</p>
+		<button>READ MORE</button>
+	</div>
+</div>
+
+<section class="cards">
+	<div class="container">
+		<h1 class="section-title">Enhance Your Learning with Our Online Tutoring Services</h1>
+		<div class="card-items">
+			<div class="item1">
+				<a asp-controller="Home" asp-action="Dashboard">
+					<img src="~/uploads/home/item1.jpg" alt="Dashboard" class="" />
+					<h2>Dashboard</h2>
+					<p>Submit a draft of your paper to a tutor, ask for specific feedback, and receive a detailed response within 48 hours.</p>
+				</a>
+			</div>
+			<div class="item2">
+				<a asp-controller="Messages" asp-action="Chat">
+					<img src="~/uploads/home/item2.jpg" alt="Live Tutoring" class="" />
+					<h2>Chat Tutoring</h2>
+					<p>Chat or meet with a tutor in one-on-one tutoring sessions via a fully interactive online.</p>
+				</a>
+			</div>
+			<div class="item3">
+				<a href="#">
+					<img src="~/uploads/home/item3.jpg" alt="Dashboard" class="" />
+					<h2>Dashboard</h2>
+					<p>Leave a specific question for our eTutors and get a response within 48 hours.</p>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
