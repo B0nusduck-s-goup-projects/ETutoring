@@ -14,8 +14,11 @@ namespace SchoolSystem.ViewModels
         // Số lượng tệp đính kèm đã tải lên (không còn sử dụng vì đả xoá attach file khỏi messages)
         //public int UploadedDocuments { get; set; }
 
-        // Danh sách bình luận gần nhất từ Tutor
-        public List<string> RecentComments { get; set; } = new List<string>();
+        /// Comments from blogs
+        public List<string> BlogComments { get; set; } = new List<string>();
+
+        // Comments from documents
+        //public List<string> DocumentComments { get; set; } = new List<string>();
 
         // Blog của sinh viên
         public List<Blog> StudentBlogs { get; set; } = new List<Blog>();
@@ -27,6 +30,9 @@ namespace SchoolSystem.ViewModels
 
         //Danh sách nhóm mà sinh viên thuộc về
         public List<Group> Groups { get; set; } = new List<Group> { };
+
+        // List of documents
+        public List<Document> Documents { get; set; } = new List<Document>();
 
         public List<UserWithRolesVM> GroupUsersWithRoles { get; set; } = new List<UserWithRolesVM> { };
 

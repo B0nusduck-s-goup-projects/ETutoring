@@ -13,7 +13,7 @@
     @foreach (var blog in Model.TutorBlogs)
     {
         <li>
-            <h5>You have received a new blog</h5>
+            <h5>@blog.Title</h5>
             <p><small>Posted on @blog.TimeStamp.ToString("g") by @blog.User.Name</small></p>
         </li>
     }
@@ -24,15 +24,15 @@
     @foreach (var blog in Model.StudentBlogs)
     {
         <li>
-            <h5>You have received a new blog</h5>
+            <h5>@blog.Title</h5>
             <p><small>Posted on @blog.TimeStamp</small></p>
         </li>
     }
 </ul>
 
-<h4>Recent Comments</h4>
+<h4>Recent Blog Comments</h4>
 <ul>
-    @foreach (var comment in Model.RecentComments)
+    @foreach (var comment in Model.BlogComments)
     {
         <li>@comment</li>
     }
@@ -51,10 +51,18 @@
     @foreach (var group in Model.Groups)
     {
         <li>
-            <h5>You have been assigned to a new group</h5>
-            <p><small>Group ID: @group.Id</small></p>
+            <h5>Group ID: @group.Id</h5>
         </li>
     }
 </ul>
 
-
+<h4>Documents</h4>
+<ul>
+    @foreach (var document in Model.Documents)
+    {
+        <li>
+            <h5>@document.Title</h5>
+            <p><small>Uploaded on @document.UploadDate.ToString("g")</small></p>
+        </li>
+    }
+</ul>

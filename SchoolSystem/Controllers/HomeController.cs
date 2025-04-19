@@ -100,7 +100,7 @@ public class HomeController : Controller
             .Select(gu => gu.User.Name)
             .FirstOrDefault() ?? string.Empty;
 
-        var recentComments = await _context.BlogComments
+        var blogComments = await _context.BlogComments
             .Where(c => c.UserId == userId)
             .OrderByDescending(c => c.TimeStamp)
             .Select(c => c.Content)
@@ -128,12 +128,14 @@ public class HomeController : Controller
             .Take(5)
             .ToListAsync();
 
-        var recentMessageIds = recentMessages.Select(m => m.Id).ToList();
-
+        var documents = await _context.Documents
+            .Where(d => d.UserId == userId)
+            .OrderByDescending(d => d.UploadDate)
+            .ToListAsync();
 
         // Log the fetched data
         Debug.WriteLine($"Student Name: {user.Name}");
-        Debug.WriteLine($"Recent Comments: {string.Join(", ", recentComments)}");
+        Debug.WriteLine($"Blog Comments: {string.Join(", ", blogComments)}");
         Debug.WriteLine($"Student Blogs: {string.Join(", ", studentBlogs.Select(b => b.Title))}");
         Debug.WriteLine($"Tutor Blogs: {string.Join(", ", tutorBlogs.Select(b => b.Title))}");
         Debug.WriteLine($"Recent Messages: {string.Join(", ", recentMessages.Select(m => m.TextContent))}");
@@ -143,15 +145,17 @@ public class HomeController : Controller
         return new StudentDashboardVM
         {
             StudentName = user.Name,
-            RecentComments = recentComments,
+            PersonalTutor = personalTutor,
+            BlogComments = blogComments,
             StudentBlogs = studentBlogs,
             TutorBlogs = tutorBlogs,
             RecentMessages = recentMessages,
             Groups = studentGroups,
             GroupUsersWithRoles = groupUsersWithRoles,
-            PersonalTutor = personalTutor,
+            Documents = documents
         };
     }
+
     private async Task<TutorDashboardVM> GetTutorDashboard(string userId, string searchName, int? groupId)
     {
         var user = await _context.Users.FindAsync(userId);
