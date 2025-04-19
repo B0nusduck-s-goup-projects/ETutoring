@@ -8,7 +8,8 @@ using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
-
+using OfficeOpenXml;
+using System.IO;
 namespace SchoolSystem.Controllers
 {
 	
@@ -104,7 +105,7 @@ namespace SchoolSystem.Controllers
 		}
 
 
-
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public async Task<IActionResult> Register(RegisterVM model)
 		{
@@ -185,7 +186,7 @@ namespace SchoolSystem.Controllers
 			return View(model);
 		}
 
-
+		[Authorize(Roles = "Admin")]
 		public async Task<IActionResult> ListUsers(string? search, string? gender, string? role)
 		{
 			var usersQuery = userManager.Users.AsQueryable(); // Start with the base query
@@ -224,6 +225,7 @@ namespace SchoolSystem.Controllers
 
 			return View(userRoles); // Pass the list of users with roles to the view
 		}
+		[Authorize(Roles = "Admin")]
 		//Update and delete head
 		[HttpGet]
 		public async Task<IActionResult> UpdateUser(string id)
@@ -332,6 +334,8 @@ namespace SchoolSystem.Controllers
 			return RedirectToAction("ListUsers");
 		}
 
+
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public async Task<IActionResult> DeleteUser(string id)
 		{
@@ -500,6 +504,12 @@ namespace SchoolSystem.Controllers
 		//		TempData["SuccessMessage"] = "Import users successfully!";
 		//		return RedirectToAction("ListUsers");
 		//	}
+		[Authorize(Roles = "Admin")]
+		public IActionResult Excel()
+		{
+			return View();
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> ImportUsersFromExcel(IFormFile file)
 		{
@@ -523,7 +533,7 @@ namespace SchoolSystem.Controllers
 						// Kiểm tra xem cột Image có trống không
 						if (string.IsNullOrWhiteSpace(imagePath))
 						{
-							imagePath = null; // Gán giá trị null nếu không có hình ảnh
+							imagePath = null; 
 						}
 
 						//// Kiểm tra nếu đường dẫn ảnh không trống
@@ -557,14 +567,14 @@ namespace SchoolSystem.Controllers
 						if (existingUserByEmail != null)
 						{
 							// Nếu email đã tồn tại
-							TempData["ErrorMessage"] = $"Email {email} đã được sử dụng. Vui lòng kiểm tra lại!";
+							TempData["ErrorMessage"] = $"Email {email} already take!";
 							return RedirectToAction("ListUsers");
 						}
 
 						if (existingUserByCode != null)
 						{
 							// Nếu code đã tồn tại
-							TempData["ErrorMessage"] = $"Code {code} đã được sử dụng. Vui lòng kiểm tra lại!";
+							TempData["ErrorMessage"] = $"Code {code} already take!";
 							return RedirectToAction("ListUsers");
 						}
 
@@ -584,7 +594,7 @@ namespace SchoolSystem.Controllers
 								Image = imagePath // Lưu đường dẫn hình ảnh vào trường Image của người dùng
 							};
 
-							var result = await userManager.CreateAsync(user, "DefaultPassword123"); // Cấp mật khẩu mặc định
+							var result = await userManager.CreateAsync(user, "default123"); // Cấp mật khẩu mặc định
 							if (result.Succeeded)
 							{
 								// Gán Role cho người dùng nếu tồn tại
@@ -599,21 +609,28 @@ namespace SchoolSystem.Controllers
 								foreach (var error in result.Errors)
 								{
 									// Xử lý lỗi (ví dụ: lưu vào log, thông báo cho người dùng, v.v.)
+									ModelState.AddModelError(string.Empty, error.Description);
 								}
 							}
 						}
+						
 					}
 				}
+				return RedirectToAction("ListUsers");
 			}
 
-			TempData["SuccessMessage"] = "Import users successfully!";
-			return RedirectToAction("ListUsers");
+			TempData["FailMessage"] = "No file!";
+			return RedirectToAction("Excel");
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> ExportUsersToExcel()
 		{
 			var users = await userManager.Users.ToListAsync(); // Lấy danh sách người dùng từ database
+			if(users == null)
+			{
+				return RedirectToAction("Excel");
+			}
 			var stream = new MemoryStream();
 
 			using (var package = new ExcelPackage(stream))
@@ -656,15 +673,17 @@ namespace SchoolSystem.Controllers
 		[HttpPost]
 		public async Task<IActionResult> UploadImage(IFormFile image)
 		{
-			// Check if the file is an image
-			var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
-			var fileExtension = Path.GetExtension(image.FileName).ToLower();
-			if (!allowedExtensions.Contains(fileExtension))
+
+			if (image != null && image.Length > 0 )
 			{
-				return RedirectToAction("ListUsers");
-			}
-			if (image != null && image.Length > 0)
-			{
+				// Check if the file is an image
+				var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+				var fileExtension = Path.GetExtension(image.FileName).ToLower();
+				if (!allowedExtensions.Contains(fileExtension))
+				{
+					return RedirectToAction("ListUsers");
+				}
+
 				var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
 				Directory.CreateDirectory(uploadsFolder);
 
@@ -679,7 +698,7 @@ namespace SchoolSystem.Controllers
 				return Json(new { filePath = $"/uploads/{uniqueFileName}" });
 			}
 
-			return BadRequest("No image uploaded.");
+			return BadRequest("No image uploaded because it not an image or something else");
 		}
 
 	}
