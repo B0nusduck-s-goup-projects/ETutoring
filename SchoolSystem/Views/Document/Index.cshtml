@@ -1,10 +1,15 @@
 @model IEnumerable<SchoolSystem.ViewModels.DocumentIndexVM>
+
 @{
     ViewData["Title"] = "Documents";
+    Layout = "~/Views/Shared/_ChatLayout.cshtml";
 }
 
+<div class="layout">
+    <h2 class="heading-text">Documents</h2>
+</div>
+
 <div class="document-container">
-    <h2 class="document-title">My Documents</h2>
     <p>
         <a asp-action="Create" class="document-btn document-btn-primary">Upload New Document</a>
     </p>
@@ -30,3 +35,15 @@
         }
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuItems = document.querySelectorAll(".menu-item");
+
+        menuItems.forEach(item => {
+            if (item.getAttribute("data-name") === "documents") {
+                item.classList.add("active");
+            }
+        });
+    });
+</script>

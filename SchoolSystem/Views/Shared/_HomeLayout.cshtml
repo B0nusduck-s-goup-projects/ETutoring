@@ -22,31 +22,31 @@
                         <div class="top-bar-links">
                             <a href="#">News</a>
                             <a href="#">Gallery</a>
-                            @if (!User.Identity.IsAuthenticated)
-                            {
-                            <a asp-controller="Account" asp-action="Login"><i class="fas fa-sign-in-alt"></i> Sign In</a>
-                            }
-                            <partial name="_LoginPartial" />
+                             @if (!User.Identity.IsAuthenticated) 
+                             { 
+                             } 
+                             <partial name="_LoginPartial" /> 
 
+                            <button type="button" class="btn-menu"><i class="fa-solid fa-bars"></i></button>
                         </div>
+
                     </div>
                 </div>
             </div>
             <div class="top">
                 <div class="container">
                     <div class="header-top row">
-                        <a asp-controller="Student" asp-action="Index" class="logo">
+                        <a asp-controller="Home" asp-action="IndexUser" class="logo">
                             <img src="https://greenwich.edu.vn/wp-content/uploads/2024/06/2022-Greenwich-Eng-400x200.webp" alt="Greenwich University Logo">
                         </a>
-                        <ul>
+                        <ul class="menu-list">
                             @* <i class="fa-solid fa-xmark"></i> *@
-                            <li><a asp-controller="Student" asp-action="Index">HOME</a></li>
-                            <li><a href="">ABOUT US</a></li>
-                            <li><a asp-controller="Student" asp-action="Event">EVENT</a></li>
-                            <li><a asp-controller="Blog" asp-action="Index">BLOG</a></li>
-                            <li><a href="">CONTACT US</a></li>
+                            <li class="list-item"><a asp-controller="Home" asp-action="IndexUser">HOME</a></li>
+                            <li class="list-item"><a href="">ABOUT US</a></li>
+                            <li class="list-item"><a asp-controller="Student" asp-action="Event">EVENT</a></li>
+                            <li class="list-item"><a asp-controller="Blog" asp-action="Index">BLOG</a></li>
+                            <li class="list-item"><a href="">CONTACT US</a></li>
                         </ul>
-                        @* <i class="fa-solid fa-bars"></i> *@
                     </div>
                 </div>
             </div>
@@ -134,5 +134,35 @@
             <div class="copyright">© 2025 Greenwich.edu.vn. All Rights Reserved</div>
         </footer>
     }
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const STATUS = {
+                OPEN: 'is-open'
+            }
+            //Select Elements
+            const menuBtn = document.querySelector('.btn-menu')
+            const headerNav = document.querySelector('.header-top')
+            if(!menuBtn) return
+
+
+            //Event Listener
+            menuBtn.addEventListener('click', handleOpenMenu)
+
+            function handleOpenMenu() {
+                headerNav.classList.add(STATUS.OPEN)
+            }
+
+            function handleCloseMenu() {
+                headerNav.classList.remove(STATUS.OPEN)
+            }
+
+            document.addEventListener('click', function(event) {
+                if(!headerNav.contains(event.target) && !menuBtn.contains(event.target)) {
+                    handleCloseMenu()
+                }
+            })
+        })
+    </script>
 </body>
 </html>

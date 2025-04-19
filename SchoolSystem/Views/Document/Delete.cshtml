@@ -2,11 +2,12 @@
 
 @{
     ViewData["Title"] = "Delete Document";
+    Layout = "~/Views/Shared/_ChatLayout.cshtml";
 }
 
 <div class="document-container">
     <h2 class="document-title">Delete Document</h2>
-    <div class="document-card">
+    <div class="document-card mt-15">
         <div class="document-card-body">
             <h4 class="document-card-title">Are you sure you want to delete this document?</h4>
             <p class="document-description">@Model.Description</p>

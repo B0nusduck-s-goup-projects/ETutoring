@@ -3,12 +3,13 @@
 
 @{
     ViewData["Title"] = "Edit Document";
-    Layout = "_Layout"; // Ensure using the correct layout
+    Layout = "~/Views/Shared/_ChatLayout.cshtml";
+    // Layout = "_Layout"; Ensure using the correct layout
 }
 
 <div class="document-container">
     <h2 class="document-title">Edit Document</h2>
-    <div class="document-form">
+    <div class="document-form mt-15">
         <form asp-action="Edit" enctype="multipart/form-data" class="document-form-container">
             <div asp-validation-summary="ModelOnly" class="document-validation-error"></div>
             <input type="hidden" asp-for="Id" />
@@ -44,6 +45,6 @@
     </div>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+@* @section Scripts { *@
+@*     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} *@
+@* } *@

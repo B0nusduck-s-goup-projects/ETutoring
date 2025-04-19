@@ -50,6 +50,10 @@ body {
     margin-top: 24px;
 }
 
+.mt-15 {
+    margin-top: 60px;
+}
+
 nav {
     position: fixed;
     width: 347px;
@@ -204,8 +208,9 @@ nav > a {
 }
 
 .student-info,
-.blog-info,
-.message-info{
+.comment-info,
+.message-info,
+.blog-info{
     margin-left: 35px;
 }
 
@@ -218,19 +223,20 @@ nav > a {
 
 .document-bio {
     width: 376px;
-    height: 119px;
+    height: 160px;
     border-radius: 15px;
     background: rgba(215, 228, 234, 0.70);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.document-info {
+.document-info,
+.group-info{
     margin-left: 25px;
 }
 
-.blog-bio {
+.comment-bio {
     width: 450px;
-    height: 386px;
+    height: 319px;
     border-radius: 15px;
     background: rgba(215, 228, 234, 0.70);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -242,6 +248,27 @@ nav > a {
     border-radius: 15px;
     background: rgba(215, 228, 234, 0.70);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.blog-bio {
+    width: 376px;
+    height: 319px;
+    border-radius: 15px;
+    background: rgba(215, 228, 234, 0.70);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.group-bio {
+    width: 376px;
+    height: 160px;
+    border-radius: 15px;
+    background: rgba(215, 228, 234, 0.70);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.title-position {
+    display:flex;
+    justify-content: flex-start
 }
 
 /*----------------------------chat--------------------------------*/

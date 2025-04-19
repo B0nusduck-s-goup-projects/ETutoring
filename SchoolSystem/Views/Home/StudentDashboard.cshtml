@@ -1,12 +1,31 @@
-﻿@model SchoolSystem.ViewModels.StudentDashboardVM
+﻿@{
+	Layout = "~/Views/Shared/_ChatLayout.cshtml";
+}
 
-<h2>Student Dashboard</h2>
+<div class="layout">
+	<h2 class="heading-text">Dashboard</h2>
+</div>
 
-<h3>Welcome, @Model.StudentName</h3>
-<p>Student Name: @Model.StudentName</p>
-<p>Personal Tutor: @Model.PersonalTutor</p>
+<div class="dashboard-container">
+	<div class="student-bio">
+		<div class="student-info">
+			<div class="student-name">
+				<p class="text-dashboard">Welcome, @Model.StudentName</p>
+			</div>
+			<div class="tutor">
+				<p class="text-dashboard">Personal Tutor: @Model.PersonalTutor</p>
+			</div>
+		</div>
+	</div>
 
-<h4>Personal Tutor: @Model.PersonalTutor</h4>
+	<div class="document-bio">
+		<div class="document-info">
+			<div class="document">
+				<p class="text-dashboard text-bold">Recent upload document</p>
+				<p>1</p>
+			</div>
+		</div>
+	</div>
 
 <h4>Tutor Blogs</h4>
 <ul>
@@ -37,14 +56,47 @@
         <li>@comment</li>
     }
 </ul>
+	<div class="comment-bio">
+		<div class="comment-info">
+			<div class="blog-comment mt-6">
+				<p class="text-dashboard text-bold">Recent Comments</p>
+				@foreach (var comment in Model.RecentComments)
+				{
+					<p>@comment</p>
+				}
+			</div>
+		</div>
+	</div>
 
-<h4>Recent Messages</h4>
-<ul>
-    @foreach (var message in Model.RecentMessages)
-    {
-        <li>@message.TextContent</li>
-    }
-</ul>
+	<div class="message-bio">
+		<div class="message-info">
+			<div class="message">
+				<p class="text-dashboard text-bold">Recent Messages</p>
+				@foreach (var message in Model.RecentMessages)
+				{
+					<p>@message.TextContent</p>
+				}
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="blog-bio">
+		<div class="blog-info">
+			<div class="blog-name">
+				<p class="text-dashboard text-bold">Student Blogs</p>
+				@foreach (var blog in Model.StudentBlogs)
+				{
+					<li>
+						<h5>You have received a new blog</h5>
+						<p><small>Posted on @blog.TimeStamp</small></p>
+					</li>
+				}
+			</div>
+		</div>
+	</div>
+
 
 <h4>Groups</h4>
 <ul>
@@ -66,3 +118,49 @@
         </li>
     }
 </ul>
+
+	<div class="blog-bio">
+		<div class="blog-info">
+			<div class="blog-name">
+				<p class="text-dashboard text-bold">Tutor Blogs</p>
+				@foreach (var blog in Model.TutorBlogs)
+				{
+					<li>
+						<h5>You have received a new blog</h5>
+						<p><small>Posted on @blog.TimeStamp.ToString("g") by @blog.User.Name</small></p>
+					</li>
+				}
+			</div>
+		</div>
+	</div>
+
+	<div class="group-bio">
+		<div class="group-info">
+			<div class="group-name">
+				<p class="text-dashboard text-bold">Group</p>
+				@foreach (var group in Model.Groups)
+				{
+					<li>
+						<h5>You have been assigned to a new group</h5>
+						<p><small>Group ID: @group.Id</small></p>
+					</li>
+				}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			const menuItems = document.querySelectorAll(".menu-item");
+
+			menuItems.forEach(item => {
+				if (item.getAttribute("data-name") === "dashboard") {
+					item.classList.add("active");
+				}
+			});
+		});
+	</script>
+
+

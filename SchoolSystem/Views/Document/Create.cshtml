@@ -2,11 +2,12 @@
 
 @{
     ViewData["Title"] = "Upload Document";
+    Layout = "~/Views/Shared/_ChatLayout.cshtml";
 }
 
 <div class="document-container">
-    <h2 class="document-title">Upload New Document</h2>
-    <div class="document-form">
+    <h2 class="document-title title-position">Upload New Document</h2>
+    <div class="document-form mt-15">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="document-validation-error"></div>
             
@@ -37,6 +38,6 @@
     </div>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+@* @section Scripts { *@
+@*     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} *@
+@* } *@
