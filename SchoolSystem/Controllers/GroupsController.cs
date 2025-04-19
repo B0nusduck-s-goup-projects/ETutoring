@@ -97,13 +97,23 @@ namespace SchoolSystem.Controllers
             IList<AppUser> users = await _userManager.GetUsersInRoleAsync("Student");
             //include group into the student list for filtering
             List<AppUser> students = _context.Users.Where(s => users.Contains(s)).Include(s => s.GroupUsers).ThenInclude(gu => gu.Group).ToList();
-            //remove all student who already has a valid group and prioritise student without group
-            //then student with long expired group, due to the lack of atribute indicating the student
-            //has quit or graduated, this list will become longer overtime
-            students = students.Where(s => s.Group.IsNullOrEmpty() || s.Group!.All(g => g.IsValid == false))
-                                .OrderBy(s => s.Group.IsNullOrEmpty())
-                                .ThenBy(s => (DateTime)(s.Group!.Select(g => g.ExpiredTime).OrderBy(dt => (DateTime)dt!).FirstOrDefault())!)
-                                .ToList();
+
+            //get all student without a group or without a valid group
+            students = students.Where(s => s.Group.IsNullOrEmpty() || s.Group!.All(g => g.IsValid == false)).ToList();
+
+            //trigger if any student used to have a group
+            if (students.Any(s => !s.Group.IsNullOrEmpty()))
+            {
+                //order student based on the time since their last group, prioritise new student.
+                //split the data into two sub list one with group and one without
+                List <AppUser> subList1 = students.Where(s => s.Group.IsNullOrEmpty()).ToList();
+                List <AppUser> subList2 = students.Where(s => !s.Group.IsNullOrEmpty()).ToList();
+                //odering list with group
+                subList2 = subList2.OrderBy(s => (DateTime)(s.Group?.Select(g => g.ExpiredTime).OrderBy(dt => (DateTime)dt!).FirstOrDefault())!).ToList();
+                //merge 2 list with list without group being first
+                subList1.AddRange(subList2);
+                students = subList1;
+            }
                                         
             //get a list of tutor
             List<AppUser> tutors = (await _userManager.GetUsersInRoleAsync("Tutor")).ToList();
