@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using SchoolSystem.Data;
 using SchoolSystem.Models;
 using SchoolSystem.Services.Hubs;
+using OfficeOpenXml;
 
+ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -70,8 +72,9 @@ app.UseAuthorization();
 
 app.MapHub<ChatHub>("/chatHub");
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+	name: "default",
+	pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();
 

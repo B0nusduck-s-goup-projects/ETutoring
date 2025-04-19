@@ -1,0 +1,22 @@
+﻿<partial name="_ValidationScriptsPartial" />
+<div asp-validation-summary="All" class="text-danger"></div>
+@if (TempData["FailMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["FailMessage"]
+    </div>
+}
+@* UploadImage *@
+<form enctype="multipart/form-data" method="post" action="/Account/UploadImage">
+    <input type="file" name="Image" />
+    <button type="submit">Upload Image</button>
+</form>
+
+@* Import and export *@
+<form method="post" enctype="multipart/form-data" asp-action="ImportUsersFromExcel">
+    <label for="file">Upload Excel file:</label>
+    <input type="file" name="file" id="file" />
+    <button type="submit">Import Users</button>
+</form>
+
+<a href="@Url.Action("ExportUsersToExcel", "Account")">Export Users to Excel</a>

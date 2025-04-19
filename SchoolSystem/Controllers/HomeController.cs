@@ -255,8 +255,8 @@ public class HomeController : Controller
 
         return Ok();
     }
-
-    public IActionResult Index()
+	[Authorize(Roles = "Admin,Staff")]
+	public IActionResult Index()
     {
         return View();
     }
