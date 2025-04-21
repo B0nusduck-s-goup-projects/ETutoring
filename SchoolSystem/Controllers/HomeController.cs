@@ -100,19 +100,20 @@ public class HomeController : Controller
             .Select(gu => gu.User.Name)
             .FirstOrDefault() ?? string.Empty;
 
-        var blogComments = await _context.BlogComments
-            .Where(c => c.UserId == userId)
-            .OrderByDescending(c => c.TimeStamp)
-            .Select(c => c.Content)
-            .Take(5)
-            .ToListAsync();
+        var tutorRoleId = (await _context.Roles.FirstOrDefaultAsync(r => r.Name == "Tutor"))?.Id;
 
         var studentBlogs = await _context.Blogs
             .Where(b => b.UserId == userId)
             .OrderByDescending(b => b.TimeStamp)
             .ToListAsync();
 
-        var tutorRoleId = (await _context.Roles.FirstOrDefaultAsync(r => r.Name == "Tutor"))?.Id;
+        var blogComments = await _context.BlogComments
+            .Where(c => studentBlogs.Select(b => b.Id).Contains(c.BlogId)) // Lọc theo blog của sinh viên
+            .Include(c => c.Blog)// Bao gồm thông tin Blog nếu cần
+            .Include(c => c.User)
+            .Include(c => c.ParentComment) // Bao gồm thông tin ParentComment nếu cần
+            .Take(5) // Giới hạn số lượng comment
+            .ToListAsync();
 
         var tutorBlogs = await _context.Blogs
             .Join(_context.UserRoles, b => b.UserId, ur => ur.UserId, (b, ur) => new { b, ur })
@@ -135,7 +136,7 @@ public class HomeController : Controller
 
         // Log the fetched data
         Debug.WriteLine($"Student Name: {user.Name}");
-        Debug.WriteLine($"Blog Comments: {string.Join(", ", blogComments)}");
+        Debug.WriteLine($"Blog Comments: {string.Join(", ", blogComments.Select(c => c.Content))}");
         Debug.WriteLine($"Student Blogs: {string.Join(", ", studentBlogs.Select(b => b.Title))}");
         Debug.WriteLine($"Tutor Blogs: {string.Join(", ", tutorBlogs.Select(b => b.Title))}");
         Debug.WriteLine($"Recent Messages: {string.Join(", ", recentMessages.Select(m => m.TextContent))}");
@@ -161,14 +162,16 @@ public class HomeController : Controller
         var user = await _context.Users.FindAsync(userId);
         if (user == null) return null; // Check if user does not exist
 
+        // Fetch assigned groups
         var assignedGroups = await _context.Groups
-            .Include(g => g.GroupUsers) // Include GroupUsers
-                .ThenInclude(gu => gu.User) // Include AppUser
+            .Include(g => g.GroupUsers)
+                .ThenInclude(gu => gu.User)
             .Where(g => g.GroupUsers.Any(gu => gu.UserId == userId))
             .ToListAsync();
 
         var assignedGroupIds = assignedGroups.Select(g => g.Id).ToList();
 
+        // Fetch group users with roles
         var groupUsersWithRoles = new List<UserWithRolesVM>();
         foreach (var group in assignedGroups)
         {
@@ -183,34 +186,18 @@ public class HomeController : Controller
             }
         }
 
-        groupUsersWithRoles = groupUsersWithRoles
-            .OrderByDescending(gu => gu.Roles.Contains("Tutor"))
-            .ThenBy(gu => gu.User.Name)
-            .ToList();
-
-        var recentMessages = await _context.Messages
-            .Where(m => assignedGroupIds.Contains(m.GroupId))
-            .OrderByDescending(m => m.TimeStamp)
-            .Take(5)
-            .ToListAsync();
-
-        var recentComments = await _context.BlogComments
-            .Where(c => _context.Blogs
-                .Where(b => assignedGroupIds.Contains(b.User.Group.FirstOrDefault().Id))
-                .Select(b => b.Id)
-                .Contains(c.BlogId))
-            .OrderByDescending(c => c.TimeStamp)
-            .Select(c => c.Content)
-            .Take(5)
-            .ToListAsync();
-
+        // Filter students based on search criteria and role
         var filteredStudentsQuery = _context.Users.AsQueryable();
+
+        // Ensure only users with the "Student" role are included
+        var studentRoleId = (await _context.Roles.FirstOrDefaultAsync(r => r.Name == "Student"))?.Id;
+        filteredStudentsQuery = filteredStudentsQuery
+            .Where(u => _context.UserRoles.Any(ur => ur.UserId == u.Id && ur.RoleId == studentRoleId));
 
         if (!string.IsNullOrEmpty(searchName))
         {
             filteredStudentsQuery = filteredStudentsQuery.Where(u => u.Name.Contains(searchName));
         }
-
         if (groupId.HasValue)
         {
             filteredStudentsQuery = filteredStudentsQuery.Where(u => u.GroupUsers.Any(gu => gu.GroupId == groupId.Value));
@@ -218,23 +205,63 @@ public class HomeController : Controller
 
         var filteredStudents = await filteredStudentsQuery.ToListAsync();
 
+        // Fetch recent messages
+        var recentMessages = await _context.Messages
+            .Where(m => assignedGroupIds.Contains(m.GroupId))
+            .OrderByDescending(m => m.TimeStamp)
+            .Take(5)
+            .ToListAsync();
+
+
+        //// Fetch student blogs (blogs uploaded by students in the tutor's assigned groups)
+        //var studentRoleId = (await _context.Roles.FirstOrDefaultAsync(r => r.Name == "Student"))?.Id;
+
+        var studentBlogs = await _context.Blogs
+            .Join(_context.UserRoles, b => b.UserId, ur => ur.UserId, (b, ur) => new { b, ur })
+            .Where(bur => bur.ur.RoleId == studentRoleId &&
+                          _context.GroupUsers.Any(gu => gu.UserId == bur.b.UserId && assignedGroupIds.Contains(gu.GroupId)))
+            .Select(bur => bur.b)
+            .Include(b => b.User) // Include the User to access the User.Name in the view
+            .OrderByDescending(b => b.TimeStamp)
+            .ToListAsync();
+
+        // Fetch tutor blogs (blogs uploaded by the tutor)
+        var tutorBlogs = await _context.Blogs
+            .Where(b => b.UserId == userId) // Filter by the tutor's user ID
+            .OrderByDescending(b => b.TimeStamp)
+            .ToListAsync();
+
+
+        // Fetch documents
+        //var documents = await _context.Documents
+        //    .Where(d => d.User.Group.Any(g => assignedGroupIds.Contains(g.Id)))
+        //    .OrderByDescending(d => d.UploadDate)
+        //    .ToListAsync();
+        var documents = await _context.Documents
+            .Where(d => d.UserId == userId)
+            .OrderByDescending(d => d.UploadDate)
+            .ToListAsync();
+
+
         // Log the fetched data
         Debug.WriteLine($"Tutor Name: {user.Name}");
-        Debug.WriteLine($"Uploaded Documents: {recentMessages.Count()}");
-        Debug.WriteLine($"Recent Comments: {string.Join(", ", recentComments)}");
+        Debug.WriteLine($"Uploaded Documents: {documents.Count}");
         Debug.WriteLine($"Recent Messages: {string.Join(", ", recentMessages.Select(m => m.TextContent))}");
         Debug.WriteLine($"Assigned Groups: {string.Join(", ", assignedGroups.Select(g => g.Id))}");
+        Debug.WriteLine($"Tutor Blogs: {string.Join(", ", tutorBlogs.Select(b => b.Title))}");
+        Debug.WriteLine($"Student Blogs: {string.Join(", ", studentBlogs.Select(b => b.Title))}");
 
         return new TutorDashboardVM
         {
             TutorName = user.Name,
-            UploadedDocuments = recentMessages.Count(),
-            RecentComments = recentComments,
             RecentMessages = recentMessages,
             AssignedGroups = assignedGroups,
             GroupUsersWithRoles = groupUsersWithRoles,
             SearchName = searchName,
-            FilteredStudents = filteredStudents
+            FilteredStudents = filteredStudents,
+            TutorBlogs = tutorBlogs,
+            StudentBlogs = studentBlogs,
+            Documents = documents
         };
     }
 

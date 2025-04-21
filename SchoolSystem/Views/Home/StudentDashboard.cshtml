@@ -19,53 +19,29 @@
 	</div>
 
 	<div class="document-bio">
-		<div class="document-info">
-			<div class="document">
-				<p class="text-dashboard text-bold">Recent upload document</p>
-				<p>1</p>
-			</div>
-		</div>
-	</div>
-
-<h4>Tutor Blogs</h4>
-<ul>
-    @foreach (var blog in Model.TutorBlogs)
-    {
-        <li>
-            <h5>@blog.Title</h5>
-            <p><small>Posted on @blog.TimeStamp.ToString("g") by @blog.User.Name</small></p>
-        </li>
-    }
-</ul>
-
-<h4>Student Blogs</h4>
-<ul>
-    @foreach (var blog in Model.StudentBlogs)
-    {
-        <li>
-            <h5>@blog.Title</h5>
-            <p><small>Posted on @blog.TimeStamp</small></p>
-        </li>
-    }
-</ul>
-
-<h4>Recent Blog Comments</h4>
-<ul>
-    @foreach (var comment in Model.BlogComments)
-    {
-        <li>@comment</li>
-    }
-</ul>
-	<div class="comment-bio">
-		<div class="comment-info">
-			<div class="blog-comment mt-6">
-				<p class="text-dashboard text-bold">Recent Comments</p>
-				@foreach (var comment in Model.RecentComments)
+		<h4>Recent Uploaded Documents</h4>
+		@{
+			// Cast Model.Documents to a strongly-typed collection to avoid dynamic issues
+			var documents = Model.Documents as IEnumerable<Document>;
+		}
+		@if (documents?.Any() == true)
+		{
+			<ul>
+				@foreach (var document in documents.OrderByDescending(d => d.UploadDate))
 				{
-					<p>@comment</p>
+					<li>
+						<h5>You have uploaded a new document</h5>
+						@* <h5>@(document.Title ?? "Untitled")</h5> *@
+						<p><small>Uploaded on: @(document.UploadDate.ToString("g") ?? "Unknown Date") by @(document.User?.Name ?? "Unknown")</small></p>
+						@* <p><small>Uploaded by: @(document.User?.Name ?? "Unknown")</small></p> *@
+					</li>
 				}
-			</div>
-		</div>
+			</ul>
+		}
+		else
+		{
+			<p>No documents available.</p>
+		}
 	</div>
 
 	<div class="message-bio">
@@ -89,35 +65,15 @@
 				@foreach (var blog in Model.StudentBlogs)
 				{
 					<li>
-						<h5>You have received a new blog</h5>
-						<p><small>Posted on @blog.TimeStamp</small></p>
+						<h5>You have uploaded a new blog</h5>
+						@* <p><small>Posted on @blog.TimeStamp </small></p> *@
+						<p><small>Posted on @blog.TimeStamp.ToString("g") by @blog.User.Name</small></p>
+
 					</li>
 				}
 			</div>
 		</div>
 	</div>
-
-
-<h4>Groups</h4>
-<ul>
-    @foreach (var group in Model.Groups)
-    {
-        <li>
-            <h5>Group ID: @group.Id</h5>
-        </li>
-    }
-</ul>
-
-<h4>Documents</h4>
-<ul>
-    @foreach (var document in Model.Documents)
-    {
-        <li>
-            <h5>@document.Title</h5>
-            <p><small>Uploaded on @document.UploadDate.ToString("g")</small></p>
-        </li>
-    }
-</ul>
 
 	<div class="blog-bio">
 		<div class="blog-info">
@@ -128,6 +84,23 @@
 					<li>
 						<h5>You have received a new blog</h5>
 						<p><small>Posted on @blog.TimeStamp.ToString("g") by @blog.User.Name</small></p>
+					</li>
+				}
+			</div>
+		</div>
+	</div>
+
+	<div class="comment-bio">
+		<div class="comment-info">
+			<div class="blog-comment mt-6">
+				<p class="text-dashboard text-bold">Blog Comments</p>
+				@foreach (var comment in Model.BlogComments)
+				{
+					<li>
+						<h5>You have received a new comment</h5>
+						<p>
+							Commented on @comment.TimeStamp.ToString("g") by @(comment.User?.Name ?? "Unknown")
+						</p>
 					</li>
 				}
 			</div>
@@ -151,16 +124,16 @@
 </div>
 
 
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			const menuItems = document.querySelectorAll(".menu-item");
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		const menuItems = document.querySelectorAll(".menu-item");
 
-			menuItems.forEach(item => {
-				if (item.getAttribute("data-name") === "dashboard") {
-					item.classList.add("active");
-				}
-			});
+		menuItems.forEach(item => {
+			if (item.getAttribute("data-name") === "dashboard") {
+				item.classList.add("active");
+			}
 		});
-	</script>
+	});
+</script>
 
 

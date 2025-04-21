@@ -15,7 +15,7 @@ namespace SchoolSystem.ViewModels
         //public int UploadedDocuments { get; set; }
 
         /// Comments from blogs
-        public List<string> BlogComments { get; set; } = new List<string>();
+        public List<BlogComment> BlogComments { get; set; } = new List<BlogComment>();
 
         // Comments from documents
         //public List<string> DocumentComments { get; set; } = new List<string>();

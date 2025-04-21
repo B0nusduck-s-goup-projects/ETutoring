@@ -2,54 +2,101 @@
 
 <h2>Tutor Dashboard</h2>
 
+<!-- Tutor Information -->
 <p>Tutor Name: @Model.TutorName</p>
-<p>Uploaded Documents: @Model.UploadedDocuments</p>
 
-<h3>Recent Comments</h3>
-<ul>
-    @foreach (var comment in Model.RecentComments)
-    {
-        <li>@comment</li>
-    }
-</ul>
-
-<h3>Recent Messages</h3>
-<ul>
-    @foreach (var message in Model.RecentMessages)
-    {
-        <li>@message.TextContent</li>
-    }
-</ul>
-
+<!-- Assigned Groups -->
 <h3>Assigned Groups</h3>
-<ul>
-    @foreach (var group in Model.AssignedGroups)
-    {
-        <li>@group.Id</li>
-    }
-</ul>
+@if (Model.AssignedGroups.Any())
+{
+    <ul>
+        @foreach (var group in Model.AssignedGroups)
+        {
+            <li>Group ID: @group.Id</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No assigned groups available.</p>
+}
 
-@* <h3>Search and Filter</h3>  *@
-@*  <form method="get" asp-action="Dashboard">  *@
-@*     <div class="form-group">  *@
-@*         <label for="searchName">Search by Name:</label>  *@
-@*          <input type="text" id="searchName" name="searchName" value="@Model.SearchName" class="form-control" />  *@
-@*    </div>  *@
-@*      <div class="form-group"> *@
-@*          <label for="groupId">Filter by Group:</label> *@
-@*          <select id="groupId" name="groupId" class="form-control">  *@
-@*              <option value="">All Groups</option> *@
-@*              @foreach (var group in Model.AssignedGroups) *@
-@*             {  *@
-@*                  var selectedGroupId = Model.FilteredStudents.FirstOrDefault()?.GroupUsers.FirstOrDefault()?.GroupId; *@
-@*                 var isSelected = group.Id == selectedGroupId ? "selected" : "";  *@
-@*                  <option value="@group.Id" selected="@isSelected">@group.Id</option>  *@
-@*             }  *@
-@*          </select> *@
-@*      </div>  *@
-@*      <button type="submit" class="btn btn-primary" style="z-index: 1000; position: relative;">Search</button> *@
-@*  </form> *@
+<!-- Tutor Blogs -->
+<h3>Tutor Blogs</h3>
+@if (Model.TutorBlogs.Any())
+{
+    <ul>
+        @foreach (var blog in Model.TutorBlogs)
+        {
+            <li>
+                <p>You have posted new blog on @blog.TimeStamp.ToString("dd/MM/yyyy") By @blog.User?.Name</p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No blogs available.</p>
+}
 
+
+<!-- Student Blogs -->
+<h3>Student Blogs</h3>
+@if (Model.StudentBlogs.Any())
+{
+    <ul>
+        @foreach (var blog in Model.StudentBlogs)
+        {
+            <li>
+                <p>You have received new blog on @blog.TimeStamp.ToString("dd/MM/yyyy") By @blog.User?.Name</p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No student blogs available.</p>
+}
+
+<!-- Documents -->
+<h3>Documents</h3>
+@if (Model.Documents.Any())
+{
+    <ul>
+        @foreach (var document in Model.Documents)
+        {
+            <li>
+                <p>You have received new document on @document.UploadDate.ToString("dd/MM/yyyy") By @document.User?.Name</p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No documents available.</p>
+}
+
+
+<!-- Recent Messages -->
+<h3>Recent Messages</h3>
+@if (Model.RecentMessages.Any())
+{
+    <ul>
+        @foreach (var message in Model.RecentMessages)
+        {
+            <li>
+                <p>@message.TextContent</p>
+                <p><small>Sent on @message.TimeStamp.ToString("g")</small></p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No recent messages available.</p>
+}
+
+<!-- Search and Filter -->
 <h3>Search and Filter</h3>
 <form method="get" asp-action="Dashboard">
     <div class="form-group">
@@ -71,39 +118,59 @@
     <button type="submit" class="btn btn-primary" style="z-index: 1000; position: relative;">Search</button>
 </form>
 
+<!-- Filtered Students -->
 <h3>Filtered Students</h3>
-<ul>
-    @foreach (var student in Model.FilteredStudents)
-    {
-        <li>@student.Name</li>
-    }
-</ul>
-
-
-<h4>Groups list</h4>
-@foreach (var group in Model.AssignedGroups)
+@if (Model.FilteredStudents != null && Model.FilteredStudents.Any())
 {
-    <div>
-        <ul>
-            @foreach (var groupUser in Model.GroupUsersWithRoles.Where(gu => gu.User.GroupUsers.Any(ggu => ggu.GroupId == group.Id)))
-            {
-                <li>
-                    Name: @groupUser.User.Name - Roles: @string.Join(", ", groupUser.Roles)
-                    @if (groupUser.Roles.Contains("Student"))
-                    {
-                        <form asp-action="RemoveStudentFromGroup" method="post" class="remove-student-form" style="display:inline;">
-                            <input type="hidden" name="groupId" value="@group.Id" />
-                            <input type="hidden" name="studentId" value="@groupUser.User.Id" />
-                            <button type="submit" class="btn btn-link btn-sm remove-button">&#x2716;</button> <!-- Unicode character for X -->
-                        </form>
-                    }
-                </li>
-            }
-        </ul>
-    </div>
+    <ul>
+        @foreach (var student in Model.FilteredStudents)
+        {
+            <li>@student.Name</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No students found.</p>
 }
 
+<!-- Groups List -->
+<h3>Groups List</h3>
+@if (Model.AssignedGroups.Any())
+{
+    @foreach (var group in Model.AssignedGroups)
+    {
+        <div>
+            <h5>Group: @group.Id (ID: @group.Id)</h5> <!-- Hiển thị ID nhóm -->
+            <ul>
+                @foreach (var groupUser in Model.GroupUsersWithRoles
+               .Where(gu => gu.User.GroupUsers.Any(ggu => ggu.GroupId == group.Id))
+               .GroupBy(gu => gu.User.Id) // Nhóm theo User.Id để loại bỏ trùng lặp
+               .Select(g => g.First())) // Lấy người dùng đầu tiên trong mỗi nhóm
+                {
+                    <li>
+                        Name: @groupUser.User.Name - Roles: @string.Join(", ", groupUser.Roles)
+                        @if (groupUser.Roles.Contains("Student"))
+                        {
+                            <form asp-action="RemoveStudentFromGroup" method="post" class="remove-student-form" style="display:inline;">
+                                <input type="hidden" name="groupId" value="@group.Id" />
+                                <input type="hidden" name="studentId" value="@groupUser.User.Id" />
+                                <button type="submit" class="btn btn-link btn-sm remove-button">&#x2716;</button>
+                            </form>
+                        }
+                    </li>
+                }
 
+            </ul>
+        </div>
+    }
+}
+else
+{
+    <p>No groups available.</p>
+}
+
+<!-- Styling -->
 <style>
     .remove-button {
         color: red;
@@ -116,6 +183,7 @@
     }
 </style>
 
+<!-- JavaScript for Removing Students -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.remove-student-form').forEach(form => {
