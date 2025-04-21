@@ -53,6 +53,16 @@ namespace SchoolSystem.Controllers
 				//return Unauthorized();
 			      return Forbid();
 
+			// Check if the file is an image
+			if(model.Image != null) { 
+			var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+			var fileExtension = Path.GetExtension(model.Image.FileName).ToLower();
+			if (!allowedExtensions.Contains(fileExtension))
+			{
+				ModelState.AddModelError("Image", "Only image files are allowed.");
+				return View(model);
+			}
+			}
 			string? imagePath = null;
 
 			// Handle image upload
@@ -143,6 +153,17 @@ namespace SchoolSystem.Controllers
 			if (!ModelState.IsValid)
 			{
 				return View(model);
+			}
+			// Check if the file is an image
+			if (model.Image != null)
+			{
+				var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+				var fileExtension = Path.GetExtension(model.Image.FileName).ToLower();
+				if (!allowedExtensions.Contains(fileExtension))
+				{
+					ModelState.AddModelError("Image", "Only image files are allowed.");
+					return View(model);
+				}
 			}
 
 			var blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == model.Id);

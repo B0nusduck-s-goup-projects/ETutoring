@@ -120,7 +120,7 @@ namespace SchoolSystem.Controllers
 					return View(model);
 				}
 
-
+				if(model.Image != null) { 
 				// Check if the file is an image
 				var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
 				var fileExtension = Path.GetExtension(model.Image.FileName).ToLower();
@@ -130,7 +130,7 @@ namespace SchoolSystem.Controllers
 					ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
 					return View(model);
 				}
-
+				}
 				// Handle file upload
 				string? imagePath = null;
 				if (model.Image != null)
@@ -266,16 +266,16 @@ namespace SchoolSystem.Controllers
 			{
 				return NotFound();
 			}
-
+			
 			// Kiểm tra trùng email trước khi cập nhật
 			var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
 			if (existingUserByEmail != null && existingUserByEmail.Id != model.Id)
 			{
 				ModelState.AddModelError("Email", "Email already exists");
-				ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();  // Đảm bảo không bị mất dữ liệu role
+				ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();  
 				return View(model);
 			}
-
+			
 
 			// Check if the file is an image
 			var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
