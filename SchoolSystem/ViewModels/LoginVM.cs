@@ -5,6 +5,7 @@ namespace SchoolSystem.ViewModels
 	public class LoginVM
 	{
 		[Required(ErrorMessage="User name is required.")]
+		[Display(Name = "Email")]
 		public string? Username { get; set; }
 
 		[Required(ErrorMessage = "Password is required.")]
