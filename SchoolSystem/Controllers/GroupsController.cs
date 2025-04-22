@@ -1,24 +1,35 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using EmailSender.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.IdentityModel.Tokens;
+using NuGet.DependencyResolver;
 using SchoolSystem.Data;
 using SchoolSystem.Models;
 using SchoolSystem.ViewModels;
+using System.Text.RegularExpressions;
+using static System.Net.WebRequestMethods;
+
+//clarify that all Group used are of SchoolSystem.Models not System.Text.RegularExpressions
+using Group = SchoolSystem.Models.Group;
 
 namespace SchoolSystem.Controllers
 {
+    [Authorize(Roles = "Staff")]
     public class GroupsController : Controller
     {
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly EmailService _emailService;
+        private readonly string emailTemplatePath;
 
-        public GroupsController(AppDbContext context, UserManager<AppUser> userManager)
+        public GroupsController(AppDbContext context, UserManager<AppUser> userManager, EmailService emailService, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _userManager = userManager;
+            _emailService = emailService;
+            emailTemplatePath = webHostEnvironment.ContentRootPath + @"\EmailTemplates";
         }
         
         private async Task<IList<string>> GetUserRole(AppUser user)
@@ -58,7 +69,7 @@ namespace SchoolSystem.Controllers
         // GET: Groups
         public async Task<IActionResult> Index()
         {
-            List<Group> groups = await _context.Groups.Include(g=>g.User).ToListAsync();
+            List<Group> groups = await _context.Groups.Include(g=>g.User).OrderByDescending(g => g.IsValid).ToListAsync();
             if (groups.IsNullOrEmpty())
             {
                 return View();
@@ -142,6 +153,7 @@ namespace SchoolSystem.Controllers
                 AppUser? teacher = await _context.Users.FindAsync(teacherID);
                 List<AppUser>? students = _context.Users.Where(u => studentID.Contains(u.Id)).ToList();
                 
+                //check for teacher vailditi
                 if (teacher == null || !await UserHasRole(teacher!, "Tutor"))
                 {
                     createVM.exception?.Add("Tutor with this id don't exist");
@@ -150,6 +162,7 @@ namespace SchoolSystem.Controllers
                 List<Group> validGroup = new List<Group>();
                 foreach (AppUser student in students)
                 {
+                    //check students for validity before adding to wait list
                     if (!await UserHasRole(student!, "Student"))
                     {
                         createVM.exception?.Add(student.Name + " is not a valid student");
@@ -165,16 +178,57 @@ namespace SchoolSystem.Controllers
                         group.User = new List<AppUser>() { teacher!, student! };
                         group.IsValid = true;
                         validGroup.Add(group);
-                        
                     }
                 }
                 if (!validGroup.IsNullOrEmpty())
                 {
+                    //get the template texts from the template files
+                    string studentEmailPath = emailTemplatePath + @"\TutorAllocation_Student.cshtml";
+                    string tutorEmailPath = emailTemplatePath + @"\TutorAllocation_Tutor.cshtml";
+                    string studentEmail= System.IO.File.ReadAllText(studentEmailPath);
+                    string tutorEmail = System.IO.File.ReadAllText(tutorEmailPath);
+
+                    //replace teacher name into the template placeholder
+                    studentEmail = new Regex(@"\[Tutor Name\]").Replace(studentEmail, teacher.Name);
+                    tutorEmail = new Regex(@"\[Tutor Name\]").Replace(tutorEmail, teacher.Name);
+                    
+                    //assigned student lists
+                    List<AppUser> registeredStudent = new List<AppUser>();
+                    //add student from wait list to database
                     foreach (Group group in validGroup)
                     {
+                        foreach(AppUser user in group.User)
+                        {
+                            if(await UserHasRole(user, "Student"))
+                            {
+                                registeredStudent.Add(user);
+                                //fill student name into placeholder
+                                string tempEmail = new Regex(@"\[Student Name\]").Replace(studentEmail, user.Name);
+                                //sent email
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                                _emailService.SendEmailsAsync([user.Email!.ToString()], "Tutor assignment", tempEmail);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                            }
+                        }
                         await _context.Groups.AddAsync(group);
                         await _context.SaveChangesAsync();
                     }
+
+                    //compile student list
+                    List<string> studentNames = registeredStudent.Select(st => st.Name).ToList();
+                    string studentListText = "";
+                    foreach (string name in studentNames)
+                    {
+                        studentListText += "<li>" + name + "</li>";
+                    }
+
+                    //replace place holder with student list
+                    tutorEmail = new Regex(@"\[Student List\]").Replace(tutorEmail, studentListText);
+
+                    //sent email
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    _emailService.SendEmailsAsync([teacher.Email!.ToString()], "Tutees assignment", tutorEmail);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -208,30 +262,101 @@ namespace SchoolSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id)
         {
+            //get group + user 
             Group? group = await _context.Groups.Include(g => g.User).FirstOrDefaultAsync(g => g.Id == id);
+            //check if group exist
             if (group == null)
             {
                 return NotFound();
             }
             try
             {
+                //get user to sent mail to
+                AppUser teacher = new AppUser();
+                AppUser student = new AppUser();
+                foreach (AppUser user in group.User)
+                {
+                    if (await UserHasRole(user, "Tutor"))
+                    {
+                        teacher = user;
+                    }
+                    else
+                    {
+                        student = user;
+                    }
+                }
+
+                //if group is still available
                 if (group!.ExpiredTime == null)
                 {
+                    //set group to expired, and sent feedback
                     group.ExpiredTime = DateTime.Now;
                     group.IsValid = false;
+                    _context.Update(group);
+                    await _context.SaveChangesAsync();
+                    ViewBag.Message = "group close successfully, you have 24 hours to undo this action if it is not intended";
+
+                    //get the template texts from the template files
+                    string studentEmailPath = emailTemplatePath + @"\TutorUn-assigned_Student.cshtml";
+                    string tutorEmailPath = emailTemplatePath + @"\TutorUn-assigned_Tutor.cshtml";
+                    string studentEmail = System.IO.File.ReadAllText(studentEmailPath);
+                    string tutorEmail = System.IO.File.ReadAllText(tutorEmailPath);
+
+                    //replace teacher name into the template placeholder
+                    studentEmail = new Regex(@"\[Tutor Name\]").Replace(studentEmail, teacher.Name);
+                    studentEmail = new Regex(@"\[Student Name\]").Replace(studentEmail, student.Name);
+
+                    tutorEmail = new Regex(@"\[Tutor Name\]").Replace(tutorEmail, teacher.Name);
+                    tutorEmail = new Regex(@"\[Student Name\]").Replace(tutorEmail, student.Name);
+
+                    //sent notification email
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    _emailService.SendEmailsAsync([teacher.Email!.ToString()], "Tutor un-assignment", studentEmail);
+                    _emailService.SendEmailsAsync([teacher.Email!.ToString()], "Tutees un-assignment", tutorEmail);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
                 //if time since expire is <= 1 day
                 else if ((((DateTime)group.ExpiredTime).Ticks - DateTime.Now.Ticks) <= 864000000000)
                 {
-                    group.ExpiredTime = null;
-                    group.IsValid = true;
+                    //check if other group already exist for this student
+                    bool hasConflict = _context.Groups.Any(g => g.User.Contains(student) && g.IsValid == true);
+                    if (!hasConflict)
+                    {
+                        //undo the exiration mark and sent feedback
+                        group.ExpiredTime = null;
+                        group.IsValid = true;
+                        _context.Update(group);
+                        await _context.SaveChangesAsync();
+                        ViewBag.Message = "group re-opened successfully";
+
+                        //get the template texts from the template files
+                        string studentEmailPath = emailTemplatePath + @"\TutorRe-assigned_Student.cshtml";
+                        string tutorEmailPath = emailTemplatePath + @"\TutorRe-assigned_Tutor.cshtml";
+                        string studentEmail = System.IO.File.ReadAllText(studentEmailPath);
+                        string tutorEmail = System.IO.File.ReadAllText(tutorEmailPath);
+
+                        //replace teacher name into the template placeholder
+                        studentEmail = new Regex(@"\[Tutor Name\]").Replace(studentEmail, teacher.Name);
+                        studentEmail = new Regex(@"\[Student Name\]").Replace(studentEmail, student.Name);
+
+                        tutorEmail = new Regex(@"\[Tutor Name\]").Replace(tutorEmail, teacher.Name);
+                        tutorEmail = new Regex(@"\[Student Name\]").Replace(tutorEmail, student.Name);
+
+                        //sent email
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                        _emailService.SendEmailsAsync([teacher.Email!.ToString()], "Tutor re-assignment", studentEmail);
+                        _emailService.SendEmailsAsync([teacher.Email!.ToString()], "Tutees re-assignment", tutorEmail);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    }
+                    else
+                    {
+                        ViewBag.Message = "student already been assigned to another group";
+                    }
                 }
                 else
                 {
-                    return View(group);
+                    ViewBag.Message = "the 24 hours period has ended you can no longer change this";
                 }
-                _context.Update(group);
-                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
