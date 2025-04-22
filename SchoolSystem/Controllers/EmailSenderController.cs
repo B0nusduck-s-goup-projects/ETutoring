@@ -8,24 +8,25 @@ namespace EmailSender.Controllers
     [ApiController]
     public class EmailController : ControllerBase
     {
-        private readonly EmailService _emailService;
+        private readonly IEmailService _emailService;
 
-        public EmailController(EmailService emailService)
+        public EmailController(IEmailService emailService)
         {
             _emailService = emailService;
         }
 
-        [HttpPost("send-test")]
-        //public async Task<IActionResult> SendEmails([FromBody] EmailRequest request)
-        //{
-        //    if (request == null || request.Recipients == null || !request.Recipients.Any())
-        //    {
-        //        return BadRequest("Recipient list cannot be empty.");
-        //    }
 
-        //    await _emailService.SendEmailsAsync(request.Recipients, request.Subject, request.Body);
-        //    return Ok("Emails sent successfully.");
-        //}
+        [HttpPost("send-test")]
+        public async Task<IActionResult> SendEmails([FromBody] EmailRequest request)
+        {
+            if (request == null || request.Recipients == null || !request.Recipients.Any())
+            {
+                return BadRequest("Recipient list cannot be empty.");
+            }
+
+            await _emailService.SendEmailsAsync(request.Recipients, request.Subject, request.Body);
+            return Ok("Emails sent successfully.");
+        }
         public async Task<IActionResult> SendTestEmails()
         {
             var recipients = new List<string>
