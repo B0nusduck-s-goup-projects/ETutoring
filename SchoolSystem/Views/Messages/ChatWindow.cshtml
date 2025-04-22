@@ -1,24 +1,27 @@
 ﻿@model SchoolSystem.ViewModels.ChatWindowVM
-<div class="container">
-    <div id="chatWindow" style="display:flex;
-                                flex-direction:column;
-                                overflow:scroll;
-                                height: 500px;
-                                padding: 0px 10px 0px 10px">
+@{
+    Layout = "~/Views/Shared/_ChatLayout.cshtml";
+}
+<div class="layout">
+    <h2 class="heading-text">Chat</h2>
+</div>
+
+<div class="chat-container">
+    <div id="chatWindow" class="chat-messages"">
         @if (Model != null)
         {
             @foreach (Message message in Model.Messages)
                 {
                     if (message.Sender != Model.CurrentUser)
                     {
-                        <div class="messageBox" style="align-self: start; max-width: 80px;">
+                        <div class="message incoming">
                             <h6>@message.Sender.Name</h6>
                             <p>@message.TextContent</p>
                         </div>
                     }
                     else
                     {
-                        <div class ="messageBox" style="align-self: end; max-width: 80px;">
+                        <div class="message outgoing">
                             <p>@message.TextContent</p>
                         </div>
                     }
@@ -27,18 +30,10 @@
         
     </div>
     
-    <ul style="width: 100%;
-                height: 70px;
-                background-color: gray;
-                list-style-type: none;
-                padding: 0px;">
-        <li style="width: 80%; height: 100%; float:left">
-            <textarea id="messageInput" style="resize:none; width: 100%; height: 100%;" warp="soft"></textarea>
-        </li>
-        <li style="width:20%; height:100%; float:right">
-            <button id="sendButton" class="btn btn-dark" style="width: 100%; height: 100%;">sent</button>
-        </li>
-    </ul>
+    <div class="chat-input">
+        <input id="messageInput" type="text" placeholder="Nhập tin nhắn..."></textarea>
+        <button id="sendButton">sent</button>
+    </div>
 </div>
 @section Scripts {
     @* client side code for live chat*@
@@ -52,6 +47,7 @@
 
         //initialize 2 way connection to server
         connection.start().then(function () {
+            //call the add to group function from chat hub
             connection.invoke('AddToGroup', @Model.CurrentGroup.Id)
             .catch(function (err) {
                 return console.error(err.toString());
@@ -68,14 +64,13 @@
             var textBox = '';
             if(senderId != "@Model.CurrentUser.Id")
             {
-                textBox = '<div class="messageBox" style="align-self: start;"><h6>'+ senderName + '</h6><p>' + textMessage + '</p></div>';
+                textBox = '<div class="message incoming"><h6>'+ senderName + '</h6><p>' + textMessage + '</p></div>';
             }
             else
             {
-                textBox = '<div class="messageBox" style="align-self: end;"><p>' + textMessage + '</p></div>';
+                textBox = '<div class="message outgoing"><p>' + textMessage + '</p></div>';
             }
             chatWindow.insertAdjacentHTML('beforeend',textBox)
-            chatWindow.scrollTop($(".messageBox")[0].scrollHeight);
         });
 
         //create event listener that will trigger hub function when fired

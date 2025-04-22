@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using SchoolSystem.Models
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -55,17 +59,34 @@
     </nav> 
     <div class="container">
         @RenderBody()
+        @if (SignInManager.IsSignedIn(User))
+        {
         <div class="layout-user">
             <div class="user">
                 <div class="user-avatar">
-                    <img src="~/uploads/chat/avatar.png" alt="Avatar" />
+                    @if(UserManager.GetUserAsync(User).Result?.Image != null &&
+                       UserManager.GetUserAsync(User).Result?.Image != "")
+                    {
+                        <img src="~/uploads/chat/@UserManager.GetUserAsync(User).Result?.Image" alt="Avatar"
+                            onerror="this.onerror=null; this.src=/uploads/default-profile.png" />
+                    }
+                    else
+                    {
+                        <img src="~/uploads/chat/avatar.png" alt="Avatar" />
+                    }
                 </div>
                 <div class="user-name">
-                    <p>(Student)</p>
+                    <p>@UserManager.GetUserName(User)</p>
                 </div>
             </div>
         </div>
+        }
     </div>
-
+    @* signalr libary*@
+    @* minimize code: use in prod *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    @* readable code: use in test/dev *@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.js"></script>*@
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

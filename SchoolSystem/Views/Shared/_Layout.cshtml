@@ -113,11 +113,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @* signalr libary*@
-    @* minimize code: use in prod *@
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
-    @* readable code: use in test/dev *@
-    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.js"></script>*@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
