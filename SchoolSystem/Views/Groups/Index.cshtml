@@ -16,12 +16,16 @@
                 @Html.DisplayNameFor(model => model.Group.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Teacher.Name)
+                @* @Html.DisplayNameFor(model => model.Teacher.Name) *@
+                Tutor name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Student.Name)
+                @* @Html.DisplayNameFor(model => model.Student.Name) *@
+                Student name
             </th>
-            <th></th>
+            <th>
+                Is valid
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -37,6 +41,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Student.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Group.IsValid)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Group.Id">Edit</a> |

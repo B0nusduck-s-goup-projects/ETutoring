@@ -3,21 +3,24 @@
 @if(Model != null)
 {    
     foreach(var item in Model){
-        <a disabled="item.IsValid" asp-action="ChatWindow" asp-route-groupid="@item.groupId">
-            <div>
-                @if (item.image != null && item.image != "")
-                {
-                    @* todo: add default image name to onerror *@
-                    <img style="display:inline" width="70" height="70" src="/uploads/@item.image" onerror="this.onerror=null; this.src=default-profile.png" />
-                }
-                else
-                {
-                    @* todo: add default image name to src *@
-                    <img style="display:inline" width="70" height="70" src="/uploads/default-profile.png" />
-                }
-                <h5 style="display:inline">@item.UserName</h5>
-            </div>
-        </a>
+        if(@item.IsValid)
+        {
+            <a asp-action="ChatWindow" asp-route-groupid="@item.groupId">
+                <div>
+                    @if (item.image != null && item.image != "")
+                    {
+                        @* todo: add default image name to onerror *@
+                        <img style="display:inline" width="70" height="70" src="/uploads/@item.image" onerror="this.onerror=null; this.src=default-profile.png" />
+                    }
+                    else
+                    {
+                        @* todo: add default image name to src *@
+                        <img style="display:inline" width="70" height="70" src="/uploads/default-profile.png" />
+                    }
+                    <h5 style="display:inline">@item.UserName</h5>
+                </div>
+            </a>
+        }
     }
 }
 else

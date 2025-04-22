@@ -30,6 +30,10 @@
                 }
                 
             </div>
+            @if (ViewBag.Message != null)
+            {
+                <p>@ViewBag.Message</p>
+            }
             <div class="form-group">
                 @if(Model.Group.IsValid){
                     <input type="submit" value="disable group" class="btn btn-primary" />

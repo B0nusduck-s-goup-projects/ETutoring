@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("default");
 
 // Add services to the container.
+// add server side code for live communication used in messages
 builder.Services.AddSignalR();
 builder.Services.AddControllersWithViews();
 
@@ -69,7 +70,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+//register hub adress for live communication used in messages
 app.MapHub<ChatHub>("/chatHub");
 app.MapControllerRoute(
 

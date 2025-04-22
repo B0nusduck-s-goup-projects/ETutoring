@@ -14,14 +14,12 @@
                         <div class="messageBox" style="align-self: start; max-width: 80px;">
                             <h6>@message.Sender.Name</h6>
                             <p>@message.TextContent</p>
-                            @* <img src="/uploads/default-profile.png" /> *@
                         </div>
                     }
                     else
                     {
                         <div class ="messageBox" style="align-self: end; max-width: 80px;">
                             <p>@message.TextContent</p>
-                            @* <img src="/uploads/default-profile.png" /> *@
                         </div>
                     }
                 }
@@ -43,13 +41,9 @@
     </ul>
 </div>
 @section Scripts {
+    @* client side code for live chat*@
     <script>
         "use strict";
-        
-        /*use testing and debugging
-        function showalert(){
-             alert('You Clicked Button');
-        }*/
 
         var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 

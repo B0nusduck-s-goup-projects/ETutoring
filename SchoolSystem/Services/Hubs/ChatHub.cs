@@ -19,19 +19,20 @@ namespace SchoolSystem.Services.Hubs
 
         public  async Task AddToGroup(int currentGroupId)
         {
+            //get the current user and verify that they belong to the selected group
             AppUser? currentUser = await _user.GetUserAsync(Context.User);
             bool Exist = _context.Groups.Any(g => g.Id == currentGroupId && g.User.Contains(currentUser));
             if (Exist)
             {
+                //add this session to a hub group with id set as group id on the server to handle live transmission
                 await Groups.AddToGroupAsync(Context.ConnectionId, currentGroupId.ToString());
             }
         }
 
-        //todo:
-        //-possibly adding a connection id feild (nullable string) to group
-        //for repeated connection to a chat
+        //function callable from client
         public async Task SendMessage(int currentGroupId, string textContent)
         {
+            //save data to server
             AppUser? currentUser = await _user.GetUserAsync(Context.User);
             Message message = new Message()
             {
@@ -42,6 +43,7 @@ namespace SchoolSystem.Services.Hubs
             };
             await _context.AddAsync(message);
             await _context.SaveChangesAsync();
+            //call to client's function to print message
             await Clients.Group(currentGroupId.ToString()).SendAsync("ReceiveMessage", currentUser.Name, currentUser.Id , textContent);
         }
     }
