@@ -3,7 +3,11 @@ using System.Net.Mail;
 
 namespace EmailSender.Services
 {
-    public class EmailService
+    public interface IEmailService
+    {
+        Task SendEmailsAsync(List<string> recipients, string subject, string body);
+    }
+    public class EmailService : IEmailService
     {
         private readonly string _smtpHost;
         private readonly int _smtpPort;
@@ -31,7 +35,7 @@ namespace EmailSender.Services
                     {
                         message.Subject = subject;
                         message.Body = body;
-                        message.IsBodyHtml = true; // Optional for HTML emails
+                        message.IsBodyHtml = true;
 
                         try
                         {
