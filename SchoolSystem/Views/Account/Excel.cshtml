@@ -1,22 +1,61 @@
-﻿<partial name="_ValidationScriptsPartial" />
-<div asp-validation-summary="All" class="text-danger"></div>
-@if (TempData["FailMessage"] != null)
-{
-    <div class="alert alert-danger">
-        @TempData["FailMessage"]
-    </div>
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@* UploadImage *@
-<form enctype="multipart/form-data" method="post" action="/Account/UploadImage">
-    <input type="file" name="Image" />
-    <button type="submit">Upload Image</button>
-</form>
+<div class="form-container">
+    <partial name="_ValidationScriptsPartial" />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (TempData["FailMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["FailMessage"]
+        </div>
+    }
+    @* UploadImage *@
+    <form enctype="multipart/form-data" method="post" action="/Account/UploadImage">
+        <input type="file" name="Image" />
+        <button type="submit">Upload Image</button>
+    </form>
 
-@* Import and export *@
-<form method="post" enctype="multipart/form-data" asp-action="ImportUsersFromExcel">
-    <label for="file">Upload Excel file:</label>
-    <input type="file" name="file" id="file" />
-    <button type="submit">Import Users</button>
-</form>
+    @* Import and export *@
+    <form method="post" enctype="multipart/form-data" asp-action="ImportUsersFromExcel">
+        <label for="file">Upload Excel file:</label>
+        <input type="file" name="file" id="file" />
+        <button type="submit">Import Users</button>
+    </form>
 
-<a href="@Url.Action("ExportUsersToExcel", "Account")">Export Users to Excel</a>
+    <a href="@Url.Action("ExportUsersToExcel", "Account")">Export Users to Excel</a>
+</div>
+
+
+<style>
+    .form-container {
+        display: flex; /* Use Flexbox for alignment */
+        flex-direction: column; /* Stack forms vertically */
+        justify-content: center; /* Center vertically */
+        align-items: center; /* Center horizontally */
+        overflow-y: auto; /* Use full height of content-area */
+    }
+
+        .form-container form, .form-container a {
+            width: 100%; /* Match container's width */
+            max-width: 400px; /* Restrict maximum width */
+            margin-bottom: 20px; /* Space between forms and link */
+            text-align: center; /* Center text inside */
+        }
+
+    input[type="file"], button {
+        display: block; /* Align inputs and buttons */
+        width: 100%; /* Match the container's width */
+        max-width: 300px; /* Limit the maximum width */
+        margin: 10px auto; /* Center the elements */
+        text-align: center;
+    }
+
+    .alert {
+        text-align: center; /* Center alert text */
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 400px;
+    }
+
+</style>

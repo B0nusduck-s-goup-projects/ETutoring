@@ -53,8 +53,9 @@
 
                                 Layout = "~/Views/Shared/_AdminLayout.cshtml";
                             }
-
-                            @if (User.IsInRole("Student") || User.IsInRole("Tutor"))
+                            
+                            @* @if (User.IsInRole("Student") || User.IsInRole("Tutor")) *@
+                            @if (User.IsInRole("Student"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
@@ -63,6 +64,10 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Messages" asp-action="ChatList">Chat</a>
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                                 </li>
+                            }
+                            @if (User.IsInRole("Tutor"))
+                            {
+                                Layout = "~/Views/Shared/_AdminLayout.cshtml";
                             }
                         } 
                        <a asp-controller="Account" asp-action="ViewProfile" class="nav-link">View Profile</a>

@@ -5,14 +5,15 @@
     font-family: Arial, sanserif;
 }
 
-.a {
-    display:none
-}
+/*.a {
+    display:none;
+}*/
 
 /* Main Layout */
 .admin-layout {
     display: flex;
     height: 100vh; /* Full height of the screen */
+    flex-direction:row;
 }
 
 /* Sidebar */
@@ -24,6 +25,55 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto; /* Allows scrolling if content overflows */
+    transition: width 0.3s ease-in-out; /* Chuyển mượt khi thay đổi */
+    flex-shrink: 0;
+    
+}
+
+
+/* Sidebar thu nhỏ */
+.sidebar.collapsed {
+    width: 75px; /* Chỉ hiển thị icon */
+    overflow:hidden;
+}
+
+    .sidebar.collapsed .menu-link {
+        justify-content:center;
+    }
+    .sidebar.collapsed .menu-link span {
+        display: none; /* Ẩn text */
+    }
+
+    .sidebar.collapsed .icons {
+        /*margin-right: 5px;*/ /* Giảm khoảng cách icon khi thu nhỏ */
+        padding-right: 40px;
+        text-align: center; /* Căn giữa icon */
+        margin:auto;
+        font-size:18px;
+    }
+        .sidebar.collapsed .icons:hover {
+            color: #254068; /* Giữ màu chữ không đổi */
+        }
+        /* Nút toggle */
+
+#toggle-btn {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: auto;
+    margin-left:10px;
+    position: relative;
+}
+    #toggle-btn:hover {
+        color: black;
+    }
+
+.icons {
+    font-size: 30px;
+/*    margin-right: 5px;*/
+    transition: color 0.3s ease-in-out; /* Hiệu ứng chuyển màu mượt */
 }
 
 .sidebar-divider {
@@ -43,6 +93,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin-right: auto;
 }
 
     .project-link a {
@@ -52,9 +103,10 @@
 
 .menu-list {
     list-style: none;
-    padding: 0;
-    margin: 5px;
-    flex-grow:1;
+/*    padding: 0;
+    margin: 5px;*/
+    flex-grow: 1;
+    overflow:hidden;
 }
 
 .menu-item {
@@ -77,12 +129,14 @@
         box-shadow: 0px 0px 5px rgba(167, 235, 242, 0.5); /* Ánh sáng khi hover */
         color: #fff; /* Giữ màu chữ không đổi */
     }
+
     .menu-link i {
-        margin-right: 15px; /* Adds space between the icon and the text */
-        font-size: 18px; /* Adjusts the icon size */
+        margin-right: 30px; /* Adds space between the icon and the text */
+        font-size: 16px; /* Adjusts the icon size */
     }
-.bottom-menu{
-    margin-top:auto;
+
+.bottom-menu {
+    margin-top: auto;
 }
 
 /* Right Section */
@@ -130,6 +184,7 @@
     padding: 20px;
     background: linear-gradient(0deg, rgba(215, 228, 234, 0.70) 0%, rgba(215, 228, 234, 0.70) 100%), linear-gradient(130deg, rgba(167, 235, 242, 0.36) 0%, rgba(84, 172, 191, 0.36) 100%);
     backdrop-filter: blur(calc(var(--sds-size-depth-800) / 2));
+    overflow-y:auto;
 }
 
 /* Footer */
@@ -140,8 +195,40 @@
     text-align: center;
     padding: 10px;
     width: 100%;
+    position:sticky;
+    bottom:0;
 }
+
     .admin-footer a {
         text-decoration: none;
         color: rgb(148, 147, 144);
     }
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .admin-layout {
+        flex-direction: column; /* Xếp chồng nội dung và sidebar */
+    }
+    .sidebar {
+        width: 100%; /* Thu hẹp sidebar trên màn hình nhỏ hơn */
+        height:auto;
+    }
+
+    .content-area {
+        padding: 15px; /* Giảm padding để tránh nội dung bị đẩy ra ngoài */
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        display: none; /* Ẩn sidebar trên màn hình rất nhỏ */
+    }
+
+    /*.admin-layout {
+        flex-direction: column;*/ /* Xếp chồng nội dung và sidebar */
+    /*}*/
+
+    .content-area {
+        padding: 10px; /* Tinh chỉnh thêm cho màn hình nhỏ */
+    }
+}

@@ -1,0 +1,94 @@
+﻿h2 {
+    margin-left: 30px;
+    color: #011C40;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: Arial;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Display-Large-Line-Height, 64px); /* 160% */
+    letter-spacing: 6px;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: 1.5%; /* 0.6px */
+    text-underline-offset: 21.5%; /* 8.6px */
+    text-underline-position: from-font;
+}
+
+/* Container chính cho dashboard */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Khoảng cách giữa các ô */
+    padding: 20px; /* Padding cho vùng dashboard */
+    background-color: transparent; /* Màu nền nhạt cho dashboard */
+}
+
+/* Từng khu vực (card) */
+.dashboard-section {
+    background-color: #fff; /* Nền trắng cho mỗi card */
+    padding: 15px; /* Khoảng cách bên trong card */
+    border-radius: 10px; /* Bo góc cho card */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+    overflow: hidden; /* Ngăn nội dung tràn ra ngoài card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+    .dashboard-section:hover {
+        transform: scale(1.03); /* Phóng to nhẹ khi hover */
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Bóng đổ mạnh hơn */
+        background-color: #f5faff;
+        border: 1px solid #8e9dac;
+        animation: slideUp 0.3s ease;
+    }
+    /* Tiêu đề trong mỗi card */
+    .dashboard-section h3 {
+        margin-top: 0; /* Xóa margin phía trên */
+        font-size: 1.5rem; /* Kích thước tiêu đề */
+        color: #333; /* Màu chữ tối */
+        transition: color 0.3s ease;
+    }
+    .dashboard-section:hover h3 {
+        background: linear-gradient(90deg, #58b3c7 19.71%, #254068 80.29%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; /* Đổi màu tiêu đề khi hover */
+    }
+
+    /* Văn bản và danh sách trong card */
+    .dashboard-section p,
+    .dashboard-section li {
+        font-size: 1rem; /* Kích thước chữ */
+        color: #555; /* Màu chữ phụ */
+        margin-bottom: 8px; /* Khoảng cách giữa các dòng */
+    }
+
+.remove-button {
+    color: red;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
+    
+@keyframes slideUp {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive trên màn hình nhỏ */
+@media (max-width: 768px) {
+    .dashboard-container {
+        grid-template-columns: 1fr; /* Hiển thị 1 cột trên màn hình nhỏ */
+    }
+}
