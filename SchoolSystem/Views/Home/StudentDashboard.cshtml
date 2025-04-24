@@ -19,34 +19,36 @@
 	</div>
 
 	<div class="document-bio">
-		<h4>Recent Uploaded Documents</h4>
-		@{
-			// Cast Model.Documents to a strongly-typed collection to avoid dynamic issues
-			var documents = Model.Documents as IEnumerable<Document>;
-		}
-		@if (documents?.Any() == true)
-		{
-			<ul>
-				@foreach (var document in documents.OrderByDescending(d => d.UploadDate))
-				{
-					<li>
-						<h5>You have uploaded a new document</h5>
-						@* <h5>@(document.Title ?? "Untitled")</h5> *@
-						<p><small>Uploaded on: @(document.UploadDate.ToString("g") ?? "Unknown Date") by @(document.User?.Name ?? "Unknown")</small></p>
-						@* <p><small>Uploaded by: @(document.User?.Name ?? "Unknown")</small></p> *@
-					</li>
-				}
-			</ul>
-		}
-		else
-		{
-			<p>No documents available.</p>
-		}
+		<div class="document-info">
+			<h4 class="text-dashboard text-bold">Recent Uploaded Documents</h4>
+			@{
+				// Cast Model.Documents to a strongly-typed collection to avoid dynamic issues
+				var documents = Model.Documents as IEnumerable<Document>;
+			}
+			@if (documents?.Any() == true)
+			{
+				<ul>
+					@foreach (var document in documents.OrderByDescending(d => d.UploadDate))
+					{
+						<li>
+							<h5>You have uploaded a new document</h5>
+							@* <h5>@(document.Title ?? "Untitled")</h5> *@
+							<p><small>Uploaded on: @(document.UploadDate.ToString("g") ?? "Unknown Date") by @(document.User?.Name ?? "Unknown")</small></p>
+							@* <p><small>Uploaded by: @(document.User?.Name ?? "Unknown")</small></p> *@
+						</li>
+					}
+				</ul>
+			}
+			else
+			{
+				<p>No documents available.</p>
+			}
+		</div>
 	</div>
 
 	<div class="message-bio">
 		<div class="message-info">
-			<div class="message">
+			<div>
 				<p class="text-dashboard text-bold">Recent Messages</p>
 				@foreach (var message in Model.RecentMessages)
 				{

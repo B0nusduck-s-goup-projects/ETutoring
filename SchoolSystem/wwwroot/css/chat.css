@@ -189,6 +189,8 @@ nav > a {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dashboard-container {
@@ -326,6 +328,7 @@ nav > a {
 
 .chat-input input {
     flex: 1;
+    width: 100%;
     padding: 10px 15px;
     border: 1px solid #ccc;
     border-radius: 20px;
