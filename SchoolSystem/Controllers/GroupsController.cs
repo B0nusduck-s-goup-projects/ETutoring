@@ -316,7 +316,7 @@ namespace SchoolSystem.Controllers
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
                 //if time since expire is <= 1 day
-                else if ((((DateTime)group.ExpiredTime).Ticks - DateTime.Now.Ticks) <= 864000000000)
+                else if ((DateTime.Now.Ticks - ((DateTime)group.ExpiredTime).Ticks) <= 864000000000)
                 {
                     //check if other group already exist for this student
                     bool hasConflict = _context.Groups.Any(g => g.User.Contains(student) && g.IsValid == true);
