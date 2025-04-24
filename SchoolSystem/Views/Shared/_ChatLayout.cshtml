@@ -25,24 +25,12 @@
                     <span class="menu-text">Dashboard</span>
                 </a>
             </li>
-            <li class="menu-item" data-name="notifications">
-                <a href="#" class="menu-item-link">
-                    <img src="~/uploads/chat/notification.png" alt="" />
-                    <span class="menu-text">Notification</span>
-                </a>
-            </li>
             <li class="menu-item" data-name="chats">
-                <a asp-controller="Home" asp-action="Chat" class="menu-item-link">
-                    <img src="~/uploads/chat/group.png" alt="" />
-                    <span class="menu-text">Chats</span>
+                <a asp-controller="Messages" class="menu-item-link">
+                    <img src="~/uploads/chat/messenger.png" alt="" />
+                    <span class="menu-text">Messages</span>
                 </a>
             </li>
-            @* <li class="menu-item" data-name="messenger"> *@
-            @*     <a asp-controller="Home" asp-action="DashboardStudent"> *@
-            @*         <img src="~/images/chat/messenger.png" alt="" /> *@
-            @*         <span class="menu-text">Messenger</span> *@
-            @*     </a> *@
-            @* </li> *@
             <li class="menu-item" data-name="documents">
                 <a asp-controller="Document" asp-action="Index" class="menu-item-link">
                     <img src="~/uploads/chat/file.png" alt="" />

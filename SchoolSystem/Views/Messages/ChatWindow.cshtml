@@ -7,7 +7,7 @@
 </div>
 
 <div class="chat-container">
-    <div id="chatWindow" class="chat-messages"">
+    <div id="chatWindow" class="chat-messages">
         @if (Model != null)
         {
             @foreach (Message message in Model.Messages)
@@ -31,8 +31,8 @@
     </div>
     
     <div class="chat-input">
-        <input id="messageInput" type="text" placeholder="Nhập tin nhắn..."></textarea>
-        <button id="sendButton">sent</button>
+        <input id="messageInput" type="text" placeholder="Aa" maxlength="500">
+        <button id="sendButton">Send</button>
     </div>
 </div>
 @section Scripts {
@@ -82,8 +82,21 @@
                 .catch(function (err) {
                     return console.error(err.toString());
                 });
+                document.getElementById("messageInput").value = '';
             }
             event.preventDefault();
         });
     </script>
 }
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuItems = document.querySelectorAll(".menu-item");
+
+        menuItems.forEach(item => {
+            if (item.getAttribute("data-name") === "chats") {
+                item.classList.add("active");
+            }
+        });
+    });
+</script>
