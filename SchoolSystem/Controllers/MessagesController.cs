@@ -54,7 +54,7 @@ namespace SchoolSystem.Controllers
             if (_userManager.GetRolesAsync(currentUser).Result.Contains("Student"))
             {
                 Group? group = _context.Groups.Where(g => g.User.Contains(currentUser!) && g.IsValid).Include(g => g.User).FirstOrDefault();
-                return group != null ? RedirectToAction("ChatWindow", new {groupId = group.Id}) : View(new List<ChatListVM>());
+                return group != null ? RedirectToAction("ChatWindow", new {groupId = group.Id}) : View("ChatListStudent", new List<ChatListVM>());
             }
             //if user is not student get list of all user that this user has group with then show them to screen
             List<ChatListVM> result = new List<ChatListVM>();
