@@ -1,0 +1,16 @@
+﻿@model ICollection<SchoolSystem.ViewModels.ChatListVM>
+@{
+    Layout = "~/Views/Shared/_ChatLayout.cshtml";
+}
+<div style="text-align:center">
+        @if (User.IsInRole("Student"))
+        {
+            <h1>
+                You have no assigned tutor for a conversation at the moment, 
+                please await for your assignment or contact the office to arrange
+                and assignment if you are yet to revice any information regarding
+                this topic
+            </h1>
+        }
+</div>
+
