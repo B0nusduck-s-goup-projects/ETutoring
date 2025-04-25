@@ -1,208 +1,310 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    @* <title>@ViewData["Title"] - Admin - SchoolSystem</title> *@
-    <title>
-        @if (User.IsInRole("Admin"))
-        {
-            @:Admin Dashboard - School System
-        }
-        else if (User.IsInRole("Tutor"))
-        {
-            @:Tutor Dashboard - School System
-        }
-    </title>
-    
-    
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	@* <title>@ViewData["Title"] - Admin - SchoolSystem</title> *@
+	<title>
+		@if (User.IsInRole("Admin"))
+		{
+			@:Admin Dashboard - School System
+		}
+		else if (User.IsInRole("Tutor"))
+		{
+			@:Tutor Dashboard - School System
+		}
+		else if (User.IsInRole("Student"))
+		{
+			@:Student Dashboard - School System
+		}
+	</title>
 
-    <!--FontAwesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!--FontAwesome-->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    @* <link rel="stylesheet" href="~/css/chat.css" asp-append-version="true" /> *@
-    <link rel="stylesheet" href="~/SchoolSystem.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+
+
+	<!--FontAwesome-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!--FontAwesome-->
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	@* <link rel="stylesheet" href="~/css/chat.css" asp-append-version="true" /> *@
+	<link rel="stylesheet" href="~/SchoolSystem.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
 
 </head>
 <body>
-    <!-- Main Layout -->
-    <div class="admin-layout">
-        <!-- Sidebar -->
-        
-        <aside class="sidebar">
-            <h1 class="project-link">
-                <a asp-area="" asp-controller="Home" asp-action="Index">SchoolSystem</a>
-            </h1>
-            
-            @if (User.Identity.IsAuthenticated)
-            {
-                @if (User.IsInRole("Admin"))
-                {
-                    <ul class="menu-list">
-                        @* <li class="menu-item"> *@
-                        @*     <a class="menu-link" asp-area="" asp-controller="Home" asp-action="Index"> *@
-                        @*         <i class="fa-solid fa-house icons"></i> *@
-                        @*         <span>Home</span> *@
-                        @*     </a> *@
-                        @* </li> *@
-                        <li class="menu-item">
-                            <a class="menu-link" asp-area="" asp-controller="Account" asp-action="Excel">
-                                <i class="fa-solid fa-pen-to-square icons"></i>
-                                <span>Import/Export</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a class="menu-link" asp-area="" asp-controller="Account" asp-action="Register">
-                                <i class="fa-solid fa-pen-to-square icons"></i>
-                                <span>Register User</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a class="menu-link" asp-area="" asp-controller="Role" asp-action="CreateRole">
-                                <i class="fa-solid fa-pen-to-square icons"></i>
-                                <span>Create Role</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a class="menu-link" asp-area="" asp-controller="Account" asp-action="ListUsers">
-                                <i class="fa-solid fa-list icons"></i>
-                                <span>List Users</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a class="menu-link" asp-area="" asp-controller="Role" asp-action="ListRoles">
-                                <i class="fa-solid fa-list icons"></i>
-                                <span>List Roles</span>
-                            </a>
-                        </li>
-                        @* <li class="menu-item"> *@
-                        @*     <a class="menu-link" asp-area="" asp-controller="Document" asp-action="Index"> *@
-                        @*         <i class="fa-solid fa-file icons"></i> *@
-                        @*         <span>Documents</span> *@
-                        @*     </a> *@
-                        @* </li> *@
-                        @* <li class="menu-item"> *@
-                        @*     <a class="menu-link" asp-area="" asp-controller="Groups" asp-action="Index"> *@
-                        @*         <i class="fa-solid fa-user-group icons"></i> *@
-                        @*         <span>Groups Manage</span> *@
-                        @*     </a> *@
-                        @* </li> *@
-                    </ul>
-                }
-                @if (User.IsInRole("Tutor"))
-                {
-                    <ul class="menu-list">
-                        <li class="menu-item">
-                            <a class="menu-link" asp-area="" asp-controller="Home" asp-action="Dashboard">
-                                <i class="fa-solid fa-house icons"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                        @* <li class="menu-item"> *@
-                        @*     <a class="menu-link" asp-area="" asp-controller="Home" asp-action="Calendar"> *@
-                        @*         <i class="fa-solid fa-pen-to-square icons"></i> *@
-                        @*         <span>Calendar</span> *@
-                        @*     </a> *@
-                        @* </li> *@
-                        <li class="menu-item">
-                            <a class="menu-link" asp-area="" asp-controller="Document" asp-action="Index">
-                                <i class="fa-solid fa-file icons"></i>
-                                <span>Document</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a class="menu-link" asp-area="" asp-controller="Messages" asp-action="ChatList">
-                                <i class="fa-solid fa-comment icons"></i>
-                                <span>Message</span>
-                            </a>
-                        </li>
-                        @* <li class="menu-item"> *@
-                        @*     <a class="menu-link" asp-area="" asp-controller="Home" asp-action="Contact"> *@
-                        @*         <i class="fa-solid fa-pen-to-square icons"></i> *@
-                        @*         <span>Contact</span> *@
-                        @*     </a> *@
-                        @* </li> *@
-                        <li class="menu-item">
-                            <a class="menu-link" asp-area="" asp-controller="Blog" asp-action="Index">
-                                <i class="fa-solid fa-pen-to-square icons"></i>
-                                <span>Blog</span>
-                            </a>
-                        </li>
-                    </ul>
-                    
-                }
-            }
-                <!--Divider line-->
-            <hr class="sidebar-divider" />
-            <div class="bottom-menu">
-                 <ul class="menu-list">
-                     <li class="menu-item">
-                         <a class="menu-link" asp-area="" asp-controller="Account" asp-action="ViewProfile">
-                             <i class="fa-solid fa-user"></i>
-                            <span>View Profile</span>
-                         </a>
-                     </li>
-                     <li class="menu-item">
-                         <a class="menu-link" asp-action="Logout" asp-controller="Account">
-                             <i class="fa-solid fa-right-from-bracket"></i>
-                            <span>Logout</span>
-                         </a>
-                     </li>
-                 </ul>
-            </div>
-            <button id="toggle-btn" aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
-        </aside>
-        
-        <!-- Right Section -->
-        <div class="right-section">
-            <!-- Header -->
-            <header class="header">
-                <div class="header-right">
-                    <partial name="_LoginPartial" />
-                </div>
-            </header>
+	<!-- Main Layout -->
+	<div class="admin-layout">
+		<!-- Sidebar -->
 
-            <!-- Main Content -->
-            <main class="content-area">
-                @RenderBody()
-            </main>
+		<aside class="sidebar">
+			@* <h1 class="project-link"> *@
+			@*     <a asp-area="" asp-controller="Home" asp-action="Index">SchoolSystem</a> *@
+			@* </h1> *@
 
-            <!-- Footer -->
-            <footer class="admin-footer">
-                <div class="container">
-                    &copy; 2025 - SchoolSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </div>
-            </footer>
-        </div>
-    </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @* signalr libary*@
-    @* minimize code: use in prod *@
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
-    @* readable code: use in test/dev *@
-    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.js"></script>*@
+			@if (User.Identity.IsAuthenticated)
+			{
+				@if (User.IsInRole("Admin"))
+				{
+					<h1 class="project-link">
+						<a asp-area="" asp-controller="Home" asp-action="Index">SchoolSystem</a>
+					</h1>
+					<ul class="menu-list">
+						@* <li class="menu-item"> *@
+						@*     <a class="menu-link" asp-area="" asp-controller="Home" asp-action="Index"> *@
+						@*         <i class="fa-solid fa-house icons"></i> *@
+						@*         <span>Home</span> *@
+						@*     </a> *@
+						@* </li> *@
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Account" asp-action="Excel">
+								<i class="fa-solid fa-pen-to-square icons"></i>
+								<span>Import/Export</span>
+							</a>
+						</li>
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Account" asp-action="Register">
+								<i class="fa-solid fa-pen-to-square icons"></i>
+								<span>Register User</span>
+							</a>
+						</li>
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Role" asp-action="CreateRole">
+								<i class="fa-solid fa-pen-to-square icons"></i>
+								<span>Create Role</span>
+							</a>
+						</li>
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Account" asp-action="ListUsers">
+								<i class="fa-solid fa-list icons"></i>
+								<span>List Users</span>
+							</a>
+						</li>
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Role" asp-action="ListRoles">
+								<i class="fa-solid fa-list icons"></i>
+								<span>List Roles</span>
+							</a>
+						</li>
+						@* <li class="menu-item"> *@
+						@*     <a class="menu-link" asp-area="" asp-controller="Document" asp-action="Index"> *@
+						@*         <i class="fa-solid fa-file icons"></i> *@
+						@*         <span>Documents</span> *@
+						@*     </a> *@
+						@* </li> *@
+						@* <li class="menu-item"> *@
+						@*     <a class="menu-link" asp-area="" asp-controller="Groups" asp-action="Index"> *@
+						@*         <i class="fa-solid fa-user-group icons"></i> *@
+						@*         <span>Groups Manage</span> *@
+						@*     </a> *@
+						@* </li> *@
+					</ul>
+				}
+				@if (User.IsInRole("Tutor"))
+				{
+					<h1 class="project-link">
+						<a asp-area="" asp-controller="Home" asp-action="IndexUser">SchoolSystem</a>
+					</h1>
+					<ul class="menu-list">
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Home" asp-action="Dashboard">
+								<i class="fa-solid fa-house icons"></i>
+								<span>Dashboard</span>
+							</a>
+						</li>
+						@* <li class="menu-item"> *@
+						@*     <a class="menu-link" asp-area="" asp-controller="Home" asp-action="Calendar"> *@
+						@*         <i class="fa-solid fa-pen-to-square icons"></i> *@
+						@*         <span>Calendar</span> *@
+						@*     </a> *@
+						@* </li> *@
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Document" asp-action="Index">
+								<i class="fa-solid fa-file icons"></i>
+								<span>Document</span>
+							</a>
+						</li>
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Messages" asp-action="ChatList">
+								<i class="fa-solid fa-comment icons"></i>
+								<span>Message</span>
+							</a>
+						</li>
+						@* <li class="menu-item"> *@
+						@*     <a class="menu-link" asp-area="" asp-controller="Home" asp-action="Contact"> *@
+						@*         <i class="fa-solid fa-pen-to-square icons"></i> *@
+						@*         <span>Contact</span> *@
+						@*     </a> *@
+						@* </li> *@
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Blog" asp-action="Index">
+								<i class="fa-solid fa-pen-to-square icons"></i>
+								<span>Blog</span>
+							</a>
+						</li>
+					</ul>
 
-    <script>
-        const sidebar = document.querySelector('.sidebar');
-        const collapsed = localStorage.getItem('collapsed');
-        if (collapsed === 'true') {
-            sidebar.classList.add('collapsed');
-        }
+				}
 
-        document.getElementById('toggle-btn').addEventListener('click', function() {
-            sidebar.classList.toggle('collapsed');
-            localStorage.setItem('collapsed', sidebar.classList.contains('collapsed'));
-        });
+				@if (User.IsInRole("Staff"))
+				{
+					<h1 class="project-link">
+						<a asp-area="" asp-controller="Home" asp-action="Index">SchoolSystem</a>
+					</h1>
+					<ul class="menu-list">
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Groups" asp-action="Index">
+								<i class="fa-solid fa-user-group"></i>
+								<span>Groups</span>
+							</a>
+						</li>
+						@* <li class="menu-item"> *@
+						@*     <a class="menu-link" asp-area="" asp-controller="Home" asp-action="Calendar"> *@
+						@*         <i class="fa-solid fa-pen-to-square icons"></i> *@
+						@*         <span>Calendar</span> *@
+						@*     </a> *@
+						@* </li> *@
+						@* <li class="menu-item"> *@
+						@*     <a class="menu-link" asp-area="" asp-controller="Document" asp-action="Index"> *@
+						@*         <i class="fa-solid fa-file icons"></i> *@
+						@*         <span>Document</span> *@
+						@*     </a> *@
+						@* </li> *@
+						@* <li class="menu-item"> *@
+						@*     <a class="menu-link" asp-area="" asp-controller="Messages" asp-action="ChatList"> *@
+						@*         <i class="fa-solid fa-comment icons"></i> *@
+						@*         <span>Message</span> *@
+						@*     </a> *@
+						@* </li> *@
+						@* <li class="menu-item"> *@
+						@*     <a class="menu-link" asp-area="" asp-controller="Home" asp-action="Contact"> *@
+						@*         <i class="fa-solid fa-pen-to-square icons"></i> *@
+						@*         <span>Contact</span> *@
+						@*     </a> *@
+						@* </li> *@
+						@* <li class="menu-item"> *@
+						@*     <a class="menu-link" asp-area="" asp-controller="Blog" asp-action="Index"> *@
+						@*         <i class="fa-solid fa-pen-to-square icons"></i> *@
+						@*         <span>Blog</span> *@
+						@*     </a> *@
+						@* </li> *@
+					</ul>
+
+				}
+
+				@if (User.IsInRole("Student"))
+				{
+					<h1 class="project-link">
+						<a asp-area="" asp-controller="Home" asp-action="IndexUser">SchoolSystem</a>
+					</h1>
+					<ul class="menu-list">
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Home" asp-action="Dashboard">
+								<i class="fa-solid fa-house icons"></i>
+								<span>Dashboard</span>
+							</a>
+						</li>
+						@* <li class="menu-item"> *@
+						@*     <a class="menu-link" asp-area="" asp-controller="Home" asp-action="Calendar"> *@
+						@*         <i class="fa-solid fa-pen-to-square icons"></i> *@
+						@*         <span>Calendar</span> *@
+						@*     </a> *@
+						@* </li> *@
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Document" asp-action="Index">
+								<i class="fa-solid fa-file icons"></i>
+								<span>Document</span>
+							</a>
+						</li>
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Messages" asp-action="ChatList">
+								<i class="fa-solid fa-comment icons"></i>
+								<span>Message</span>
+							</a>
+						</li>
+						@* <li class="menu-item"> *@
+						@*     <a class="menu-link" asp-area="" asp-controller="Home" asp-action="Contact"> *@
+						@*         <i class="fa-solid fa-pen-to-square icons"></i> *@
+						@*         <span>Contact</span> *@
+						@*     </a> *@
+						@* </li> *@
+						<li class="menu-item">
+							<a class="menu-link" asp-area="" asp-controller="Blog" asp-action="Index">
+								<i class="fa-solid fa-pen-to-square icons"></i>
+								<span>Blog</span>
+							</a>
+						</li>
+					</ul>
+
+				}
+			}
+			<!--Divider line-->
+			<hr class="sidebar-divider" />
+			<div class="bottom-menu">
+				<ul class="menu-list">
+					<li class="menu-item">
+						<a class="menu-link" asp-area="" asp-controller="Account" asp-action="ViewProfile">
+							<i class="fa-solid fa-user"></i>
+							<span>View Profile</span>
+						</a>
+					</li>
+					<li class="menu-item">
+						<a class="menu-link" asp-action="Logout" asp-controller="Account">
+							<i class="fa-solid fa-right-from-bracket"></i>
+							<span>Logout</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<button id="toggle-btn" aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
+		</aside>
+
+		<!-- Right Section -->
+		<div class="right-section">
+			<!-- Header -->
+			<header class="header">
+				<div class="header-right">
+					<partial name="_LoginPartial" />
+				</div>
+			</header>
+
+			<!-- Main Content -->
+			<main class="content-area">
+				@RenderBody()
+			</main>
+
+			<!-- Footer -->
+			<footer class="admin-footer">
+				<div class="container">
+					&copy; 2025 - SchoolSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@* signalr libary*@
+	@* minimize code: use in prod *@
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+	@* readable code: use in test/dev *@
+	@*<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.js"></script>*@
+
+	<script>
+		const sidebar = document.querySelector('.sidebar');
+		const collapsed = localStorage.getItem('collapsed');
+		if (collapsed === 'true') {
+			sidebar.classList.add('collapsed');
+		}
+
+		document.getElementById('toggle-btn').addEventListener('click', function() {
+			sidebar.classList.toggle('collapsed');
+			localStorage.setItem('collapsed', sidebar.classList.contains('collapsed'));
+		});
 
 
-    </script>
+	</script>
 
 
-    @await RenderSectionAsync("Scripts", required: false)
-    </body>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
 </html>

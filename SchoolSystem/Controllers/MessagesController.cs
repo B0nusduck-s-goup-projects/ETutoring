@@ -64,13 +64,21 @@ namespace SchoolSystem.Controllers
                 foreach (Group group in groups)
                 {
                     AppUser otherUser = group.User.Where(u => u.Id != currentUser.Id).FirstOrDefault()!;
-                    ChatListVM instance = new ChatListVM()
+                    ChatListVM instance;
+                    try
                     {
-                        UserName = otherUser.Name,
-                        groupId = group.Id,
-                        image = otherUser.Image,
-                        IsValid = group.IsValid,
-                    };
+                        instance = new ChatListVM()
+                        {
+                            UserName = otherUser.Name,
+                            groupId = group.Id,
+                            image = otherUser.Image,
+                            IsValid = group.IsValid,
+                        }; 
+                    }
+                    catch(Exception ex)
+                    {
+                        continue;
+                    }
                     result.Add(instance);
                 }
             }
