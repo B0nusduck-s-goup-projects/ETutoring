@@ -1,141 +1,257 @@
-﻿@{
-	Layout = "~/Views/Shared/_ChatLayout.cshtml";
+﻿@model SchoolSystem.ViewModels.StudentDashboardVM
+@{
+	// Layout = "~/Views/Shared/_ChatLayout.cshtml";
+	ViewData["Title"] = "Student Dashboard";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
 }
 
-<div class="layout">
-	<h2 class="heading-text">Dashboard</h2>
-</div>
+<head>
+	<link rel="stylesheet" href="~/css/tutor.css" />
+</head>
+
+<h2>Student Dashboard</h2>
 
 <div class="dashboard-container">
-	<div class="student-bio">
-		<div class="student-info">
-			<div class="student-name">
-				<p class="text-dashboard">Welcome, @Model.StudentName</p>
-			</div>
-			<div class="tutor">
-				<p class="text-dashboard">Personal Tutor: @Model.PersonalTutor</p>
-			</div>
-		</div>
+	<div class="dashboard-section tutor-info">
+		<h3>Student Information</h3>
+		<p><strong>Student Name:</strong> @Model.StudentName</p>
+		<p><strong>Personal Tutor:</strong> @Model.PersonalTutor</p>
 	</div>
 
-	<div class="document-bio">
-		<div class="document-info">
-			<h4 class="text-dashboard text-bold">Recent Uploaded Documents</h4>
-			@{
-				// Cast Model.Documents to a strongly-typed collection to avoid dynamic issues
-				var documents = Model.Documents as IEnumerable<Document>;
-			}
-			@if (documents?.Any() == true)
-			{
-				<ul>
-					@foreach (var document in documents.OrderByDescending(d => d.UploadDate))
-					{
-						<li>
-							<h5>You have uploaded a new document</h5>
-							@* <h5>@(document.Title ?? "Untitled")</h5> *@
-							<p><small>Uploaded on: @(document.UploadDate.ToString("g") ?? "Unknown Date") by @(document.User?.Name ?? "Unknown")</small></p>
-							@* <p><small>Uploaded by: @(document.User?.Name ?? "Unknown")</small></p> *@
-						</li>
-					}
-				</ul>
-			}
-			else
-			{
-				<p>No documents available.</p>
-			}
-		</div>
-	</div>
-
-	<div class="message-bio">
-		<div class="message-info">
-			<div>
-				<p class="text-dashboard text-bold">Recent Messages</p>
-				@foreach (var message in Model.RecentMessages)
-				{
-					<p>@message.TextContent</p>
-				}
-
-			</div>
-		</div>
-	</div>
-
-
-	<div class="blog-bio">
-		<div class="blog-info">
-			<div class="blog-name">
-				<p class="text-dashboard text-bold">Student Blogs</p>
+	<!-- Student Blogs -->
+	<div class="dashboard-section student-blogs">
+		<h3>Student Blogs</h3>
+		@if (Model.StudentBlogs.Any())
+		{
+			<ul>
 				@foreach (var blog in Model.StudentBlogs)
 				{
-					<li>
-						<h5>You have uploaded a new blog</h5>
-						@* <p><small>Posted on @blog.TimeStamp </small></p> *@
-						<p><small>Posted on @blog.TimeStamp.ToString("g") by @blog.User.Name</small></p>
-
-					</li>
+					<li>You received a blog from @blog.User?.Name on @blog.TimeStamp.ToString("dd/MM/yyyy")</li>
 				}
-			</div>
-		</div>
+			</ul>
+		}
+		else
+		{
+			<p>No student blogs available.</p>
+		}
 	</div>
 
-	<div class="blog-bio">
-		<div class="blog-info">
-			<div class="blog-name">
-				<p class="text-dashboard text-bold">Tutor Blogs</p>
+	<!-- Tutor Blogs -->
+	<div class="dashboard-section tutor-blogs">
+		<h3>Tutor Blogs</h3>
+		@if (Model.TutorBlogs.Any())
+		{
+			<ul>
 				@foreach (var blog in Model.TutorBlogs)
 				{
-					<li>
-						<h5>You have received a new blog</h5>
-						<p><small>Posted on @blog.TimeStamp.ToString("g") by @blog.User.Name</small></p>
-					</li>
+					<li>You posted a blog on @blog.TimeStamp.ToString("dd/MM/yyyy") by @blog.User?.Name</li>
 				}
-			</div>
-		</div>
+			</ul>
+		}
+		else
+		{
+			<p>No blogs available.</p>
+		}
 	</div>
 
-	<div class="comment-bio">
-		<div class="comment-info">
-			<div class="blog-comment mt-6">
-				<p class="text-dashboard text-bold">Blog Comments</p>
+	<!-- Documents -->
+	<div class="dashboard-section documents">
+		<h3>Documents</h3>
+		@if (Model.Documents.Any())
+		{
+			<ul>
+				@foreach (var document in Model.Documents)
+				{
+					<li>New document uploaded by @document.User?.Name on @document.UploadDate.ToString("dd/MM/yyyy")</li>
+				}
+			</ul>
+		}
+		else
+		{
+			<p>No documents available.</p>
+		}
+	</div>
+
+	<!-- Recent Messages -->
+	<div class="dashboard-section recent-messages">
+		<h3>Recent Messages</h3>
+		@if (Model.RecentMessages.Any())
+		{
+			<ul>
+				@foreach (var message in Model.RecentMessages)
+				{
+					<li>
+						<p>@message.TextContent</p>
+						<p><small>Sent on @message.TimeStamp.ToString("g")</small></p>
+					</li>
+				}
+			</ul>
+		}
+		else
+		{
+			<p>No recent messages available.</p>
+		}
+	</div>
+
+	<!-- Blog Comment -->
+	<div class="dashboard-section documents">
+		<h3>Blog Comments</h3>
+		@if (Model.BlogComments.Any())
+		{
+			<ul>
 				@foreach (var comment in Model.BlogComments)
 				{
 					<li>
 						<h5>You have received a new comment</h5>
 						<p>
-							Commented on @comment.TimeStamp.ToString("g") by @(comment.User?.Name ?? "Unknown")
+							<small>Commented on @comment.TimeStamp.ToString("g") by @(comment.User?.Name ?? "Unknown")</small>
 						</p>
 					</li>
 				}
-			</div>
-		</div>
-	</div>
-
-	<div class="group-bio">
-		<div class="group-info">
-			<div class="group-name">
-				<p class="text-dashboard text-bold">Group</p>
-				@foreach (var group in Model.Groups)
-				{
-					<li>
-						<h5>You have been assigned to a new group</h5>
-						<p><small>Group ID: @group.Id</small></p>
-					</li>
-				}
-			</div>
-		</div>
+			</ul>
+		}
+		else
+		{
+			<p>No comments available.</p>
+		}
 	</div>
 </div>
 
+@* <div class="layout"> *@
+@* 	<h2 class="heading-text">Dashboard</h2> *@
+@* </div> *@
 
-<script>
-	document.addEventListener("DOMContentLoaded", function() {
-		const menuItems = document.querySelectorAll(".menu-item");
+@* <div class="dashboard-container"> *@
+@* 	<div class="student-bio"> *@
+@* 		<div class="student-info"> *@
+@* 			<div class="student-name"> *@
+@* 				<p class="text-dashboard">Welcome, @Model.StudentName</p> *@
+@* 			</div> *@
+@* 			<div class="tutor"> *@
+@* 				<p class="text-dashboard">Personal Tutor: @Model.PersonalTutor</p> *@
+@* 			</div> *@
+@* 		</div> *@
+@* 	</div> *@
 
-		menuItems.forEach(item => {
-			if (item.getAttribute("data-name") === "dashboard") {
-				item.classList.add("active");
-			}
-		});
-	});
-</script>
+@* 	<div class="document-bio"> *@
+@* 		<div class="document-info"> *@
+@* 			<h4 class="text-dashboard text-bold">Recent Uploaded Documents</h4> *@
+@* 			@{ *@
+@* 				// Cast Model.Documents to a strongly-typed collection to avoid dynamic issues *@
+@* 				var documents = Model.Documents as IEnumerable<Document>; *@
+@* 			} *@
+@* 			@if (documents?.Any() == true) *@
+@* 			{ *@
+@* 				<ul> *@
+@* 					@foreach (var document in documents.OrderByDescending(d => d.UploadDate)) *@
+@* 					{ *@
+@* 						<li> *@
+@* 							<h5>You have uploaded a new document</h5> *@
+@* 							@* <h5>@(document.Title ?? "Untitled")</h5> *@ 
+@* 							<p><small>Uploaded on: @(document.UploadDate.ToString("g") ?? "Unknown Date") by @(document.User?.Name ?? "Unknown")</small></p> *@
+@* 							@* <p><small>Uploaded by: @(document.User?.Name ?? "Unknown")</small></p> *@ 
+@* 						</li> *@
+@* 					} *@
+@* 				</ul> *@
+@* 			} *@
+@* 			else *@
+@* 			{ *@
+@* 				<p>No documents available.</p> *@
+@* 			} *@
+@* 		</div> *@
+@* 	</div> *@
+
+@* 	<div class="message-bio"> *@
+@* 		<div class="message-info"> *@
+@* 			<div> *@
+@* 				<p class="text-dashboard text-bold">Recent Messages</p> *@
+@* 				@foreach (var message in Model.RecentMessages) *@
+@* 				{ *@
+@* 					<p class="truncate">@message.TextContent</p> *@
+@* 				} *@
+
+@* 			</div> *@
+@* 		</div> *@
+@* 	</div> *@
+
+
+@* 	<div class="blog-bio"> *@
+@* 		<div class="blog-info"> *@
+@* 			<div class="blog-name"> *@
+@* 				<p class="text-dashboard text-bold">Student Blogs</p> *@
+@* 				@foreach (var blog in Model.StudentBlogs) *@
+@* 				{ *@
+@* 					<li> *@
+@* 						<h5>You have uploaded a new blog</h5> *@
+@* 						@* <p><small>Posted on @blog.TimeStamp </small></p> *@ 
+@* 						<p><small>Posted on @blog.TimeStamp.ToString("g") by @blog.User.Name</small></p> *@
+
+@* 					</li> *@
+@* 				} *@
+@* 			</div> *@
+@* 		</div> *@
+@* 	</div> *@
+
+@* 	<div class="blog-bio"> *@
+@* 		<div class="blog-info"> *@
+@* 			<div class="blog-name"> *@
+@* 				<p class="text-dashboard text-bold">Tutor Blogs</p> *@
+@* 				@foreach (var blog in Model.TutorBlogs) *@
+@* 				{ *@
+@* 					<li> *@
+@* 						<h5>You have received a new blog</h5> *@
+@* 						<p><small>Posted on @blog.TimeStamp.ToString("g") by @blog.User.Name</small></p> *@
+@* 					</li> *@
+@* 				} *@
+@* 			</div> *@
+@* 		</div> *@
+@* 	</div> *@
+
+@* 	<div class="comment-bio"> *@
+@* 		<div class="comment-info"> *@
+@* 			<div class="blog-comment"> *@
+@* 				<p class="text-dashboard text-bold">Blog Comments</p> *@
+@* 				@foreach (var comment in Model.BlogComments) *@
+@* 				{ *@
+@* 					<li> *@
+@* 						<h5>You have received a new comment</h5> *@
+@* 						<p> *@
+@* 							<small>Commented on @comment.TimeStamp.ToString("g") by @(comment.User?.Name ?? "Unknown")</small> *@
+@* 						</p> *@
+@* 					</li> *@
+@* 				} *@
+@* 			</div> *@
+@* 		</div> *@
+@* 	</div> *@
+
+@* 	<div class="group-bio"> *@
+@* 		<div class="group-info"> *@
+@* 			<div class="group-name"> *@
+@* 				<p class="text-dashboard text-bold">Group</p> *@
+@* 				@foreach (var group in Model.Groups) *@
+@* 				{ *@
+@* 					<li> *@
+@* 						<h5>You have been assigned to a new group</h5> *@
+@* 						<p><small>Group ID: @group.Id</small></p> *@
+@* 					</li> *@
+@* 				} *@
+@* 			</div> *@
+@* 		</div> *@
+@* 	</div> *@
+@* </div> *@
+
+
+@* <script> *@
+@* 	document.addEventListener("DOMContentLoaded", function() { *@
+@* 		const menuItems = document.querySelectorAll(".menu-item"); *@
+
+@* 		menuItems.forEach(item => { *@
+@* 			if (item.getAttribute("data-name") === "dashboard") { *@
+@* 				item.classList.add("active"); *@
+@* 			} *@
+@* 		}); *@
+@* 	}); *@
+@* </script> *@
 
 

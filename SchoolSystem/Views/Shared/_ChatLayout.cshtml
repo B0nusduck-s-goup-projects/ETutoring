@@ -6,75 +6,75 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title - Chat</title>
-    <link rel="stylesheet" href="~/css/chat.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/document.css" asp-append-version="true" />
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title - Chat</title>
+	<link rel="stylesheet" href="~/css/chat.css" asp-append-version="true" />
+	@* <link rel="stylesheet" href="~/css/document.css" asp-append-version="true" /> *@
 </head>
 <body>
-    <nav>
-        <a asp-controller="Home" asp-action="IndexUser">
-            <div class="layout">
-                <h1 class="logo">SchoolSystem</h1>
-            </div>
-        </a>
-        <ul class="menu-list">
-            <li class="menu-item" data-name="dashboard">
-                <a asp-controller="Home" asp-action="Dashboard" class="menu-item-link">
-                    <img src="~/uploads/chat/dashboard.png" alt="" />
-                    <span class="menu-text">Dashboard</span>
-                </a>
-            </li>
-            <li class="menu-item" data-name="chats">
-                <a asp-controller="Messages" asp-action="ChatList" class="menu-item-link">
-                    <img src="~/uploads/chat/group.png" alt="" />
-                    <span class="menu-text">Chats</span>
-                </a>
-            </li>
-            <li class="menu-item" data-name="documents">
-                <a asp-controller="Document" asp-action="Index" class="menu-item-link">
-                    <img src="~/uploads/chat/file.png" alt="" />
-                    <span class="menu-text">Documents</span>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a asp-action="Logout" asp-controller="Account" class="menu-item-link">
-                    <img src="~/uploads/chat/logout.png" alt="" />
-                    <span class="menu-text">Logout</span>
-                </a>
-            </li>
-        </ul>
-    </nav> 
-    <div class="container">
-        @RenderBody()
-        @if (SignInManager.IsSignedIn(User))
-        {
-        <div class="layout-user">
-            <div class="user">
-                <div class="user-avatar">
-                    @if(UserManager.GetUserAsync(User).Result?.Image != null &&
-                       UserManager.GetUserAsync(User).Result?.Image != "")
-                    {
-                        <img src="~/uploads/chat/@UserManager.GetUserAsync(User).Result?.Image" alt="Avatar"
-                            onerror="this.onerror=null; this.src=/uploads/default-profile.png" />
-                    }
-                    else
-                    {
-                        <img src="~/uploads/chat/avatar.png" alt="Avatar" />
-                    }
-                </div>
-                <div class="user-name">
-                    <p>@UserManager.GetUserName(User)</p>
-                </div>
-            </div>
-        </div>
-        }
-    </div>
-    @* signalr libary*@
-    @* minimize code: use in prod *@
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
-    @* readable code: use in test/dev *@
-    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.js"></script>*@
-    @await RenderSectionAsync("Scripts", required: false)
+	<nav>
+		<a asp-controller="Home" asp-action="IndexUser">
+			<div class="layout">
+				<h1 class="logo">SchoolSystem</h1>
+			</div>
+		</a>
+		<ul class="menu-list">
+			<li class="menu-item" data-name="dashboard">
+				<a asp-controller="Home" asp-action="Dashboard" class="menu-item-link">
+					<img src="~/uploads/chat/dashboard.png" alt="" />
+					<span class="menu-text">Dashboard</span>
+				</a>
+			</li>
+			@* <li class="menu-item" data-name="chats"> *@
+			@*     <a asp-controller="Messages" asp-action="ChatList" class="menu-item-link"> *@
+			@*         <img src="~/uploads/chat/messenger.png" alt="" /> *@
+			@*         <span class="menu-text">Messages</span> *@
+			@*     </a> *@
+			@* </li> *@
+			@* <li class="menu-item" data-name="documents"> *@
+			@*     <a asp-controller="Document" asp-action="Index" class="menu-item-link"> *@
+			@*         <img src="~/uploads/chat/file.png" alt="" /> *@
+			@*         <span class="menu-text">Documents</span> *@
+			@*     </a> *@
+			@* </li> *@
+			@* <li class="menu-item"> *@
+			@*     <a asp-action="Logout" asp-controller="Account" class="menu-item-link"> *@
+			@*         <img src="~/uploads/chat/logout.png" alt="" /> *@
+			@*         <span class="menu-text">Logout</span> *@
+			@*     </a> *@
+			@* </li> *@
+		</ul>
+	</nav>
+	<div class="container">
+		@RenderBody()
+		@if (SignInManager.IsSignedIn(User))
+		{
+			<div class="layout-user">
+				<div class="user">
+					<div class="user-avatar">
+						@if (UserManager.GetUserAsync(User).Result?.Image != null &&
+											UserManager.GetUserAsync(User).Result?.Image != "")
+						{
+							<img src="~/uploads/chat/@UserManager.GetUserAsync(User).Result?.Image" alt="Avatar"
+								 onerror="this.onerror=null; this.src=/uploads/default-profile.png" />
+						}
+						else
+						{
+							<img src="~/uploads/chat/avatar.png" alt="Avatar" />
+						}
+					</div>
+					<div class="user-name truncate">
+						<p>@UserManager.GetUserName(User)</p>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+	@* signalr libary*@
+	@* minimize code: use in prod *@
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+	@* readable code: use in test/dev *@
+	@*<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.js"></script>*@
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
