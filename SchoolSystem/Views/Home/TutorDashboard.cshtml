@@ -93,14 +93,26 @@
     <!-- Recent Messages -->
     <div class="dashboard-section recent-messages">
         <h3>Recent Messages</h3>
+        @{
+            var currentUserId = ViewData["CurrentUserId"] as string;
+        }
         @if (Model.RecentMessages.Any())
         {
             <ul>
                 @foreach (var message in Model.RecentMessages)
                 {
                     <li>
-                        <p>@message.TextContent</p>
-                        <p><small>Sent on @message.TimeStamp.ToString("g")</small></p>
+                        @if (message.SenderId == currentUserId)
+                        {
+                            <h5>You have sent a message</h5>
+                            <p><small>At: @message.TimeStamp.ToString("g")</small></p>
+                        }
+                        else
+                        {
+                            <h5>You have received a message</h5>
+                            <p><small>From: @(message.Sender?.Name ?? "Unknown User")</small></p>
+                            <p><small>At: @message.TimeStamp.ToString("g")</small></p>
+                        }
                     </li>
                 }
             </ul>
@@ -171,14 +183,6 @@
                         {
                             <li>
                                 Name: @groupUser.User.Name - Roles: @string.Join(", ", groupUser.Roles)
-                                @if (groupUser.Roles.Contains("Student"))
-                                {
-                                    <form asp-action="RemoveStudentFromGroup" method="post" class="remove-student-form">
-                                        <input type="hidden" name="groupId" value="@group.Id" />
-                                        <input type="hidden" name="studentId" value="@groupUser.User.Id" />
-                                        <button type="submit" class="btn btn-link btn-sm remove-button">&#x2716;</button>
-                                    </form>
-                                }
                             </li>
                         }
                     </ul>
@@ -192,23 +196,4 @@
     </div>
 </div>
 
-<!-- JavaScript for Removing Students -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.remove-student-form').forEach(form => {
-            form.addEventListener('submit', async function (event) {
-                event.preventDefault();
-                const formData = new FormData(this);
-                const response = await fetch(this.action, {
-                    method: this.method,
-                    body: formData
-                });
-                if (response.ok) {
-                    this.closest('li').remove();
-                } else {
-                    alert('Failed to remove student.');
-                }
-            });
-        });
-    });
-</script>
+

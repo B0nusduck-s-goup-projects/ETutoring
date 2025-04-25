@@ -10134,23 +10134,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hoang\\.nuget\\packages\\": {},
+    "C:\\Users\\ACER\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\AoU\\Enterprise Web Software Development - 1640\\New folder\\ETutoring-main\\ETutoring\\TestProject1\\TestProject1.csproj",
+      "projectUniqueName": "C:\\Users\\ACER\\Documents\\GitHub\\ETutoring\\TestProject1\\TestProject1.csproj",
       "projectName": "TestProject1",
-      "projectPath": "E:\\AoU\\Enterprise Web Software Development - 1640\\New folder\\ETutoring-main\\ETutoring\\TestProject1\\TestProject1.csproj",
-      "packagesPath": "C:\\Users\\hoang\\.nuget\\packages\\",
-      "outputPath": "E:\\AoU\\Enterprise Web Software Development - 1640\\New folder\\ETutoring-main\\ETutoring\\TestProject1\\obj\\",
+      "projectPath": "C:\\Users\\ACER\\Documents\\GitHub\\ETutoring\\TestProject1\\TestProject1.csproj",
+      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ACER\\Documents\\GitHub\\ETutoring\\TestProject1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\hoang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -10165,8 +10165,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\AoU\\Enterprise Web Software Development - 1640\\New folder\\ETutoring-main\\ETutoring\\SchoolSystem\\SchoolSystem.csproj": {
-              "projectPath": "E:\\AoU\\Enterprise Web Software Development - 1640\\New folder\\ETutoring-main\\ETutoring\\SchoolSystem\\SchoolSystem.csproj"
+            "C:\\Users\\ACER\\Documents\\GitHub\\ETutoring\\SchoolSystem\\SchoolSystem.csproj": {
+              "projectPath": "C:\\Users\\ACER\\Documents\\GitHub\\ETutoring\\SchoolSystem\\SchoolSystem.csproj"
             }
           }
         }
@@ -10181,7 +10181,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -10228,7 +10228,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

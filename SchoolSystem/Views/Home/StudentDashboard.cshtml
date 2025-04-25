@@ -50,11 +50,35 @@
 		<div class="message-info">
 			<div>
 				<p class="text-dashboard text-bold">Recent Messages</p>
-				@foreach (var message in Model.RecentMessages)
-				{
-					<p>@message.TextContent</p>
+				@{
+					// Lấy UserId của người dùng hiện tại từ ViewData
+					var currentUserId = ViewData["CurrentUserId"] as string;
 				}
-
+				@if (Model.RecentMessages is IEnumerable<Message> recentMessages && recentMessages.Any())
+				{
+					<ul>
+						@foreach (var message in recentMessages)
+						{
+							<li>
+								@if (message.SenderId == currentUserId)
+								{
+									<h5>You have sent a message</h5>
+									<p><small>At: @message.TimeStamp.ToString("g")</small></p>
+								}
+								else
+								{
+									<h5>You have received a message</h5>
+									<p><small>From: @(message.Sender?.Name ?? "Unknown User")</small></p>
+									<p><small>At: @message.TimeStamp.ToString("g")</small></p>
+								}
+							</li>
+						}
+					</ul>
+				}
+				else
+				{
+					<p>No recent messages available.</p>
+				}
 			</div>
 		</div>
 	</div>
@@ -101,7 +125,9 @@
 					<li>
 						<h5>You have received a new comment</h5>
 						<p>
-							Commented on @comment.TimeStamp.ToString("g") by @(comment.User?.Name ?? "Unknown")
+							<small>
+								Commented on @comment.TimeStamp.ToString("g") by @(comment.User?.Name ?? "Unknown")
+							</small>
 						</p>
 					</li>
 				}

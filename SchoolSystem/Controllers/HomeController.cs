@@ -28,24 +28,27 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Dashboard(string searchName = null, int? groupId = null)
     {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the current user's ID
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Lấy ID người dùng hiện tại
         if (userId == null)
         {
             return Unauthorized();
         }
 
-        var user = await _userManager.FindByIdAsync(userId); // Find the user in the database
+        var user = await _userManager.FindByIdAsync(userId); // Tìm người dùng trong cơ sở dữ liệu
 
         if (user == null)
         {
             return NotFound("User not found.");
         }
 
-        // Log the user roles
+        // Thiết lập ViewData để truyền userId sang view
+        ViewData["CurrentUserId"] = userId;
+
+        // Log các vai trò của người dùng
         var roles = await _userManager.GetRolesAsync(user);
         Debug.WriteLine($"User roles: {string.Join(", ", roles)}");
 
-        // Check if the user is a student or a tutor
+        // Kiểm tra vai trò của người dùng
         if (await _userManager.IsInRoleAsync(user, "Student"))
         {
             var studentDashboard = await GetStudentDashboard(userId);
@@ -59,7 +62,6 @@ public class HomeController : Controller
 
         return Forbid();
     }
-
     private async Task<StudentDashboardVM> GetStudentDashboard(string userId)
     {
         var user = await _context.Users.FindAsync(userId);
@@ -103,9 +105,10 @@ public class HomeController : Controller
         var tutorRoleId = (await _context.Roles.FirstOrDefaultAsync(r => r.Name == "Tutor"))?.Id;
 
         var studentBlogs = await _context.Blogs
-            .Where(b => b.UserId == userId)
-            .OrderByDescending(b => b.TimeStamp)
-            .ToListAsync();
+           .Where(b => b.UserId == userId)
+           .OrderByDescending(b => b.TimeStamp)
+           .Take(5)
+           .ToListAsync();
 
         var blogComments = await _context.BlogComments
             .Where(c => studentBlogs.Select(b => b.Id).Contains(c.BlogId)) // Lọc theo blog của sinh viên
@@ -121,10 +124,13 @@ public class HomeController : Controller
             .Select(bur => bur.b)
             .Include(b => b.User) // Include the User to access the User.Name in the view
             .OrderByDescending(b => b.TimeStamp)
+            .Take(5)
             .ToListAsync();
 
         var recentMessages = await _context.Messages
             .Where(m => studentGroupIds.Contains(m.GroupId))
+            .Include(m => m.Sender)
+            .Include(m => m.Group)
             .OrderByDescending(m => m.TimeStamp)
             .Take(5)
             .ToListAsync();
@@ -132,6 +138,7 @@ public class HomeController : Controller
         var documents = await _context.Documents
             .Where(d => d.UserId == userId)
             .OrderByDescending(d => d.UploadDate)
+            .Take(5)
             .ToListAsync();
 
         // Log the fetched data
@@ -207,10 +214,12 @@ public class HomeController : Controller
 
         // Fetch recent messages
         var recentMessages = await _context.Messages
-            .Where(m => assignedGroupIds.Contains(m.GroupId))
-            .OrderByDescending(m => m.TimeStamp)
-            .Take(5)
-            .ToListAsync();
+             .Where(m => assignedGroupIds.Contains(m.GroupId))
+             .Include(m => m.Sender)
+             .Include(m => m.Group)
+             .OrderByDescending(m => m.TimeStamp)
+             .Take(5)
+             .ToListAsync();
 
 
         //// Fetch student blogs (blogs uploaded by students in the tutor's assigned groups)
@@ -223,12 +232,14 @@ public class HomeController : Controller
             .Select(bur => bur.b)
             .Include(b => b.User) // Include the User to access the User.Name in the view
             .OrderByDescending(b => b.TimeStamp)
+            .Take(5)
             .ToListAsync();
 
         // Fetch tutor blogs (blogs uploaded by the tutor)
         var tutorBlogs = await _context.Blogs
             .Where(b => b.UserId == userId) // Filter by the tutor's user ID
             .OrderByDescending(b => b.TimeStamp)
+            .Take(5)
             .ToListAsync();
 
 
@@ -240,6 +251,7 @@ public class HomeController : Controller
         var documents = await _context.Documents
             .Where(d => d.UserId == userId)
             .OrderByDescending(d => d.UploadDate)
+            .Take(5)
             .ToListAsync();
 
 
