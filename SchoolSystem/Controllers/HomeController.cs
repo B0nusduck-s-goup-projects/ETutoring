@@ -136,10 +136,10 @@ public class HomeController : Controller
             .ToListAsync();
 
         var documents = await _context.Documents
-            .Where(d => d.UserId == userId)
-            .OrderByDescending(d => d.UploadDate)
-            .Take(5)
-            .ToListAsync();
+        .Where(d => d.UserId == userId || d.User.Group.Any(g => studentGroupIds.Contains(g.Id)))
+        .OrderByDescending(d => d.UploadDate)
+        .Take(5)
+        .ToListAsync();
 
         // Log the fetched data
         Debug.WriteLine($"Student Name: {user.Name}");
