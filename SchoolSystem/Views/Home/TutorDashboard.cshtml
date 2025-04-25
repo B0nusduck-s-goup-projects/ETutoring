@@ -75,12 +75,15 @@
     <!-- Documents -->
     <div class="dashboard-section documents">
         <h3>Documents</h3>
-        @if (Model.Documents.Any())
+        @if (Model.Documents != null && Model.Documents.Any())
         {
             <ul>
                 @foreach (var document in Model.Documents)
                 {
-                    <li>New document uploaded by @document.User?.Name on @document.UploadDate.ToString("dd/MM/yyyy")</li>
+                    <li>
+                        <p><strong>Uploaded By:</strong> @(document.User?.Name ?? "Unknown User")</p>
+                        <p><strong>Upload Date:</strong> @document.UploadDate.ToString("dd/MM/yyyy")</p>
+                    </li>
                 }
             </ul>
         }

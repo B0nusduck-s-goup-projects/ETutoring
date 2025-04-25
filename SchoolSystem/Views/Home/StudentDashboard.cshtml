@@ -50,20 +50,14 @@
 	<!-- Documents -->
 	<div class="dashboard-section documents">
 		<h3>Documents</h3>
-		@{
-			// Cast Model.Documents to a strongly-typed collection to avoid dynamic issues
-			var documents = Model.Documents as IEnumerable<Document>;
-		}
-		@if (documents?.Any() == true)
+		@if (Model.Documents != null && Model.Documents.Any())
 		{
 			<ul>
-				@foreach (var document in documents.OrderByDescending(d => d.UploadDate))
+				@foreach (var document in Model.Documents)
 				{
 					<li>
-						<h5>You have uploaded a new document</h5>
-						@* <h5>@(document.Title ?? "Untitled")</h5> *@
-						<p><small>Uploaded on: @(document.UploadDate.ToString("g") ?? "Unknown Date") by @(document.User?.Name ?? "Unknown")</small></p>
-						@* <p><small>Uploaded by: @(document.User?.Name ?? "Unknown")</small></p> *@
+						<p><strong>Uploaded By:</strong> @(document.User?.Name ?? "Unknown User")</p>
+						<p><strong>Upload Date:</strong> @document.UploadDate.ToString("dd/MM/yyyy")</p>
 					</li>
 				}
 			</ul>

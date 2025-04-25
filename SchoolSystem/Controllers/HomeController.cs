@@ -243,16 +243,17 @@ public class HomeController : Controller
             .ToListAsync();
 
 
-        // Fetch documents
-        //var documents = await _context.Documents
-        //    .Where(d => d.User.Group.Any(g => assignedGroupIds.Contains(g.Id)))
-        //    .OrderByDescending(d => d.UploadDate)
-        //    .ToListAsync();
+        //Fetch documents
         var documents = await _context.Documents
-            .Where(d => d.UserId == userId)
+            .Where(d => d.User.Group.Any(g => assignedGroupIds.Contains(g.Id)))
             .OrderByDescending(d => d.UploadDate)
             .Take(5)
             .ToListAsync();
+        //var documents = await _context.Documents
+        //    .Where(d => d.UserId == userId)
+        //    .OrderByDescending(d => d.UploadDate)
+        //    .Take(5)
+        //    .ToListAsync();
 
 
         // Log the fetched data
