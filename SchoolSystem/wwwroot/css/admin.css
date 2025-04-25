@@ -5,6 +5,10 @@
     font-family: Arial, sanserif;
 }
 
+.hidden {
+    display: none;
+}
+
 /*.a {
     display:none;
 }*/

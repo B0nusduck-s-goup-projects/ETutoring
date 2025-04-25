@@ -20,6 +20,11 @@ li {
     list-style: none;
 }
 
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 html, body {
     height: 100%; 
     margin: 0;
@@ -189,8 +194,6 @@ nav > a {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .dashboard-container {
@@ -213,7 +216,7 @@ nav > a {
 .comment-info,
 .message-info,
 .blog-info{
-    margin-left: 35px;
+    margin: 0 35px;
 }
 
 
@@ -229,11 +232,12 @@ nav > a {
     border-radius: 15px;
     background: rgba(215, 228, 234, 0.70);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
 }
 
 .document-info,
 .group-info{
-    margin-left: 25px;
+    margin: 0 25px;
 }
 
 .comment-bio {
@@ -242,6 +246,7 @@ nav > a {
     border-radius: 15px;
     background: rgba(215, 228, 234, 0.70);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
 }
 
 .message-bio {
@@ -258,6 +263,7 @@ nav > a {
     border-radius: 15px;
     background: rgba(215, 228, 234, 0.70);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
 }
 
 .group-bio {
@@ -266,6 +272,7 @@ nav > a {
     border-radius: 15px;
     background: rgba(215, 228, 234, 0.70);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
 }
 
 .title-position {
@@ -278,7 +285,7 @@ nav > a {
 .chat-container {
     background-color: white;
     width: 95%;
-    height: 480px;
+    height: 75vh;
     margin-top: 30px;
     border-radius: 15px;
     display: flex;
@@ -349,7 +356,7 @@ nav > a {
     background-color: #006fd6;
 }
 /*-----------RESPONSIVE---------------*/
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
     nav {
         width: 100%;
         height: auto;
@@ -460,5 +467,5 @@ nav > a {
     .chat-input button {
         width: 35%;
     }   
-}
+}*/
 
