@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
+using SchoolSystem.Models;
 
 namespace SchoolSystem.ViewModels
 {
@@ -15,5 +16,6 @@ namespace SchoolSystem.ViewModels
         public string UserName { get; set; }
         public string UserId { get; set; }
         public bool CanEdit { get; set; }
-    }
+		public List<DocumentComment> Comments { get; set; }
+	}
 }

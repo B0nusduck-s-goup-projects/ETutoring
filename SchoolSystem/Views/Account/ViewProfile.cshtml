@@ -5,7 +5,16 @@
 }
 <!--Using _AdminLayout-->
 @{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var isAdmin = User.IsInRole("Admin");
+
+    if (isAdmin)
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    }
 }
 
 @if (TempData["SuccessMessage"] != null)
@@ -16,8 +25,30 @@
 }
 <h2>Your Profile</h2>
 
+
+<form asp-action="UpdateProfileImage" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="userId" value="@Model.Id" />
+    <div class="form-group">
+        <label for="ProfileImage">Update Profile Image</label>
+        <input type="file" name="ProfileImage" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Update Image</button>
+</form>
+
+
+
 <div>
-    <img src="@Model.Image" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%;" />
+@*     <img src="@Model.Image" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%;" /> *@
+    @if (!string.IsNullOrEmpty(Model.Image))
+    {
+        <img src="@Model.Image" alt="User Image" style="width: 150px; height: 150px; border-radius: 50%;" />
+    }
+    else
+    {
+        @* <img src="/uploads/default-profile.png" alt="Default Image" width="50" height="50" class="rounded-circle" /> *@
+        <img src="/uploads/default-profile.png?v=@DateTime.Now.Ticks"
+             alt="Default Image" style="width: 150px; height: 150px; border-radius: 50%;" />
+    }
 </div>
 
 <table class="table">
