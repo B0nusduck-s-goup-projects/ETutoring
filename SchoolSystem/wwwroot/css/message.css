@@ -1,4 +1,4 @@
-﻿:root {
+﻿/*:root {
     --main-text-font: "Liter", serif;
     --logo-text-font: "Roboto Flex", serif;
     --main-color: #011C40;
@@ -57,22 +57,42 @@ body {
 
 .mt-15 {
     margin-top: 60px;
-}
+}*/
 
 
 /*----------------------------chat--------------------------------*/
 
-.chat-container {
-    background-color: white;
-    width: calc(100%-250px);
+h2 {
+    margin-left: 30px;
+    color: #011C40;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: Arial;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Display-Large-Line-Height, 64px); /* 160% */
+    letter-spacing: 6px;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: 1.5%; /* 0.6px */
+    text-underline-offset: 21.5%; /* 8.6px */
+    text-underline-position: from-font;
+    text-align:center;
+}
+
+.chat-container, .ChatList-Container {
+    background-color: #fff;
+    width: calc(100% - 250px); /* Hoặc bạn có thể cố định width nếu cần */
     height: 75vh;
-    margin-top: 30px;
+    margin: 30px auto; /* Căn giữa ngang */
     border-radius: 15px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     font-family: sans-serif;
+    position: relative; /* Đặt vị trí tương đối */
 }
 
 .chat-messages {
@@ -135,6 +155,53 @@ body {
 .chat-input button:hover {
     background-color: #006fd6;
 }
+
+/*-----------Chat List Window---------*/
+
+.List-student {
+    width: 100%; /* Bảng chiếm toàn bộ chiều rộng container */
+    border-collapse: collapse; /* Gộp đường viền bảng */
+    text-align: center; /* Căn trái nội dung */
+    margin-top: 10px; /* Khoảng cách giữa bảng và nội dung trên */
+}
+
+    .List-student th,
+    .List-student td {
+        border: 1px solid #ddd; /* Đường viền ô */
+        padding: 8px; /* Tăng khoảng cách nội dung */
+        vertical-align: middle; /* Căn giữa nội dung dọc */
+    }
+
+    .List-student th {
+        background-color: #f1f1f1; /* Nền nhạt cho tiêu đề bảng */
+        font-weight: bold; /* Chữ đậm */
+    }
+
+    .List-student img {
+        display: inline-block; /* Hiển thị hình ảnh như nội dung */
+        width: 70px;
+        height: 70px;
+        border-radius: 50%; /* Làm hình ảnh thành hình tròn */
+    }
+.action-link {
+    text-decoration: none; /* Loại bỏ gạch dưới */
+    color: #007BFF; /* Màu xanh */
+    cursor: pointer; /* Hiển thị kiểu con trỏ tay */
+}
+
+    .action-link i {
+        font-size: 30px;
+        transition: color 0.3s ease-in-out; /* Hiệu ứng chuyển màu mượt */
+    }
+
+    .action-link:hover {
+        color: #0056b3; /* Màu xanh đậm hơn khi hover */
+    }
+
+
+
+/*-----------Chat List Window---------*/
+
 /*-----------RESPONSIVE---------------*/
 /*@media (max-width: 768px) {
     nav {

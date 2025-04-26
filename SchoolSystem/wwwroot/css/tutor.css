@@ -6,42 +6,53 @@
     font-size: 40px;
     font-style: normal;
     font-weight: 400;
-    line-height: var(--Display-Large-Line-Height, 64px); /* 160% */
+    line-height: var(--Display-Large-Line-Height, 64px);
     letter-spacing: 6px;
     text-decoration-line: underline;
     text-decoration-style: solid;
     text-decoration-skip-ink: auto;
-    text-decoration-thickness: 1.5%; /* 0.6px */
-    text-underline-offset: 21.5%; /* 8.6px */
+    text-decoration-thickness: 1.5%; 
+    text-underline-offset: 21.5%; 
     text-underline-position: from-font;
 }
 
-/* Container chính cho dashboard */
+/* Dashboard Container */
 .dashboard-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 20px; /* Khoảng cách giữa các ô */
-    padding: 20px; /* Padding cho vùng dashboard */
-    background-color: transparent; /* Màu nền nhạt cho dashboard */
+    display: flex;
+    flex-direction:column;
+    gap: 20px; 
+    padding: 20px; 
+    background-color: transparent;
+}
+.dashboard-row {
+    display: flex;
+    gap: 20px; 
+    flex-wrap: wrap; 
+    justify-content: left; 
 }
 
-/* Từng khu vực (card) */
+/* Dashboard Section */
 .dashboard-section {
-    background-color: #fff; /* Nền trắng cho mỗi card */
-    padding: 15px; /* Khoảng cách bên trong card */
-    border-radius: 10px; /* Bo góc cho card */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
-    overflow: hidden; /* Ngăn nội dung tràn ra ngoài card */
+    flex: 1;
+    min-width: 250px; 
+    max-width: 700px; 
+    width: auto; 
+
+    background-color: #fff; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; 
+    display: block; 
 }
     .dashboard-section:hover {
-        transform: scale(1.03); /* Phóng to nhẹ khi hover */
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Bóng đổ mạnh hơn */
+        transform: scale(1.03); 
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); 
         background-color: #f5faff;
         border: 1px solid #8e9dac;
         animation: slideUp 0.3s ease;
     }
-    /* Tiêu đề trong mỗi card */
     .dashboard-section h3 {
         margin-top: 0; /* Xóa margin phía trên */
         font-size: 1.5rem; /* Kích thước tiêu đề */
@@ -52,17 +63,112 @@
         background: linear-gradient(90deg, #58b3c7 19.71%, #254068 80.29%);
         background-clip: text;
         -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent; /* Đổi màu tiêu đề khi hover */
+        -webkit-text-fill-color: transparent;
     }
-
-    /* Văn bản và danh sách trong card */
     .dashboard-section p,
     .dashboard-section li {
-        font-size: 1rem; /* Kích thước chữ */
-        color: #555; /* Màu chữ phụ */
-        margin-bottom: 8px; /* Khoảng cách giữa các dòng */
+        font-size: 1rem; 
+        color: #555; 
+        margin-bottom: 8px;
     }
 
+/*--Assigned/ Groups list--*/
+
+/* Assigned Groups Table */
+.assigned-groups {
+    display: flex;
+    flex-direction: column; 
+    overflow: visible;
+}
+    .assigned-groups table {
+        margin: 0 auto; 
+        border-collapse: collapse; 
+        font-size: 0.85rem; 
+        max-height: 200px; 
+        overflow-y: auto; 
+        display: block;
+        width: auto; 
+        text-align: center; 
+        overflow: visible;
+    }
+
+/* Group Container for Flexbox Layout */
+.group-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px; 
+    justify-content: center;
+    max-height: 400px; 
+    overflow-y: auto; /* Enable scrolling for overflowing content */
+    scrollbar-width: thin; 
+    padding: 10px;
+    overflow: visible;
+}
+
+/* Group Details Styling */
+.group-details {
+    flex: 1 1 calc(30% - 20px); 
+    max-width: 300px; 
+    min-width: 250px; 
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+    .group-details:hover {
+        transform: scale(1.05); 
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+    }
+
+    /* Group Details Table */
+    .group-details table {
+        width: 100%; 
+        border-collapse: collapse;
+        font-size: 0.85rem; 
+        max-height: 200px;
+        overflow-y: auto; 
+        display: block; 
+    }
+
+    /* Limit Column Stretch */
+    .assigned-groups td, .assigned-groups th,
+    .group-details td, .group-details th {
+        border: 1px solid #ddd;
+        padding: 5px; 
+        text-align: center; 
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+    }
+
+    /* Header Styling */
+    .assigned-groups th,
+    .group-details th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+    }
+
+    /* Scrollbar Customization (Optional) */
+    .assigned-groups table::-webkit-scrollbar,
+    .group-container::-webkit-scrollbar,
+    .group-details table::-webkit-scrollbar {
+        width: 8px; 
+    }
+
+    .assigned-groups table::-webkit-scrollbar-thumb,
+    .group-container::-webkit-scrollbar-thumb,
+    .group-details table::-webkit-scrollbar-thumb {
+        background-color: #888; 
+        border-radius: 4px; 
+    }
+
+        .assigned-groups table::-webkit-scrollbar-thumb:hover,
+        .group-container::-webkit-scrollbar-thumb:hover,
+        .group-details table::-webkit-scrollbar-thumb:hover {
+            background-color: #555; 
+        }
 .remove-button {
     color: red;
     padding: 0;
@@ -71,9 +177,157 @@
     cursor: pointer;
     font-size: 1rem;
     margin-left: 10px;
+    text-decoration: none;
 }
 
-    
+
+/* Table Styling */
+table {
+    width: 80%;
+    max-width: 600px; 
+    margin: 0 auto; /* Center the table */
+    font-size: 0.9rem;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f5f5f5;
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternate row colors */
+}
+
+tr:hover {
+    background-color: #eef; 
+}
+
+.tutor-info h3{
+    color: red;
+}
+/*--Assigned/ Groups list--*/
+
+/*--Tutor/Student Blogs--*/
+.notification {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+}
+
+    .notification .author {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .notification .content {
+        font-size: 0.9rem;
+        color: #555;
+    }
+/*--Tutor/Student Blogs--*/
+
+/*--Search&Filter--*/
+
+.search-wrapper {
+    display: flex; 
+    justify-content: flex-start; 
+    padding-left:20px;
+}
+
+
+.search-form {
+    flex: 1; 
+    max-width: 55%; 
+}
+
+
+.search-results {
+    flex: 1;  
+    max-width: 45%; 
+    margin-left:0;
+    padding-right:40px;
+}
+}
+.form-group {
+    margin-bottom: 15px;
+}
+
+input.form-control,
+select.form-control {
+    width: 100%; 
+    padding: 5px; 
+    font-size: 1rem; 
+    box-sizing: border-box; 
+    overflow-wrap: break-word; 
+    white-space: normal; 
+}
+    .search-results table {
+        width: 100%; 
+        border-collapse: collapse; 
+        font-size: 0.9rem; 
+    }
+        .search-results table th,
+        .search-results table td {
+            border: 1px solid #ddd; 
+            padding: 6px; 
+            text-align: left;
+        }
+
+.search-filter button {
+    margin-bottom: 20px; 
+}
+
+.search-filter h4 {
+    margin-top: 0; 
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+input.form-control,
+select.form-control {
+    width: 100%; 
+    padding: 3px; 
+    font-size: 1rem; 
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+
+button.form-button {
+    padding: 5px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+    button.form-button:hover {
+        background-color: #0056b3;
+    }
+
 @keyframes slideUp {
     from {
         transform: translateY(10px);
@@ -86,9 +340,26 @@
     }
 }
 
-/* Responsive trên màn hình nhỏ */
+/* Responsive */
 @media (max-width: 768px) {
     .dashboard-container {
-        grid-template-columns: 1fr; /* Hiển thị 1 cột trên màn hình nhỏ */
+        grid-template-columns: 1fr; /* Display one column when screen is scaled */
     }
 }
+
+
+/* Apply scrollbar inside content of dashboard-section */
+.dashboard-section {
+    max-height: 300px; /* Limit height */
+    overflow-y: auto; /* Scrollbar appear */
+}
+    .dashboard-section::-webkit-scrollbar {
+        width: 8px; 
+    }
+    .dashboard-section::-webkit-scrollbar-thumb {
+        background-color: #888; 
+        border-radius: 4px; 
+    }
+        .dashboard-section::-webkit-scrollbar-thumb:hover {
+            background-color: #555; 
+        }
