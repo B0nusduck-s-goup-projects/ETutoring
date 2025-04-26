@@ -103,7 +103,7 @@ namespace SchoolSystem.Controllers
 			var subject = "Your blog has been successfully created.";
 			var body = $@"
             <h1>Hello {user.Name}</h1>
-            <p>BYour blog has been successfully created.</p>
+            <p>Your blog has been successfully created.</p>
             <p><strong>Title:</strong> {blog.Title}</p>
         ";
 			await _emailService.SendEmailsAsync(new List<string> { user.Email }, subject, body);
