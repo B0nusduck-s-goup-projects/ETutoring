@@ -1,14 +1,18 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using EmailSender.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using SchoolSystem.Data;
+using SchoolSystem.Migrations;
 using SchoolSystem.Models;
 using SchoolSystem.ViewModels;
 using System;
 using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -19,11 +23,12 @@ namespace SchoolSystem.Controllers
 	{
 		private readonly AppDbContext _context;
 		private readonly UserManager<AppUser> _userManager;
-
-		public BlogController(AppDbContext context, UserManager<AppUser> userManager)
+		private readonly EmailService _emailService;
+		public BlogController(AppDbContext context, UserManager<AppUser> userManager, EmailService emailService)
 		{
 			_context = context;
 			_userManager = userManager;
+			_emailService = emailService;
 		}
 
         public async Task<IActionResult> Index()
@@ -82,7 +87,7 @@ namespace SchoolSystem.Controllers
 				imagePath = $"/BlogUploads/{uniqueFileName}"; 
 			}
 
-			var blog = new Blog
+			var blog = new SchoolSystem.Models.Blog
 			{
 				Title = model.Title,
 				Content = model.Content,
@@ -92,7 +97,17 @@ namespace SchoolSystem.Controllers
 			};
 
 			_context.Blogs.Add(blog);
-			await _context.SaveChangesAsync();
+			var result = await _context.SaveChangesAsync();
+			if (result > 0) { 
+			// Send email
+			var subject = "Your blog has been successfully created.";
+			var body = $@"
+            <h1>Hello {user.Name}</h1>
+            <p>BYour blog has been successfully created.</p>
+            <p><strong>Title:</strong> {blog.Title}</p>
+        ";
+			await _emailService.SendEmailsAsync(new List<string> { user.Email }, subject, body);
+			}
 
 			return RedirectToAction("Index");
 		}
@@ -130,7 +145,7 @@ namespace SchoolSystem.Controllers
 			var userId = _userManager.GetUserId(User);
 			var userRoles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
 
-			// Kiểm tra quyền chỉnh sửa
+		
 			if (userId != blog.UserId && !userRoles.Contains("Admin") && !userRoles.Contains("Staff"))
 			{
 				return Forbid();
@@ -141,7 +156,7 @@ namespace SchoolSystem.Controllers
 				Id = blog.Id,
 				Title = blog.Title,
 				Content = blog.Content,
-				ExistingImage = blog.Image // Lưu ảnh cũ
+				ExistingImage = blog.Image 
 			};
 
 			return View(model);
@@ -214,8 +229,23 @@ namespace SchoolSystem.Controllers
 			blog.TimeStamp = DateTime.UtcNow;
 
 			_context.Blogs.Update(blog);
-			await _context.SaveChangesAsync();
+			var result = await _context.SaveChangesAsync();
+			if (result > 0) { 
+			var blogOwner = await _context.Users.FirstOrDefaultAsync(u => u.Id == blog.UserId);
+				if (blogOwner != null)
+				{
 
+					// Send Email
+					var subject = "Your blog has been successfully updated.";
+					var body = $@"
+               		<h1>Hello {blogOwner.Name}</h1>
+               		<p>Your blog has been successfully updated.</p>
+               		<p><strong>Title:</strong> {blog.Title}</p>
+            ";
+					await _emailService.SendEmailsAsync(new List<string> { blogOwner.Email }, subject, body);
+
+				}
+			}
 			return RedirectToAction("Index");
 		}
 
@@ -243,9 +273,26 @@ namespace SchoolSystem.Controllers
 
 			_context.BlogComments.RemoveRange(blog.Comments);
 			_context.BlogRatings.RemoveRange(blog.Ratings);
-
 			_context.Blogs.Remove(blog);
-			await _context.SaveChangesAsync();
+
+			var result = await _context.SaveChangesAsync();
+			if (result > 0)
+			{
+				var blogOwner = await _context.Users.FirstOrDefaultAsync(u => u.Id == blog.UserId);
+				if (blogOwner != null)
+				{
+
+					// Send Email
+					var subject = "Your blog has been successfully deleted.";
+					var body = $@"
+               		<h1>Hello {blogOwner.Name}</h1>
+               		<p>Your blog has been successfully deleted.</p>
+               		<p><strong>Title:</strong> {blog.Title}</p>
+            ";
+					await _emailService.SendEmailsAsync(new List<string> { blogOwner.Email }, subject, body);
+
+				}
+			}
 
 			TempData["SuccessMessage"] = "Blog deleted successfully!";
 			return RedirectToAction("Index");
@@ -282,7 +329,25 @@ namespace SchoolSystem.Controllers
 				_context.BlogRatings.Add(newRating);
 			}
 
-			await _context.SaveChangesAsync();
+			var result = await _context.SaveChangesAsync();
+			if (result > 0)
+			{
+				var blog = await _context.Blogs.FirstOrDefaultAsync(u => u.Id == blogId);
+				if (blog != null)
+				{
+
+					// Send Email
+					var subject = "Rating blog successfully.";
+					var body = $@"
+               		<h1>Hello {user.Name}</h1>
+               		<p>Rating blog successfully.</p>
+               		<p><strong>Blog Title:</strong> {blog.Title}</p>
+					<p><strong>Rating: </strong> {rating}</p>
+            ";
+					await _emailService.SendEmailsAsync(new List<string> { user.Email }, subject, body);
+
+				}
+			}
 			return RedirectToAction("Details", new { id = blogId });
 		}
 
@@ -310,8 +375,23 @@ namespace SchoolSystem.Controllers
 			};
 
 			_context.BlogComments.Add(comment);
-			await _context.SaveChangesAsync();
-
+			var result = await _context.SaveChangesAsync();
+			if (result > 0)
+			{
+				var blog = await _context.Blogs.FirstOrDefaultAsync(u => u.Id == model.BlogId);
+				if(blog != null) { 
+				// Send email
+				var subject = "Comment blog successfully";
+				var body = $@"
+            <h1>Hello {user.Name}</h1>
+            <p>Comment blog successfully.</p>
+            <p><strong>Blog title:</strong> {blog.Title}</p>
+			<p><strong>Comment:</strong> {model.Content}</p>
+			<p><strong>Comment time:</strong> {comment.TimeStamp:dd/MM/yyyy HH:mm}</p>
+        ";
+				await _emailService.SendEmailsAsync(new List<string> { user.Email }, subject, body);
+			}
+			}
 			return RedirectToAction("Details", new { id = model.BlogId });
 		}
 
@@ -325,10 +405,11 @@ namespace SchoolSystem.Controllers
 				return NotFound();
 			}
 
-			var userId = _userManager.GetUserId(User);
+			//var userId = _userManager.GetUserId(User);
+			var user = await _userManager.GetUserAsync(User);
 			var userRoles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
 
-			if (userId != comment.UserId && userId != comment.Blog.UserId && !userRoles.Contains("Admin") && !userRoles.Contains("Staff"))
+			if (user.Id != comment.UserId && user.Id != comment.Blog.UserId && !userRoles.Contains("Admin") && !userRoles.Contains("Staff"))
 			{
 				return Forbid();
 			}
@@ -336,7 +417,24 @@ namespace SchoolSystem.Controllers
 			await DeleteCommentRecursively(comment.Id);
 
 			_context.BlogComments.Remove(comment);
-			await _context.SaveChangesAsync();
+			var result = await _context.SaveChangesAsync();
+			if (result > 0)
+			{
+				var blog = await _context.Blogs.FirstOrDefaultAsync(u => u.Id == comment.BlogId);
+				if (blog != null)
+				{
+					// Send email
+					var subject = "Delete comment in blog successfully";
+					var body = $@"
+           			<h1>Hello {user.Name}</h1>
+           			<p>Delete comment in blog successfully.</p>
+           			<p><strong>Blog title:</strong> {blog.Title}</p>
+					<p><strong>Comment:</strong> {comment.Content}</p>
+					<p><strong>Comment time:</strong> {comment.TimeStamp:dd/MM/yyyy HH:mm}</p>
+        ";
+					await _emailService.SendEmailsAsync(new List<string> { user.Email }, subject, body);
+				}
+			}
 
 			return RedirectToAction("Details", new { id = comment.BlogId });
 		}

@@ -45,6 +45,12 @@ namespace SchoolSystem.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_Code",
+                table: "AspNetUsers",
+                column: "Code",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DocumentComments_DocumentId",
                 table: "DocumentComments",
                 column: "DocumentId");
@@ -65,6 +71,10 @@ namespace SchoolSystem.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DocumentComments");
+
+            migrationBuilder.DropIndex(
+                name: "IX_AspNetUsers_Code",
+                table: "AspNetUsers");
         }
     }
 }
