@@ -1,39 +1,85 @@
 ﻿@model ICollection<SchoolSystem.ViewModels.ChatListVM>
 
 @{
-    Layout = "~/Views/Shared/_ChatLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@if(Model != null && Model.Count() != 0)
-{    
-    foreach(var item in Model){
-        if(@item.IsValid)
+<head>
+    <link rel="stylesheet" href="~/css/message.css" />
+</head>
+
+<h2>Students Message List</h2>
+<div class="ChatList-Container">
+    <div class="ChatList-detail">
+        @if (Model != null && Model.Count() != 0)
         {
-            <a asp-action="ChatWindow" asp-route-groupid="@item.groupId">
-                <div>
-                    @if (item.image != null && item.image != "")
+            <table class="List-student">
+                <thead>
+                    <tr>
+                        <th>Avatar</th>
+                        <th>Student name</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
                     {
-                        <img style="display:inline" width="70" height="70" src="/uploads/@item.image" onerror="this.onerror=null; this.src=/uploads/default-profile.png" />
+                        if (item.IsValid)
+                        {
+                            <tr>
+                                <td>
+                                    @if (item.image != null && item.image != "")
+                                    {
+                                        <img src="/uploads/@item.image" onerror="this.onerror=null; this.src='/uploads/default-profile.png'" />
+                                    }
+                                    else
+                                    {
+                                        <img src="/uploads/default-profile.png" />
+                                    }
+                                </td>
+                                <td>@item.UserName</td>
+                                <td>
+                                    <a asp-action="ChatWindow" asp-route-groupid="@item.groupId" class="action-link"><i class="fa-solid fa-envelope"></i></a>
+                                </td>
+                            </tr>
+                        }
                     }
-                    else
-                    {
-                        <img style="display:inline" width="70" height="70" src="/uploads/default-profile.png" />
-                    }
-                    <h5 style="display:inline">@item.UserName</h5>
-                </div>
-            </a>
+                </tbody>
+            </table>
         }
-    }
-}
-else
-{
-    <div style="text-align:center">
+        else
+        {
+            <div style="text-align:center">
                 <h1>
-                    You have no assigned student for a conversation at the moment, 
+                    You have no assigned student for a conversation at the moment,
                     please await for your assignment or contact the office to arrange
                     and assignment if you are yet to revice any information regarding
                     this topic
                 </h1>
+            </div>
+        }
     </div>
-}
+</div>
+@* @if(Model != null && Model.Count() != 0) *@
+@* {     *@
+@*     foreach(var item in Model){ *@
+@*         if(@item.IsValid) *@
+@*         { *@
+@*             <a asp-action="ChatWindow" asp-route-groupid="@item.groupId"> *@
+@*                 <div> *@
+@*                     @if (item.image != null && item.image != "") *@
+@*                     { *@
+@*                         <img style="display:inline" width="70" height="70" src="/uploads/@item.image" onerror="this.onerror=null; this.src=/uploads/default-profile.png" /> *@
+@*                     } *@
+@*                     else *@
+@*                     { *@
+@*                         <img style="display:inline" width="70" height="70" src="/uploads/default-profile.png" /> *@
+@*                     } *@
+@*                     <h5 style="display:inline">@item.UserName</h5> *@
+@*                 </div> *@
+@*             </a> *@
+@*         } *@
+@*     } *@
+@* } *@
+
 

@@ -7,34 +7,33 @@
     <link rel="stylesheet" href="~/css/message.css" />
 </head>
 
-<div class="layout">
-    <h2 class="heading-text">Message</h2>
-</div>
+
+<h2 class="heading-text">Message</h2>
 
 <div class="chat-container">
     <div id="chatWindow" class="chat-messages">
         @if (Model != null)
         {
             @foreach (Message message in Model.Messages)
+            {
+                if (message.Sender != Model.CurrentUser)
                 {
-                    if (message.Sender != Model.CurrentUser)
-                    {
-                        <div class="message incoming">
-                            <h6>@message.Sender.Name</h6>
-                            <p>@message.TextContent</p>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="message outgoing">
-                            <p>@message.TextContent</p>
-                        </div>
-                    }
+                    <div class="message incoming">
+                        <h6>@message.Sender.Name</h6>
+                        <p>@message.TextContent</p>
+                    </div>
                 }
+                else
+                {
+                    <div class="message outgoing">
+                        <p>@message.TextContent</p>
+                    </div>
+                }
+            }
         }
-        
+
     </div>
-    
+
     <div class="chat-input">
         <input id="messageInput" type="text" placeholder="Aa" maxlength="500">
         <button id="sendButton">Send</button>
@@ -62,7 +61,7 @@
         }).catch(function (err) {
             return console.error(err.toString());
         });
-        
+
         //define "ReceiveMessage" function callable from hub
         connection.on("ReceiveMessage", function (senderName, senderId, textMessage) {
             var chatWindow = document.getElementById("chatWindow");

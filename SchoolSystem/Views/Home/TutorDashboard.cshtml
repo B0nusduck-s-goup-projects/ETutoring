@@ -6,7 +6,7 @@
     // Layout = "~/Views/Shared/_ChatLayout.cshtml";
 }
 <head>
-    <link rel="stylesheet" href="~/css/tutor.css" />
+    <link rel="stylesheet" href="~/css/tutor.css?v=1.1" />
 </head>
 
 <h2>Tutor Dashboard</h2>
@@ -17,186 +17,264 @@
         <h3>Tutor Information</h3>
         <p><strong>Tutor Name:</strong> @Model.TutorName</p>
     </div>
+    <!-- First Row -->
+    <div class="dashboard-row">
+        <!-- Assigned Groups -->
+        <div class="dashboard-section assigned-groups">
+            <h3>Assigned Groups</h3>
+            @if (Model.AssignedGroups.Any())
+            {
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Group ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var group in Model.AssignedGroups)
+                        {
+                            <tr>
+                                <td>@group.Id</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No groups available.</p>
+            }
 
-    <!-- Assigned Groups -->
-    <div class="dashboard-section assigned-groups">
-        <h3>Assigned Groups</h3>
-        @if (Model.AssignedGroups.Any())
-        {
-            <ul>
-                @foreach (var group in Model.AssignedGroups)
+            <!-- Groups List -->
+            <div class="dashboard-section group-list">
+                <h3>Groups List</h3>
+                @if (Model.AssignedGroups.Any())
                 {
-                    <li><strong>Group ID:</strong> @group.Id</li>
+                    <div class="group-container">
+                        @foreach (var group in Model.AssignedGroups)
+                        {
+                            <div class="group-details">
+                                <h5>Group: @group.Id</h5>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Role</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var groupUser in Model.GroupUsersWithRoles
+                                       .Where(gu => gu.User.GroupUsers.Any(ggu => ggu.GroupId == group.Id))
+                                       .GroupBy(gu => gu.User.Id)
+                                       .Select(g => g.First()))
+                                        {
+                                            <tr>
+                                                <td>@groupUser.User.Name</td>
+                                                <td>@string.Join(", ", groupUser.Roles)</td>
+                                                <td>
+                                                    @if (groupUser.Roles.Contains("Student"))
+                                                    {
+                                                        <form asp-action="RemoveStudentFromGroup" method="post" class="remove-student-form" style="display:inline;">
+                                                            <input type="hidden" name="groupId" value="@group.Id" />
+                                                            <input type="hidden" name="studentId" value="@groupUser.User.Id" />
+                                                            <button type="submit" class="btn btn-link btn-sm remove-button" title="Remove Student">&#x2716;</button>
+                                                        </form>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    </div>
                 }
-            </ul>
-        }
-        else
-        {
-            <p>No assigned groups available.</p>
-        }
+
+                else
+                {
+                    <p>No groups available.</p>
+                }
+            </div>
+            
+        </div>
+
+        <!-- Search&Filter -->
+        <div class="dashboard-section search-filter">
+            <h3>Search and Filter</h3>
+            <div class="search-wrapper">
+                <form method="get" asp-action="Dashboard" class="search-form">
+                    <div class="form-group">
+                        <label for="searchName">Search by Student Name:</label>
+                        <input type="text" id="searchName" name="searchName" value="@Model.SearchName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="groupId">Filter by Group:</label>
+                        <select id="groupId" name="groupId" class="form-control">
+                            <option value="">All Groups</option>
+                            @foreach (var group in Model.AssignedGroups)
+                            {
+                                var selectedGroupId = Model.FilteredStudents?.FirstOrDefault()?.GroupUsers?.FirstOrDefault()?.GroupId;
+                                var isSelected = group.Id == selectedGroupId ? "selected" : "";
+                                <option value="@group.Id" selected="@isSelected">@group.Id</option>
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="form-button">Search</button>
+                </form>
+
+                <div class="search-results">
+                    <h4>Search Results</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.FilteredStudents != null && Model.FilteredStudents.Any())
+                            {
+                                @foreach (var student in Model.FilteredStudents)
+                                {
+                                    <tr>
+                                        <td>@student.Name</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <p>No students found.</p>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Tutor Blogs -->
-    <div class="dashboard-section tutor-blogs">
-        <h3>Tutor Blogs</h3>
-        @if (Model.TutorBlogs.Any())
-        {
-            <ul>
+    <!-- Second Row -->
+    <div class="dashboard-row">
+        <!-- Tutor/Student Blogs -->
+        <div class="dashboard-section tutor-blogs">
+            <h3>Tutor Blogs</h3>
+            @if (Model.TutorBlogs.Any())
+            {
                 @foreach (var blog in Model.TutorBlogs)
                 {
-                    <li>You posted a blog on @blog.TimeStamp.ToString("dd/MM/yyyy") by @blog.User?.Name</li>
+                    <div class="notification">
+                        <p class="author">@blog.User?.Name</p>
+                        <p class="content">Posted a new blog on @blog.TimeStamp.ToString("dd/MM/yyyy")</p>
+                    </div>
                 }
-            </ul>
-        }
-        else
-        {
-            <p>No blogs available.</p>
-        }
-    </div>
+            }
+            else
+            {
+                <p>No blogs available.</p>
+            }
+            
+        </div>
 
-    <!-- Student Blogs -->
-    <div class="dashboard-section student-blogs">
-        <h3>Student Blogs</h3>
-        @if (Model.StudentBlogs.Any())
-        {
-            <ul>
+        <div class="dashboard-section student-blogs">
+            <h3>Student Blogs</h3>
+            @if (Model.StudentBlogs.Any())
+            {
                 @foreach (var blog in Model.StudentBlogs)
                 {
-                    <li>You received a blog from @blog.User?.Name on @blog.TimeStamp.ToString("dd/MM/yyyy")</li>
+                    <div class="notification">
+                        <p class="author">@blog.User?.Name</p>
+                        <p class="content">Posted a new blog on @blog.TimeStamp.ToString("dd/MM/yyyy")</p>
+                    </div>
                 }
-            </ul>
-        }
-        else
-        {
-            <p>No student blogs available.</p>
-        }
-    </div>
+            }
+            else
+            {
+                <p>No blogs available.</p>
+            }
+        </div>
 
-    <!-- Documents -->
-    <div class="dashboard-section documents">
-        <h3>Documents</h3>
-        @if (Model.Documents != null && Model.Documents.Any())
-        {
-            <ul>
+        <!-- Documents -->
+        <div class="dashboard-section documents">
+            <h3>Documents</h3>
+            @if (Model.Documents.Any())
+            {
                 @foreach (var document in Model.Documents)
                 {
-                    <li>
-                        <p><strong>Uploaded By:</strong> @(document.User?.Name ?? "Unknown User")</p>
-                        <p><strong>Upload Date:</strong> @document.UploadDate.ToString("dd/MM/yyyy")</p>
-                    </li>
+                    <div class="notification">
+                        <p class="author">@document.User?.Name</p>
+                        <p class="content">Uploaded a document on @document.UploadDate.ToString("dd/MM/yyyy")</p>
+                    </div>
                 }
-            </ul>
-        }
-        else
-        {
-            <p>No documents available.</p>
-        }
-    </div>
+            }
+            else
+            {
+                <p>No documents available.</p>
+            }
+        </div>
 
-    <!-- Recent Messages -->
-    <div class="dashboard-section recent-messages">
-        <h3>Recent Messages</h3>
-        @{
-            var currentUserId = ViewData["CurrentUserId"] as string;
-        }
-        @if (Model.RecentMessages.Any())
-        {
-            <ul>
+        <!-- Recent Messages -->
+        <div class="dashboard-section recent-messages">
+            <h3>Recent Messages</h3>
+            @{
+                var currentUserId = ViewData["CurrentUserId"] as string;
+            }
+            @if (Model.RecentMessages.Any())
+            {
                 @foreach (var message in Model.RecentMessages)
                 {
-                    <li>
-                        @if (message.SenderId == currentUserId)
-                        {
-                            <h5>You have sent a message</h5>
-                            <p><small>At: @message.TimeStamp.ToString("g")</small></p>
-                        }
-                        else
-                        {
-                            <h5>You have received a message</h5>
-                            <p><small>From: @(message.Sender?.Name ?? "Unknown User")</small></p>
-                            <p><small>At: @message.TimeStamp.ToString("g")</small></p>
-                        }
-                    </li>
+                    <div class="notification">
+                        <p class="author">
+                            @(message.SenderId == currentUserId ? "You" : message.Sender?.Name ?? "Unknown User")
+                        </p>
+                        <p class="content">
+                            @(message.SenderId == currentUserId
+                                ? $"Sent a message at {message.TimeStamp.ToString("g")}"
+                                : $"Received a message at {message.TimeStamp.ToString("g")}")
+                        </p>
+                    </div>
                 }
-            </ul>
-        }
-        else
-        {
-            <p>No recent messages available.</p>
-        }
-    </div>
-
-    <!-- Search and Filter -->
-    <div class="dashboard-section search-filter">
-        <h3>Search and Filter</h3>
-        <form method="get" asp-action="Dashboard">
-            <div class="form-group">
-                <label for="searchName">Search by Name:</label>
-                <input type="text" id="searchName" name="searchName" value="@Model.SearchName" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="groupId">Filter by Group:</label>
-                <select id="groupId" name="groupId" class="form-control">
-                    <option value="">All Groups</option>
-                    @foreach (var group in Model.AssignedGroups)
-                    {
-                        var selectedGroupId = Model.FilteredStudents?.FirstOrDefault()?.GroupUsers?.FirstOrDefault()?.GroupId;
-                        var isSelected = group.Id == selectedGroupId ? "selected" : "";
-                        <option value="@group.Id" selected="@isSelected">@group.Id</option>
-                    }
-                    }
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
-    </div>
-
-    <!-- Filtered Students -->
-    <div class="dashboard-section filtered-students">
-        <h3>Filtered Students</h3>
-        @if (Model.FilteredStudents != null && Model.FilteredStudents.Any())
-        {
-            <ul>
-                @foreach (var student in Model.FilteredStudents)
-                {
-                    <li>@student.Name</li>
-                }
-            </ul>
-        }
-        else
-        {
-            <p>No students found.</p>
-        }
-    </div>
-
-    <!-- Groups List -->
-    <div class="dashboard-section groups-list">
-        <h3>Groups List</h3>
-        @if (Model.AssignedGroups.Any())
-        {
-            @foreach (var group in Model.AssignedGroups)
-            {
-                <div>
-                    <h5>Group: @group.Id</h5>
-                    <ul>
-                        @foreach (var groupUser in Model.GroupUsersWithRoles
-                       .Where(gu => gu.User.GroupUsers.Any(ggu => ggu.GroupId == group.Id))
-                       .GroupBy(gu => gu.User.Id)
-                       .Select(g => g.First()))
-                        {
-                            <li>
-                                Name: @groupUser.User.Name - Roles: @string.Join(", ", groupUser.Roles)
-                            </li>
-                        }
-                    </ul>
-                </div>
             }
-        }
-        else
-        {
-            <p>No groups available.</p>
-        }
+            else
+            {
+                <p>No recent messages available.</p>
+            }
+        </div>
     </div>
 </div>
+@section Scripts{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Lắng nghe sự kiện 'submit' trên tất cả form có class 'remove-student-form'
+            document.querySelectorAll('.remove-student-form').forEach(form => {
+                form.addEventListener('submit', async function (event) {
+                    event.preventDefault(); // Ngăn trình duyệt gửi form theo cách mặc định
 
+                    const formData = new FormData(this); // Lấy dữ liệu từ form
+                    const response = await fetch(this.action, {
+                        method: this.method,
+                        body: formData
+                    });
 
+                    if (response.ok) {
+                        // Xóa hàng (tr) của bảng chứa form được submit
+                        const row = this.closest('tr');
+                        row.remove();
+
+                        // Kiểm tra nếu bảng (tbody) không còn bất kỳ hàng nào
+                        const tableBody = row.closest('tbody');
+                        if (tableBody && tableBody.rows.length === 0) {
+                            // Xóa toàn bộ nhóm (group-details) nếu bảng trống
+                            const groupDetails = row.closest('.group-details');
+                            if (groupDetails) {
+                                groupDetails.remove();
+                            }
+                        }
+                    } else {
+                        // Hiển thị lỗi nếu server không xử lý thành công
+                        alert('Failed to remove student.');
+                    }
+                });
+            });
+        });
+    </script>
+}
