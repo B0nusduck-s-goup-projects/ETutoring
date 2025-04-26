@@ -200,7 +200,7 @@ namespace SchoolSystem.Controllers
                     <h1>Welcome {user.Name}</h1>
                     <p>Your account has been successfully created.</p>
                     <p><strong>Email:</strong> {user.Email}</p>
-                    <p><strong>Mật khẩu:</strong> {model.Password}</p>
+                    <p><strong>Password:</strong> {model.Password}</p>
 
                 ";
 					await emailService.SendEmailsAsync(new List<string> { user.Email }, subject, body);
@@ -601,7 +601,7 @@ namespace SchoolSystem.Controllers
                    				<h1>Welcome {user.Name}</h1>
                    				<p>Your account has been successfully created.</p>
                    				<p><strong>Email:</strong> {user.Email}</p>
-                   				<p><strong>Mật khẩu:</strong> default123</p>
+                   				<p><strong>Password:</strong> default123</p>
 
                 ";
 								await emailService.SendEmailsAsync(new List<string> { user.Email }, subject, body);
