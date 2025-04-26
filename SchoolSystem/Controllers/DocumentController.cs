@@ -6,6 +6,7 @@ using SchoolSystem.Data;
 using SchoolSystem.Models;
 using SchoolSystem.ViewModels;
 using System.Security.Claims;
+using EmailSender.Services;
 
 namespace SchoolSystem.Controllers
 {
@@ -15,16 +16,17 @@ namespace SchoolSystem.Controllers
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<AppUser> _userManager;
-
-        public DocumentController(
+		private readonly EmailService _emailService;
+		public DocumentController(
             AppDbContext context, 
             IWebHostEnvironment webHostEnvironment,
-            UserManager<AppUser> userManager)
+            UserManager<AppUser> userManager, EmailService emailService)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
             _userManager = userManager;
-        }
+			_emailService = emailService;
+		}
 
         public async Task<IActionResult> Index()
         {
@@ -59,10 +61,12 @@ namespace SchoolSystem.Controllers
         if (id == null) return NotFound();
 
         var document = await _context.Documents
-            .Include(d => d.User)
-            .FirstOrDefaultAsync(m => m.Id == id);
+			 .Include(d => d.User)
+			.Include(d => d.Comments)
+			.ThenInclude(c => c.User)
+			.FirstOrDefaultAsync(m => m.Id == id);
 
-        if (document == null) return NotFound();
+			if (document == null) return NotFound();
 
         var currentUser = await _userManager.GetUserAsync(User);
         var currentUserRole = (await _userManager.GetRolesAsync(currentUser)).FirstOrDefault();
@@ -79,8 +83,9 @@ namespace SchoolSystem.Controllers
             FileSize = document.FileSize,
             UserName = document.User.UserName,
             UserId = document.UserId,
-            CanEdit = document.UserId == currentUser.Id
-        };
+            CanEdit = document.UserId == currentUser.Id,
+			Comments = document.Comments.ToList()
+		};
 
         return View(viewModel);
     }
@@ -332,5 +337,108 @@ namespace SchoolSystem.Controllers
         {
             return _context.Documents.Any(e => e.Id == id);
         }
-    }
+
+		//CommentHead
+		[HttpPost]
+		public async Task<IActionResult> AddComment(DocumentCommentVM model)
+		{
+			if (!ModelState.IsValid)
+			{
+				TempData["ErrorMessage"] = "Comment cannot be empty.";
+				return RedirectToAction("Details", new { id = model.DocumentId });
+			}
+
+			var user = await _userManager.GetUserAsync(User);
+			if (user == null)
+				return Unauthorized();
+
+			var comment = new DocumentComment
+			{
+				Content = model.Content,
+				DocumentId = model.DocumentId,
+				UserId = user.Id,
+				ParentCommentId = model.ParentCommentId,
+				TimeStamp = DateTime.UtcNow
+			};
+
+			_context.DocumentComments.Add(comment);
+			var result = await _context.SaveChangesAsync();
+			if (result > 0)
+			{
+				var doc = await _context.Documents.FirstOrDefaultAsync(u => u.Id == model.DocumentId);
+				if (doc != null)
+				{
+					// Send email
+					var subject = "Comment document successfully";
+					var body = $@"
+                    <h1>Hello {user.Name}</h1>
+                    <p>Comment document successfully.</p>
+                    <p><strong>Document title:</strong> {doc.Title}</p>
+			        <p><strong>Comment:</strong> {model.Content}</p>
+			        <p><strong>Comment time:</strong> {comment.TimeStamp:dd/MM/yyyy HH:mm}</p>
+        ";
+					await _emailService.SendEmailsAsync(new List<string> { user.Email }, subject, body);
+				}
+			}
+
+			return RedirectToAction("Details", new { id = model.DocumentId });
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> DeleteComment(int CommentId)
+		{
+			var comment = await _context.DocumentComments.Include(c => c.Document).FirstOrDefaultAsync(c => c.Id == CommentId);
+
+			if (comment == null)
+			{
+				return NotFound();
+			}
+
+			var user = await _userManager.GetUserAsync(User);
+			var userRoles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
+
+			if (user.Id != comment.UserId && user.Id != comment.Document.UserId && !userRoles.Contains("Admin") && !userRoles.Contains("Staff"))
+			{
+				return Forbid();
+			}
+
+			await DeleteCommentRecursively(comment.Id);
+
+			_context.DocumentComments.Remove(comment);
+			var result = await _context.SaveChangesAsync();
+			if (result > 0)
+			{
+				var doc = await _context.Documents.FirstOrDefaultAsync(u => u.Id == comment.DocumentId);
+				if (doc != null)
+				{
+					// Send email
+					var subject = "Delete comment in document successfully";
+					var body = $@"
+           			<h1>Hello {user.Name}</h1>
+           			<p>Delete comment in document successfully.</p>
+           			<p><strong>Document title:</strong> {doc.Title}</p>
+					<p><strong>Comment:</strong> {comment.Content}</p>
+					<p><strong>Comment time:</strong> {comment.TimeStamp:dd/MM/yyyy HH:mm}</p>
+        ";
+					await _emailService.SendEmailsAsync(new List<string> { user.Email }, subject, body);
+				}
+			}
+
+			return RedirectToAction("Details", new { id = comment.DocumentId });
+		}
+
+		private async Task DeleteCommentRecursively(int commentId)
+		{
+			var replies = await _context.DocumentComments.Where(c => c.ParentCommentId == commentId).ToListAsync();
+
+			foreach (var reply in replies)
+			{
+				await DeleteCommentRecursively(reply.Id);
+				_context.DocumentComments.Remove(reply);
+			}
+
+			await _context.SaveChangesAsync();
+		}
+		//CommentEnd
+	}
 }

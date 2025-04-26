@@ -75,7 +75,7 @@ app.MapHub<ChatHub>("/chatHub");
 app.MapControllerRoute(
 
 	name: "default",
-	pattern: "{controller=Account}/{action=Login}/{id?}");
+	pattern: "{controller=Account}/{action=RedirectByRole}/{id?}");
 
 app.Run();
 

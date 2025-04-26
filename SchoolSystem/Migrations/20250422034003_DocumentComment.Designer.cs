@@ -12,8 +12,8 @@ using SchoolSystem.Data;
 namespace SchoolSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250406161650_UniqueCode")]
-    partial class UniqueCode
+    [Migration("20250422034003_DocumentComment")]
+    partial class DocumentComment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -248,28 +248,6 @@ namespace SchoolSystem.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("SchoolSystem.Models.AttachFiles", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FileContent")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MessageId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MessageId");
-
-                    b.ToTable("AttachFiles");
-                });
-
             modelBuilder.Entity("SchoolSystem.Models.Blog", b =>
                 {
                     b.Property<int>("Id")
@@ -491,11 +469,6 @@ namespace SchoolSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("FileCount")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
@@ -568,17 +541,6 @@ namespace SchoolSystem.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SchoolSystem.Models.AttachFiles", b =>
-                {
-                    b.HasOne("SchoolSystem.Models.Message", "Message")
-                        .WithMany("AttachFiles")
-                        .HasForeignKey("MessageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Message");
                 });
 
             modelBuilder.Entity("SchoolSystem.Models.Blog", b =>
@@ -748,11 +710,6 @@ namespace SchoolSystem.Migrations
                     b.Navigation("GroupUsers");
 
                     b.Navigation("Messages");
-                });
-
-            modelBuilder.Entity("SchoolSystem.Models.Message", b =>
-                {
-                    b.Navigation("AttachFiles");
                 });
 #pragma warning restore 612, 618
         }
