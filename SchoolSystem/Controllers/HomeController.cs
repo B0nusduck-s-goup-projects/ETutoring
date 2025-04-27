@@ -278,23 +278,23 @@ public class HomeController : Controller
         };
     }
 
-    [HttpPost]
-    [Authorize(Roles = "Tutor")]
-    public async Task<IActionResult> RemoveStudentFromGroup(int groupId, string studentId)
-    {
-        var groupUser = await _context.GroupUsers
-            .FirstOrDefaultAsync(gu => gu.GroupId == groupId && gu.UserId == studentId);
+    //[HttpPost]
+    //[Authorize(Roles = "Tutor")]
+    //public async Task<IActionResult> RemoveStudentFromGroup(int groupId, string studentId)
+    //{
+    //    var groupUser = await _context.GroupUsers
+    //        .FirstOrDefaultAsync(gu => gu.GroupId == groupId && gu.UserId == studentId);
 
-        if (groupUser == null)
-        {
-            return NotFound();
-        }
+    //    if (groupUser == null)
+    //    {
+    //        return NotFound();
+    //    }
 
-        _context.GroupUsers.Remove(groupUser);
-        await _context.SaveChangesAsync();
+    //    _context.GroupUsers.Remove(groupUser);
+    //    await _context.SaveChangesAsync();
 
-        return Ok();
-    }
+    //    return Ok();
+    //}
 	[Authorize(Roles = "Admin,Staff")]
 	public IActionResult Index()
     {

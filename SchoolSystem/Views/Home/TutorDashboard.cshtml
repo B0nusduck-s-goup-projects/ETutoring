@@ -60,7 +60,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Role</th>
-                                            <th>Action</th>
+                                            @* <th>Action</th> *@
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,16 +72,16 @@
                                             <tr>
                                                 <td>@groupUser.User.Name</td>
                                                 <td>@string.Join(", ", groupUser.Roles)</td>
-                                                <td>
-                                                    @if (groupUser.Roles.Contains("Student"))
-                                                    {
-                                                        <form asp-action="RemoveStudentFromGroup" method="post" class="remove-student-form" style="display:inline;">
-                                                            <input type="hidden" name="groupId" value="@group.Id" />
-                                                            <input type="hidden" name="studentId" value="@groupUser.User.Id" />
-                                                            <button type="submit" class="btn btn-link btn-sm remove-button" title="Remove Student">&#x2716;</button>
-                                                        </form>
-                                                    }
-                                                </td>
+                                                @* <td> *@
+                                                @*     @if (groupUser.Roles.Contains("Student")) *@
+                                                @*     { *@
+                                                @*         <form asp-action="RemoveStudentFromGroup" method="post" class="remove-student-form" style="display:inline;"> *@
+                                                @*             <input type="hidden" name="groupId" value="@group.Id" /> *@
+                                                @*             <input type="hidden" name="studentId" value="@groupUser.User.Id" /> *@
+                                                @*             <button type="submit" class="btn btn-link btn-sm remove-button" title="Remove Student">&#x2716;</button> *@
+                                                @*         </form> *@
+                                                @*     } *@
+                                                @* </td> *@
                                             </tr>
                                         }
                                     </tbody>
@@ -241,40 +241,41 @@
         </div>
     </div>
 </div>
-@section Scripts{
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Lắng nghe sự kiện 'submit' trên tất cả form có class 'remove-student-form'
-            document.querySelectorAll('.remove-student-form').forEach(form => {
-                form.addEventListener('submit', async function (event) {
-                    event.preventDefault(); // Ngăn trình duyệt gửi form theo cách mặc định
 
-                    const formData = new FormData(this); // Lấy dữ liệu từ form
-                    const response = await fetch(this.action, {
-                        method: this.method,
-                        body: formData
-                    });
+@* @section Scripts{ *@
+@*     <script> *@
+@*         document.addEventListener('DOMContentLoaded', function () { *@
+@*             // Lắng nghe sự kiện 'submit' trên tất cả form có class 'remove-student-form' *@
+@*             document.querySelectorAll('.remove-student-form').forEach(form => { *@
+@*                 form.addEventListener('submit', async function (event) { *@
+@*                     event.preventDefault(); // Ngăn trình duyệt gửi form theo cách mặc định *@
 
-                    if (response.ok) {
-                        // Xóa hàng (tr) của bảng chứa form được submit
-                        const row = this.closest('tr');
-                        row.remove();
+@*                     const formData = new FormData(this); // Lấy dữ liệu từ form *@
+@*                     const response = await fetch(this.action, { *@
+@*                         method: this.method, *@
+@*                         body: formData *@
+@*                     }); *@
 
-                        // Kiểm tra nếu bảng (tbody) không còn bất kỳ hàng nào
-                        const tableBody = row.closest('tbody');
-                        if (tableBody && tableBody.rows.length === 0) {
-                            // Xóa toàn bộ nhóm (group-details) nếu bảng trống
-                            const groupDetails = row.closest('.group-details');
-                            if (groupDetails) {
-                                groupDetails.remove();
-                            }
-                        }
-                    } else {
-                        // Hiển thị lỗi nếu server không xử lý thành công
-                        alert('Failed to remove student.');
-                    }
-                });
-            });
-        });
-    </script>
-}
+@*                     if (response.ok) { *@
+@*                         // Xóa hàng (tr) của bảng chứa form được submit *@
+@*                         const row = this.closest('tr'); *@
+@*                         row.remove(); *@
+
+@*                         // Kiểm tra nếu bảng (tbody) không còn bất kỳ hàng nào *@
+@*                         const tableBody = row.closest('tbody'); *@
+@*                         if (tableBody && tableBody.rows.length === 0) { *@
+@*                             // Xóa toàn bộ nhóm (group-details) nếu bảng trống *@
+@*                             const groupDetails = row.closest('.group-details'); *@
+@*                             if (groupDetails) { *@
+@*                                 groupDetails.remove(); *@
+@*                             } *@
+@*                         } *@
+@*                     } else { *@
+@*                         // Hiển thị lỗi nếu server không xử lý thành công *@
+@*                         alert('Failed to remove student.'); *@
+@*                     } *@
+@*                 }); *@
+@*             }); *@
+@*         }); *@
+@*     </script> *@
+@* } *@
