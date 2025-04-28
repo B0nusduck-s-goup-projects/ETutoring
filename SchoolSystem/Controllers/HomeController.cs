@@ -110,21 +110,21 @@ public class HomeController : Controller
            .Take(5)
            .ToListAsync();
 
+        var tutorBlogs = await _context.Blogs
+           .Join(_context.UserRoles, b => b.UserId, ur => ur.UserId, (b, ur) => new { b, ur })
+           .Where(bur => bur.ur.RoleId == tutorRoleId)
+           .Select(bur => bur.b)
+           .Include(b => b.User) // Include the User to access the User.Name in the view
+           .OrderByDescending(b => b.TimeStamp)
+           .Take(5)
+           .ToListAsync();
+
         var blogComments = await _context.BlogComments
             .Where(c => studentBlogs.Select(b => b.Id).Contains(c.BlogId)) // Lọc theo blog của sinh viên
             .Include(c => c.Blog)// Bao gồm thông tin Blog nếu cần
             .Include(c => c.User)
             .Include(c => c.ParentComment) // Bao gồm thông tin ParentComment nếu cần
             .Take(5) // Giới hạn số lượng comment
-            .ToListAsync();
-
-        var tutorBlogs = await _context.Blogs
-            .Join(_context.UserRoles, b => b.UserId, ur => ur.UserId, (b, ur) => new { b, ur })
-            .Where(bur => bur.ur.RoleId == tutorRoleId)
-            .Select(bur => bur.b)
-            .Include(b => b.User) // Include the User to access the User.Name in the view
-            .OrderByDescending(b => b.TimeStamp)
-            .Take(5)
             .ToListAsync();
 
         var recentMessages = await _context.Messages
@@ -236,12 +236,16 @@ public class HomeController : Controller
             .ToListAsync();
 
         // Fetch tutor blogs (blogs uploaded by the tutor)
+        var tutorRoleId = (await _context.Roles.FirstOrDefaultAsync(r => r.Name == "Tutor"))?.Id;
+
         var tutorBlogs = await _context.Blogs
-            .Where(b => b.UserId == userId) // Filter by the tutor's user ID
+            .Join(_context.UserRoles, b => b.UserId, ur => ur.UserId, (b, ur) => new { b, ur })
+            .Where(bur => bur.ur.RoleId == tutorRoleId) // Lọc blog của tất cả các tutor
+            .Select(bur => bur.b)
+            .Include(b => b.User) // Bao gồm thông tin người dùng
             .OrderByDescending(b => b.TimeStamp)
             .Take(5)
             .ToListAsync();
-
 
         //Fetch documents
         var documents = await _context.Documents
