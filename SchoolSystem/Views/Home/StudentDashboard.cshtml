@@ -166,7 +166,7 @@
 			<ul>
 				@foreach (var blog in Model.TutorBlogs)
 				{
-					<li>You posted a blog on @blog.TimeStamp.ToString("dd/MM/yyyy") by @blog.User?.Name</li>
+					<li>You received a blog on @blog.TimeStamp.ToString("dd/MM/yyyy") by @blog.User?.Name</li>
 				}
 			</ul>
 		}
@@ -191,9 +191,6 @@
 							<small>
 								Commented on @comment.TimeStamp.ToString("g") by @(comment.User?.Name ?? "Unknown")
 							</small>
-
-							<small>Commented on @comment.TimeStamp.ToString("g") by @(comment.User?.Name ?? "Unknown")</small>
-
 						</p>
 					</li>
 				}

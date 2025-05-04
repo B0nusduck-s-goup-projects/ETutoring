@@ -19,11 +19,11 @@ namespace SchoolSystem.Controllers
 		private readonly SignInManager<AppUser> signInManager;
 		private readonly UserManager<AppUser> userManager;
 		private readonly RoleManager<IdentityRole> roleManager;
-		private readonly IEmailService emailService;
+		private readonly EmailService emailService;
 
 		public AccountController(SignInManager<AppUser> signInManager,
 			UserManager<AppUser> userManager,
-			RoleManager<IdentityRole> roleManager, IEmailService emailService
+			RoleManager<IdentityRole> roleManager, EmailService emailService
 			)
 		{			
 			this.signInManager = signInManager;
