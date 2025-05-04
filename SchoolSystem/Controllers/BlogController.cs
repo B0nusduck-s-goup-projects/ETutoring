@@ -23,8 +23,8 @@ namespace SchoolSystem.Controllers
 	{
 		private readonly AppDbContext _context;
 		private readonly UserManager<AppUser> _userManager;
-		private readonly EmailService _emailService;
-		public BlogController(AppDbContext context, UserManager<AppUser> userManager, EmailService emailService)
+		private readonly IEmailService _emailService;
+		public BlogController(AppDbContext context, UserManager<AppUser> userManager, IEmailService emailService)
 		{
 			_context = context;
 			_userManager = userManager;

@@ -9,6 +9,9 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using EmailSender.Services;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace SchoolSystem.Tests
 {
@@ -20,12 +23,26 @@ namespace SchoolSystem.Tests
         private Mock<RoleManager<IdentityRole>> _roleManagerMock;
         private AccountController _controller;
 
+        private Mock<IEmailService> _mockEmailService;
+
+
+
         [SetUp]
         public void Setup()
         {
+            _mockEmailService = new Mock<IEmailService>();
+            var emailServiceMock = new Mock<EmailService>();
+            var userStoreMock = new Mock<IUserStore<AppUser>>();
             _userManagerMock = new Mock<UserManager<AppUser>>(
-                new Mock<IUserStore<AppUser>>().Object,
-                null, null, null, null, null, null, null, null
+                userStoreMock.Object,
+                new Mock<IOptions<IdentityOptions>>().Object,
+                new Mock<IPasswordHasher<AppUser>>().Object,
+                new IUserValidator<AppUser>[0],
+                new IPasswordValidator<AppUser>[0],
+                new Mock<ILookupNormalizer>().Object,
+                new Mock<IdentityErrorDescriber>().Object,
+                new Mock<IServiceProvider>().Object,
+                new Mock<ILogger<UserManager<AppUser>>>().Object
             );
 
             _signInManagerMock = new Mock<SignInManager<AppUser>>(
@@ -35,15 +52,24 @@ namespace SchoolSystem.Tests
                 null, null, null, null
             );
 
+            var roleStoreMock = new Mock<IRoleStore<IdentityRole>>();
             _roleManagerMock = new Mock<RoleManager<IdentityRole>>(
-                new Mock<IRoleStore<IdentityRole>>().Object,
-                null, null, null, null
+                roleStoreMock.Object,
+                new List<IRoleValidator<IdentityRole>>(),
+                new Mock<ILookupNormalizer>().Object,
+                new Mock<IdentityErrorDescriber>().Object,
+                new Mock<ILogger<RoleManager<IdentityRole>>>().Object
             );
-
-            _controller = new AccountController(_signInManagerMock.Object, _userManagerMock.Object, _roleManagerMock.Object);
+            _mockEmailService.Setup(e => e.SendEmailsAsync(It.IsAny<List<string>>(), It.IsAny<string>(), It.IsAny<string>()))
+                 .Returns(Task.CompletedTask);
+            var emailService = new EmailService("smtp.example.com", 587, "username", "password"); 
+_controller = new AccountController(_signInManagerMock.Object, _userManagerMock.Object, _roleManagerMock.Object, emailService);
+            _mockEmailService = new Mock<IEmailService>();
+            _controller = new AccountController(_signInManagerMock.Object, _userManagerMock.Object, _roleManagerMock.Object, _mockEmailService.Object);
         }
 
-        [TearDown]
+
+            [TearDown]
         public void TearDown()
         {
             _controller?.Dispose();
