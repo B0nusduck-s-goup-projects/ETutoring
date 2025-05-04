@@ -16,11 +16,11 @@ namespace SchoolSystem.Controllers
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<AppUser> _userManager;
-		private readonly IEmailService _emailService;
+		private readonly EmailService _emailService;
 		public DocumentController(
             AppDbContext context, 
             IWebHostEnvironment webHostEnvironment,
-            UserManager<AppUser> userManager, IEmailService emailService)
+            UserManager<AppUser> userManager, EmailService emailService)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
