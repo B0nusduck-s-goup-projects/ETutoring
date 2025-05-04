@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using EmailSender.Services;
 
 namespace SchoolSystem.Tests
 {
@@ -21,76 +20,58 @@ namespace SchoolSystem.Tests
     public class DocumentControllerTests
     {
         private Mock<UserManager<AppUser>> _userManagerMock;
-        private Mock<IWebHostEnvironment> _mockWebHostEnvironment;
+        private Mock<IWebHostEnvironment> _webHostEnvironmentMock;
         private AppDbContext _context;
         private DocumentController _controller;
-
-        private Mock<IEmailService> _mockEmailService;
 
         [SetUp]
         public async Task Setup()
         {
-            // Cấu hình In-Memory Database
             var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString()) // Đảm bảo mỗi test có DB riêng
+                .UseInMemoryDatabase(Guid.NewGuid().ToString()) // Unique database per test
                 .Options;
 
             _context = new AppDbContext(options);
             await _context.Database.EnsureCreatedAsync();
 
-            // Xóa dữ liệu cũ trước khi tạo mới
+            _webHostEnvironmentMock = new Mock<IWebHostEnvironment>();
+
+            var userStoreMock = new Mock<IUserStore<AppUser>>();
+            _userManagerMock = new Mock<UserManager<AppUser>>(
+                userStoreMock.Object, null, null, null, null, null, null, null, null
+            );
+
+            _controller = new DocumentController(_context, _webHostEnvironmentMock.Object, _userManagerMock.Object);
+
+            // Clear previous data before seeding
             _context.Users.RemoveRange(_context.Users);
             _context.Documents.RemoveRange(_context.Documents);
             await _context.SaveChangesAsync();
 
-            // Mock môi trường web (nếu cần)
-            _mockWebHostEnvironment = new Mock<IWebHostEnvironment>();
-
-            // Mock Email Service (dùng interface thay vì class trực tiếp)
-            _mockEmailService = new Mock<IEmailService>();
-
-            // Mock UserManager với tất cả tham số cần thiết
-            var userStoreMock = new Mock<IUserStore<AppUser>>();
-            _userManagerMock = new Mock<UserManager<AppUser>>(
-                userStoreMock.Object,
-                new Mock<IOptions<IdentityOptions>>().Object,
-                new Mock<IPasswordHasher<AppUser>>().Object,
-                new IUserValidator<AppUser>[0],
-                new IPasswordValidator<AppUser>[0],
-                new Mock<ILookupNormalizer>().Object,
-                new Mock<IdentityErrorDescriber>().Object,
-                new Mock<IServiceProvider>().Object,
-                new Mock<ILogger<UserManager<AppUser>>>().Object
-            );
-
-            // Tạo người dùng test với tất cả thuộc tính bắt buộc
+            // Seed test user
             var testUser = new AppUser
             {
-                Id = "User1",
-                Code = "USER001", // Thuộc tính bắt buộc
-                Gender = "Male",  // Thuộc tính bắt buộc
+                Id = "1",
+                Code = "USER001",
+                Gender = "Male",
                 Name = "Test User"
             };
-
             _context.Users.Add(testUser);
             await _context.SaveChangesAsync();
 
-            // Thêm tài liệu mẫu để kiểm thử Delete và Edit
+            // Seed a test document with all required fields set
             _context.Documents.Add(new Document
             {
-                Id = 1,
-                Title = "Sample Document",
-                Description = "For unit testing",
-                FilePath = "/uploads/test.pdf",
+                Id = 1, // Ensure a valid ID for deletion test
+                Title = "Test Document",
+                Description = "Sample document for testing",
+                FilePath = "/uploads/sample.pdf",
                 UserId = testUser.Id,
-                User = testUser, // Đảm bảo User không null
+                User = testUser, // Explicitly set the User property
                 FileType = "pdf"
             });
 
             await _context.SaveChangesAsync();
-
-            // Khởi tạo Controller với các mock phụ thuộc
-            _controller = new DocumentController(_context, _mockWebHostEnvironment.Object, _userManagerMock.Object, _mockEmailService.Object);
         }
 
         [TearDown]

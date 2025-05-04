@@ -12,8 +12,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using EmailSender.Services;
-using Microsoft.AspNetCore.Hosting;
 
 namespace SchoolSystem.Tests
 {
@@ -24,8 +22,6 @@ namespace SchoolSystem.Tests
         private AppDbContext _context;
         private GroupsController _controller;
         private Mock<UserManager<AppUser>> _mockUserManager;
-        private Mock<IEmailService> _mockEmailService;
-        private Mock<IWebHostEnvironment> _mockWebHostEnvironment;
         [TearDown]
         public void Cleanup()
         {
@@ -36,12 +32,6 @@ namespace SchoolSystem.Tests
                 disposableController.Dispose();
             }
         }
-
-
-
-
-       
-
         [SetUp]
         public async Task Setup()
         {
@@ -51,8 +41,19 @@ namespace SchoolSystem.Tests
 
             _context = new AppDbContext(options);
 
-            _mockEmailService = new Mock<IEmailService>(); 
-            _mockWebHostEnvironment = new Mock<IWebHostEnvironment>(); 
+            // Xóa dữ liệu cũ trước khi seed mới
+            _context.Groups.RemoveRange(_context.Groups);
+            await _context.SaveChangesAsync(); // Đảm bảo xóa dữ liệu
+
+            // Seed test data - kiểm tra nếu nhóm đã tồn tại trước khi thêm mới
+            if (!await _context.Groups.AnyAsync())
+            {
+                _context.Groups.AddRange(
+                    new Group { Id = 1, IsValid = true, CreatedTime = DateTime.Now, User = new List<AppUser>() },
+                    new Group { Id = 2, IsValid = false, CreatedTime = DateTime.Now, User = new List<AppUser>() }
+                );
+                await _context.SaveChangesAsync();
+            }
 
             var userStoreMock = new Mock<IUserStore<AppUser>>();
             _mockUserManager = new Mock<UserManager<AppUser>>(
@@ -67,8 +68,9 @@ namespace SchoolSystem.Tests
                 new Mock<ILogger<UserManager<AppUser>>>().Object
             );
 
-            _controller = new GroupsController(_context, _mockUserManager.Object, _mockEmailService.Object, _mockWebHostEnvironment.Object);
+            _controller = new GroupsController(_context, _mockUserManager.Object);
         }
+
 
         [Test]
         public async Task Index_ReturnsViewWithGroups()
