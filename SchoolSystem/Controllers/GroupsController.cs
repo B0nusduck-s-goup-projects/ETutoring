@@ -21,10 +21,10 @@ namespace SchoolSystem.Controllers
     {
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
-        private readonly EmailService _emailService;
+        private readonly IEmailService _emailService;
         private readonly string emailTemplatePath;
 
-        public GroupsController(AppDbContext context, UserManager<AppUser> userManager, EmailService emailService, IWebHostEnvironment webHostEnvironment)
+        public GroupsController(AppDbContext context, UserManager<AppUser> userManager, IEmailService emailService, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _userManager = userManager;

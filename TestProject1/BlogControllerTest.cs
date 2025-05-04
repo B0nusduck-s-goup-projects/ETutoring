@@ -13,6 +13,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using EmailSender.Services;
 
 namespace SchoolSystem.Tests
 {
@@ -23,17 +24,20 @@ namespace SchoolSystem.Tests
         private Mock<UserManager<AppUser>> _mockUserManager;
         private AppDbContext _context;
 
+        private Mock<IEmailService> _mockEmailService;
+
         [SetUp]
         public async Task Setup()
         {
             var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString()) // Ensure fresh database per test
+                .UseInMemoryDatabase(Guid.NewGuid().ToString()) // Đảm bảo mỗi test có DB riêng
                 .Options;
 
             _context = new AppDbContext(options);
             await _context.Database.EnsureCreatedAsync();
 
-            // Initialize mock UserManager
+            _mockEmailService = new Mock<IEmailService>(); // Thêm dòng này!
+
             var userStoreMock = new Mock<IUserStore<AppUser>>();
             _mockUserManager = new Mock<UserManager<AppUser>>(
                 userStoreMock.Object,
@@ -47,27 +51,7 @@ namespace SchoolSystem.Tests
                 new Mock<ILogger<UserManager<AppUser>>>().Object
             );
 
-            // Clear previous user data before adding new test users
-            _context.Users.RemoveRange(_context.Users);
-            await _context.SaveChangesAsync();
-
-            // Ensure required properties are set in test user
-            var testUser = new AppUser
-            {
-                Id = "User1",
-                Code = "USER001", // Ensure this property is set
-                Gender = "Male",  // Ensure this property is set
-                Name = "Test User" // Ensure this property is set
-            };
-
-            _context.Users.Add(testUser);
-            await _context.SaveChangesAsync();
-
-            // Mock GetUserAsync to return test user when needed
-            _mockUserManager.Setup(um => um.GetUserAsync(It.IsAny<ClaimsPrincipal>()))
-                .ReturnsAsync(testUser);
-
-            _controller = new BlogController(_context, _mockUserManager.Object);
+            _controller = new BlogController(_context, _mockUserManager.Object, _mockEmailService.Object);
         }
 
         [TearDown]

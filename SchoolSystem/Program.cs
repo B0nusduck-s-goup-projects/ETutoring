@@ -5,11 +5,14 @@ using SchoolSystem.Data;
 using SchoolSystem.Models;
 using SchoolSystem.Services.Hubs;
 using OfficeOpenXml;
+using EmailSender.Services;
+using EmailSender.Controllers;
 
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 var connectionString = builder.Configuration.GetConnectionString("default");
 
@@ -32,14 +35,9 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(
     })
     .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("Email"));
+builder.Services.AddScoped<IEmailService, EmailService>();
 
-//Add Email Service
-builder.Services.AddScoped(sp => new EmailSender.Services.EmailService(
-    smtpHost: "smtp.gmail.com", 
-    smtpPort: 587,              
-    smtpUser: "buicaonguyen115@gmail.com", 
-    smtpPass: "tzju egvo icfu rrnc"
-));
 
 
 // Register the custom claims principal factory 
