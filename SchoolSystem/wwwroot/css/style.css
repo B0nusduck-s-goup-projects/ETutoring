@@ -534,6 +534,9 @@ h3 {
 
 /*-------------------------CreateBlog Page-------------------------*/
 
+#content {
+    width: 100%
+}
 .backPage {
     margin-top: 25px;
     margin-left: 30px;
