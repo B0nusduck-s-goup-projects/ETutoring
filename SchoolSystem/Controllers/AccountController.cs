@@ -143,8 +143,15 @@ namespace SchoolSystem.Controllers
 					ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
 					return View(model);
 				}
-
-				if(model.Image != null) { 
+				// Kiểm tra trùng email trước khi cập nhật
+				var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
+				if (existingUserByEmail != null)
+				{
+					ModelState.AddModelError("Email", "Email already exists");
+					ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();  
+					return View(model);
+				}
+				if (model.Image != null) { 
 				// Check if the file is an image
 				var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
 				var fileExtension = Path.GetExtension(model.Image.FileName).ToLower();
@@ -262,7 +269,7 @@ namespace SchoolSystem.Controllers
 			ViewBag.Genders = new List<string> { "Male", "Female" };
 			ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
 
-			return View(userRoles); // Pass the list of users with roles to the view
+			return View(userRoles); 
 		}
 		
 		//Update and delete head
@@ -300,33 +307,39 @@ namespace SchoolSystem.Controllers
 		//		ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
 		//		return View(model);
 		//	}
-
-		//	var user = await userManager.FindByIdAsync(model.Id);
-		//	if (user == null)
+		//	// Check if the file is an image
+		//	if (model.Image != null)
 		//	{
-		//		return NotFound();
+		//		var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+		//		var fileExtension = Path.GetExtension(model.Image.FileName).ToLower();
+		//		if (!allowedExtensions.Contains(fileExtension))
+		//		{
+		//			ModelState.AddModelError("Image", "Only image files are allowed.");
+		//			ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
+		//			return View(model);
+		//		}
 		//	}
-			
+		//	// Check if Code is already taken
+		//	var existingUser = await userManager.Users.FirstOrDefaultAsync(u => u.Code == model.Code);
+		//	if (existingUser != null && existingUser.Id != model.Id)
+		//	{
+		//		ModelState.AddModelError("Code", "This Code is already registered.");
+		//		ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
+		//		return View(model);
+		//	}
 		//	// Kiểm tra trùng email trước khi cập nhật
 		//	var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
 		//	if (existingUserByEmail != null && existingUserByEmail.Id != model.Id)
 		//	{
 		//		ModelState.AddModelError("Email", "Email already exists");
-		//		ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();  
-		//		return View(model);
-		//	}
-			
-
-		//	// Check if the file is an image
-		//	var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
-		//	var fileExtension = Path.GetExtension(model.Image.FileName).ToLower();
-		//	if (!allowedExtensions.Contains(fileExtension))
-		//	{
-		//		ModelState.AddModelError("Image", "Only image files are allowed.");
 		//		ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
 		//		return View(model);
 		//	}
-
+		//	var user = await userManager.FindByIdAsync(model.Id);
+		//	if (user == null)
+		//	{
+		//		return NotFound();
+		//	}
 
 		//	// Cập nhật thông tin người dùng
 		//	user.Name = model.Name;
@@ -384,31 +397,38 @@ namespace SchoolSystem.Controllers
 				return View(model);
 			}
 			// Check if the file is an image
-			if(model.Image != null) { 
-			var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
-			var fileExtension = Path.GetExtension(model.Image.FileName).ToLower();
-			if (!allowedExtensions.Contains(fileExtension))
+			if (model.Image != null)
 			{
-				ModelState.AddModelError("Image", "Only image files are allowed.");
+				var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+				var fileExtension = Path.GetExtension(model.Image.FileName).ToLower();
+				if (!allowedExtensions.Contains(fileExtension))
+				{
+					ModelState.AddModelError("Image", "Only image files are allowed.");
+					ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
+					return View(model);
+				}
+			}
+			// Check if Code is already taken
+			var existingUser = await userManager.Users.FirstOrDefaultAsync(u => u.Code == model.Code);
+			if (existingUser != null && existingUser.Id != model.Id)
+			{
+				ModelState.AddModelError("Code", "This Code is already registered.");
 				ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
 				return View(model);
 			}
+			// Kiểm tra trùng email trước khi cập nhật
+			var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
+			if (existingUserByEmail != null && existingUserByEmail.Id != model.Id)
+			{
+				ModelState.AddModelError("Email", "Email already exists");
+				ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
+				return View(model);
 			}
 			var user = await userManager.FindByIdAsync(model.Id);
 			if (user == null)
 			{
 				return NotFound();
 			}
-
-			// Kiểm tra trùng email trước khi cập nhật
-			var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
-			if (existingUserByEmail != null && existingUserByEmail.Id != model.Id)
-			{
-				ModelState.AddModelError("Email", "Email already exists");
-				ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();  // Đảm bảo không bị mất dữ liệu role
-				return View(model);
-			}
-
 			// Cập nhật thông tin người dùng
 			user.Name = model.Name;
 			user.Code = model.Code;
@@ -457,10 +477,10 @@ namespace SchoolSystem.Controllers
 				// Send Eamil
 				var subject = "Account updateted successfully";
 				var body = $@"
-                    <h1>Hello {user.Name}</h1>
-                    <p><strong>Email:</strong> {user.Email}</p>
-                    <p>Your account has been successfully updateted.</p>
-                ";
+		                  <h1>Hello {user.Name}</h1>
+		                  <p><strong>Email:</strong> {user.Email}</p>
+		                  <p>Your account has been successfully updateted.</p>
+		              ";
 				await emailService.SendEmailsAsync(new List<string> { user.Email }, subject, body);
 
 				TempData["SuccessMessage"] = "User updated successfully!";
@@ -482,7 +502,7 @@ namespace SchoolSystem.Controllers
 					ModelState.AddModelError("", "Failed to update user");
 				}
 
-				ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();  // Đảm bảo không bị mất dữ liệu role
+				ViewBag.Roles = roleManager.Roles.Select(r => r.Name).ToList();
 				return View(model);
 			}
 		}
@@ -632,18 +652,42 @@ namespace SchoolSystem.Controllers
 		[HttpGet]
 		public async Task<IActionResult> ExportUsersToExcel()
 		{
-			//var users = await userManager.Users.ToListAsync();
-			var adminRole = "Admin";
+			//var users = await userManager.Users.ToListAsync();    //All users
+
+			//var adminRole = "Admin";                                //except admin
+			//var allUsers = await userManager.Users.ToListAsync();
+			//var users = new List<AppUser>();
+
+			//foreach (var user in allUsers)
+			//{
+			//	if (!await userManager.IsInRoleAsync(user, adminRole))
+			//	{
+			//		users.Add(user);
+			//	}
+			//}
+
+			var rolesToExclude = new[] { "Admin", "Staff" };			//except Admin, Staff
 			var allUsers = await userManager.Users.ToListAsync();
 			var users = new List<AppUser>();
 
 			foreach (var user in allUsers)
 			{
-				if (!await userManager.IsInRoleAsync(user, adminRole))
+				var isInExcludedRole = false;
+				foreach (var role in rolesToExclude)
+				{
+					if (await userManager.IsInRoleAsync(user, role))
+					{
+						isInExcludedRole = true;
+						break;
+					}
+				}
+
+				if (!isInExcludedRole)
 				{
 					users.Add(user);
 				}
 			}
+
 
 			if (users == null)
 			{

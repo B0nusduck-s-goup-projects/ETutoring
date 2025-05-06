@@ -363,3 +363,13 @@ C:\Users\ACER\Documents\GitHub\ETutoring\TestProject1\obj\Debug\net8.0\TestProje
 C:\Users\ACER\Documents\GitHub\ETutoring\TestProject1\obj\Debug\net8.0\TestProject1.dll
 C:\Users\ACER\Documents\GitHub\ETutoring\TestProject1\obj\Debug\net8.0\refint\TestProject1.dll
 C:\Users\ACER\Documents\GitHub\ETutoring\TestProject1\obj\Debug\net8.0\TestProject1.pdb
+D:\DO_PHU_THINH\Enterprise\ETutoring\TestProject1\bin\Debug\net8.0\CoverletSourceRootsMapping_TestProject1
+D:\DO_PHU_THINH\Enterprise\ETutoring\TestProject1\obj\Debug\net8.0\TestProject1.csproj.AssemblyReference.cache
+D:\DO_PHU_THINH\Enterprise\ETutoring\TestProject1\obj\Debug\net8.0\TestProject1.GeneratedMSBuildEditorConfig.editorconfig
+D:\DO_PHU_THINH\Enterprise\ETutoring\TestProject1\obj\Debug\net8.0\TestProject1.AssemblyInfoInputs.cache
+D:\DO_PHU_THINH\Enterprise\ETutoring\TestProject1\obj\Debug\net8.0\TestProject1.AssemblyInfo.cs
+D:\DO_PHU_THINH\Enterprise\ETutoring\TestProject1\obj\Debug\net8.0\TestProject1.csproj.CoreCompileInputs.cache
+D:\DO_PHU_THINH\Enterprise\ETutoring\TestProject1\obj\Debug\net8.0\TestProject1.sourcelink.json
+D:\DO_PHU_THINH\Enterprise\ETutoring\TestProject1\obj\Debug\net8.0\TestProject1.dll
+D:\DO_PHU_THINH\Enterprise\ETutoring\TestProject1\obj\Debug\net8.0\refint\TestProject1.dll
+D:\DO_PHU_THINH\Enterprise\ETutoring\TestProject1\obj\Debug\net8.0\TestProject1.pdb

@@ -10134,23 +10134,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ACER\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\phuth\\.nuget\\packages\\": {},
+    "C:\\VS\\tools\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ACER\\Documents\\GitHub\\ETutoring\\TestProject1\\TestProject1.csproj",
+      "projectUniqueName": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\TestProject1\\TestProject1.csproj",
       "projectName": "TestProject1",
-      "projectPath": "C:\\Users\\ACER\\Documents\\GitHub\\ETutoring\\TestProject1\\TestProject1.csproj",
-      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ACER\\Documents\\GitHub\\ETutoring\\TestProject1\\obj\\",
+      "projectPath": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\TestProject1\\TestProject1.csproj",
+      "packagesPath": "C:\\Users\\phuth\\.nuget\\packages\\",
+      "outputPath": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\TestProject1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\VS\\tools\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\phuth\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -10165,8 +10165,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\ACER\\Documents\\GitHub\\ETutoring\\SchoolSystem\\SchoolSystem.csproj": {
-              "projectPath": "C:\\Users\\ACER\\Documents\\GitHub\\ETutoring\\SchoolSystem\\SchoolSystem.csproj"
+            "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\SchoolSystem.csproj": {
+              "projectPath": "D:\\DO_PHU_THINH\\Enterprise\\ETutoring\\SchoolSystem\\SchoolSystem.csproj"
             }
           }
         }
@@ -10181,7 +10181,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -10228,7 +10228,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
