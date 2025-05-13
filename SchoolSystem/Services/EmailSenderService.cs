@@ -1,5 +1,7 @@
 using System.Net;
 using System.Net.Mail;
+using EmailSender.Controllers;
+using Microsoft.Extensions.Options;
 
 namespace EmailSender.Services
 {
@@ -9,29 +11,23 @@ namespace EmailSender.Services
     }
     public class EmailService : IEmailService
     {
-        private readonly string _smtpHost;
-        private readonly int _smtpPort;
-        private readonly string _smtpUser;
-        private readonly string _smtpPass;
+        private readonly EmailSettings _emailSettings;
 
-        public EmailService(string smtpHost, int smtpPort, string smtpUser, string smtpPass)
+        public EmailService(IOptions<EmailSettings> emailSettings)
         {
-            _smtpHost = smtpHost;
-            _smtpPort = smtpPort;
-            _smtpUser = smtpUser;
-            _smtpPass = smtpPass;
+            _emailSettings = emailSettings.Value;
         }
 
         public async Task SendEmailsAsync(List<string> recipients, string subject, string body)
         {
-            using (var client = new SmtpClient(_smtpHost, _smtpPort))
+            using (var client = new SmtpClient(_emailSettings.SmtpHost, _emailSettings.SmtpPort))
             {
-                client.Credentials = new NetworkCredential(_smtpUser, _smtpPass);
+                client.Credentials = new NetworkCredential(_emailSettings.SmtpUser, _emailSettings.SmtpPass);
                 client.EnableSsl = true;
 
                 foreach (var recipient in recipients)
                 {
-                    using (var message = new MailMessage(_smtpUser, recipient))
+                    using (var message = new MailMessage(_emailSettings.SmtpUser, recipient))
                     {
                         message.Subject = subject;
                         message.Body = body;
@@ -51,3 +47,4 @@ namespace EmailSender.Services
         }
     }
 }
+                
